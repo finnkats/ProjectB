@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace ProjectTest.MenuTests;
 
 [TestClass]
@@ -10,17 +12,27 @@ public class MenuTest{
         menu = new("Test Menu");
     }
 
+    // Check that duplicates wont get added
     [TestMethod]
     public void AllOptions(){
         menu.AddAllOption("Nothing", Nothing);
         menu.AddAllOption("Nothing", Nothing);
     }
 
-    /*[TestMethod]
+    [TestMethod]
     public void CurrentOptions(){
         menu.AddAllOption("Nothing", Nothing);
         menu.AddCurrentOption("Nothing");
+        menu.AddCurrentOption("Nothing");
         menu.AddCurrentOption("Something");
-    }*/
+
+        string MenuString = menu.MenuString();
+        // Check if Nothing is in MenuString only
+        Assert.IsTrue(MenuString.Contains("Nothing"));
+        // Check if Nothing didn't get added twice
+        Assert.AreEqual(1, Regex.Matches(MenuString, "Nothing").Count());
+        // Check if Something didn't get added
+        Assert.IsFalse(MenuString.Contains("Something"));
+    }
 
 }

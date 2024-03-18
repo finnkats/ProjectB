@@ -22,4 +22,11 @@ public class Menu{
     }
 
     public void RemoveCurrentOption(string optionName) => CurrentOptions.Remove(optionName);
+
+    public string MenuString(){
+        string menuString = $"{Name}\n\n";
+        int index = 1;
+        CurrentOptions.ForEach(option => menuString += $"{index++}: {option}\n");
+        return menuString;
+    }
 }

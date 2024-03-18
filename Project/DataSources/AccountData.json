@@ -4,6 +4,11 @@
             "AdminName": "Admin123",
             "AdminPassword": "Password123"
         },
-        "CustomerAccount": []
+        "CustomerAccount": [
+            {
+                "name": "Soufiane",
+                "password": "password"
+            }
+        ]
     }
 ]

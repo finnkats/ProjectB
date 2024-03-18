@@ -1,10 +1,9 @@
 [
     {
-        "AdminName": null,
-        "AdminPassword": null
-    },
-    {
-        "email": null,
-        "password": null
+        "AdminAccount": {
+            "AdminName": "Admin123",
+            "AdminPassword": "Password123"
+        },
+        "CustomerAccount": []
     }
 ]

@@ -29,4 +29,12 @@ public class Menu{
         CurrentOptions.ForEach(option => menuString += $"{index++}: {option}\n");
         return menuString;
     }
+
+    public Action? GetFunction(int input){
+        // Menu input starts at 1, so if input is 1, then index should be 0
+        try {
+            Action function = AllOptions[CurrentOptions[input - 1]];
+            return function;
+        } catch (ArgumentOutOfRangeException) { return null; }
+    }
 }

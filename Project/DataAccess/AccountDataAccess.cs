@@ -5,7 +5,7 @@ using System.Text.Json;
 
 public static class AccountDataAccess
 {
-    static string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\DataSources\AccountData.json"));
+    static string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
 
     public static List<AccountDataModel> LoadAll()
     {

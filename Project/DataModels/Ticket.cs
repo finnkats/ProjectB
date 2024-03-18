@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 public class Ticket{
     public string MovieName {get; set;}
     public string Date {get; set;}

@@ -1,27 +1,61 @@
 using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+public class KeyValueClass{
+    public int ID {get; set;}
+    public Ticket Ticket {get; set;}
+    public KeyValueClass(int id, Ticket ticket){
+        this.ID = id;
+        this.Ticket = ticket;
+    }
+}
 
 public class Ticket{
     public string MovieName {get; set;}
     public string Date {get; set;}
     public string Time {get; set;}
-    private static int UniqueBookID = 1;
+    public string Room {get; set;}
+    private static int UniqueTicketID = 1;
+    private static string JsonPath = "../../ProjectB/Project/DataSources/tickets.json";
 
-    public Ticket(string movieName, string date, string time){
+    public Ticket(string movieName, string date, string time, string roomChar){
         this.MovieName = movieName;
         this.Date = date;
         this.Time = time;
+        this.Room = roomChar;
         UpdateJsonFile();
     }
 
     protected void UpdateJsonFile(){
-        try{
-            StreamReader reader = new("../DataSources/tickets.json");
+        // Currently the json file needs to have some data inside it
+        List<KeyValueClass> ticketsCollection;
+        if(File.Exists(JsonPath)){
+            StreamReader reader = new(JsonPath);
             string ticketsJson = reader.ReadToEnd();
+            // List<Ticket> ticketsCollection = JsonConvert.DeserializeObject<List<Ticket>>(ticketsJson)!;
+            ticketsCollection = JsonConvert.DeserializeObject<List<KeyValueClass>>(ticketsJson)!;
+            reader.Close();
         }
-        catch(Exception ex){
-            Console.WriteLine(ex.Message);
+        else{
+            ticketsCollection = new List<KeyValueClass>();
         }
+        // catch(Exception ex){
+        //     Console.WriteLine(ex.Message);
+        // }
+
+        int ticketID = NewTicketID();
+        KeyValueClass customDict = new KeyValueClass(ticketID, this);
+        ticketsCollection.Add(customDict);
+
+        StreamWriter writer = new(JsonPath);
+        string listJson = JsonConvert.SerializeObject(ticketsCollection);
+        writer.Write(listJson);
+        writer.Close();
     }
 
-    private static void NewBookID() => UniqueBookID++;
+    private static int NewTicketID(){
+        UniqueTicketID++;
+        return UniqueTicketID;
+    }
 }

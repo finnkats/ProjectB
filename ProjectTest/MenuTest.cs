@@ -58,4 +58,40 @@ public class MenuTest{
         Action? func_low = menu.GetFunction(-39);
     	Assert.AreSame(null, func_low);
     }
+
+    [TestMethod]
+    public void ExitIndex(){
+        menu.AddAllOption("One", Nothing);
+        menu.AddAllOption("Two", Nothing);
+        menu.AddAllOption("Three", Nothing);
+        menu.AddCurrentOption("One");
+        menu.AddCurrentOption("Two");
+        menu.AddCurrentOption("Three");
+
+        string menuString = menu.MenuString();
+        Assert.IsTrue(menuString.Contains("4: Exit"));
+
+        menu.RemoveCurrentOption("Three");
+
+        menuString = menu.MenuString();
+        Assert.IsTrue(menuString.Contains("3: Exit"));
+    }
+
+    [TestMethod]
+    public void MenuPath(){
+        Menu Previous1 = new("Previous 1");
+        Menu Previous2 = new("Previous 2");
+        menu.PreviousMenu = Previous1;
+        Previous1.PreviousMenu = Previous2;
+
+        string menuString = menu.MenuString();
+        Assert.IsTrue(menuString.Contains("Previous 2 -> Previous 1 -> Test Menu"));
+
+        menuString = Previous1.MenuString();
+        Assert.IsTrue(menuString.Contains("Previous 2 -> Previous 1"));
+
+        menu.PreviousMenu = Previous2;
+        menuString = menu.MenuString();
+        Assert.IsTrue(menuString.Contains("Previous 2 -> Test Menu"));
+    }
 }

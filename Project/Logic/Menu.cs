@@ -8,6 +8,7 @@ public class Menu{
     // List of options which should "currently" be able to be accessed.
     private List<string> CurrentOptions = new();
     // The menu this menu was accessed by
+    public Menu? PreviousMenu = null;
 
     public void AddAllOption(string optionName, Action optionFunction){
         try {
@@ -25,16 +26,29 @@ public class Menu{
 
     public string MenuString(){
         string menuString = $"{Name}\n\n";
+        Menu? pointer = PreviousMenu;
+        while (pointer != null){
+            menuString = $"{pointer.Name} -> " + menuString;
+            pointer = pointer.PreviousMenu;
+        }
+
         int index = 1;
         CurrentOptions.ForEach(option => menuString += $"{index++}: {option}\n");
+        // Add Exit option at the end
+        menuString += $"{index}: Exit\n";
         return menuString;
     }
 
     public Action? GetFunction(int input){
+        // If input is the last item + 1 (Exit), which isnt in CurrentOptions
+        if (input == CurrentOptions.Count() + 1) return this.SetToPreviousMenu;
         // Menu input starts at 1, so if input is 1, then index should be 0
         try {
             Action function = AllOptions[CurrentOptions[input - 1]];
             return function;
         } catch (ArgumentOutOfRangeException) { return null; }
     }
+
+    public void SetToPreviousMenu() => App.CurrentMenu = PreviousMenu;
+    public void SetToCurrentMenu() => App.CurrentMenu = this;
 }

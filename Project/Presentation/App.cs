@@ -1,6 +1,11 @@
+// Initialize objects that will be used in the app
 public static class App{
-    // Initialize objects that will be used in the app
     public static Menu? CurrentMenu;
+    public static void Start(){
+        // Fill in all Menu's
+        CreateMenus();
+    }
+
 
     // Add new menu's here
     public static Menu FrontPage = new("Front Page");
@@ -11,22 +16,13 @@ public static class App{
     public static Menu ModifyCategories = new("Modify Categories");
     public static Menu ModifyLocations = new("Modify Locations");
     public static Menu EditLocation = new("Edit Location");
-
     public static Menu ExampleMenu1 = new("Example Menu 1");
-
-
-    public static void Start(){
-        // Fill in all Menu's
-        CreateMenus();
-    }
-
 
     public static void CreateMenus(){
         // First menu the program will use
         CurrentMenu = FrontPage;
 
-
-        // Fill up objects
+        // Fill up menu's
 
         //  Front Page
         FrontPage.AddAllOption("Home Page", HomePage.SetToCurrentMenu);
@@ -100,6 +96,7 @@ public static class App{
         ExampleMenu1.AddCurrentOption("Boilerplate Option 2");
     }
 
+    // Adds all "hidden" menu's, for demo
     public static void AddAllMenus(){
         FrontPage.AddCurrentOption("Logout");
         FrontPage.AddCurrentOption("Example Menu");

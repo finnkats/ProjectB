@@ -14,7 +14,6 @@ namespace Logic.Tests
         public void Setup()
         {
             // Load account data before each test
-            string jsonFilePath = "Project B/HET Project B/ProjectB/Project/DataSources/AccountData.json";
             accountDataList = AccountDataAccess.LoadAll();
         }
 

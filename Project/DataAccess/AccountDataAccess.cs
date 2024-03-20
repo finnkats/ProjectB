@@ -9,7 +9,7 @@ public static class AccountDataAccess
     {
         if (jsonPath == null)
         {
-            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
+            jsonPath = @"DataSources/AccountData.json";
         }
 
         string json = File.ReadAllText(jsonPath);

@@ -17,7 +17,10 @@ public class Ticket{
     public string Time {get; set;}
     public string Room {get; set;}
     private static int UniqueTicketID = 1;
-    private static string JsonPath = "../../ProjectB/Project/DataSources/tickets.json";
+    public static string? JsonTestPath = null;
+    private static string JsonPath {
+        get => string.IsNullOrEmpty(JsonTestPath) ? "../../DataSources/tickets.json" : JsonTestPath;
+    }
 
     public Ticket(string movieName, string date, string time, string roomChar){
         this.MovieName = movieName;
@@ -30,7 +33,7 @@ public class Ticket{
     protected void UpdateJsonFile(){
         // Currently the json file needs to have some data inside it
         List<KeyValueClass> ticketsCollection;
-        if(File.Exists(JsonPath)){
+        if(File.Exists(JsonPath) && !string.IsNullOrEmpty(File.ReadAllText(JsonPath))){
             StreamReader reader = new(JsonPath);
             string ticketsJson = reader.ReadToEnd();
             // List<Ticket> ticketsCollection = JsonConvert.DeserializeObject<List<Ticket>>(ticketsJson)!;

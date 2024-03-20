@@ -10,7 +10,6 @@ public static class App{
     public static Menu ModifyMovies = new("Modify Movies");
     public static Menu ModifyCategories = new("Modify Categories");
     public static Menu ModifyLocations = new("Modify Locations");
-    public static Menu CheckStatistics = new("Check Statistiscs");
     public static Menu EditLocation = new("Edit Location");
 
     public static Menu ExampleMenu1 = new("Example Menu 1");

@@ -5,11 +5,14 @@ using System.Text.Json;
 
 public static class AccountDataAccess
 {
-    static string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
-
-    public static List<AccountDataModel> LoadAll()
+    public static List<AccountDataModel> LoadAll(string jsonPath = null)
     {
-        string json = File.ReadAllText(path);
+        if (jsonPath == null)
+        {
+            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
+        }
+
+        string json = File.ReadAllText(jsonPath);
         return JsonSerializer.Deserialize<List<AccountDataModel>>(json);
     }
 }

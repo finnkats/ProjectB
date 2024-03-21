@@ -12,7 +12,7 @@ public static class App{
     public static Menu SignInUp = new("Sign in / up");
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");
-    public static Menu ModifyMovies = new("Modify Movies");
+    public static Menu ModifyPlays = new("Modify Plays");
     public static Menu ModifyCategories = new("Modify Categories");
     public static Menu ModifyLocations = new("Modify Locations");
     public static Menu EditLocation = new("Edit Location");
@@ -41,30 +41,30 @@ public static class App{
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Movies", Example.DoNothing); // TODO add view movie function
+        HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view movie function
         HomePage.AddAllOption("View Tickets", Example.DoNothing); // TODO add view ticket function
         HomePage.AddAllOption("View Notification", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
-        HomePage.AddCurrentOption("View Movies");
+        HomePage.AddCurrentOption("View Plays");
 
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;
-        AdminFeatures.AddAllOption("Modify Movies", ModifyMovies.SetToCurrentMenu);
+        AdminFeatures.AddAllOption("Modify Plays", ModifyPlays.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Modify Categories", ModifyCategories.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Modify Locations", ModifyLocations.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
-        AdminFeatures.AddCurrentOption("Modify Movies");
+        AdminFeatures.AddCurrentOption("Modify Plays");
         AdminFeatures.AddCurrentOption("Modify Categories");
         AdminFeatures.AddCurrentOption("Modify Locations");
         AdminFeatures.AddCurrentOption("Check Statistics");
 
-        //  Modify Movies
-        ModifyMovies.PreviousMenu = AdminFeatures;
-        ModifyMovies.AddAllOption("Add Movie", Example.DoNothing); // TODO add add movie function
-        ModifyMovies.AddAllOption("Edit Movie", Example.DoNothing); // TODO add edit movie function
-        ModifyMovies.AddCurrentOption("Add Movie");
-        ModifyMovies.AddCurrentOption("Edit Movie");
+        //  Modify Plays
+        ModifyPlays.PreviousMenu = AdminFeatures;
+        ModifyPlays.AddAllOption("Add Play", Example.DoNothing); // TODO add add movie function
+        ModifyPlays.AddAllOption("Edit Play", Example.DoNothing); // TODO add edit movie function
+        ModifyPlays.AddCurrentOption("Add Play");
+        ModifyPlays.AddCurrentOption("Edit Play");
 
         // Modify Categories
         ModifyCategories.PreviousMenu = AdminFeatures;

@@ -1,0 +1,14 @@
+[
+    {
+        "AdminAccount": {
+            "AdminName": "Admin123",
+            "AdminPassword": "Password123"
+        },
+        "CustomerAccount": [
+            {
+                "name": "Soufiane",
+                "password": "password"
+            }
+        ]
+    }
+]

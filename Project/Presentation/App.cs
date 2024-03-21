@@ -1,11 +1,15 @@
-// Initialize objects that will be used in the app
-public static class App{
+using Logic;
+
+public static class App
+{
+    public static string? LoggedInUsername { get; set; }
     public static Menu? CurrentMenu;
-    public static void Start(){
+
+    public static void Start()
+    {
         // Fill in all Menu's
         CreateMenus();
     }
-
 
     // Add new menu's here
     public static Menu FrontPage = new("Front Page");
@@ -18,7 +22,8 @@ public static class App{
     public static Menu EditLocation = new("Edit Location");
     public static Menu ExampleMenu1 = new("Example Menu 1");
 
-    public static void CreateMenus(){
+    public static void CreateMenus()
+    {
         // First menu the program will use
         CurrentMenu = FrontPage;
 
@@ -27,14 +32,14 @@ public static class App{
         //  Front Page
         FrontPage.AddAllOption("Home Page", HomePage.SetToCurrentMenu);
         FrontPage.AddAllOption("Sign in / up", SignInUp.SetToCurrentMenu);
-        FrontPage.AddAllOption("Logout", Example.DoNothing); // TODO add logout function
+        FrontPage.AddAllOption("Logout", AccountLogic.Logout);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
         FrontPage.AddCurrentOption("Home Page");
         FrontPage.AddCurrentOption("Sign in / up");
-        
+
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
-        SignInUp.AddAllOption("Sign in", Example.DoNothing); // TODO add login function
+        SignInUp.AddAllOption("Sign in", () => AccountLogic.Login());
         SignInUp.AddAllOption("Sign up", Example.DoNothing); // TODO add create account function
         SignInUp.AddCurrentOption("Sign in");
         SignInUp.AddCurrentOption("Sign up");
@@ -43,7 +48,7 @@ public static class App{
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view Play function
         HomePage.AddAllOption("View Tickets", Example.DoNothing); // TODO add view ticket function
-        HomePage.AddAllOption("View Notification", Example.DoNothing); // TODO add view notification function
+        HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         HomePage.AddCurrentOption("View Plays");
@@ -97,7 +102,8 @@ public static class App{
     }
 
     // Adds all "hidden" menu's, for demo
-    public static void AddAllMenus(){
+    public static void AddAllMenus()
+    {
         FrontPage.AddCurrentOption("Logout");
         FrontPage.AddCurrentOption("Example Menu");
 

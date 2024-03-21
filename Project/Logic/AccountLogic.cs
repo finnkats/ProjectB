@@ -8,11 +8,7 @@ public static class AccountLogic
     public static void Login(List<AccountDataModel>? accountData = null)
     {
         // Check if a user is already logged in
-        if (!string.IsNullOrEmpty(App.LoggedInUsername))
-        {
-            Console.WriteLine("You are already logged in as: " + App.LoggedInUsername);
-            return; // Prevent further login attempts
-        }
+        if (AccountPresentation.CheckLoggedIn()) return;
 
         List<AccountDataModel> accountDataList;
 
@@ -28,36 +24,27 @@ public static class AccountLogic
         bool loginLoop = true;
         while (loginLoop)
         {
-            Console.WriteLine("Name: ");
-            string? loginName = Console.ReadLine();
-
-            Console.WriteLine();
-
-            Console.WriteLine("Password:");
-            string? loginPassword = Console.ReadLine();
-
+            var (loginName, loginPassword) = AccountPresentation.GetLoginDetails();
             bool found = false;
 
             foreach (var data in accountDataList)
             {
-                if (data.Admin != null && data.Admin.AdminName == loginName && data.Admin.AdminPassword == loginPassword)
+                if (CheckAdmin(loginName, loginPassword, data))
                 {
                     found = true;
                     // Add Admin features
                     App.HomePage.AddCurrentOption("Admin Features");
-                    
+
                     App.LoggedInUsername = loginName; // Set the LoggedInUsername property
-                    Console.WriteLine("\nLogin successful!");
-                    Thread.Sleep(1500);
-                    Console.WriteLine($"Logged in as administrator {data.Admin.AdminName}");
-                    Thread.Sleep(2000);
+
+                    AccountPresentation.PrintSuccess($"Logged in as administrator {loginName}");
                     loginLoop = false;
                 }
 
                 if (data.Customers != null){
                     foreach (var customer in data.Customers)
                     {
-                        if (customer.Name == loginName && customer.Password == loginPassword)
+                        if (CheckCustomer(loginName, loginPassword, customer))
                         {
                             found = true;
                             // Add Customer Logged-In options
@@ -65,10 +52,7 @@ public static class AccountLogic
                             App.HomePage.AddCurrentOption("View Notifications");
                             App.HomePage.AddCurrentOption("Edit Account Settings");
 
-                            Console.WriteLine("\nLogin successful!");
-                            Thread.Sleep(1500);
-                            Console.WriteLine($"Welcome back {customer.Name}");
-                            Thread.Sleep(2000);
+                            AccountPresentation.PrintSuccess($"Welcome back {customer.Name}");
                             loginLoop = false;
                             break;
                         }
@@ -86,11 +70,22 @@ public static class AccountLogic
                 }
             }
 
-            if (!found)
-            {
-                Console.WriteLine("Invalid name or password. Please try again.\n");
-            }
+            if (!found) AccountPresentation.LoginFailure();
         }
+    }
+
+    public static bool CheckAdmin(string? loginName, string? loginPassword, AccountDataModel data){
+        if (data.Admin != null && data.Admin.AdminName == loginName && data.Admin.AdminPassword == loginPassword){
+            return true;
+        }
+        return false;
+    }
+
+    public static bool CheckCustomer(string? loginName, string? loginPassword, AccountDataModel.CustomerAccount customer){
+        if (customer.Name == loginName && customer.Password == loginPassword){
+            return true;
+        }
+        return false;
     }
 
     public static void Logout()

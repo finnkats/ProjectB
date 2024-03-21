@@ -26,20 +26,21 @@ public class Menu{
 
     public string MenuString()
 {
-    string menuString = $"{Name}\n\n";
-
+    string menuString = "";
     // Include logged-in username if available
     if (!string.IsNullOrEmpty(App.LoggedInUsername))
     {
         menuString += $"Logged in as: {App.LoggedInUsername}\n\n";
     }
 
+    string menuPath = $"{Name}\n";
     Menu? pointer = PreviousMenu;
     while (pointer != null)
     {
-        menuString = $"{pointer.Name} -> " + menuString;
+        menuPath = $"{pointer.Name} -> " + menuPath;
         pointer = pointer.PreviousMenu;
     }
+    menuString += menuPath;
 
     int index = 1;
     CurrentOptions.ForEach(option => menuString += $"{index++}: {option}\n");

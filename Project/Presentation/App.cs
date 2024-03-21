@@ -9,7 +9,6 @@ public static class App
     {
         // Fill in all Menu's
         CreateMenus();
-        AddAllMenus();
     }
 
     // Add new menu's here

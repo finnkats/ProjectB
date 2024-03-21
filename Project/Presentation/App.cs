@@ -41,7 +41,7 @@ public static class App{
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view movie function
+        HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view Play function
         HomePage.AddAllOption("View Tickets", Example.DoNothing); // TODO add view ticket function
         HomePage.AddAllOption("View Notification", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
@@ -61,8 +61,8 @@ public static class App{
 
         //  Modify Plays
         ModifyPlays.PreviousMenu = AdminFeatures;
-        ModifyPlays.AddAllOption("Add Play", Example.DoNothing); // TODO add add movie function
-        ModifyPlays.AddAllOption("Edit Play", Example.DoNothing); // TODO add edit movie function
+        ModifyPlays.AddAllOption("Add Play", Example.DoNothing); // TODO add add Play function
+        ModifyPlays.AddAllOption("Edit Play", Example.DoNothing); // TODO add edit Play function
         ModifyPlays.AddCurrentOption("Add Play");
         ModifyPlays.AddCurrentOption("Edit Play");
 
@@ -101,7 +101,7 @@ public static class App{
         FrontPage.AddCurrentOption("Logout");
         FrontPage.AddCurrentOption("Example Menu");
 
-        HomePage.AddCurrentOption("View Movies");
+        HomePage.AddCurrentOption("View Plays");
         HomePage.AddCurrentOption("View Tickets");
         HomePage.AddCurrentOption("View Notifications");
         HomePage.AddCurrentOption("Edit Account Settings");

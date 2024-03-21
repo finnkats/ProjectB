@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Logic
 {
@@ -7,68 +8,95 @@ namespace Logic
     {
         public static void Login(List<AccountDataModel> accountData = null)
         {
-            bool loginLoop = true; // Variable used to keep asking name and password, in case name or password are wrong
-            bool adminAccount = false; // Variable used to check if user who logged in is admin or not
-            bool customerAccount = true; // Variable used to check if user who logged in is customer or not
+            // Check if a user is already logged in
+            if (!string.IsNullOrEmpty(App.LoggedInUsername))
+            {
+                Console.WriteLine("You are already logged in as: " + App.LoggedInUsername);
+                return; // Prevent further login attempts
+            }
+
+            bool loginLoop = true;
+            bool adminAccount = false;
+            bool customerAccount = false;
 
             List<AccountDataModel> accountDataList;
 
             if (accountData == null)
             {
-                accountDataList = AccountDataAccess.LoadAll(); // Load data from JSON file
+                accountDataList = AccountDataAccess.LoadAll();
             }
             else
             {
-                accountDataList = accountData; // Use provided account data, if it exists.
+                accountDataList = accountData;
             }
 
-            while (loginLoop)  // While true
+            while (loginLoop)
             {
                 Console.WriteLine("Name: ");
-                string loginName = Console.ReadLine(); // Input
+                string loginName = Console.ReadLine();
 
-                Console.WriteLine("Password: ");
-                string loginPassword = Console.ReadLine(); // Input
+                Console.WriteLine();
 
-                bool found = false; 
+                Console.WriteLine("Password:");
+                string loginPassword = Console.ReadLine();
 
-                foreach (var data in accountDataList) // Loops through data list
-                {   
-                    // If account data is correct, execute this
+                bool found = false;
+
+                foreach (var data in accountDataList)
+                {
                     if (data.Admin != null && data.Admin.AdminName == loginName && data.Admin.AdminPassword == loginPassword)
                     {
                         found = true;
                         adminAccount = true;
-                        Console.WriteLine("Login successful!");
+                        App.LoggedInUsername = loginName; // Set the LoggedInUsername property
+                        Console.WriteLine("\nLogin successful!");
+                        Thread.Sleep(1500);
                         Console.WriteLine($"Logged in as administrator {data.Admin.AdminName}");
+                        Thread.Sleep(2000);
                         loginLoop = false;
                         break;
                     }
 
-                    // Loops through the "CustomerAccount" value, which is a list with customer account data
                     foreach (var customer in data.Customers)
-                    {   
-                        // If account data is correct, execute this
+                    {
                         if (customer.Name == loginName && customer.Password == loginPassword)
                         {
                             found = true;
                             customerAccount = true;
-                            Console.WriteLine("Login successful!");
+                            Console.WriteLine("\nLogin successful!");
+                            Thread.Sleep(1500);
                             Console.WriteLine($"Welcome back {customer.Name}");
+                            Thread.Sleep(2000);
                             loginLoop = false;
                             break;
                         }
                     }
 
                     if (found)
+                    {
+                        App.LoggedInUsername = loginName;
                         break;
+                    }
                 }
 
                 if (!found)
                 {
                     Console.WriteLine("Invalid name or password. Please try again.\n");
-                    break; // Breaks because of unit test, after it's merged remove this
                 }
+            }
+        }
+
+        public static void Logout()
+        {
+            // Check if a user is logged in
+            if (!string.IsNullOrEmpty(App.LoggedInUsername))
+            {
+                Console.WriteLine($"Logging out user: {App.LoggedInUsername}");
+                App.LoggedInUsername = null; // Clear the logged-in user
+            }
+            else
+            {
+                Console.WriteLine("No user is currently logged in.");
             }
         }
     }

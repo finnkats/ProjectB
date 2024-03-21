@@ -90,27 +90,18 @@ public static class AccountLogic
 
     public static void Logout()
     {
-        // Check if a user is logged in
-        if (!string.IsNullOrEmpty(App.LoggedInUsername))
-        {
-            Console.WriteLine($"Logging out user: {App.LoggedInUsername}");
-            App.LoggedInUsername = null; // Clear the logged-in user
-            Thread.Sleep(1500);
+        AccountPresentation.PrintLogout();
+        
+        App.LoggedInUsername = null;
 
+        // Remove all options which has to do with someone being logged in
+        App.FrontPage.RemoveCurrentOption("Logout");
+        App.HomePage.RemoveCurrentOption("View Tickets");
+        App.HomePage.RemoveCurrentOption("View Notifications");
+        App.HomePage.RemoveCurrentOption("Edit Account Settings");
+        App.HomePage.RemoveCurrentOption("Admin Features");
 
-            // Remove all options which has to do with someone being logged in
-            App.FrontPage.RemoveCurrentOption("Logout");
-            App.HomePage.RemoveCurrentOption("View Tickets");
-            App.HomePage.RemoveCurrentOption("View Notifications");
-            App.HomePage.RemoveCurrentOption("Edit Account Settings");
-            App.HomePage.RemoveCurrentOption("Admin Features");
-
-            App.FrontPage.AddCurrentOption("Sign in / up");
-            App.FrontPage.SetToCurrentMenu();
-        }
-        else
-        {
-            Console.WriteLine("No user is currently logged in.");
-        }
+        App.FrontPage.AddCurrentOption("Sign in / up");
+        App.FrontPage.SetToCurrentMenu();
     }
 }

@@ -9,6 +9,7 @@ public static class AccountPresentation{
     }
 
     public static (string?, string?) GetLoginDetails(){
+        Console.Clear();
         Console.WriteLine("Name: ");
         string? loginName = Console.ReadLine();
 
@@ -26,5 +27,14 @@ public static class AccountPresentation{
         Thread.Sleep(2000);
     }
 
-    public static void LoginFailure() => Console.WriteLine("Invalid name or password. Please try again.\n");
+    public static void LoginFailure(){
+        Console.WriteLine("Invalid name or password. Please try again.\n");
+        Thread.Sleep(1000);
+    }
+
+    public static void PrintLogout(){
+        Console.Clear();
+        Console.WriteLine($"Logging out user: {App.LoggedInUsername}");
+        Thread.Sleep(1500);
+    }
 }

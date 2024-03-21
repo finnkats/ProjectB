@@ -32,7 +32,7 @@ public static class App
         //  Front Page
         FrontPage.AddAllOption("Home Page", HomePage.SetToCurrentMenu);
         FrontPage.AddAllOption("Sign in / up", SignInUp.SetToCurrentMenu);
-        FrontPage.AddAllOption("Logout", () => AccountLogic.Logout()); // Adding logout function here
+        FrontPage.AddAllOption("Logout", AccountLogic.Logout);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
         FrontPage.AddCurrentOption("Home Page");
         FrontPage.AddCurrentOption("Sign in / up");
@@ -48,7 +48,7 @@ public static class App
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Movies", Example.DoNothing); // TODO add view movie function
         HomePage.AddAllOption("View Tickets", Example.DoNothing); // TODO add view ticket function
-        HomePage.AddAllOption("View Notification", Example.DoNothing); // TODO add view notification function
+        HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         HomePage.AddCurrentOption("View Movies");

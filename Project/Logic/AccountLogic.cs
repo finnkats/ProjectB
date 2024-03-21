@@ -43,13 +43,15 @@ public static class AccountLogic
                 if (data.Admin != null && data.Admin.AdminName == loginName && data.Admin.AdminPassword == loginPassword)
                 {
                     found = true;
+                    // Add Admin features
+                    App.HomePage.AddCurrentOption("Admin Features");
+                    
                     App.LoggedInUsername = loginName; // Set the LoggedInUsername property
                     Console.WriteLine("\nLogin successful!");
                     Thread.Sleep(1500);
                     Console.WriteLine($"Logged in as administrator {data.Admin.AdminName}");
                     Thread.Sleep(2000);
                     loginLoop = false;
-                    break;
                 }
 
                 if (data.Customers != null){
@@ -58,6 +60,11 @@ public static class AccountLogic
                         if (customer.Name == loginName && customer.Password == loginPassword)
                         {
                             found = true;
+                            // Add Customer Logged-In options
+                            App.HomePage.AddCurrentOption("View Tickets");
+                            App.HomePage.AddCurrentOption("View Notifications");
+                            App.HomePage.AddCurrentOption("Edit Account Settings");
+
                             Console.WriteLine("\nLogin successful!");
                             Thread.Sleep(1500);
                             Console.WriteLine($"Welcome back {customer.Name}");
@@ -71,6 +78,10 @@ public static class AccountLogic
                 if (found)
                 {
                     App.LoggedInUsername = loginName;
+                    // Remove sign in / up option from frontpage, and add logout
+                    App.FrontPage.RemoveCurrentOption("Sign in / up");
+                    App.FrontPage.AddCurrentOption("Logout");
+                    App.HomePage.SetToCurrentMenu();
                     break;
                 }
             }
@@ -89,6 +100,18 @@ public static class AccountLogic
         {
             Console.WriteLine($"Logging out user: {App.LoggedInUsername}");
             App.LoggedInUsername = null; // Clear the logged-in user
+            Thread.Sleep(1500);
+
+
+            // Remove all options which has to do with someone being logged in
+            App.FrontPage.RemoveCurrentOption("Logout");
+            App.HomePage.RemoveCurrentOption("View Tickets");
+            App.HomePage.RemoveCurrentOption("View Notifications");
+            App.HomePage.RemoveCurrentOption("Edit Account Settings");
+            App.HomePage.RemoveCurrentOption("Admin Features");
+
+            App.FrontPage.AddCurrentOption("Sign in / up");
+            App.FrontPage.SetToCurrentMenu();
         }
         else
         {

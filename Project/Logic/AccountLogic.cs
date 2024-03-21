@@ -1,52 +1,58 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Logic
 {
     public static class AccountLogic
     {
-        public static void Login()
+        public static void Login(List<AccountDataModel> accountData = null)
         {
             bool loginLoop = true;
             bool adminAccount = false;
             bool customerAccount = true;
 
-            while (loginLoop) // If login data doesn't exist, it keeps asking until it's right
+            List<AccountDataModel> accountDataList;
+
+            if (accountData == null)
+            {
+                accountDataList = AccountDataAccess.LoadAll(); // Load data from JSON file
+            }
+            else
+            {
+                accountDataList = accountData; // Use provided account data
+            }
+
+            while (loginLoop)
             {
                 Console.WriteLine("Name: ");
-                string loginName = Console.ReadLine(); // Asks for input
+                string loginName = Console.ReadLine(); // Input
 
-                Console.WriteLine("Password: "); // Asks for input
-                string loginPassword = Console.ReadLine();
-
-                var accountDataList = AccountDataAccess.LoadAll(); // List with dicts gets stored in 'accountDataList' variable
+                Console.WriteLine("Password: ");
+                string loginPassword = Console.ReadLine(); // Input
 
                 bool found = false;
 
-                foreach (var accountData in accountDataList)
+                foreach (var data in accountDataList)
                 {
-                    // Checks if admin login data is correct
-                    if (accountData.Admin != null && accountData.Admin.AdminName == loginName && accountData.Admin.AdminPassword == loginPassword)
+                    if (data.Admin != null && data.Admin.AdminName == loginName && data.Admin.AdminPassword == loginPassword)
                     {
                         found = true;
                         adminAccount = true;
                         Console.WriteLine("Login successful!");
-                        Console.WriteLine($"Logged in as administrator {accountData.Admin.AdminName}");
-                        loginLoop = false; // Exit the login loop
+                        Console.WriteLine($"Logged in as administrator {data.Admin.AdminName}");
+                        loginLoop = false;
                         break;
                     }
 
-                    // Loops through list of account data from Customers key
-                    foreach (var customer in accountData.Customers)
+                    foreach (var customer in data.Customers)
                     {
-                        // Checks if customer login data is correct
                         if (customer.Name == loginName && customer.Password == loginPassword)
                         {
                             found = true;
                             customerAccount = true;
                             Console.WriteLine("Login successful!");
                             Console.WriteLine($"Welcome back {customer.Name}");
-                            loginLoop = false; // Exit the login loop
+                            loginLoop = false;
                             break;
                         }
                     }
@@ -58,6 +64,7 @@ namespace Logic
                 if (!found)
                 {
                     Console.WriteLine("Invalid name or password. Please try again.\n");
+                    break;
                 }
             }
         }

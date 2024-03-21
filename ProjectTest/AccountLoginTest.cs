@@ -1,21 +1,23 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Logic;
-
-var accountDataList = AccountDataAccess.LoadAll();
+using System;
+using System.IO;
+using System.Text;
 
 namespace Logic.Tests
 {
     [TestClass]
     public class AccountLogicTests
-    {
+    {   
+
         private List<AccountDataModel> accountDataList;
 
         [TestInitialize]
         public void Setup()
         {
             // Load account data before each test
-            accountDataList = AccountDataAccess.LoadAll();
+            accountDataList = AccountDataAccess.LoadAll("../../../Sources/AccountData.json");
         }
+
 
         [TestMethod]
         public void Login_AdminLogin_Success()
@@ -24,24 +26,18 @@ namespace Logic.Tests
             string input = "Admin123\nPassword123\n";
             using (StringReader stringReader = new StringReader(input))
             {
-                // Redirect Console input
-                Console.SetIn(stringReader);
-
-                // Captures the console output
                 using (StringWriter stringWriter = new StringWriter())
                 {
+                    Console.SetIn(stringReader);
                     Console.SetOut(stringWriter);
 
                     // Act
-                    AccountLogic.Login();
+                    AccountLogic.Login(accountDataList);
 
-                    foreach (var accountData in accountDataList)
-                    {
-                        // Assert
-                        string consoleOutput = stringWriter.ToString();
-                        Assert.IsTrue(consoleOutput.Contains("Login successful!"), "Login should be successful");
-                        Assert.IsTrue(consoleOutput.Contains($"Logged in as administrator {accountData.Admin.AdminName}"), "Logged in as administrator should be printed");
-                    }
+                    // Assert
+                    string consoleOutput = stringWriter.ToString();
+                    Assert.IsTrue(consoleOutput.Contains("Login successful!"), "Admin login should be successful");
+                    Assert.IsTrue(consoleOutput.Contains("Logged in as administrator Admin123"), "Logged in as administrator should be printed");
                 }
             }
         }
@@ -53,61 +49,40 @@ namespace Logic.Tests
             string input = "Soufiane\npassword\n";
             using (StringReader stringReader = new StringReader(input))
             {
-                // Redirect Console input
-                Console.SetIn(stringReader);
-
-                // Captures the console output
                 using (StringWriter stringWriter = new StringWriter())
                 {
+                    Console.SetIn(stringReader);
                     Console.SetOut(stringWriter);
 
                     // Act
-                    AccountLogic.Login();
+                    AccountLogic.Login(accountDataList);
 
                     // Assert
-                    foreach (var accountData in accountDataList)
-                    {
-                        foreach (var customer in accountData.Customers)
-                        {
-                            string consoleOutput = stringWriter.ToString();
-                            Assert.IsTrue(consoleOutput.Contains("Login successful!"), "Login should be successful");
-                            Assert.IsTrue(consoleOutput.Contains($"Welcome back {customer.Name}"), "Logged in as administrator should be printed");
-                            break;
-                        }
-                    }
+                    string consoleOutput = stringWriter.ToString();
+                    Assert.IsTrue(consoleOutput.Contains("Login successful!"), "Customer login should be successful");
+                    Assert.IsTrue(consoleOutput.Contains("Welcome back Soufiane"), "Welcome message should be printed");
                 }
             }
         }
 
         [TestMethod]
-        public void Login_CustomerLogin_Fail()
+        public void Login_InvalidCredentials_Fail()
         {
             // Arrange
-            string input = "A\nA\n";
+            string input = "InvalidName\nInvalidPassword\n";
             using (StringReader stringReader = new StringReader(input))
             {
-                // Redirect Console input
-                Console.SetIn(stringReader);
-
-                // Captures the console output
                 using (StringWriter stringWriter = new StringWriter())
                 {
+                    Console.SetIn(stringReader);
                     Console.SetOut(stringWriter);
 
                     // Act
-                    AccountLogic.Login();
+                    AccountLogic.Login(accountDataList);
 
                     // Assert
-                    foreach (var accountData in accountDataList)
-                    {
-
-                        foreach (var customer in accountData.Customers)
-                        {
-                            string consoleOutput = stringWriter.ToString();
-                            Assert.IsTrue(consoleOutput.Contains("Invalid name or password. Please try again.\n"), "Login should be successful");
-                            break;
-                        }
-                    }
+                    string consoleOutput = stringWriter.ToString();
+                    Assert.IsTrue(consoleOutput.Contains("Invalid name or password. Please try again."), "Login with invalid credentials should fail");
                 }
             }
         }

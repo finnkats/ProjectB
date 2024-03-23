@@ -4,25 +4,22 @@ using System.Text.Json.Serialization;
 public static class UpdateTicketJson{
     private static int UniqueTicketID = 0;
     public static string? JsonTestPath = null;
+    // Checks if the unittest has set a path, if not (null) it will use the program's json file
     private static string JsonPath {
         get => string.IsNullOrEmpty(JsonTestPath) ? "../../DataSources/tickets.json" : JsonTestPath;
     }
     public static void UpdateJsonFile(Ticket newTicket){
-        // Currently the json file needs to have some data inside it
         List<KeyValueClass> ticketsCollection;
+        // Check if file exist and has data inside it
         if(File.Exists(JsonPath) && !string.IsNullOrEmpty(File.ReadAllText(JsonPath))){
             StreamReader reader = new(JsonPath);
             string ticketsJson = reader.ReadToEnd();
-            // List<Ticket> ticketsCollection = JsonConvert.DeserializeObject<List<Ticket>>(ticketsJson)!;
             ticketsCollection = JsonSerializer.Deserialize<List<KeyValueClass>>(ticketsJson)!;
             reader.Close();
         }
         else{
             ticketsCollection = new List<KeyValueClass>();
         }
-        // catch(Exception ex){
-        //     Console.WriteLine(ex.Message);
-        // }
 
         int ticketID = NewTicketID();
         KeyValueClass customDict = new KeyValueClass(ticketID, newTicket);
@@ -34,6 +31,7 @@ public static class UpdateTicketJson{
         writer.Close();
     }
 
+// Creates new ID's for new Movies
     private static int NewTicketID(){
         UniqueTicketID++;
         return UniqueTicketID;

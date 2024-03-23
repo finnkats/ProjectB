@@ -11,4 +11,6 @@ public class Ticket{
         this.Room = roomChar;
         UpdateTicketJson.UpdateJsonFile(this);
     }
+
+    public string TicketInfo() => $"The movie you booked: {this.MovieName}. On {this.Date} at {this.Time} in theater room {this.Room}";
 }

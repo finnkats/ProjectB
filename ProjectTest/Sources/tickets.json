@@ -1,1 +1,1 @@
-[{"ID":1,"Ticket":{"MovieName":"Movie","Date":"01-02-2000","Time":"12:00","Room":"L"}}]
+[{"ID":1,"Ticket":{"Movie":"Movie","Date":"01-02-2000","Time":"12:00","Room":"L"}},{"ID":2,"Ticket":{"Movie":"Movie2","Date":"01-02-2001","Time":"18:00","Room":"A"}}]

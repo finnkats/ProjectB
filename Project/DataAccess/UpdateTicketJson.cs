@@ -2,11 +2,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 public static class UpdateTicketJson{
-    private static int UniqueTicketID = 0;
+    public static int UniqueTicketID = 0;
     public static string? JsonTestPath = null;
     // Checks if the unittest has set a path, if not (null) it will use the program's json file
     private static string JsonPath {
-        get => string.IsNullOrEmpty(JsonTestPath) ? "../../DataSources/tickets.json" : JsonTestPath;
+        get => string.IsNullOrEmpty(JsonTestPath) ? "./DataSources/tickets.json" : JsonTestPath;
     }
     public static void UpdateJsonFile(Ticket newTicket){
         List<KeyValueClass> ticketsCollection;

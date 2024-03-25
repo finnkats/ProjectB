@@ -2,7 +2,7 @@ using System.Text.Json;
 public static class PlaysPresentation
 {
     // TODO: add method that gets all locations and puts them in a list
-    public static List<string> LocationOptions = new() {"Kruispunt", "Zuidplein"};
+    public static List<string> LocationOptions = new() {"Theater het Kruispunt", "Theater Zuidplein"};
     public static string SelectLocation(){
         Console.Clear();
         // Loop through the available location options and display them to the user

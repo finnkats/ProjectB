@@ -36,7 +36,7 @@ public static class PlaySchedule
         {
             if (viewing.Location == selectedLocation && viewing.Date == chosenDate)
             {
-                timesString += $"{timeCounter}: {viewing.Time} in hall {viewing.Hall}\n";
+                timesString += $"{timeCounter}: {viewing.Time} in {viewing.Hall}\n";
                 timeOptions.Add(timeCounter, viewing.Time);
                 timeCounter++;
             }

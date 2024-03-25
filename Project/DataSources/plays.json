@@ -1,0 +1,48 @@
+{
+    "ID1": [
+        {
+            "Location": "Kruispunt",
+            "Time": "19:40:00",
+            "Date": "19-04-2024",
+            "Hall": "1",
+            "Name": "dune"
+        },
+        {
+            "Location": "Kruispunt",
+            "Time": "20:00:00",
+            "Date": "19/04/2024",
+            "Hall": "1",
+            "Name": "dune"
+        },
+        {
+            "Location": "Zuidplein",
+            "Time": "18:00:00",
+            "Date": "19/04/2024",
+            "Hall": "1",
+            "Name": "dune"
+        }
+    ],
+    "ID2": [
+        {
+            "Location": "Zuidplein",
+            "Time": "12:00:00",
+            "Date": "19/04/2024",
+            "Hall": "1",
+            "Name": "dune"
+        },
+        {
+            "Location": "Zuidplein",
+            "Time": "13:00:00",
+            "Date": "19/04/2024",
+            "Hall": "1",
+            "Name": "dune"
+        },
+        {
+            "Location": "Zuidplein",
+            "Time": "14:30:00",
+            "Date": "20/04/2024",
+            "Hall": "3",
+            "Name": "dune"
+        }
+    ]
+} 

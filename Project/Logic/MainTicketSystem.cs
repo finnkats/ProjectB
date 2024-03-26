@@ -8,6 +8,7 @@ public static class MainTicketSystem{
         List<KeyValueClass>? ticketList = ReadTicketJson.ReadTickets();
         if(ticketList != null){
             foreach(KeyValueClass ticketPair in ticketList){
+                if (ticketPair.User != App.LoggedInUsername) continue;
                 Console.WriteLine(ticketPair.Ticket.TicketInfo());
             }
         }

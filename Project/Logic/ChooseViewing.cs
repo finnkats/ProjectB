@@ -18,7 +18,9 @@ public static class ChooseViewing{
         Console.Clear();
         // TODO: get play name from ID
         MainTicketSystem.CreateBookTicket(playID, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
-        //Console.WriteLine($"You have chosen {ViewingTime} on {ViewingDate} at {ViewingLocation} in hall {ViewingHall}");
+
+        // For now
         MainTicketSystem.ShowTicketInfo();
+        Thread.Sleep(10000);
     }
 }

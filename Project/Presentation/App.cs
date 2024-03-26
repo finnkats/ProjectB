@@ -2,7 +2,7 @@ using Logic;
 
 public static class App
 {
-    public static string? LoggedInUsername { get; set; }
+    public static string LoggedInUsername { get; set; } = "Unknown";
     public static Menu? CurrentMenu;
 
     public static void Start()
@@ -40,14 +40,14 @@ public static class App
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
         SignInUp.AddAllOption("Sign in", () => AccountLogic.Login());
-        SignInUp.AddAllOption("Sign up", Example.DoNothing); // TODO add create account function
+        SignInUp.AddAllOption("Sign up", CreateAccount.Create); // TODO add create account function
         SignInUp.AddCurrentOption("Sign in");
         SignInUp.AddCurrentOption("Sign up");
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view Play function
-        HomePage.AddAllOption("View Tickets", Example.DoNothing); // TODO add view ticket function
+        HomePage.AddAllOption("View Tickets", () => ChooseViewing.Choose("ID1")); // TODO add view ticket function // for now linked to ticket system
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);

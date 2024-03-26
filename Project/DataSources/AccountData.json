@@ -1,14 +1,1 @@
-[
-    {
-        "AdminAccount": {
-            "AdminName": "Admin123",
-            "AdminPassword": "Password123"
-        },
-        "CustomerAccount": [
-            {
-                "name": "Soufiane",
-                "password": "password"
-            }
-        ]
-    }
-]
+{"Admin123":{"Name":"Admin123","Password":"Password123","IsAdmin":true},"Soufiane":{"Name":"Soufiane","Password":"password","IsAdmin":false},"Max":{"Name":"Max","Password":"p4ssw0rd","IsAdmin":false}}

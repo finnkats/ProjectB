@@ -24,30 +24,29 @@ public class Menu{
 
     public void RemoveCurrentOption(string optionName) => CurrentOptions.Remove(optionName);
 
-    public string MenuString()
-{
-    string menuString = "";
-    // Include logged-in username if available
-    if (!string.IsNullOrEmpty(App.LoggedInUsername))
-    {
-        menuString += $"Logged in as: {App.LoggedInUsername}\n\n";
-    }
+    public string MenuString(){
+        string menuString = "";
+        // Include logged-in username if available
+        if (App.LoggedInUsername != "Unknown")
+        {
+            menuString += $"Logged in as: {App.LoggedInUsername}\n\n";
+        }
 
-    string menuPath = $"{Name}\n";
-    Menu? pointer = PreviousMenu;
-    while (pointer != null)
-    {
-        menuPath = $"{pointer.Name} -> " + menuPath;
-        pointer = pointer.PreviousMenu;
-    }
-    menuString += menuPath;
+        string menuPath = $"{Name}\n";
+        Menu? pointer = PreviousMenu;
+        while (pointer != null)
+        {
+            menuPath = $"{pointer.Name} -> " + menuPath;
+            pointer = pointer.PreviousMenu;
+        }
+        menuString += menuPath;
 
-    int index = 1;
-    CurrentOptions.ForEach(option => menuString += $"{index++}: {option}\n");
-    // Add Exit option at the end
-    menuString += $"{index}: Exit\n";
-    return menuString;
-}
+        int index = 1;
+        CurrentOptions.ForEach(option => menuString += $"{index++}: {option}\n");
+        // Add Exit option at the end
+        menuString += $"{index}: Exit\n";
+        return menuString;
+    }
 
 
     public Action? GetFunction(int input){

@@ -1,3 +1,5 @@
+using Logic;
+
 public static class CreateAccount{
     public static void Create(){
         (string name, string password) = AccountPresentation.GetLoginDetails();
@@ -13,5 +15,7 @@ public static class CreateAccount{
         Accounts.Add(name, new AccountDataModel(name, password, false));
         AccountDataAccess.WriteAll(Accounts);
         AccountPresentation.PrintMessage("\nAccount has been created.");
+        Thread.Sleep(1000);
+        AccountLogic.Login(null, name, password);
     }
 }

@@ -1,12 +1,12 @@
 using System.Text.Json.Serialization;
 
 public class KeyValueClass{
-    [JsonPropertyName("ID")]
-    public int ID {get; set;}
+    [JsonPropertyName("User")]
+    public string User {get; set;}
     [JsonPropertyName("Ticket")]
     public Ticket Ticket {get; set;}
-    public KeyValueClass(int id, Ticket ticket){
-        this.ID = id;
+    public KeyValueClass(string user, Ticket ticket){
+        this.User = user;
         this.Ticket = ticket;
     }
 }

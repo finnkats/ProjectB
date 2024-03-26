@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 public static class UpdateTicketJson{
-    public static int UniqueTicketID = 0;
+    // public static int UniqueTicketID = 0;
     public static string? JsonTestPath = null;
     // Checks if the unittest has set a path, if not (null) it will use the program's json file
     private static string JsonPath {
@@ -21,8 +21,8 @@ public static class UpdateTicketJson{
             ticketsCollection = new List<KeyValueClass>();
         }
 
-        int ticketID = NewTicketID();
-        KeyValueClass customDict = new KeyValueClass(ticketID, newTicket);
+        // int ticketID = NewTicketID();
+        KeyValueClass customDict = new KeyValueClass(App.LoggedInUsername, newTicket);
         ticketsCollection.Add(customDict);
 
         StreamWriter writer = new(JsonPath);
@@ -32,8 +32,8 @@ public static class UpdateTicketJson{
     }
 
 // Creates new ID's for new Movies
-    private static int NewTicketID(){
-        UniqueTicketID++;
-        return UniqueTicketID;
-    }
+    // private static int NewTicketID(){
+    //     UniqueTicketID++;
+    //     return UniqueTicketID;
+    // }
 }

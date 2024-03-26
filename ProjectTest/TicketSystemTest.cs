@@ -12,11 +12,6 @@ public class TicketSystemTest{
         File.WriteAllText(jsonTestPath, String.Empty);
     }
 
-    [TestCleanup]
-    public void ResetIDProperty(){
-        UpdateTicketJson.UniqueTicketID = 0;
-    }
-
     [TestMethod]
     // Test if Ticket.cs can update the Json file
     public void TestMethodJsonUpdate(){
@@ -68,21 +63,6 @@ public class TicketSystemTest{
         testTicket3.UpdateData();
         List<KeyValueClass> resultList = ReadTicketJson.ReadTickets()!;
         Assert.IsTrue(resultList != null && resultList.Count > 2);
-        ReadTicketJson.JsonTestPath = null;
-        UpdateTicketJson.JsonTestPath = null;
-    }
-
-    [TestMethod]
-    public void TestNewTicketIDIncrementation(){
-        UpdateTicketJson.JsonTestPath = jsonTestPath;
-        ReadTicketJson.JsonTestPath = jsonTestPath;
-        Ticket testTicket = new Ticket("Movie", "01-02-2000", "12:00", "L");
-        testTicket.UpdateData();
-        Ticket testTicket2 = new Ticket("Movie2", "01-02-2001", "15:00", "A");
-        testTicket2.UpdateData();
-        List<KeyValueClass> resultList = ReadTicketJson.ReadTickets()!;
-        Assert.AreEqual(resultList[0].ID, 1);
-        Assert.AreEqual(resultList[1].ID, 2);
         ReadTicketJson.JsonTestPath = null;
         UpdateTicketJson.JsonTestPath = null;
     }

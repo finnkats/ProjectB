@@ -2,7 +2,7 @@ using Logic;
 
 public static class App
 {
-    public static string? LoggedInUsername { get; set; }
+    public static string LoggedInUsername { get; set; } = "Unknown";
     public static Menu? CurrentMenu;
 
     public static void Start()

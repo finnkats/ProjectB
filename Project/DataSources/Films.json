@@ -1,0 +1,10 @@
+[
+  {
+    "ID1":
+    {
+      "PlayName": "Scary movie",
+      "Genres": "Horror",
+      "Active": true
+    } 
+  }
+]

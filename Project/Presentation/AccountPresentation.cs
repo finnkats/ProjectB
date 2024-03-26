@@ -1,6 +1,6 @@
 public static class AccountPresentation{
     public static bool CheckLoggedIn(){
-        if (!string.IsNullOrEmpty(App.LoggedInUsername))
+        if (App.LoggedInUsername != "Unknown")
         {
             Console.WriteLine("You are already logged in as: " + App.LoggedInUsername);
             return true; // Prevent further login attempts
@@ -8,7 +8,7 @@ public static class AccountPresentation{
         return false;
     }
 
-    public static (string?, string?) GetLoginDetails(){
+    public static (string, string) GetLoginDetails(){
         Console.Clear();
         Console.WriteLine("Name: ");
         string? loginName = Console.ReadLine();
@@ -17,7 +17,7 @@ public static class AccountPresentation{
 
         Console.WriteLine("Password:");
         string? loginPassword = Console.ReadLine();
-        return (loginName, loginPassword);
+        return (loginName ?? "null", loginPassword ?? "null");
     }
 
     public static void PrintSuccess(string loginString){
@@ -36,5 +36,20 @@ public static class AccountPresentation{
         Console.Clear();
         Console.WriteLine($"Logging out user: {App.LoggedInUsername}");
         Thread.Sleep(1500);
+    }
+
+    public static bool DoubleCheckPassword(string? password){
+        Console.WriteLine("\nConfirm Password:");
+        if (Console.ReadLine() != password){
+            Console.WriteLine("Password is incorrect.");
+            Thread.Sleep(2000);
+            return false;
+        }
+        return true;
+    }
+
+    public static void PrintMessage(string message){
+        Console.WriteLine(message);
+        Thread.Sleep(2000);
     }
 }

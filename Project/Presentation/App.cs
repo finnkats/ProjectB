@@ -2,7 +2,7 @@ using Logic;
 
 public static class App
 {
-    public static string? LoggedInUsername { get; set; }
+    public static string LoggedInUsername { get; set; } = "Unknown";
     public static Menu? CurrentMenu;
 
     public static void Start()
@@ -40,7 +40,7 @@ public static class App
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
         SignInUp.AddAllOption("Sign in", () => AccountLogic.Login());
-        SignInUp.AddAllOption("Sign up", Example.DoNothing); // TODO add create account function
+        SignInUp.AddAllOption("Sign up", CreateAccount.Create); // TODO add create account function
         SignInUp.AddCurrentOption("Sign in");
         SignInUp.AddCurrentOption("Sign up");
 

@@ -5,21 +5,12 @@ using System.Threading;
 namespace Logic;
 public static class AccountLogic
 {
-    public static void Login(List<AccountDataModel>? accountData = null)
+    public static void Login(Dictionary<string, AccountDataModel>? accountData = null)
     {
         // Check if a user is already logged in
         if (AccountPresentation.CheckLoggedIn()) return;
 
-        List<AccountDataModel> accountDataList;
-
-        if (accountData == null)
-        {
-            accountDataList = AccountDataAccess.LoadAll();
-        }
-        else
-        {
-            accountDataList = accountData;
-        }
+        if (accountData == null) accountData = AccountDataAccess.LoadAll();
 
         bool loginLoop = true;
         while (loginLoop)
@@ -27,72 +18,51 @@ public static class AccountLogic
             var (loginName, loginPassword) = AccountPresentation.GetLoginDetails();
             bool found = false;
 
-            foreach (var data in accountDataList)
+            foreach (var account in accountData.Values)
             {
-                if (CheckAdmin(loginName, loginPassword, data))
+                if (!CheckLogin(loginName, loginPassword, account)) continue;
+                if (account.IsAdmin)
                 {
-                    found = true;
                     // Add Admin features
                     App.HomePage.AddCurrentOption("Admin Features");
 
                     App.LoggedInUsername = loginName; // Set the LoggedInUsername property
 
-                    AccountPresentation.PrintSuccess($"Logged in as administrator {loginName}");
+                    AccountPresentation.PrintSuccess($"Logged in as administrator {account.Name}");
                     loginLoop = false;
                 }
+                else {
+                    // Add Customer Logged-In options
+                    App.HomePage.AddCurrentOption("View Tickets");
+                    App.HomePage.AddCurrentOption("View Notifications");
+                    App.HomePage.AddCurrentOption("Edit Account Settings");
 
-                if (data.Customers != null){
-                    foreach (var customer in data.Customers)
-                    {
-                        if (CheckCustomer(loginName, loginPassword, customer))
-                        {
-                            found = true;
-                            // Add Customer Logged-In options
-                            App.HomePage.AddCurrentOption("View Tickets");
-                            App.HomePage.AddCurrentOption("View Notifications");
-                            App.HomePage.AddCurrentOption("Edit Account Settings");
-
-                            AccountPresentation.PrintSuccess($"Welcome back {customer.Name}");
-                            loginLoop = false;
-                            break;
-                        }
-                    }
+                    AccountPresentation.PrintSuccess($"Welcome back {account.Name}");
+                    loginLoop = false;
                 }
                 
-                if (found)
-                {
-                    App.LoggedInUsername = loginName;
-                    // Remove sign in / up option from frontpage, and add logout
-                    App.FrontPage.RemoveCurrentOption("Sign in / up");
-                    App.FrontPage.AddCurrentOption("Logout");
-                    App.HomePage.SetToCurrentMenu();
-                    break;
-                }
+                App.LoggedInUsername = loginName;
+                // Remove sign in / up option from frontpage, and add logout
+                App.FrontPage.RemoveCurrentOption("Sign in / up");
+                App.FrontPage.AddCurrentOption("Logout");
+                App.HomePage.SetToCurrentMenu();
+                found = true;
+                break;
             }
 
             if (!found) AccountPresentation.LoginFailure();
         }
     }
 
-    public static bool CheckAdmin(string? loginName, string? loginPassword, AccountDataModel data){
-        if (data.Admin != null && data.Admin.AdminName == loginName && data.Admin.AdminPassword == loginPassword){
-            return true;
-        }
-        return false;
-    }
-
-    public static bool CheckCustomer(string? loginName, string? loginPassword, AccountDataModel.CustomerAccount customer){
-        if (customer.Name == loginName && customer.Password == loginPassword){
-            return true;
-        }
-        return false;
+    public static bool CheckLogin(string? loginName, string? loginPassword, AccountDataModel account){
+        return (account.Name == loginName && account.Password == loginPassword);
     }
 
     public static void Logout()
     {
         AccountPresentation.PrintLogout();
         
-        App.LoggedInUsername = null;
+        App.LoggedInUsername = "Unknown";
 
         // Remove all options which has to do with someone being logged in
         App.FrontPage.RemoveCurrentOption("Logout");

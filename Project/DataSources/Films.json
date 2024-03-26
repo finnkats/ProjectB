@@ -3,7 +3,7 @@
     "ID1":
     {
       "PlayName": "Scary movie",
-      "Genres": "Horror",
+      "Genres": [ "Horror" ],
       "Active": true
     } 
   }

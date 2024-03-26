@@ -21,6 +21,7 @@ class EditPlay
             foreach (KeyValuePair<string, Play> film in films)
             {
                 if (film.Value.ContainsValue(FilmName))
+                    return film.Key;
             }
         }
     }

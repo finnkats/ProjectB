@@ -27,9 +27,11 @@ public static class AccountPresentation{
         Thread.Sleep(2000);
     }
 
-    public static void LoginFailure(){
-        Console.WriteLine("Invalid name or password. Please try again.\n");
-        Thread.Sleep(1000);
+    public static bool LoginFailure(){
+        Console.Clear();
+        Console.WriteLine("Invalid name or password.\nDo you want to try again? (y/n)");
+        string input = Console.ReadLine()?.ToLower() ?? "n";
+        return input.StartsWith('y');
     }
 
     public static void PrintLogout(){

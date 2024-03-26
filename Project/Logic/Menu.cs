@@ -27,7 +27,7 @@ public class Menu{
     public string MenuString(){
         string menuString = "";
         // Include logged-in username if available
-        if (!string.IsNullOrEmpty(App.LoggedInUsername))
+        if (App.LoggedInUsername != "Unknown")
         {
             menuString += $"Logged in as: {App.LoggedInUsername}\n\n";
         }

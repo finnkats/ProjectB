@@ -50,7 +50,8 @@ public static class AccountLogic
                 break;
             }
 
-            if (!found) AccountPresentation.LoginFailure();
+            if (!found)
+            loginLoop = AccountPresentation.LoginFailure() ? true : false;
         }
     }
 

@@ -5,7 +5,7 @@ using System.Threading;
 namespace Logic;
 public static class AccountLogic
 {
-    public static void Login(Dictionary<string, AccountDataModel>? accountData = null)
+    public static void Login(Dictionary<string, AccountDataModel>? accountData = null, string inputName = "", string inputPassword = "")
     {
         // Check if a user is already logged in
         if (AccountPresentation.CheckLoggedIn()) return;
@@ -15,7 +15,9 @@ public static class AccountLogic
         bool loginLoop = true;
         while (loginLoop)
         {
-            var (loginName, loginPassword) = AccountPresentation.GetLoginDetails();
+            string loginName, loginPassword;
+            if (inputName != "") (loginName, loginPassword) = (inputName, inputPassword);
+            else (loginName, loginPassword) = AccountPresentation.GetLoginDetails();
             bool found = false;
 
             foreach (var account in accountData.Values)
@@ -50,8 +52,10 @@ public static class AccountLogic
                 break;
             }
 
-            if (!found)
-            loginLoop = AccountPresentation.LoginFailure() ? true : false;
+            if (!found){
+                if (inputName != "") return;
+                loginLoop = AccountPresentation.LoginFailure() ? true : false;
+            }
         }
     }
 

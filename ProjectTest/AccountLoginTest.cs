@@ -9,19 +9,25 @@ namespace Logic.Tests
     public class AccountLogicTests
     {   
 
-        private Dictionary<string, AccountDataModel> accountData = new();
+        private static Dictionary<string, AccountDataModel> accountData = new();
 
-        [TestInitialize]
-        public void Setup()
+        [ClassInitialize]
+        public static void Setup(TestContext testContext)
         {
             // Load account data before each test
             Dictionary<string, AccountDataModel>? accountDataTemp = AccountDataAccess.LoadAll("../../../Sources/AccountData.json");
             if (accountData != null) accountData = accountDataTemp;
+            App.Start();
+        }
+
+        [TestInitialize]
+        public void Reset(){
+            AccountLogic.Logout();
         }
 
 
         [TestMethod]
-        public void CheckLogin()
+        public void CheckLoginTest()
         {
             // Arrange
             string loginName = "Admin123";
@@ -35,6 +41,34 @@ namespace Logic.Tests
 
             AccountDataModel customer = new("Customer", "Password", false);
             Assert.IsTrue(AccountLogic.CheckLogin("Customer", "Password", customer), "Login should be successful");
+        }
+
+        [TestMethod]
+        public void AdminLogin(){
+            string loginName = "Admin123";
+            string loginPassword = "Password123";
+            AccountDataModel Admin = new(loginName, loginPassword, true);
+            AccountLogic.Login(accountData, loginName, loginPassword);
+
+            Assert.AreNotEqual("Unknown", App.LoggedInUsername);
+
+            string menuString = App.HomePage.MenuString();
+            Assert.IsTrue(menuString.Contains("Admin Features"), menuString);
+            Assert.IsFalse(menuString.Contains("View Tickets"), menuString);
+        }
+
+        [TestMethod]
+        public void CustomerLogin(){
+            string loginName = "Soufiane";
+            string loginPassword = "password";
+            AccountDataModel Customer = new(loginName, loginPassword, false);
+            AccountLogic.Login(accountData, loginName, loginPassword);
+
+            Assert.AreNotEqual("Unknown", App.LoggedInUsername);
+
+            string menuString = App.HomePage.MenuString();
+            Assert.IsTrue(menuString.Contains("View Tickets"), menuString);
+            Assert.IsFalse(menuString.Contains("Admin Features"), menuString);
         }
     }
 }

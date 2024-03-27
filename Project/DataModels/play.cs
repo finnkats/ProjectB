@@ -2,6 +2,8 @@ using System.Text.Json.Serialization;
 
 public class Play
 {
+    public string ID {  get; set; }
+
     [JsonPropertyName("PlayName")]
 	public string PlayName { get; set; }
     [JsonPropertyName("Genres")]

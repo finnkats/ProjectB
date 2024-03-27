@@ -9,7 +9,7 @@ class AddFilm
     public void AddToJson(AddFilm Film)
     {
         string ID = this.ID_Asigner();
-        var FilmDict = new Dictionary<int, Play>()
+        var FilmDict = new Dictionary<int, Play>();
         {
             {ID, Film};
         };

@@ -8,15 +8,15 @@ class AddFilm
 {
     public void AddToJson(AddFilm Film)
     {
-        int ID = this.ID_Asigner();
+        string ID = this.ID_Asigner();
         var FilmDict = new Dictionary<int, Play>()
         {
-            {ID, Film}
+            {ID, Film};
         };
-        var JsonFormat = JsonSerializer.Serialize(FilmDict, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
+    var JsonFormat = JsonSerializer.Serialize(FilmDict, new JsonSerializerOptions
+    {
+        WriteIndented = true
+    });
 
         File.WriteAllText(@"../../DataSources/Films.json", JsonFormat);
     }

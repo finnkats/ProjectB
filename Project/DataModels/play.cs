@@ -5,15 +5,15 @@ public class Play
     [JsonPropertyName("PlayName")]
 	public string PlayName { get; set; }
     [JsonPropertyName("Genres")]
-    public list<genres> Genre { get; set; }
+    public list<string> Genre { get; set; }
     [JsonPropertyName("Active")]
-    public string Active { get; set; }
+    public bool Active { get; set; }
 
-    public Play(string playname, list<genres> genre, bool active)
+    public Play(string playname, list<string> genre, bool active)
     {
         PlayName = playname;
-        Genre = genre
-        Active = active
+        Genre = genre;
+        Active = active;
     }
 }
 
@@ -32,10 +32,10 @@ public class PlayDetails
 
     public PlayDetails(string location, string time, string room, string date, string playname)
     {
-        Location = location
-        Time = time
-        Room = room
-        Date = date
-        PlayName = playname
+        Location = location;
+        Time = time;
+        Room = room;
+        Date = date;
+        PlayName = playname;
     }
 }

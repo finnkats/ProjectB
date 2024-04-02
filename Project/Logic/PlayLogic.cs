@@ -1,7 +1,32 @@
 using System.Text.Json;
-public static class PlaySchedule
+public static class PlayLogic
 {
-    public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<MovieViewing> playOptions){
+    public static void Choose(string playID){
+        var AllViewings = PlayReader.ReadMovieOptionsFromJson(playID);
+        string ViewingLocation = PlayPresentation.SelectLocation();
+        string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
+        if (ViewingDate == null) return;
+        string? ViewingTime = PlayPresentation.PrintTimes(ViewingLocation, ViewingDate, AllViewings);
+        if (ViewingTime == null) return;
+
+        string ViewingHall = "";
+        foreach (var viewing in AllViewings){
+            if (viewing.Date == ViewingDate && viewing.Time == ViewingTime){
+                ViewingHall = viewing.Hall;
+                break;
+            }
+        }
+
+        Console.Clear();
+        // TODO: get play name from ID
+        MainTicketSystem.CreateBookTicket(playID, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
+
+        // For now
+        MainTicketSystem.ShowTicketInfo();
+        Thread.Sleep(10000);
+    }
+
+    public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
         string datesString = "";
         datesString += "Available dates:\n";
@@ -27,7 +52,7 @@ public static class PlaySchedule
         return (datesString, dateOptions);
     }
 
-    public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<MovieViewing> playOptions){
+    public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
         string timesString = $"Available times on {chosenDate}:\n";
         int timeCounter = 1;

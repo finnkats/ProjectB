@@ -1,5 +1,5 @@
 using System.Text.Json;
-public static class PlaysPresentation
+public static class PlayPresentation
 {
     // TODO: add method that gets all locations and puts them in a list
     public static List<string> LocationOptions = new() {"Theater het Kruispunt", "Theater Zuidplein"};
@@ -25,9 +25,9 @@ public static class PlaysPresentation
     }
 
 
-    public static string? PrintDates(string selectedLocation, List<MovieViewing> playOptions){
+    public static string? PrintDates(string selectedLocation, List<Play> playOptions){
         Console.Clear();
-        (string? datesString, Dictionary<int, string>? datesOptions) = PlaySchedule.GetDates(selectedLocation, playOptions);
+        (string? datesString, Dictionary<int, string>? datesOptions) = PlayLogic.GetDates(selectedLocation, playOptions);
         if (datesString == null || datesOptions == null){
             Console.WriteLine("No viewings for the play");
             return null;
@@ -48,9 +48,9 @@ public static class PlaysPresentation
         return chosenDate;
     }
 
-    public static string? PrintTimes(string selectedLocation, string chosenDate, List<MovieViewing> playOptions){
+    public static string? PrintTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         Console.Clear();
-        (string? timesString, Dictionary<int, string>? timesOptions) = PlaySchedule.GetTimes(selectedLocation, chosenDate, playOptions);
+        (string? timesString, Dictionary<int, string>? timesOptions) = PlayLogic.GetTimes(selectedLocation, chosenDate, playOptions);
         if (timesString == null || timesOptions == null){
             Console.WriteLine("No times for the play");
             return null;

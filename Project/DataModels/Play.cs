@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-public class MovieViewing {
+public class Play {
     [JsonPropertyName("Location")]
     public string Location { get; set; }
     [JsonPropertyName("Time")]
@@ -11,7 +11,7 @@ public class MovieViewing {
     [JsonPropertyName("Name")]
     public string Name { get; set; }
 
-    public MovieViewing(string location, string time, string date, string hall, string name){
+    public Play(string location, string time, string date, string hall, string name){
         this.Location = location;
         this.Time = time;
         this.Date = date;

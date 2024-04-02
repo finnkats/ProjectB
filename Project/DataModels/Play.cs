@@ -1,4 +1,4 @@
-public class PlayDetails
+public class Play
 {
     [JsonPropertyName("Location")]
     public string Location { get; set; }

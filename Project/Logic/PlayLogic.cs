@@ -2,7 +2,7 @@ using System.Text.Json;
 public static class PlayLogic
 {
     public static void Choose(string playID){
-        var AllViewings = PlayReader.ReadMovieOptionsFromJson("DataSources/plays.json", playID);
+        var AllViewings = PlayReader.ReadMovieOptionsFromJson(playID);
         string ViewingLocation = PlayPresentation.SelectLocation();
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
         if (ViewingDate == null) return;

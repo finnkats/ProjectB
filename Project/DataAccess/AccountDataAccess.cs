@@ -5,15 +5,9 @@ using System.Text.Json;
 
 public static class AccountDataAccess
 {
-    public static Dictionary<string, Account> LoadAll(string? jsonPath = null)
+    public static Dictionary<string, Account> LoadAll()
     {   
-        // If a value is not passed as a parameter, execute this
-        if (jsonPath == null)
-        {
-            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
-        }
-
-        string json = File.ReadAllText(jsonPath);
+        string json = File.ReadAllText(@"DataSources/accounts.json");
         var accountDataList = JsonSerializer.Deserialize<Dictionary<string, Account>?>(json); // Convert to dictionary, with AccountDataModel object as value
         return accountDataList == null ? new Dictionary<string, Account>() : accountDataList; 
     }

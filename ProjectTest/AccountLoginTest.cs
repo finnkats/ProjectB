@@ -15,7 +15,7 @@ namespace Logic.Tests
         public static void Setup(TestContext testContext)
         {
             // Load account data before each test
-            Dictionary<string, Account>? accountDataTemp = AccountDataAccess.LoadAll("../../../Sources/AccountData.json");
+            Dictionary<string, Account>? accountDataTemp = AccountDataAccess.LoadAll();
             if (accountData != null) accountData = accountDataTemp;
             App.Start();
         }

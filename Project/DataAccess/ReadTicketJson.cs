@@ -10,13 +10,13 @@ public static class ReadTicketJson{
     }
 
     // Returns all tickets from JsonPath into a list
-    public static List<KeyValueClass>? ReadTickets(){
-        List<KeyValueClass> ticketCollection;
+    public static List<UserTicket>? ReadTickets(){
+        List<UserTicket> ticketCollection;
 
         if(File.Exists(JsonPath) && !string.IsNullOrEmpty(File.ReadAllText(JsonPath))){
             StreamReader reader = new(JsonPath);
             string ticketsJson = reader.ReadToEnd();
-            ticketCollection = JsonSerializer.Deserialize<List<KeyValueClass>>(ticketsJson)!;
+            ticketCollection = JsonSerializer.Deserialize<List<UserTicket>>(ticketsJson)!;
             reader.Close();
             return ticketCollection;
         }

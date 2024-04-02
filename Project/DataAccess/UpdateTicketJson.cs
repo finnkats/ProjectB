@@ -9,20 +9,20 @@ public static class UpdateTicketJson{
         get => string.IsNullOrEmpty(JsonTestPath) ? "./DataSources/tickets.json" : JsonTestPath;
     }
     public static void UpdateJsonFile(Ticket newTicket){
-        List<KeyValueClass> ticketsCollection;
+        List<UserTicket> ticketsCollection;
         // Check if file exist and has data inside it
         if(File.Exists(JsonPath) && !string.IsNullOrEmpty(File.ReadAllText(JsonPath))){
             StreamReader reader = new(JsonPath);
             string ticketsJson = reader.ReadToEnd();
-            ticketsCollection = JsonSerializer.Deserialize<List<KeyValueClass>>(ticketsJson)!;
+            ticketsCollection = JsonSerializer.Deserialize<List<UserTicket>>(ticketsJson)!;
             reader.Close();
         }
         else{
-            ticketsCollection = new List<KeyValueClass>();
+            ticketsCollection = new List<UserTicket>();
         }
 
         // int ticketID = NewTicketID();
-        KeyValueClass customDict = new KeyValueClass(App.LoggedInUsername, newTicket);
+        UserTicket customDict = new UserTicket(App.LoggedInUsername, newTicket);
         ticketsCollection.Add(customDict);
 
         StreamWriter writer = new(JsonPath);

@@ -6,7 +6,7 @@ public static class AddPlayForAdmin
     {
         Console.WriteLine("Enter a performance you want to add.");
         Console.WriteLine("Performance name: ");
-        string MovieName = Console.ReadLine();
+        string performanceName = Console.ReadLine();
         Console.Clear();
   
   
@@ -42,8 +42,8 @@ public static class AddPlayForAdmin
             Active = false;
         }  
   
-        Play Film = new Play(MovieName, Genres, Active);
+        Play Film = new Play(performanceName, Genres, Active);
         AddFilm.AddToJson(Film);
-        Console.WriteLine("Movie succesfully added");
+        Console.WriteLine("Performance succesfully added");
     }   
 }

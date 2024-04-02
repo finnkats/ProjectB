@@ -1,7 +1,7 @@
 using System.Text.Json;
 public static class PlaySchedule
 {
-    public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<MovieViewing> playOptions){
+    public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
         string datesString = "";
         datesString += "Available dates:\n";
@@ -27,7 +27,7 @@ public static class PlaySchedule
         return (datesString, dateOptions);
     }
 
-    public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<MovieViewing> playOptions){
+    public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
         string timesString = $"Available times on {chosenDate}:\n";
         int timeCounter = 1;

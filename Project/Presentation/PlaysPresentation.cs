@@ -25,7 +25,7 @@ public static class PlaysPresentation
     }
 
 
-    public static string? PrintDates(string selectedLocation, List<MovieViewing> playOptions){
+    public static string? PrintDates(string selectedLocation, List<Play> playOptions){
         Console.Clear();
         (string? datesString, Dictionary<int, string>? datesOptions) = PlaySchedule.GetDates(selectedLocation, playOptions);
         if (datesString == null || datesOptions == null){
@@ -48,7 +48,7 @@ public static class PlaysPresentation
         return chosenDate;
     }
 
-    public static string? PrintTimes(string selectedLocation, string chosenDate, List<MovieViewing> playOptions){
+    public static string? PrintTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         Console.Clear();
         (string? timesString, Dictionary<int, string>? timesOptions) = PlaySchedule.GetTimes(selectedLocation, chosenDate, playOptions);
         if (timesString == null || timesOptions == null){

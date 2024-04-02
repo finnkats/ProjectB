@@ -10,7 +10,7 @@ public static class AccountDataAccess
         // If a value is not passed as a parameter, execute this
         if (jsonPath == null)
         {
-            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
+            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
         }
 
         string json = File.ReadAllText(jsonPath);
@@ -21,7 +21,7 @@ public static class AccountDataAccess
     public static void WriteAll(Dictionary<string, AccountDataModel> Accounts, string? jsonPath = null){
         if (jsonPath == null)
         {
-            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
+            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
         }
 
         string json = JsonSerializer.Serialize(Accounts);

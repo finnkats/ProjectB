@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 public class Play
 {
     [JsonPropertyName("Location")]
@@ -9,14 +11,14 @@ public class Play
     [JsonPropertyName("Date")]
     public string Date { get; set; }
     [JsonPropertyName("PlayName")]
-    public string PlayName { get; set; }
+    public string PerformanceName { get; set; }
 
-    public PlayDetails(string location, string time, string room, string date, string playname)
+    public PlayDetails(string location, string time, string room, string date, string performanceName)
     {
         Location = location;
         Time = time;
         Room = room;
         Date = date;
-        PlayName = playname;
+        PerformanceName = performanceName;
     }
 }

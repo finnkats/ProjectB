@@ -1,13 +1,16 @@
+using System.Text.Json.Serialization;
+
 public class Play
 {
-    public string ID {  get; set; }
+	[JsonPropertyName("PlayName")]
+    public string ID {get; set;}
 
     [JsonPropertyName("PlayName")]
-	public string PlayName { get; set; }
+	public string PlayName {get; set;}
     [JsonPropertyName("Genres")]
-    public list<string> Genre { get; set; }
+    public list<string> Genre {get; set;}
     [JsonPropertyName("Active")]
-    public bool Active { get; set; }
+    public bool Active {get; set;}
 
     public Play(string playname, list<string> genre, bool active)
     {

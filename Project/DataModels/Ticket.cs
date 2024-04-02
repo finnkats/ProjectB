@@ -10,11 +10,11 @@ public class Ticket{
     [JsonPropertyName("Hall")]
     public string Hall {get; set;}
 
-    public Ticket(string Performance, string Date, string Time, string Room){
+    public Ticket(string Performance, string Date, string Time, string Hall){
         this.Performance = Performance;
         this.Date = Date;
         this.Time = Time;
-        this.Hall = Room;
+        this.Hall = Hall;
     }
 
     public void UpdateData(){

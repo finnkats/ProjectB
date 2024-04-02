@@ -4,15 +4,13 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-class AddFilm
+public class AddFilm
 {
     public void AddToJson(AddFilm Film)
     {
-        string ID = this.ID_Asigner();
-        var FilmDict = new Dictionary<int, Play>();
-        {
-            {ID, Film};
-        };
+        string ID = this.ID_Assigner();
+        var FilmDict = new Dictionary<string, Play>(){{ID, Film}};
+
     var JsonFormat = JsonSerializer.Serialize(FilmDict, new JsonSerializerOptions
     {
         WriteIndented = true
@@ -20,7 +18,7 @@ class AddFilm
 
         File.WriteAllText(@"../../DataSources/Films.json", JsonFormat);
     }
-    public string ID_Asigner() 
+    public string ID_Assigner() 
     {
         var FilmsJson = File.ReadAllText(@"../../DataSources/Films.json");
         var films = JsonSerializer.Deserialize<Dictionary<string, Play>>(FilmsJson);

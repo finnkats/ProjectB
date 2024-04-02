@@ -40,7 +40,7 @@ public static class App
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
         SignInUp.AddAllOption("Sign in", () => AccountLogic.Login());
-        SignInUp.AddAllOption("Sign up", CreateAccount.Create); // TODO add create account function
+        SignInUp.AddAllOption("Sign up", AccountLogic.CreateAccount); // TODO add create account function
         SignInUp.AddCurrentOption("Sign in");
         SignInUp.AddCurrentOption("Sign up");
 

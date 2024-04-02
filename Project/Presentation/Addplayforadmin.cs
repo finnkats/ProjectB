@@ -1,48 +1,39 @@
-class AddPlayForAdmin
+using System;
+
+public static class AddPlayForAdmin
 {
     public static void AdminTool()
     {
-        Console.WriteLine("Enter a movie/play you want to add.");
-        Console.WriteLine("\nFilmname: ");
+        Console.WriteLine("Enter a performance you want to add.");
+        Console.WriteLine("Performance name: ");
         string MovieName = Console.ReadLine();
         Console.Clear();
   
   
         List<string> Genres = new List<string>();
-        bool LoopCheck = true;
-        while (LoopCheck == true)
+        while (true)
         {
             Console.WriteLine("Enter Q if you want to stop adding Genres");
             Console.WriteLine("Genre: ");
             string Genre = Console.ReadLine();
-              
-            switch(Genre)
-            {
-                case "Q":
-                    LoopCheck = false;
-                    Console.Clear();
-                    break;
-  
-                case "q":
-                    LoopCheck = false;
-                    Console.Clear();
-                    break;
-  
-                default:
-                    Genres.Add(Genre);
-                    Console.WriteLine($@"{Genre} has been added.")
-                    Console.Clear();
-                    break;
-  
+            if(Genre.ToLower() == "q"){
+                Console.Clear();
+                break;
+            }
+            else{
+                Genres.Add(Genre);
+                Console.WriteLine($"{Genre} has been added.")
+                Console.Clear();
+                break;
             }
         }
               
   
-        Console.WriteLine("Is the movie/play currently active?");
+        Console.WriteLine("Will the performance be currently active?");
         Console.WriteLine("\n1. Yes");
         Console.WriteLine("2. No");
 
-        string Active_input = Console.ReadLine();
+        string activeInput = Console.ReadLine();
         Console.Clear();
         bool Active = true;
   

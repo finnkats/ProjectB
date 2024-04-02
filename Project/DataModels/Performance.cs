@@ -1,10 +1,7 @@
 using System.Text.Json.Serialization;
 
-public class Play
+public class Performance
 {
-	[JsonPropertyName("PlayName")]
-    public string ID {get; set;}
-
     [JsonPropertyName("PlayName")]
 	public string PlayName {get; set;}
     [JsonPropertyName("Genres")]
@@ -12,7 +9,7 @@ public class Play
     [JsonPropertyName("Active")]
     public bool Active {get; set;}
 
-    public Play(string playname, list<string> genre, bool active)
+    public Performance(string playname, list<string> genre, bool active)
     {
         PlayName = playname;
         Genre = genre;

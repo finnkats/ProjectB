@@ -29,7 +29,7 @@ public class TicketSystemTest{
         ReadTicketJson.JsonTestPath = jsonTestPath;
         Ticket testTicket = new Ticket("Movie", "01-02-2000", "12:00", "L");
         testTicket.UpdateData();
-        List<KeyValueClass>? resultList = ReadTicketJson.ReadTickets();
+        List<UserTicket>? resultList = ReadTicketJson.ReadTickets();
         Assert.IsTrue(resultList != null && resultList.Count > 0);
         ReadTicketJson.JsonTestPath = null;
         UpdateTicketJson.JsonTestPath = null;
@@ -44,7 +44,7 @@ public class TicketSystemTest{
         testTicket.UpdateData();
         Ticket testTicket2 = new Ticket("Movie2", "01-02-2001", "18:00", "A");
         testTicket2.UpdateData();
-        List<KeyValueClass> resultList = ReadTicketJson.ReadTickets()!;
+        List<UserTicket> resultList = ReadTicketJson.ReadTickets()!;
         Assert.AreEqual(resultList[0].Ticket.TicketInfo(), "The play you booked: Movie. On 01-02-2000 at 12:00 | L");
         Assert.AreEqual(resultList[1].Ticket.TicketInfo(), "The play you booked: Movie2. On 01-02-2001 at 18:00 | A");
         ReadTicketJson.JsonTestPath = null;
@@ -61,7 +61,7 @@ public class TicketSystemTest{
         testTicket2.UpdateData();
         Ticket testTicket3 = new Ticket("Movie3", "01-02-2002", "18:00", "B");
         testTicket3.UpdateData();
-        List<KeyValueClass> resultList = ReadTicketJson.ReadTickets()!;
+        List<UserTicket> resultList = ReadTicketJson.ReadTickets()!;
         Assert.IsTrue(resultList != null && resultList.Count > 2);
         ReadTicketJson.JsonTestPath = null;
         UpdateTicketJson.JsonTestPath = null;

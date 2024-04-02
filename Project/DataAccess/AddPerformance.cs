@@ -6,19 +6,18 @@ using System.Text.RegularExpressions;
 
 public static class AddPerformance
 {
-    public static void AddToJson(Play play)
+    public static void AddToJson(Performance performance)
     {
-        string ID = this.ID_Assigner();
-        var PerformanceDict = new Dictionary<string, Play>(){{ID, play}};
+        string ID = this.IdAssigner();
+        var PerformanceDict = new Dictionary<string, Performance>{ID, performance};
 
-    var JsonFormat = JsonSerializer.Serialize(PerformanceDict, new JsonSerializerOptions
-    {
-        WriteIndented = true
-    });
+    var JsonFormat = JsonSerializer.Serialize(PerformanceDict);
 
         File.WriteAllText(@"../../DataSources/Performance.json", JsonFormat);
     }
-    public static string ID_Assigner() 
+
+    // Rewrite code for more clarity. Check for empty files and use FileIsNotNull method.
+    public static string IdAssigner()
     {
         var PerformancesJson = File.ReadAllText(@"../../DataSources/Performance.json");
         var performances = JsonSerializer.Deserialize<Dictionary<string, Play>>(PerformancesJson);
@@ -27,7 +26,6 @@ public static class AddPerformance
         {
             return "ID1";
         }
-
         else
         {
             int CurrentID = 0;
@@ -42,7 +40,7 @@ public static class AddPerformance
             }
 
             CurrentID = CurrentID + 1;
-            string ReturnID = @$"ID{CurrentID}";
+            string ReturnID = $"ID: {CurrentID}";
 
             return ReturnID;
         }

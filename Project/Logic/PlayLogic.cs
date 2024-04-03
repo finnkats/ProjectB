@@ -2,7 +2,7 @@ using System.Text.Json;
 public static class PlayLogic
 {
     public static void Choose(string playID){
-        var AllViewings = PlayReader.ReadMovieOptionsFromJson(playID);
+        var AllViewings = PlayDataAccess.GetPlaysFromPresentation(playID);
         string ViewingLocation = PlayPresentation.SelectLocation();
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
         if (ViewingDate == null) return;
@@ -68,5 +68,20 @@ public static class PlayLogic
         }
 
         return (timesString, timeOptions);
+    }
+
+    public static void AddNewId(string id){
+        var Plays = PlayDataAccess.ReadPlays();
+        Plays.Add(id, new List<Play>());
+        PlayDataAccess.WritePlays(Plays);
+    }
+
+    public static void ChangeName(string id, string name){
+        var Plays = PlayDataAccess.ReadPlays();
+        if (!Plays.ContainsKey(id)) return;
+        for (int i = 0; i < Plays[id].Count(); i++){
+            Plays[id][i].Name = name;
+        }
+        PlayDataAccess.WritePlays(Plays);
     }
 }

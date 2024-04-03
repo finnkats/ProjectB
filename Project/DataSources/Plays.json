@@ -1,5 +1,5 @@
 {
-    "ID1": [
+    "ID0": [
         {
             "Location": "Theater het Kruispunt",
             "Time": "19:40:00",
@@ -22,27 +22,5 @@
             "Name": "Soldaat van Oranje"
         }
     ],
-    "ID2": [
-        {
-            "Location": "Theater Zuidplein",
-            "Time": "12:00:00",
-            "Date": "19/04/2024",
-            "Hall": "Grote Zaal",
-            "Name": "Soldaat van Oranje"
-        },
-        {
-            "Location": "Theater Zuidplein",
-            "Time": "13:00:00",
-            "Date": "19/04/2024",
-            "Hall": "Zaal-Z",
-            "Name": "Soldaat van Oranje"
-        },
-        {
-            "Location": "Theater Zuidplein",
-            "Time": "14:30:00",
-            "Date": "20/04/2024",
-            "Hall": "Balkon op Zuid A",
-            "Name": "Soldaat van Oranje"
-        }
-    ]
-} 
+    "ID1": []
+}

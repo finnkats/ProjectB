@@ -1,1 +1,19 @@
-{"ID0":{"Name":"Soldaat van Oranje","Genres":["Dutch","War"],"Active":true}}
+{
+  "ID0": {
+    "Name": "Soldaat van Oranje",
+    "Genres": [
+      "Dutch",
+      "War"
+    ],
+    "Active": true
+  },
+  "ID1": {
+    "Name": "The Lion King",
+    "Genres": [
+      "Family",
+      "Disney",
+      "Sad"
+    ],
+    "Active": true
+  }
+}

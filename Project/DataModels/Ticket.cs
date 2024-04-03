@@ -1,25 +1,25 @@
 using System.Text.Json.Serialization;
 
 public class Ticket{
-    [JsonPropertyName("Movie")]
-    public string MovieName {get; set;}
+    [JsonPropertyName("Performance")]
+    public string Performance {get; set;}
     [JsonPropertyName("Date")]
     public string Date {get; set;}
     [JsonPropertyName("Time")]
     public string Time {get; set;}
-    [JsonPropertyName("Room")]
-    public string Room {get; set;}
+    [JsonPropertyName("Hall")]
+    public string Hall {get; set;}
 
-    public Ticket(string MovieName, string Date, string Time, string Room){
-        this.MovieName = MovieName;
+    public Ticket(string Performance, string Date, string Time, string Hall){
+        this.Performance = Performance;
         this.Date = Date;
         this.Time = Time;
-        this.Room = Room;
+        this.Hall = Hall;
     }
 
     public void UpdateData(){
         UpdateTicketJson.UpdateJsonFile(this);
     }
 
-    public string TicketInfo() => $"The play you booked: {this.MovieName}. On {this.Date} at {this.Time} | {this.Room}";
+    public string TicketInfo() => $"The play you booked: {this.Performance}. On {this.Date} at {this.Time} | {this.Hall}";
 }

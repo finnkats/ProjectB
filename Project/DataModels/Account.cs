@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-public class AccountDataModel
+public class Account
 {
     [JsonPropertyName("Name")]
     public string Name {get; set;}
@@ -10,7 +10,7 @@ public class AccountDataModel
     [JsonPropertyName("IsAdmin")]
     public bool IsAdmin {get; set;}
     
-    public AccountDataModel(string name, string password, bool isAdmin){
+    public Account(string name, string password, bool isAdmin){
         Name = name;
         Password = password;
         IsAdmin = isAdmin;

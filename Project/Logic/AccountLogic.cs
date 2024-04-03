@@ -5,7 +5,7 @@ using System.Threading;
 namespace Logic;
 public static class AccountLogic
 {
-    public static void Login(Dictionary<string, AccountDataModel>? accountData = null, string inputName = "", string inputPassword = "")
+    public static void Login(Dictionary<string, Account>? accountData = null, string inputName = "", string inputPassword = "")
     {
         // Check if a user is already logged in
         if (AccountPresentation.CheckLoggedIn()) return;
@@ -59,7 +59,7 @@ public static class AccountLogic
         }
     }
 
-    public static bool CheckLogin(string? loginName, string? loginPassword, AccountDataModel account){
+    public static bool CheckLogin(string? loginName, string? loginPassword, Account account){
         return (account.Name == loginName && account.Password == loginPassword);
     }
 
@@ -78,5 +78,23 @@ public static class AccountLogic
 
         App.FrontPage.AddCurrentOption("Sign in / up");
         App.FrontPage.SetToCurrentMenu();
+    }
+
+    public static void CreateAccount(){
+        (string name, string password) = AccountPresentation.GetLoginDetails();
+        if (!AccountPresentation.DoubleCheckPassword(password) || name == "null"){
+            return;
+        }
+
+        Dictionary<string, Account> Accounts = AccountDataAccess.LoadAll();
+        if (Accounts.ContainsKey(name) || name == "Unknown"){
+            AccountPresentation.PrintMessage("Account with that name already exists");
+            return;
+        }
+        Accounts.Add(name, new Account(name, password, false));
+        AccountDataAccess.WriteAll(Accounts);
+        AccountPresentation.PrintMessage("\nAccount has been created.");
+        Thread.Sleep(1000);
+        AccountLogic.Login(null, name, password);
     }
 }

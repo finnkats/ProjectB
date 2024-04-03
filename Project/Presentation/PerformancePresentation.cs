@@ -3,9 +3,10 @@ using System;
 public static class PerformancePresentation
 {
     public static void AddPerformance(){
+        Console.Clear();
         Console.WriteLine("Enter a performance you want to add.");
         Console.WriteLine("Performance name: ");
-        string performanceName = Console.ReadLine();
+        string? performanceName = Console.ReadLine();
         Console.Clear();
   
         var genres = GetGenres();
@@ -16,13 +17,14 @@ public static class PerformancePresentation
 
         bool active = (Console.ReadLine() != "1");
 
-        if (PerformanceLogic.AddPerformance(performanceName, genres, active)){
+        Console.Clear();
+        if (PerformanceLogic.AddPerformance(performanceName ?? "", genres, active)){
             Console.WriteLine($"Performance {performanceName} has been added");
         } else {
             Console.WriteLine($"Performance {performanceName} already exists");
         }
 
-        Thread.Sleep(2000);
+        Thread.Sleep(3500);
         Console.Clear();
     }
 
@@ -33,11 +35,11 @@ public static class PerformancePresentation
         while (genre?.ToLower() != "q")
         {
             Console.WriteLine("Genre: ");
-            string Genre = Console.ReadLine();
+            genre = Console.ReadLine();
             Console.WriteLine();
 
             if(genre?.ToLower() != "q"){
-                Genres.Add(genre);
+                Genres.Add(genre ?? "");
             }
         }
         Console.Clear();
@@ -45,6 +47,6 @@ public static class PerformancePresentation
     } 
 
     public static void EditPerformance(){
-        
+
     }
 }

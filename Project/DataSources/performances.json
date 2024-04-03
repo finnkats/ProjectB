@@ -1,9 +1,1 @@
-{
-  "ID1":
-  {
-    "Name": "Scary movie",
-    "Genres": [ "Horror" ],
-    "Active": true
-  }
-}
-
+{"ID0":{"Name":"Soldaat van Oranje","Genres":["Dutch","War"],"Active":true}}

@@ -40,7 +40,7 @@ public static class App
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
         SignInUp.AddAllOption("Sign in", () => AccountLogic.Login());
-        SignInUp.AddAllOption("Sign up", AccountLogic.CreateAccount); // TODO add create account function
+        SignInUp.AddAllOption("Sign up", AccountLogic.CreateAccount);
         SignInUp.AddCurrentOption("Sign in");
         SignInUp.AddCurrentOption("Sign up");
 
@@ -66,10 +66,12 @@ public static class App
 
         //  Modify Performances
         ModifyPerformances.PreviousMenu = AdminFeatures;
-        ModifyPerformances.AddAllOption("Add Performance", PerformancePresentation.AddPerformance); // TODO add add Play function
-        ModifyPerformances.AddAllOption("Edit Performance", PerformancePresentation.EditPerformanceChoice); // TODO add edit Play function
+        ModifyPerformances.AddAllOption("Add Performance", PerformancePresentation.AddPerformance);
+        ModifyPerformances.AddAllOption("Edit Performance", PerformancePresentation.EditPerformanceStart);
+        ModifyPerformances.AddAllOption("Add Play", PlayPresentation.AddPlayDetails);
         ModifyPerformances.AddCurrentOption("Add Performance");
         ModifyPerformances.AddCurrentOption("Edit Performance");
+        ModifyPerformances.AddCurrentOption("Add Play");
 
         // Modify Categories
         ModifyCategories.PreviousMenu = AdminFeatures;

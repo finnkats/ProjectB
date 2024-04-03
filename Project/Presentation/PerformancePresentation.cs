@@ -46,7 +46,7 @@ public static class PerformancePresentation
         return Genres;
     } 
 
-    public static void EditPerformanceChoice(){
+    public static string? PerformanceChoice(string question, bool onlyActive=false){
         var Performances = PerformanceDataAccess.ReadPerformances();
         while (true){
             Console.Clear();
@@ -54,19 +54,27 @@ public static class PerformancePresentation
             List<string> PerformanceIds = new();
 
             foreach (KeyValuePair<string, Performance> performance in Performances){
+                if (onlyActive && !performance.Value.Active) continue;
                 PerformanceIds.Add(performance.Key);
                 Console.WriteLine($"{index++}: {performance.Value.Name}");
             }
             Console.WriteLine($"{index}: Exit\n");
 
-            Console.WriteLine("Choose the performance you want to edit:");
+            Console.WriteLine(question);
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {
-                EditPerformance(PerformanceIds[choice - 1]);
+                string performanceId = PerformanceIds[choice - 1];
+                return performanceId;
             } catch (ArgumentOutOfRangeException) {
-                if (choice == PerformanceIds.Count() + 1) return;
+                if (choice == PerformanceIds.Count() + 1) return null;
             }
         }
+    }
+
+    public static void EditPerformanceStart(){
+        string? performanceId = PerformanceChoice("Choose the performance you want to edit:");
+        if (performanceId == null) return;
+        EditPerformance(performanceId);
     }
 
     public static void EditPerformance(string performanceId){

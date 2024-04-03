@@ -28,7 +28,7 @@ public static class PlayLogic
 
     public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
-        string datesString = "";
+        string? datesString = "";
         datesString += "Available dates:\n";
 
         HashSet<string> availableDates = new HashSet<string>();
@@ -49,12 +49,13 @@ public static class PlayLogic
             dateCounter++;
         }
         
+        if (datesString == "Available dates:\n") datesString = null;
         return (datesString, dateOptions);
     }
 
     public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
-        string timesString = $"Available times on {chosenDate}:\n";
+        string? timesString = $"Available times on {chosenDate}:\n";
         int timeCounter = 1;
         Dictionary<int, string> timeOptions = new Dictionary<int, string>();
         foreach (var viewing in playOptions)
@@ -67,6 +68,7 @@ public static class PlayLogic
             }
         }
 
+        if (timesString == $"Available times on {chosenDate}:\n") timesString = null;
         return (timesString, timeOptions);
     }
 
@@ -83,5 +85,19 @@ public static class PlayLogic
             Plays[id][i].Name = name;
         }
         PlayDataAccess.WritePlays(Plays);
+    }
+
+    public static bool AddPlay(string location, string time, string date, string hall, string playId){
+        var Performances = PerformanceDataAccess.ReadPerformances();
+        if (!Performances.ContainsKey(playId)) return false;
+        string name = Performances[playId].Name;
+
+        var Plays = PlayDataAccess.ReadPlays();
+        if (!Plays.ContainsKey(playId)) return false;
+        Play newPlay = new(location, time, date, hall, name);
+        Plays[playId].Add(newPlay);
+        PlayDataAccess.WritePlays(Plays);
+
+        return true;
     }
 }

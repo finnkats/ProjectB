@@ -66,7 +66,7 @@ public static class App
 
         //  Modify Performances
         ModifyPerformances.PreviousMenu = AdminFeatures;
-        ModifyPerformances.AddAllOption("Add Performance", Example.DoNothing); // TODO add add Play function
+        ModifyPerformances.AddAllOption("Add Performance", PerformancePresentation.AddPerformance); // TODO add add Play function
         ModifyPerformances.AddAllOption("Edit Performance", Example.DoNothing); // TODO add edit Play function
         ModifyPerformances.AddCurrentOption("Add Performance");
         ModifyPerformances.AddCurrentOption("Edit Performance");

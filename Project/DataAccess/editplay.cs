@@ -54,17 +54,17 @@ class EditPlay
     public void Menu(int MenuUse)
     {
         if (MenuUse == 1) {
-            Console.WriteLine("\n1. Location")
-            Console.WriteLine("2. Time")
-            Console.WriteLine("3. Room")
-            Console.WriteLine("4. PlayName")
+            Console.WriteLine("\n1. Location");
+            Console.WriteLine("2. Time");
+            Console.WriteLine("3. Room");
+            Console.WriteLine("4. PlayName");
         }
 
         if (MenuUse == 2)
         {
-            Console.WriteLine("\n1. Delete value")
-            Console.WriteLine("2. Add value")
-            Console.WriteLine("3. change value")
+            Console.WriteLine("\n1. Delete value");
+            Console.WriteLine("2. Add value");
+            Console.WriteLine("3. change value");
         }
     }
 
@@ -77,7 +77,7 @@ class EditPlay
         Console.WriteLine("What aspect do you want to edit?");
         EditPlay.Menu(1);
 
-        int? UserChoice = null
+        int? UserChoice = null;
         do
         {
             int UserInput = Console.ReadLine();
@@ -92,6 +92,6 @@ class EditPlay
 
             }
         }
-        while (UserChoice == null)
+        while (UserChoice == null);
     }
 }

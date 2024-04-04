@@ -22,8 +22,20 @@
     "ID1": [
         {
             "Location": "Theater Zuidplein",
-            "Time": "21:0:00",
-            "Date": "05/01/2024",
+            "Time": "21:00:00",
+            "Date": "01/05/2024",
+            "Hall": "THEATERZAAL"
+        },
+        {
+            "Location": "Theater het Kruispunt",
+            "Time": "13:30:00",
+            "Date": "01/05/2024",
+            "Hall": "THEATERZAAL"
+        },
+        {
+            "Location": "Theater Zuidplein",
+            "Time": "12:00:00",
+            "Date": "01/05/2024",
             "Hall": "THEATERZAAL"
         }
     ]

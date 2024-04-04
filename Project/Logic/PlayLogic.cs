@@ -1,4 +1,6 @@
 using System.Text.Json;
+using System.Globalization;
+
 public static class PlayLogic
 {
     public static void Choose(string performanceId){
@@ -84,5 +86,49 @@ public static class PlayLogic
         PlayDataAccess.UpdatePlays();
 
         return true;
+    }
+
+    public static List<DateTime> ConvertToValidDates(List<string> dateStringList)
+    {
+        List<DateTime> validDates = new List<DateTime>();
+
+        foreach (var dateString in dateStringList.ToList()) // Iterate over a copy of the list
+        {
+            try
+            {
+                DateTime parsedDate = DateTime.ParseExact(dateString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                validDates.Add(parsedDate);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine($"Invalid date format: {dateString}");
+                dateStringList.Remove(dateString); // Remove invalid date string from original list
+            }
+        }
+
+        return validDates;
+    }
+
+    public static List<string> FilterMoviesDate(List<DateTime> validDateLis)
+    {
+        List<string> dateListBeforeOneMonth = new List<string>();
+        int counter = 1;
+
+        DateTime currentDate = DateTime.Now.Date;  // Corrected the usage of DateTime.Now
+
+        foreach (var playDate in validDateLis)
+        {   
+            DateTime oneMonthAhead = currentDate.AddMonths(1);
+
+            if (playDate >= currentDate && playDate <= oneMonthAhead)
+            {
+                string dateString = playDate.ToString("dd/MM/yyyy");
+                Console.WriteLine($"{counter}. {dateString}");
+                dateListBeforeOneMonth.Add(dateString);
+                counter++;
+            }
+        }
+
+        return dateListBeforeOneMonth;
     }
 }

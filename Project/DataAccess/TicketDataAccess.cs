@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
 public static class TicketDataAccess{
-    public static List<UserTicket>? ReadTickets(){
+    public static List<UserTicket> ReadTickets(){
         List<UserTicket> ticketCollection = new();
         string JsonPath = @"DataSources/tickets.json";
 
@@ -16,6 +21,7 @@ public static class TicketDataAccess{
         UserTicket customDict = new UserTicket(App.LoggedInUsername, newTicket);
         App.Tickets.Add(customDict);
 
+        string JsonPath = @"DataSources/tickets.json";
         StreamWriter writer = new(JsonPath);
         string listJson = JsonSerializer.Serialize(App.Tickets);
         writer.Write(listJson);

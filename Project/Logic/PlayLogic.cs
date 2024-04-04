@@ -17,6 +17,8 @@ public static class PlayLogic
             }
         }
 
+        if(MainTicketSystem.LoginRequest()){}
+
         Console.Clear();
         // TODO: get play name from ID
         MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");

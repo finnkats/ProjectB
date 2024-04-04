@@ -1,3 +1,5 @@
+using Logic;
+
 public static class MainTicketSystem{
     public static void CreateBookTicket(string performanceId, string date, string time, string room){
         Ticket createNewTicket = new Ticket(performanceId, date, time, room);
@@ -15,5 +17,14 @@ public static class MainTicketSystem{
         else{
             Console.WriteLine("No tickets booked");
         }
+    }
+
+    public static bool LoginRequest(){
+        if(App.LoggedInUsername == "Unknown"){
+            AccountLogic.Login();
+            Console.WriteLine("Has passed through this function");
+            return true;
+        }
+        return false;
     }
 }

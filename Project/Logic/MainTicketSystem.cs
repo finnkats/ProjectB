@@ -18,13 +18,4 @@ public static class MainTicketSystem{
             Console.WriteLine("No tickets booked");
         }
     }
-
-    public static bool LoginRequest(){
-        if(App.LoggedInUsername == "Unknown"){
-            AccountLogic.Login();
-            Console.WriteLine("Has passed through this function");
-            return true;
-        }
-        return false;
-    }
 }

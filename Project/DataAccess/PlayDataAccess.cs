@@ -7,8 +7,8 @@ public static class PlayDataAccess {
         return Plays;
     }
 
-    public static void WritePlays(Dictionary<string, List<Play>> plays){
-        var JsonString = JsonSerializer.Serialize(plays);
+    public static void UpdatePlays(){
+        var JsonString = JsonSerializer.Serialize(App.Plays);
         File.WriteAllText(@"DataSources/plays.json", JsonString);
     }
 

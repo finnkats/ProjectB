@@ -69,4 +69,48 @@ public static class PlayLogic
 
         return (timesString, timeOptions);
     }
+
+    public static List<DateTime> ConvertToValidDates(List<string> dateStringList)
+    {
+        List<DateTime> validDates = new List<DateTime>();
+
+        foreach (var dateString in dateStringList.ToList()) // Iterate over a copy of the list
+        {
+            try
+            {
+                DateTime parsedDate = DateTime.ParseExact(dateString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                validDates.Add(parsedDate);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine($"Invalid date format: {dateString}");
+                dateStringList.Remove(dateString); // Remove invalid date string from original list
+            }
+        }
+
+        return validDates;
+    }
+
+    public static List<string> FilterMoviesDate(List<DateTime> playDateList)
+    {
+        List<string> dateListBeforeOneMonth = new List<string>();
+        int counter = 1;
+
+        foreach (var playDate in playDateList)
+        {   
+            DateTime currentDate = currentDate.Now.Date;
+            DateTime oneMonthAhead = currentDate.AddMonths(1);
+
+            if (playDate >= currentDate && playDate <= oneMonthAhead)
+            {
+                string dateString = playDate.ToString("dd/MM/yyyy");
+                Console.WriteLine($"{counter}. {dateString}");
+                dateListBeforeOneMonth.Add(dateString);
+                counter++;
+            }
+        }
+
+        return dateListBeforeOneMonth;
+    }
+
 }

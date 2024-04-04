@@ -12,7 +12,7 @@ public static class PlayDataAccess {
         File.WriteAllText(@"DataSources/plays.json", JsonString);
     }
 
-    public static List<Play> GetPlaysFromPresentation(string playID)
+    public static List<Play> GetPlaysFromPresentationss(string playID)
     {   
         string jsonData = File.ReadAllText(@"DataSources/plays.json");
         var PlayOptions = JsonSerializer.Deserialize<Dictionary<string, List<Play>>>(jsonData) ?? new Dictionary<string, List<Play>>();

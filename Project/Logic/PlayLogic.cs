@@ -1,4 +1,6 @@
 using System.Text.Json;
+using System.Globalization;
+
 public static class PlayLogic
 {
     public static void Choose(string playID){
@@ -91,14 +93,15 @@ public static class PlayLogic
         return validDates;
     }
 
-    public static List<string> FilterMoviesDate(List<DateTime> playDateList)
+    public static List<string> FilterMoviesDate(List<DateTime> validDateLis)
     {
         List<string> dateListBeforeOneMonth = new List<string>();
         int counter = 1;
 
-        foreach (var playDate in playDateList)
+        DateTime currentDate = DateTime.Now.Date;  // Corrected the usage of DateTime.Now
+
+        foreach (var playDate in validDateLis)
         {   
-            DateTime currentDate = currentDate.Now.Date;
             DateTime oneMonthAhead = currentDate.AddMonths(1);
 
             if (playDate >= currentDate && playDate <= oneMonthAhead)
@@ -112,5 +115,4 @@ public static class PlayLogic
 
         return dateListBeforeOneMonth;
     }
-
 }

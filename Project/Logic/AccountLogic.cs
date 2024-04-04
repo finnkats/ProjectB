@@ -5,12 +5,10 @@ using System.Threading;
 namespace Logic;
 public static class AccountLogic
 {
-    public static void Login(Dictionary<string, Account>? accountData = null, string inputName = "", string inputPassword = "")
+    public static void Login(string inputName = "", string inputPassword = "")
     {
         // Check if a user is already logged in
         if (AccountPresentation.CheckLoggedIn()) return;
-
-        if (accountData == null) accountData = AccountDataAccess.LoadAll();
 
         bool loginLoop = true;
         while (loginLoop)
@@ -20,7 +18,7 @@ public static class AccountLogic
             else (loginName, loginPassword) = AccountPresentation.GetLoginDetails();
             bool found = false;
 
-            foreach (var account in accountData.Values)
+            foreach (var account in App.Accounts.Values)
             {
                 if (!CheckLogin(loginName, loginPassword, account)) continue;
                 if (account.IsAdmin)
@@ -86,15 +84,14 @@ public static class AccountLogic
             return;
         }
 
-        Dictionary<string, Account> Accounts = AccountDataAccess.LoadAll();
-        if (Accounts.ContainsKey(name) || name == "Unknown"){
+        if (App.Accounts.ContainsKey(name) || name == "Unknown"){
             AccountPresentation.PrintMessage("Account with that name already exists");
             return;
         }
-        Accounts.Add(name, new Account(name, password, false));
-        AccountDataAccess.WriteAll(Accounts);
+        App.Accounts.Add(name, new Account(name, password, false));
+        AccountDataAccess.UpdateAccounts();
         AccountPresentation.PrintMessage("\nAccount has been created.");
         Thread.Sleep(1000);
-        AccountLogic.Login(null, name, password);
+        AccountLogic.Login(name, password);
     }
 }

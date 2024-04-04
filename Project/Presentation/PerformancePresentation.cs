@@ -47,13 +47,12 @@ public static class PerformancePresentation
     } 
 
     public static string? PerformanceChoice(string question, bool onlyActive=false){
-        var Performances = PerformanceDataAccess.ReadPerformances();
         while (true){
             Console.Clear();
             int index = 1;
             List<string> PerformanceIds = new();
 
-            foreach (KeyValuePair<string, Performance> performance in Performances){
+            foreach (KeyValuePair<string, Performance> performance in App.Performances){
                 if (onlyActive && !performance.Value.Active) continue;
                 PerformanceIds.Add(performance.Key);
                 Console.WriteLine($"{index++}: {performance.Value.Name}");
@@ -78,30 +77,29 @@ public static class PerformancePresentation
     }
 
     public static void EditPerformance(string performanceId){
-        var Performances = PerformanceDataAccess.ReadPerformances();
         while (true){
             Console.Clear();
-            Console.WriteLine($"1: Change name \"{Performances[performanceId].Name}\"");
-            Console.WriteLine($"2: Change genres \"{String.Join('|', Performances[performanceId].Genres)}\"");
-            Console.WriteLine($"3: Change active status \"{Performances[performanceId].Active}\"");
+            Console.WriteLine($"1: Change name \"{App.Performances[performanceId].Name}\"");
+            Console.WriteLine($"2: Change genres \"{String.Join('|', App.Performances[performanceId].Genres)}\"");
+            Console.WriteLine($"3: Change active status \"{App.Performances[performanceId].Active}\"");
             Console.WriteLine("4: Exit\n");
             Int32.TryParse(Console.ReadLine(), out int choice);
             if (choice == 1){
                 Console.Clear();
                 Console.WriteLine("Enter new name:\n");
-                if (PerformanceLogic.ChangeName(Console.ReadLine() ?? "", performanceId, Performances)) Console.WriteLine("Successfully changed name");
+                if (PerformanceLogic.ChangeName(Console.ReadLine() ?? "", performanceId, App.Performances)) Console.WriteLine("Successfully changed name");
                 else Console.WriteLine("Couldn't change name");
                 Thread.Sleep(2500);
             }
             else if (choice == 2){
                 Console.Clear();
                 List<string> genres = GetGenres();
-                PerformanceLogic.ChangeGenres(genres, performanceId, Performances);
+                PerformanceLogic.ChangeGenres(genres, performanceId, App.Performances);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);
             }
             else if (choice == 3){
-                PerformanceLogic.ChangeActive(performanceId, Performances);
+                PerformanceLogic.ChangeActive(performanceId, App.Performances);
                 Console.WriteLine("Successfully changed active status");
                 Thread.Sleep(2500);
             }

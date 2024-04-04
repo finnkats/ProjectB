@@ -12,8 +12,8 @@ public static class PerformanceDataAccess
         return Performances ?? new Dictionary<string, Performance>();
     }
 
-    public static void WritePerformances(Dictionary<string, Performance> performances){
-        var PerformancesJson = JsonSerializer.Serialize(performances);
+    public static void UpdatePerformances(){
+        var PerformancesJson = JsonSerializer.Serialize(App.Performances);
         File.WriteAllText(@"DataSources/performances.json", PerformancesJson);
     }
 }

@@ -7,11 +7,13 @@ namespace ProjectTest.PerformanceTest;
 
 [TestClass]
 public class PerformanceTest{
-    private static Dictionary<string, Performance> Performances = new();
 
-    [ClassInitialize]
-    public static void LoadPerformances(TestContext testContext){
-        Performances = PerformanceDataAccess.ReadPerformances();
+    [TestInitialize]
+    public void EmptyPerformances(){
+        File.WriteAllText(@"DataSources/performances.json", "{}");
+        App.Performances.Clear();
+        File.WriteAllText(@"DataSources/Plays.json", "{}");
+        App.Plays.Clear();
     }
 
     [TestMethod]
@@ -21,10 +23,9 @@ public class PerformanceTest{
         bool active = false;
 
         PerformanceLogic.AddPerformance(name, genres, active);
-        Performances = PerformanceDataAccess.ReadPerformances();
 
         Performance? Performance = null;
-        foreach (var performance in Performances.Values){
+        foreach (var performance in App.Performances.Values){
             if (performance.Name == "Test Performance 1"){
                 Performance = performance;
                 break;
@@ -39,23 +40,21 @@ public class PerformanceTest{
 
     [TestMethod]
     public void DuplicateTest(){
-        int Amount = Performances.Count();
+        int Amount = App.Performances.Count();
         PerformanceLogic.AddPerformance("Test Performance 2", new List<string>(){"Genre 1", "Genre 2"}, false);
         PerformanceLogic.AddPerformance("Test Performance 2", new List<string>(){"Genre 1", "Genre 2"}, false);
-        Performances = PerformanceDataAccess.ReadPerformances();
 
-        Assert.AreEqual(Amount + 1, Performances.Count());
+        Assert.AreEqual(Amount + 1, App.Performances.Count());
 
     }
 
     [TestMethod]
     public void AssignIdTest(){
-        int baseAmount = Performances.Count();
+        int baseAmount = App.Performances.Count();
         PerformanceLogic.AddPerformance("Test Performance 3", new List<string>(){"Genre 1", "Genre 2"}, false);
-        Performances = PerformanceDataAccess.ReadPerformances();
         
-        Assert.AreEqual(1, Performances.Count() - baseAmount);
-        Assert.IsTrue(Performances.ContainsKey($"ID{baseAmount}"));
-        Assert.AreEqual("Test Performance 3", Performances[$"ID{baseAmount}"].Name);
+        Assert.AreEqual(1, App.Performances.Count() - baseAmount);
+        Assert.IsTrue(App.Performances.ContainsKey($"ID{baseAmount}"));
+        Assert.AreEqual("Test Performance 3", App.Performances[$"ID{baseAmount}"].Name);
     }
 }

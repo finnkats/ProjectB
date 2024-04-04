@@ -18,11 +18,10 @@ public class Ticket{
     }
 
     public void UpdateData(){
-        UpdateTicketJson.UpdateJsonFile(this);
+        TicketDataAccess.UpdateTickets(this);
     }
 
     public string TicketInfo() {
-        var Performances = PerformanceDataAccess.ReadPerformances();
-        return $"The play you booked: {Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | {this.Hall}";
+        return $"The play you booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | {this.Hall}";
     }  
 }

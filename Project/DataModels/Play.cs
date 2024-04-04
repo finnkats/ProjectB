@@ -8,14 +8,14 @@ public class Play {
     public string Date { get; set; }
     [JsonPropertyName("Hall")]
     public string Hall { get; set; }
-    [JsonPropertyName("Name")]
-    public string Name { get; set; }
+    [JsonIgnore]
+    public string PerformanceId { get; set; }
 
-    public Play(string location, string time, string date, string hall, string name){
+    public Play(string location, string time, string date, string hall, string performanceId){
         this.Location = location;
         this.Time = time;
         this.Date = date;
         this.Hall = hall;
-        this.Name = name;
+        this.PerformanceId = performanceId;
     }
 }

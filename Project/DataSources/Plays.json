@@ -4,22 +4,19 @@
             "Location": "Theater het Kruispunt",
             "Time": "19:40:00",
             "Date": "19/04/2024",
-            "Hall": "THEATERZAAL",
-            "Name": "Soldaat van Oranje"
+            "Hall": "THEATERZAAL"
         },
         {
             "Location": "Theater het Kruispunt",
             "Time": "20:00:00",
             "Date": "19/04/2024",
-            "Hall": "THEATERZAAL",
-            "Name": "Soldaat van Oranje"
+            "Hall": "THEATERZAAL"
         },
         {
             "Location": "Theater Zuidplein",
             "Time": "18:00:00",
             "Date": "19/04/2024",
-            "Hall": "THEATERZAAL",
-            "Name": "Soldaat van Oranje"
+            "Hall": "THEATERZAAL"
         }
     ],
     "ID1": [
@@ -27,8 +24,7 @@
             "Location": "Theater Zuidplein",
             "Time": "21:0:00",
             "Date": "05/01/2024",
-            "Hall": "THEATERZAAL",
-            "Name": "The Lion King"
+            "Hall": "THEATERZAAL"
         }
     ]
 }

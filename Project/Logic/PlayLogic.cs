@@ -1,8 +1,8 @@
 using System.Text.Json;
 public static class PlayLogic
 {
-    public static void Choose(string playID){
-        var AllViewings = PlayDataAccess.GetPlaysFromPresentation(playID);
+    public static void Choose(string performanceId){
+        var AllViewings = PlayDataAccess.GetPlaysFromPresentation(performanceId);
         string ViewingLocation = PlayPresentation.SelectLocation();
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
         if (ViewingDate == null) return;
@@ -19,7 +19,7 @@ public static class PlayLogic
 
         Console.Clear();
         // TODO: get play name from ID
-        MainTicketSystem.CreateBookTicket(playID, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
+        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
 
         // For now
         MainTicketSystem.ShowTicketInfo();
@@ -78,23 +78,10 @@ public static class PlayLogic
         PlayDataAccess.WritePlays(Plays);
     }
 
-    public static void ChangeName(string id, string name){
-        var Plays = PlayDataAccess.ReadPlays();
-        if (!Plays.ContainsKey(id)) return;
-        for (int i = 0; i < Plays[id].Count(); i++){
-            Plays[id][i].Name = name;
-        }
-        PlayDataAccess.WritePlays(Plays);
-    }
-
     public static bool AddPlay(string location, string time, string date, string hall, string playId){
-        var Performances = PerformanceDataAccess.ReadPerformances();
-        if (!Performances.ContainsKey(playId)) return false;
-        string name = Performances[playId].Name;
-
         var Plays = PlayDataAccess.ReadPlays();
         if (!Plays.ContainsKey(playId)) return false;
-        Play newPlay = new(location, time, date, hall, name);
+        Play newPlay = new(location, time, date, hall, playId);
         Plays[playId].Add(newPlay);
         PlayDataAccess.WritePlays(Plays);
 

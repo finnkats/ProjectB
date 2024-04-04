@@ -15,8 +15,6 @@ namespace Logic.Tests
         public static void Setup(TestContext testContext)
         {
             // Load account data before each test
-            Dictionary<string, Account>? accountDataTemp = AccountDataAccess.LoadAll();
-            if (accountData != null) accountData = accountDataTemp;
             App.Start();
         }
 
@@ -48,7 +46,7 @@ namespace Logic.Tests
             string loginName = "Admin123";
             string loginPassword = "Password123";
             Account Admin = new(loginName, loginPassword, true);
-            AccountLogic.Login(accountData, loginName, loginPassword);
+            AccountLogic.Login(loginName, loginPassword);
 
             Assert.AreNotEqual("Unknown", App.LoggedInUsername);
 
@@ -62,7 +60,7 @@ namespace Logic.Tests
             string loginName = "Soufiane";
             string loginPassword = "password";
             Account Customer = new(loginName, loginPassword, false);
-            AccountLogic.Login(accountData, loginName, loginPassword);
+            AccountLogic.Login(loginName, loginPassword);
 
             Assert.AreNotEqual("Unknown", App.LoggedInUsername);
 

@@ -73,17 +73,15 @@ public static class PlayLogic
     }
 
     public static void AddNewId(string id){
-        var Plays = PlayDataAccess.ReadPlays();
-        Plays.Add(id, new List<Play>());
-        PlayDataAccess.WritePlays(Plays);
+        App.Plays.Add(id, new List<Play>());
+        PlayDataAccess.UpdatePlays();
     }
 
     public static bool AddPlay(string location, string time, string date, string hall, string playId){
-        var Plays = PlayDataAccess.ReadPlays();
-        if (!Plays.ContainsKey(playId)) return false;
+        if (!App.Plays.ContainsKey(playId)) return false;
         Play newPlay = new(location, time, date, hall, playId);
-        Plays[playId].Add(newPlay);
-        PlayDataAccess.WritePlays(Plays);
+        App.Plays[playId].Add(newPlay);
+        PlayDataAccess.UpdatePlays();
 
         return true;
     }

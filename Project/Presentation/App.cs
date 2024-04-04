@@ -3,7 +3,13 @@ using Logic;
 public static class App
 {
     public static string LoggedInUsername { get; set; } = "Unknown";
+
     public static Menu? CurrentMenu;
+
+    public static readonly Dictionary<string, Performance> Performances = PerformanceDataAccess.ReadPerformances();
+    public static readonly Dictionary<string, Account> Accounts = AccountDataAccess.ReadAccounts();
+    public static readonly Dictionary<string, List<Play>> Plays = PlayDataAccess.ReadPlays();
+    public static readonly List<UserTicket> Tickets = TicketDataAccess.ReadTickets();
 
     public static void Start()
     {

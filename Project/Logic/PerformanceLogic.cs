@@ -1,20 +1,18 @@
 public static class PerformanceLogic{
     public static bool AddPerformance(string name, List<string> genres, bool active){
         Performance NewPerformance = new(name, genres, active);
-        var Performances = PerformanceDataAccess.ReadPerformances();
-        foreach (var performance in Performances.Values){
+        foreach (var performance in App.Performances.Values){
             if (performance.Name.ToLower() == name.ToLower()) return false;
         }
         string AssignedId = AssignId();
-        Performances.Add(AssignedId, NewPerformance);
-        PerformanceDataAccess.WritePerformances(Performances);
+        App.Performances.Add(AssignedId, NewPerformance);
+        PerformanceDataAccess.UpdatePerformances();
         PlayLogic.AddNewId(AssignedId);
         return true;
     }
 
     public static string AssignId(){
-        var Performances = PerformanceDataAccess.ReadPerformances();
-        int newId = Performances.Count();
+        int newId = App.Performances.Count();
         return $"ID{newId}";
     }
 
@@ -24,18 +22,17 @@ public static class PerformanceLogic{
         }
 
         Performances[id].Name = name;
-        PerformanceDataAccess.WritePerformances(Performances);
-        //PlayLogic.ChangeName(id, name);
+        PerformanceDataAccess.UpdatePerformances();
         return true;
     }
 
     public static void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
         Performances[id].Genres = genres;
-        PerformanceDataAccess.WritePerformances(Performances);
+        PerformanceDataAccess.UpdatePerformances();
         return;
     }
 
     public static void ChangeActive(string id, Dictionary<string, Performance> Performances){
-        Performances[id].Active = !(Performances[id].Active);
+        Performances[id].Active = !Performances[id].Active;
     }
 }

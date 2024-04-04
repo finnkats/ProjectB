@@ -5,9 +5,8 @@ public static class MainTicketSystem{
     }
 
     public static void ShowTicketInfo(){
-        List<UserTicket>? ticketList = ReadTicketJson.ReadTickets();
-        if(ticketList != null){
-            foreach(UserTicket ticketPair in ticketList){
+        if(App.Tickets != null){
+            foreach(UserTicket ticketPair in App.Tickets){
                 if (ticketPair.User != App.LoggedInUsername) continue;
                 Console.WriteLine(ticketPair.Ticket.TicketInfo());
             }

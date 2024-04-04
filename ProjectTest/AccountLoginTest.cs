@@ -9,8 +9,6 @@ namespace Logic.Tests
     public class AccountLogicTests
     {   
 
-        private static Dictionary<string, Account> accountData = new();
-
         [ClassInitialize]
         public static void Setup(TestContext testContext)
         {

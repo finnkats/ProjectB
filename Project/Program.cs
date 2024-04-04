@@ -1,5 +1,5 @@
 ﻿App.Start();
-Console.Clear();
+//Console.Clear();
 // Turn on "Demo" mode if any program arguments are given
 if (args.Length != 0) App.AddAllMenus();
 bool invalidInput = false;

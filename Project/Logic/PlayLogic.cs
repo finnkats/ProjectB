@@ -1,8 +1,8 @@
 using System.Text.Json;
 public static class PlayLogic
 {
-    public static void Choose(string playID){
-        var AllViewings = PlayReader.ReadMovieOptionsFromJson(playID);
+    public static void Choose(string performanceId){
+        var AllViewings = PlayDataAccess.GetPlaysFromPresentation(performanceId);
         string ViewingLocation = PlayPresentation.SelectLocation();
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
         if (ViewingDate == null) return;
@@ -19,7 +19,7 @@ public static class PlayLogic
 
         Console.Clear();
         // TODO: get play name from ID
-        MainTicketSystem.CreateBookTicket(playID, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
+        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
 
         // For now
         MainTicketSystem.ShowTicketInfo();
@@ -28,7 +28,7 @@ public static class PlayLogic
 
     public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
-        string datesString = "";
+        string? datesString = "";
         datesString += "Available dates:\n";
 
         HashSet<string> availableDates = new HashSet<string>();
@@ -49,12 +49,13 @@ public static class PlayLogic
             dateCounter++;
         }
         
+        if (datesString == "Available dates:\n") datesString = null;
         return (datesString, dateOptions);
     }
 
     public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
-        string timesString = $"Available times on {chosenDate}:\n";
+        string? timesString = $"Available times on {chosenDate}:\n";
         int timeCounter = 1;
         Dictionary<int, string> timeOptions = new Dictionary<int, string>();
         foreach (var viewing in playOptions)
@@ -67,6 +68,23 @@ public static class PlayLogic
             }
         }
 
+        if (timesString == $"Available times on {chosenDate}:\n") timesString = null;
         return (timesString, timeOptions);
+    }
+
+    public static void AddNewId(string id){
+        var Plays = PlayDataAccess.ReadPlays();
+        Plays.Add(id, new List<Play>());
+        PlayDataAccess.WritePlays(Plays);
+    }
+
+    public static bool AddPlay(string location, string time, string date, string hall, string playId){
+        var Plays = PlayDataAccess.ReadPlays();
+        if (!Plays.ContainsKey(playId)) return false;
+        Play newPlay = new(location, time, date, hall, playId);
+        Plays[playId].Add(newPlay);
+        PlayDataAccess.WritePlays(Plays);
+
+        return true;
     }
 }

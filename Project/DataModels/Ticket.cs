@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
 public class Ticket{
-    [JsonPropertyName("Performance")]
-    public string Performance {get; set;}
+    [JsonPropertyName("PerformanceId")]
+    public string PerformanceId {get; set;}
     [JsonPropertyName("Date")]
     public string Date {get; set;}
     [JsonPropertyName("Time")]
@@ -10,8 +10,8 @@ public class Ticket{
     [JsonPropertyName("Hall")]
     public string Hall {get; set;}
 
-    public Ticket(string Performance, string Date, string Time, string Hall){
-        this.Performance = Performance;
+    public Ticket(string PerformanceId, string Date, string Time, string Hall){
+        this.PerformanceId = PerformanceId;
         this.Date = Date;
         this.Time = Time;
         this.Hall = Hall;
@@ -21,5 +21,8 @@ public class Ticket{
         UpdateTicketJson.UpdateJsonFile(this);
     }
 
-    public string TicketInfo() => $"The play you booked: {this.Performance}. On {this.Date} at {this.Time} | {this.Hall}";
+    public string TicketInfo() {
+        var Performances = PerformanceDataAccess.ReadPerformances();
+        return $"The play you booked: {Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | {this.Hall}";
+    }  
 }

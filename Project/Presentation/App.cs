@@ -52,12 +52,12 @@ public static class App
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view Play function
+        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue); // TODO add view Performance function
         HomePage.AddAllOption("View Tickets", () => PlayLogic.Choose("ID1")); // TODO add view ticket function // for now linked to ticket system
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
-        HomePage.AddCurrentOption("View Plays");
+        HomePage.AddCurrentOption("View Performances");
 
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;

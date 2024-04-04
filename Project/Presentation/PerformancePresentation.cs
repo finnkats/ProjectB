@@ -49,23 +49,20 @@ public static class PerformancePresentation
     public static string? PerformanceChoice(string question, bool onlyActive=false){
         while (true){
             Console.Clear();
-            int index = 1;
-            List<string> PerformanceIds = new();
+            var PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive);
 
-            foreach (KeyValuePair<string, Performance> performance in App.Performances){
-                if (onlyActive && !performance.Value.Active) continue;
-                PerformanceIds.Add(performance.Key);
-                Console.WriteLine($"{index++}: {performance.Value.Name}");
+            foreach (var performanceOption in PerformanceOptions){
+                Console.WriteLine(performanceOption.Item2);
             }
-            Console.WriteLine($"{index}: Exit\n");
+            Console.WriteLine($"\n{PerformanceOptions.Count + 1}: Exit\n");
 
             Console.WriteLine(question);
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {
-                string performanceId = PerformanceIds[choice - 1];
+                string performanceId = PerformanceOptions[choice - 1].Item1;
                 return performanceId;
             } catch (ArgumentOutOfRangeException) {
-                if (choice == PerformanceIds.Count() + 1) return null;
+                if (choice == PerformanceOptions.Count() + 1) return null;
             }
         }
     }

@@ -5,7 +5,7 @@ using System.Threading;
 namespace Logic;
 public static class AccountLogic
 {
-    public static void Login(string inputName = "", string inputPassword = "", bool ticketUser = false)
+    public static void Login(string inputName = "", string inputPassword = "")
     {
         // Check if a user is already logged in
         if (AccountPresentation.CheckLoggedIn()) return;
@@ -21,7 +21,7 @@ public static class AccountLogic
             foreach (var account in App.Accounts.Values)
             {
                 if (!CheckLogin(loginName, loginPassword, account)) continue;
-                if (account.IsAdmin && !ticketUser)
+                if (account.IsAdmin)
                 {
                     // Add Admin features
                     App.HomePage.AddCurrentOption("Admin Features");

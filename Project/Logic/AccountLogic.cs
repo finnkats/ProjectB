@@ -20,6 +20,7 @@ public static class AccountLogic
 
             foreach (var account in App.Accounts.Values)
             {
+                // Check if the current account is the correct account and validates the name and password
                 if (!CheckLogin(loginName, loginPassword, account)) continue;
                 if (account.IsAdmin)
                 {

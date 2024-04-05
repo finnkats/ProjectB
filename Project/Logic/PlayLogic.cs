@@ -22,13 +22,7 @@ public static class PlayLogic
             }
         }
 
-        Console.Clear();
-        // TODO: get play name from ID
         MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
-
-        // For now
-        MainTicketSystem.ShowTicketInfo();
-        Thread.Sleep(10000);
     }
 
     public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){

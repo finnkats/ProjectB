@@ -17,7 +17,7 @@ public static class PerformanceLogic{
     }
 
     public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
-        int index = 1;
+        int index = 0;
         // id, performance string
         List<(string, string)> PerformanceOptions = new();
         List<(string, Performance)> PerformancesOrdered = new();
@@ -30,7 +30,7 @@ public static class PerformanceLogic{
 
         foreach (var performance in PerformancesOrdered){
             if (onlyActive && !performance.Item2.Active) continue;
-            string performanceString = $"{index++}: {performance.Item2.Name}".PadRight(30);
+            string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
             if (onlyActive){
                 string genres = String.Join(", ", performance.Item2.Genres);
                 performanceString += $"[{genres}]";

@@ -3,7 +3,10 @@ public static class PlayLogic
 {
     public static void Choose(string performanceId){
         if(App.LoggedInUsername == "Unknown"){
-            TicketLoginPresentation.ChooseLoginOption();
+            bool readyToPay = TicketLoginPresentation.ChooseLoginOption();
+            if(!readyToPay){
+                return;
+            }
         }
         var AllViewings = PlayDataAccess.GetPlaysFromPresentation(performanceId);
         string ViewingLocation = PlayPresentation.SelectLocation();

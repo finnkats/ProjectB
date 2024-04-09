@@ -3,7 +3,7 @@ using Logic;
 
 public static class TicketLoginPresentation{
 
-    public static void ChooseLoginOption(bool loop = false){
+    public static bool ChooseLoginOption(bool loop = false){
         Console.Clear();
         if(!loop){
             Console.WriteLine("You're not logged in, please choose to sign in or to sign up");
@@ -26,17 +26,32 @@ public static class TicketLoginPresentation{
                 }
                 else{
                     AccountLogic.Login(loginName, loginPassword);
+                    return true;
                 }
             }
             else if(option == 2){
                 AccountLogic.CreateAccount();
+                return true;
+            }
+            else if (option == 3){
+                Console.Clear();
+                Console.WriteLine("Stop buying process...");
+                Thread.Sleep(2000);
+                return false;
             }
             else{
+                Console.Clear();
                 Console.WriteLine("This is not an option");
+                Thread.Sleep(1500);
+                ChooseLoginOption(true);
             }
         }
         else{
+            Console.Clear();
             Console.WriteLine("Invalid input");
+            Thread.Sleep(1500);
+            ChooseLoginOption(true);
         }
+        return false; //refactor using while loop if code gets complicated.
     }
 }

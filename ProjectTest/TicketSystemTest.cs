@@ -57,4 +57,20 @@ public class TicketSystemTest{
         testTicket3.UpdateData();
         Assert.IsTrue(App.Tickets != null && App.Tickets.Count > 2);
     }
+
+    [TestMethod]
+    public void LoginCheckCorrectAdminTest(){
+        MainTicketSystem.IsTesting = (true, "Admin123", "Password123");
+        (bool,string,string) tupleLogin = MainTicketSystem.LoginCheckAdmin();
+        Assert.AreEqual(tupleLogin, (true,"Admin123","Password123"));
+        MainTicketSystem.IsTesting = (false, "", "");
+    }
+
+    [TestMethod]
+    public void LoginCheckIncorrectAdminTest(){
+        MainTicketSystem.IsTesting = (true, "admin", "password");
+        (bool,string,string) tupleLogin = MainTicketSystem.LoginCheckAdmin();
+        Assert.AreEqual(tupleLogin, (false,"admin","password"));
+        MainTicketSystem.IsTesting = (false, "", "");
+    }
 }

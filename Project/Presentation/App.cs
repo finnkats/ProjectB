@@ -52,7 +52,8 @@ public static class App
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view Play function
+        // HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view Play function
+        HomePage.AddAllOption("View Plays", () => PlayLogic.Choose("ID2"));
         HomePage.AddAllOption("View Tickets", () => PlayLogic.Choose("ID1")); // TODO add view ticket function // for now linked to ticket system
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function

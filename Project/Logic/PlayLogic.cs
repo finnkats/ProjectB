@@ -2,6 +2,12 @@ using System.Text.Json;
 public static class PlayLogic
 {
     public static void Choose(string performanceId){
+        if(App.LoggedInUsername == "Unknown"){
+            bool readyToPay = TicketLoginPresentation.ChooseLoginOption();
+            if(!readyToPay){
+                return;
+            }
+        }
         var AllViewings = PlayDataAccess.GetPlaysFromPresentation(performanceId);
         string ViewingLocation = PlayPresentation.SelectLocation();
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);

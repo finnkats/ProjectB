@@ -15,4 +15,11 @@ public static class TicketPresentation{
             if (Console.ReadLine() == "1") return;
         }
     }
+    
+    public static void PrintTicket(Ticket ticket){
+        Console.Clear();
+        Console.WriteLine("Just booked:");
+        Console.WriteLine(ticket.TicketInfo());
+        Thread.Sleep(3500);
+    }
 }

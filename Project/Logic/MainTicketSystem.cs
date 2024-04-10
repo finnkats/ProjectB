@@ -22,7 +22,7 @@ public static class MainTicketSystem{
 
     public static (bool, string, string) LoginCheckAdmin(){
         string loginName, loginPassword;
-        (loginName, loginPassword) = IsTesting!.Value.Item1 ? (IsTesting.Value.Item2, IsTesting.Value.Item3) : AccountPresentation.GetLoginDetails();
+        (loginName, loginPassword) = (IsTesting != null && IsTesting.Value.Item1) ? (IsTesting.Value.Item2, IsTesting.Value.Item3) : AccountPresentation.GetLoginDetails();
         // Check if admin here instead of checking it the method from AccountLogic
         foreach(var account in App.Accounts.Values){
             if(!AccountLogic.CheckLogin(loginName, loginPassword, account)){

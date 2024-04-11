@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Globalization;
 public static class PlayLogic
 {
     public static void Choose(string performanceId){
@@ -12,6 +13,7 @@ public static class PlayLogic
         List<Play> AllViewings;
         if (App.Plays.ContainsKey(performanceId)) AllViewings = App.Plays[performanceId];
         else AllViewings = new();
+        AllViewings = OneMonthFilter(AllViewings);
         
         string ViewingLocation = PlayPresentation.SelectLocation();
 
@@ -93,5 +95,17 @@ public static class PlayLogic
         PlayDataAccess.UpdatePlays();
 
         return true;
+    }
+
+    public static List<Play> OneMonthFilter(List<Play> Plays){
+        DateTime OneMonthDate = DateTime.Now.Date.AddMonths(1);
+        List<Play> FilteredPlays = new();
+        foreach (var play in Plays){
+            DateTime.TryParseExact(play.Date, "dd/MM/yyyy", null, DateTimeStyles.None, out DateTime playDate);
+            if (playDate < OneMonthDate){
+                FilteredPlays.Add(play);
+            }
+        }
+        return FilteredPlays;
     }
 }

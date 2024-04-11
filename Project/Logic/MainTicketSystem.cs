@@ -5,6 +5,7 @@ public static class MainTicketSystem{
     public static (bool,string,string)? IsTesting {get; set;}
     public static void CreateBookTicket(string performanceId, string date, string time, string room){
         Ticket createNewTicket = new Ticket(performanceId, date, time, room);
+        TicketPresentation.PrintTicket(createNewTicket);
         createNewTicket.UpdateData();
     }
 

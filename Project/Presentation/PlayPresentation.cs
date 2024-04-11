@@ -104,7 +104,7 @@ public static class PlayPresentation
             if (!Int32.TryParse(times[1], out int minutes)) continue;
             if (0 > hours || hours > 23) continue;
             if (0 > minutes || minutes > 59) continue;
-            time = $"{hours}:{minutes}:00";
+            time = $"{time}:00";
             break;
         }
 
@@ -120,7 +120,7 @@ public static class PlayPresentation
         // for now
         string hall = "THEATERZAAL";
 
-        if (PlayLogic.AddPlay(location, time, date.ToString(@"MM\/dd\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
+        if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
         else Console.WriteLine("Couldn't add play");
         Thread.Sleep(2500);
     }

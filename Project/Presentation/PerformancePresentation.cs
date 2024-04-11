@@ -47,25 +47,44 @@ public static class PerformancePresentation
     } 
 
     public static string? PerformanceChoice(string question, bool onlyActive=false){
+        Console.Clear();
+
+        var PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive);
+        int page = 1;
+        int pages = (PerformanceOptions.Count + 4) / 5;
+        int offset = 0;
+
         while (true){
             Console.Clear();
-            int index = 1;
-            List<string> PerformanceIds = new();
-
-            foreach (KeyValuePair<string, Performance> performance in App.Performances){
-                if (onlyActive && !performance.Value.Active) continue;
-                PerformanceIds.Add(performance.Key);
-                Console.WriteLine($"{index++}: {performance.Value.Name}");
+            var PerformanceOptionsScope = PerformanceOptions.Skip(0 + (5 * (page - 1))).Take(5).ToList();
+            foreach (var performanceOption in PerformanceOptionsScope){
+                Console.WriteLine(performanceOption.Item2);
             }
-            Console.WriteLine($"{index}: Exit\n");
+            Console.WriteLine();
+
+            if (offset == 2 || PerformanceOptions.Count > 5){
+                Console.WriteLine($"Page {page}/{pages}");
+                Console.WriteLine($"{PerformanceOptionsScope.Count + 1}: Next page");
+                Console.WriteLine($"{PerformanceOptionsScope.Count + 2}: Previous page");
+                offset = 2;
+            }
+            Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Exit\n");
 
             Console.WriteLine(question);
+
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {
-                string performanceId = PerformanceIds[choice - 1];
+                string performanceId = PerformanceOptionsScope[choice - 1].Item1;
                 return performanceId;
             } catch (ArgumentOutOfRangeException) {
-                if (choice == PerformanceIds.Count() + 1) return null;
+                if (choice == PerformanceOptionsScope.Count() + 1 + offset) return null;
+                else if (offset == 2){
+                    if (choice == PerformanceOptionsScope.Count() + 1){
+                        page = (page + 1 > pages) ? 1 : page + 1;
+                    } else if (choice == PerformanceOptionsScope.Count() + 2){
+                        page = (page - 1 < 1) ? pages : page - 1;
+                    }
+                }
             }
         }
     }

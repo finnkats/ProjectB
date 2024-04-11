@@ -8,10 +8,16 @@ public static class PlayLogic
                 return;
             }
         }
-        var AllViewings = PlayDataAccess.GetPlaysFromPresentation(performanceId);
+
+        List<Play> AllViewings;
+        if (App.Plays.ContainsKey(performanceId)) AllViewings = App.Plays[performanceId];
+        else AllViewings = new();
+        
         string ViewingLocation = PlayPresentation.SelectLocation();
+
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
         if (ViewingDate == null) return;
+
         string? ViewingTime = PlayPresentation.PrintTimes(ViewingLocation, ViewingDate, AllViewings);
         if (ViewingTime == null) return;
 
@@ -23,13 +29,7 @@ public static class PlayLogic
             }
         }
 
-        Console.Clear();
-        // TODO: get play name from ID
         MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
-
-        // For now
-        MainTicketSystem.ShowTicketInfo();
-        Thread.Sleep(10000);
     }
 
     public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
@@ -45,10 +45,11 @@ public static class PlayLogic
                 availableDates.Add(viewing.Date);
             }
         }
+        List<string> availableDatesOrdered = availableDates.Order().ToList();
 
         int dateCounter = 1;
         Dictionary<int, string> dateOptions = new Dictionary<int, string>();
-        foreach (var date in availableDates)
+        foreach (var date in availableDatesOrdered)
         {
             datesString += $"{dateCounter}: {date}\n";
             dateOptions.Add(dateCounter, date);
@@ -64,7 +65,9 @@ public static class PlayLogic
         string? timesString = $"Available times on {chosenDate}:\n";
         int timeCounter = 1;
         Dictionary<int, string> timeOptions = new Dictionary<int, string>();
-        foreach (var viewing in playOptions)
+
+        var playOptionsOrdered = playOptions.OrderBy(performance => performance.Time).ToList();
+        foreach (var viewing in playOptionsOrdered)
         {
             if (viewing.Location == selectedLocation && viewing.Date == chosenDate)
             {

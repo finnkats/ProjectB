@@ -26,7 +26,7 @@ public static class TicketLoginPresentation{
                 }
                 else{
                     AccountLogic.Login(loginName, loginPassword);
-                    return true;
+                    if (App.LoggedInUsername != "Unknown") return true;
                 }
             }
             else if(option == 2){

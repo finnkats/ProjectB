@@ -5,26 +5,17 @@ using System.Text.Json;
 
 public static class AccountDataAccess
 {
-    public static Dictionary<string, AccountDataModel> LoadAll(string? jsonPath = null)
+    public static Dictionary<string, Account> ReadAccounts()
     {   
-        // If a value is not passed as a parameter, execute this
-        if (jsonPath == null)
-        {
-            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
-        }
-
-        string json = File.ReadAllText(jsonPath);
-        var accountDataList = JsonSerializer.Deserialize<Dictionary<string, AccountDataModel>?>(json); // Convert to dictionary, with AccountDataModel object as value
-        return accountDataList == null ? new Dictionary<string, AccountDataModel>() : accountDataList; 
+        string json = File.ReadAllText(@"DataSources/accounts.json");
+        var accountDataList = JsonSerializer.Deserialize<Dictionary<string, Account>?>(json); // Convert to dictionary, with AccountDataModel object as value
+        return accountDataList == null ? new Dictionary<string, Account>() : accountDataList; 
     }
 
-    public static void WriteAll(Dictionary<string, AccountDataModel> Accounts, string? jsonPath = null){
-        if (jsonPath == null)
-        {
-            jsonPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/AccountData.json"));
-        }
+    public static void UpdateAccounts(){
+        string jsonPath = @"DataSources/accounts.json";
 
-        string json = JsonSerializer.Serialize(Accounts);
+        string json = JsonSerializer.Serialize(App.Accounts);
         File.WriteAllText(jsonPath, json);
     }
 }

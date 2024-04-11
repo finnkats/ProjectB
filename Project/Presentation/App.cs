@@ -3,7 +3,13 @@ using Logic;
 public static class App
 {
     public static string LoggedInUsername { get; set; } = "Unknown";
+
     public static Menu? CurrentMenu;
+
+    public static readonly Dictionary<string, Performance> Performances = PerformanceDataAccess.ReadPerformances();
+    public static readonly Dictionary<string, Account> Accounts = AccountDataAccess.ReadAccounts();
+    public static readonly Dictionary<string, List<Play>> Plays = PlayDataAccess.ReadPlays();
+    public static readonly List<UserTicket> Tickets = TicketDataAccess.ReadTickets();
 
     public static void Start()
     {
@@ -16,7 +22,7 @@ public static class App
     public static Menu SignInUp = new("Sign in / up");
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");
-    public static Menu ModifyPlays = new("Modify Plays");
+    public static Menu ModifyPerformances = new("Modify Performances");
     public static Menu ModifyCategories = new("Modify Categories");
     public static Menu ModifyLocations = new("Modify Locations");
     public static Menu EditLocation = new("Edit Location");
@@ -40,36 +46,38 @@ public static class App
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
         SignInUp.AddAllOption("Sign in", () => AccountLogic.Login());
-        SignInUp.AddAllOption("Sign up", CreateAccount.Create); // TODO add create account function
+        SignInUp.AddAllOption("Sign up", AccountLogic.CreateAccount);
         SignInUp.AddCurrentOption("Sign in");
         SignInUp.AddCurrentOption("Sign up");
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Plays", Example.DoNothing); // TODO add view Play function
-        HomePage.AddAllOption("View Tickets", () => ChooseViewing.Choose("ID1")); // TODO add view ticket function // for now linked to ticket system
+        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue); // TODO add view Performance function
+        HomePage.AddAllOption("View Tickets", TicketPresentation.PrintTickets); // TODO add view ticket function // for now linked to ticket system
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
-        HomePage.AddCurrentOption("View Plays");
+        HomePage.AddCurrentOption("View Performances");
 
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;
-        AdminFeatures.AddAllOption("Modify Plays", ModifyPlays.SetToCurrentMenu);
+        AdminFeatures.AddAllOption("Modify Performances", ModifyPerformances.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Modify Categories", ModifyCategories.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Modify Locations", ModifyLocations.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
-        AdminFeatures.AddCurrentOption("Modify Plays");
+        AdminFeatures.AddCurrentOption("Modify Performances");
         AdminFeatures.AddCurrentOption("Modify Categories");
         AdminFeatures.AddCurrentOption("Modify Locations");
         AdminFeatures.AddCurrentOption("Check Statistics");
 
-        //  Modify Plays
-        ModifyPlays.PreviousMenu = AdminFeatures;
-        ModifyPlays.AddAllOption("Add Play", Example.DoNothing); // TODO add add Play function
-        ModifyPlays.AddAllOption("Edit Play", Example.DoNothing); // TODO add edit Play function
-        ModifyPlays.AddCurrentOption("Add Play");
-        ModifyPlays.AddCurrentOption("Edit Play");
+        //  Modify Performances
+        ModifyPerformances.PreviousMenu = AdminFeatures;
+        ModifyPerformances.AddAllOption("Add Performance", PerformancePresentation.AddPerformance);
+        ModifyPerformances.AddAllOption("Edit Performance", PerformancePresentation.EditPerformanceStart);
+        ModifyPerformances.AddAllOption("Add Play", PlayPresentation.AddPlayDetails);
+        ModifyPerformances.AddCurrentOption("Add Performance");
+        ModifyPerformances.AddCurrentOption("Edit Performance");
+        ModifyPerformances.AddCurrentOption("Add Play");
 
         // Modify Categories
         ModifyCategories.PreviousMenu = AdminFeatures;

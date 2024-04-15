@@ -7,11 +7,11 @@ namespace ProjectTest.TicketSystemTest;
 public class TicketSystemTest{
     public static string JsonPath = @"DataSources/tickets.json";
 
-    [ClassInitialize]
-    public static void ClearPerformances(TestContext testContext){
-        File.WriteAllText(@"DataSources/performances.json",
-        "{\"ID0\": {\"Name\": \"Movie\",\"Genres\": [\"Genre\"],\"Active\": true}}");
-    }
+    //[ClassInitialize]
+    //public static void ClearPerformances(TestContext testContext){
+    //    File.WriteAllText(@"DataSources/performances.json",
+    //    "{\"ID0\": {\"Name\": \"Movie\",\"Genres\": [\"Genre\"],\"Active\": true}}");
+    //}
 
 
     [TestInitialize]
@@ -39,12 +39,17 @@ public class TicketSystemTest{
     [TestMethod]
     // Test if the Tickets are able to be printed in the terminal
     public void TestPrintTicketInfo(){
-        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "L");
+        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "ID0");
         testTicket.UpdateData();
-        Ticket testTicket2 = new Ticket("ID0", "01-02-2001", "18:00", "A");
+        Ticket testTicket2 = new Ticket("ID0", "01-02-2001", "18:00", "ID0");
         testTicket2.UpdateData();
-        Assert.AreEqual(App.Tickets[0].Ticket.TicketInfo(), "The play you booked: Movie. On 01-02-2000 at 12:00 | L");
-        Assert.AreEqual(App.Tickets[1].Ticket.TicketInfo(), "The play you booked: Movie. On 01-02-2001 at 18:00 | A");
+
+        string name = App.Performances["ID0"].Name;
+        string hall = App.Halls["ID0"].Name;
+        string location = App.Locations[App.Halls["ID0"].LocationId].Name;
+
+        Assert.AreEqual(App.Tickets[0].Ticket.TicketInfo(), $"The play you booked: {name}. On 01-02-2000 at 12:00 | {location} - {hall}");
+        Assert.AreEqual(App.Tickets[1].Ticket.TicketInfo(), $"The play you booked: {name}. On 01-02-2001 at 18:00 | {location} - {hall}");
     }
 
     [TestMethod]

@@ -2,21 +2,21 @@
     "ID0": {
         "Name": "Theaterzaal",
         "Seats": 500,
-        "Location": "ID0"
+        "LocationId": "ID0"
     },
     "ID1": {
         "Name": "Grote Zaal",
         "Seats": 600,
-        "Location": "ID1"
+        "LocationId": "ID1"
     },
     "ID2": {
         "Name": "Kleine Zaal",
         "Seats": 250,
-        "Location": "ID1"
+        "LocationId": "ID1"
     },
     "ID3": {
         "Name": "Zaal-Z",
         "Seats": 80,
-        "Location": "ID1"
+        "LocationId": "ID1"
     }
 }

@@ -23,6 +23,6 @@ public class Ticket{
 
     public string TicketInfo() {
         return $"The play you booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +
-               $"{App.Locations[App.Halls[this.Hall].LocationId]} - {App.Halls[this.Hall].Name}";
+               $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name}";
     }  
 }

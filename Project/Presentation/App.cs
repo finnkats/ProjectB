@@ -10,6 +10,8 @@ public static class App
     public static readonly Dictionary<string, Account> Accounts = AccountDataAccess.ReadAccounts();
     public static readonly Dictionary<string, List<Play>> Plays = PlayDataAccess.ReadPlays();
     public static readonly List<UserTicket> Tickets = TicketDataAccess.ReadTickets();
+    public static readonly Dictionary<string, Location> Locations = LocationDataAccess.ReadLocations();
+    public static readonly Dictionary<string, Hall> Halls = HallDataAccess.ReadHalls();
 
     public static void Start()
     {

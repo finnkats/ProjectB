@@ -27,7 +27,6 @@ public static class App
     public static Menu ModifyPerformances = new("Modify Performances");
     public static Menu ModifyCategories = new("Modify Categories");
     public static Menu ModifyLocations = new("Modify Locations");
-    public static Menu EditLocation = new("Edit Location");
     public static Menu ExampleMenu1 = new("Example Menu 1");
 
     public static void CreateMenus()
@@ -92,12 +91,12 @@ public static class App
         ModifyLocations.PreviousMenu = AdminFeatures;
         ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation); // TODO add add category function
         ModifyLocations.AddAllOption("Edit Location", Example.DoNothing); // TODO add edit category function
-        EditLocation.AddAllOption("Add Hall", HallPresentation.AddHall); // TODO add add hall function
-        EditLocation.AddAllOption("Edit Hall", Example.DoNothing); // TODO add edit hall function
+        ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall); // TODO add add hall function
+        ModifyLocations.AddAllOption("Edit Hall", Example.DoNothing); // TODO add edit hall function
         ModifyLocations.AddCurrentOption("Add Location");
         ModifyLocations.AddCurrentOption("Edit Location");
-        EditLocation.AddCurrentOption("Add Hall");
-        EditLocation.AddCurrentOption("Edit Hall");
+        ModifyLocations.AddCurrentOption("Add Hall");
+        ModifyLocations.AddCurrentOption("Edit Hall");
 
         //  Example Menu 1
         ExampleMenu1.PreviousMenu = FrontPage;

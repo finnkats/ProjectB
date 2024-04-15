@@ -10,10 +10,10 @@ public static class LocationPresentation {
                 continue;
             }
             foreach (var location in App.Locations){
-                if (location.Value.Name == Name){
+                if (location.Value.Name.ToLower() == Name.ToLower()){
                     Console.Write($"Location with name {Name} already exists");
                     Thread.Sleep(3000);
-                    continue;
+                    return;
                 }
             }
 
@@ -25,9 +25,13 @@ public static class LocationPresentation {
                 continue;
             }
 
+            Console.Clear();
             string seperator = ", ";
-            Console.WriteLine($"Location {Name} with halls [{String.Join(seperator, Halls)}] has been added");
+            List<string> currentHalls = new();
+            Halls.ForEach(hallId => currentHalls.Add(App.Halls[hallId].Name));
+            Console.WriteLine($"Location '{Name}' with halls [{String.Join(seperator, currentHalls)}] has been added");
             Thread.Sleep(5000);
+            break;
         }
     }
 
@@ -48,15 +52,16 @@ public static class LocationPresentation {
                 locations += $"{index++}: {location.Item2}\n";
             }
             locations += $"\n{index}: " + exit;
+            Console.WriteLine(locations);
 
             try {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){
                     Console.WriteLine("\nInvalid input\n");
                 } else {
-                    return LocationsOrdered[choice].Item1;
+                    return LocationsOrdered[choice - 1].Item1;
                 }
             } catch (ArgumentOutOfRangeException){
-                if (choice == LocationsOrdered.Count){
+                if (choice - 1 == LocationsOrdered.Count){
                     return "null";
                 } else {
                     Console.WriteLine("Invalid choice");

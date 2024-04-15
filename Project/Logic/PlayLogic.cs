@@ -15,7 +15,8 @@ public static class PlayLogic
         else AllViewings = new();
         AllViewings = OneMonthFilter(AllViewings);
         
-        string ViewingLocation = PlayPresentation.SelectLocation();
+        string ViewingLocation = LocationPresentation.GetLocation("Select a location:", "Exit");
+        if (ViewingLocation == "null") return;
 
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
         if (ViewingDate == null) return;

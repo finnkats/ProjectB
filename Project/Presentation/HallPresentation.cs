@@ -39,6 +39,30 @@ public static class HallPresentation {
         }
     }
 
+    public static string GetHall(string locationId){
+        if (!App.Locations.ContainsKey(locationId)) return "null";
+        List<string> HallsOrdered = App.Locations[locationId].Halls;
+        HallsOrdered = HallsOrdered.OrderBy(hall => hall).ToList();
+        int choice = -1;
+        int index = 1;
+        string halls = "";
+        while (true){
+            Console.Clear();
+            Console.WriteLine("Choose a hall:");
+            foreach (var hall in HallsOrdered){
+                halls += $"{index++}: {hall}\n";
+            }
+            halls += $"{index}: Cancel";
+            try {
+                return HallsOrdered[choice - 1];
+            } catch (ArgumentOutOfRangeException){
+                if (choice == HallsOrdered.Count) return "null";
+                Console.WriteLine("Invalid choice");
+                Thread.Sleep(2000);
+            }
+        }
+    }
+
     public static List<string> GetHalls(string LocationId = ""){
         if (LocationId != "" && !App.Locations.ContainsKey(LocationId)) LocationId = "";
         List<string> LocationHalls = (LocationId == "") ? new() : App.Locations[LocationId].Halls;
@@ -68,8 +92,8 @@ public static class HallPresentation {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){
                     Console.WriteLine("\nInvalid input\n");
                 } else {
-                    LocationHalls.Add(HallsOrdered[choice].Item1);
-                    HallsOrdered.RemoveAt(choice);
+                    LocationHalls.Add(HallsOrdered[choice - 1].Item1);
+                    HallsOrdered.RemoveAt(choice - 1);
                 }
             } catch (ArgumentOutOfRangeException){
                 if (choice == HallsOrdered.Count){

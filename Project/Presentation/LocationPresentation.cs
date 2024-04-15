@@ -31,7 +31,7 @@ public static class LocationPresentation {
         }
     }
 
-    public static string GetLocation(){
+    public static string GetLocation(string question = "In which location is this hall?\n", string exit = "No location yet"){
         List<(string, string)> LocationsOrdered = new();
         foreach (var location in App.Locations){
             LocationsOrdered.Add((location.Key, location.Value.Name));
@@ -41,13 +41,13 @@ public static class LocationPresentation {
         while(true){
             int choice = -1;
             Console.Clear();
-            Console.WriteLine("In which location is this hall?\n");
+            Console.WriteLine(question);
             int index = 1;
             string locations = "";
             foreach (var location in LocationsOrdered){
                 locations += $"{index++}: {location.Item2}\n";
             }
-            locations += $"\n{index}: No location yet";
+            locations += $"\n{index}: " + exit;
 
             try {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){

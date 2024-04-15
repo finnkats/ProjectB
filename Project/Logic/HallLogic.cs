@@ -19,13 +19,21 @@ public static class HallLogic {
 
     public static bool ChangeName(string id, string name){
         if (!App.Halls.ContainsKey(id)) return false;
+        if (name == "") return false;
+        foreach (var hall in App.Halls){
+            if (hall.Key == id) continue;
+            if (hall.Value.Name.ToLower() == name.ToLower()) return false;
+        }
         App.Halls[id].Name = name;
+        HallDataAccess.UpdateHalls();
         return true;
     }
 
     public static bool ChangeSeats(string id, int seats){
         if (!App.Halls.ContainsKey(id)) return false;
+        if (seats <= 0) return false;
         App.Halls[id].Seats = seats;
+        HallDataAccess.UpdateHalls();
         return true;
     }
 }

@@ -17,7 +17,7 @@ public static class LocationPresentation {
                 }
             }
 
-            var Halls = HallPresentation.GetHalls();
+            var Halls = HallPresentation.GetUnlinkedHalls();
 
             if (!LocationLogic.AddLocation(Name, Halls)){
                 Console.WriteLine("An error occured while adding location. Try again");
@@ -121,7 +121,7 @@ public static class LocationPresentation {
                                   
                 string addHall = Console.ReadLine()?.ToUpper() ?? "";
                 if (addHall.StartsWith("Y")){
-                    App.Locations[locationId].Halls = HallPresentation.GetHalls(locationId);
+                    App.Locations[locationId].Halls = HallPresentation.GetUnlinkedHalls(locationId);
                 }
 
                 LocationDataAccess.UpdateLocations();

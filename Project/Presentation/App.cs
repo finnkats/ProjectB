@@ -53,8 +53,8 @@ public static class App
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue); // TODO add view Performance function
-        HomePage.AddAllOption("View Tickets", TicketPresentation.PrintTickets); // TODO add view ticket function // for now linked to ticket system
+        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue);
+        HomePage.AddAllOption("View Tickets", TicketPresentation.PrintTickets);
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
@@ -89,10 +89,10 @@ public static class App
 
         // Modify Locations
         ModifyLocations.PreviousMenu = AdminFeatures;
-        ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation); // TODO add add category function
-        ModifyLocations.AddAllOption("Edit Location", LocationPresentation.EditLocationStart); // TODO add edit category function
-        ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall); // TODO add add hall function
-        ModifyLocations.AddAllOption("Edit Hall", Example.DoNothing); // TODO add edit hall function
+        ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation);
+        ModifyLocations.AddAllOption("Edit Location", LocationPresentation.EditLocationStart);
+        ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall);
+        ModifyLocations.AddAllOption("Edit Hall", HallPresentation.EditHallStart);
         ModifyLocations.AddCurrentOption("Add Location");
         ModifyLocations.AddCurrentOption("Edit Location");
         ModifyLocations.AddCurrentOption("Add Hall");

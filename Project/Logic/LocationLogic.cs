@@ -30,7 +30,7 @@ public static class LocationLogic {
     }
 
     public static bool ChangeHalls(string id, List<string>? halls = null){
-        if (halls == null) halls = HallPresentation.GetHalls(id);
+        if (halls == null) halls = HallPresentation.GetUnlinkedHalls(id);
         if (!App.Locations.ContainsKey(id)) return false;
         App.Locations[id].Halls = halls;
         return true;

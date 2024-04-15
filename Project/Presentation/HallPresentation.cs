@@ -71,7 +71,7 @@ public static class HallPresentation {
         }
     }
 
-    public static List<string> GetHalls(string LocationId = ""){
+    public static List<string> GetHalls(string LocationId = "", bool overwrite = false){
         if (LocationId != "" && !App.Locations.ContainsKey(LocationId)) LocationId = "";
         List<string> LocationHalls = (LocationId == "") ? new() : App.Locations[LocationId].Halls;
 

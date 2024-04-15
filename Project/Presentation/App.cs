@@ -90,7 +90,7 @@ public static class App
         // Modify Locations
         ModifyLocations.PreviousMenu = AdminFeatures;
         ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation); // TODO add add category function
-        ModifyLocations.AddAllOption("Edit Location", Example.DoNothing); // TODO add edit category function
+        ModifyLocations.AddAllOption("Edit Location", LocationPresentation.EditLocationStart); // TODO add edit category function
         ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall); // TODO add add hall function
         ModifyLocations.AddAllOption("Edit Hall", Example.DoNothing); // TODO add edit hall function
         ModifyLocations.AddCurrentOption("Add Location");

@@ -1,8 +1,8 @@
 public static class LocationLogic {
     public static bool AddLocation(string Name, List<string> Halls){
         if (Name == "") return false;
-        foreach (var Location in App.Locations){
-            if (Location.Value.Name.ToLower() == Name.ToLower()) return false;
+        foreach (var location in App.Locations){
+            if (location.Value.Name.ToLower() == Name.ToLower()) return false;
         }
         
         string locationId = AssignId();
@@ -19,7 +19,13 @@ public static class LocationLogic {
 
     public static bool ChangeName(string id, string name){
         if (!App.Locations.ContainsKey(id)) return false;
+        if (name == "") return false;
+        foreach (var location in App.Locations){
+            if (location.Key == id) continue;
+            if (location.Value.Name.ToLower() == name.ToLower()) return false;
+        }
         App.Locations[id].Name = name;
+        LocationDataAccess.UpdateLocations();
         return true;
     }
 

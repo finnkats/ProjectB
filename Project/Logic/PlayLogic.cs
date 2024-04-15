@@ -8,6 +8,10 @@ public static class PlayLogic
             if(!readyToPay){
                 return;
             }
+        } else if (App.LoggedInUsername == "Admin123"){
+            Console.WriteLine("Can't buy tickets as admin");
+            Thread.Sleep(2500);
+            return;
         }
 
         List<Play> AllViewings;
@@ -32,7 +36,7 @@ public static class PlayLogic
             }
         }
 
-        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, $"{ViewingLocation}: {ViewingHall}");
+        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall);
     }
 
     public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
@@ -74,7 +78,7 @@ public static class PlayLogic
         {
             if (viewing.Location == selectedLocation && viewing.Date == chosenDate)
             {
-                timesString += $"{timeCounter}: {viewing.Time} in {viewing.Hall}\n";
+                timesString += $"{timeCounter}: {viewing.Time} in {App.Halls[viewing.Hall].Name}\n";
                 timeOptions.Add(timeCounter, viewing.Time);
                 timeCounter++;
             }

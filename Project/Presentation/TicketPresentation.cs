@@ -20,6 +20,6 @@ public static class TicketPresentation{
         Console.Clear();
         Console.WriteLine("Just booked:");
         Console.WriteLine(ticket.TicketInfo());
-        Thread.Sleep(3500);
+        Thread.Sleep(6000);
     }
 }

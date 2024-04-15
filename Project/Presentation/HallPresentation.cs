@@ -25,9 +25,9 @@ public static class HallPresentation {
                 continue;
             }
             
-            string? locationId = LocationPresentation.GetLocation();
+            string locationId = LocationPresentation.GetLocation();
 
-            if (!HallLogic.AddHall(Name, Seats)){
+            if (!HallLogic.AddHall(Name, Seats, locationId)){
                 Console.WriteLine("Error occurred while adding hall. Try again");
                 Thread.Sleep(2500);
                 continue;
@@ -45,7 +45,7 @@ public static class HallPresentation {
 
         List<(string, string)> HallsOrdered = new();
         foreach (var hall in App.Halls){
-            if (hall.Value.LocationId != null) continue;
+            if (hall.Value.LocationId != "null") continue;
             HallsOrdered.Add((hall.Key, hall.Value.Name));
         }
         HallsOrdered = HallsOrdered.OrderBy(hall => hall.Item2).ToList();

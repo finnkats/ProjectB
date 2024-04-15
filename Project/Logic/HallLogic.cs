@@ -1,5 +1,5 @@
 public static class HallLogic {
-    public static bool AddHall(string Name, int Seats, string? locationId = null){
+    public static bool AddHall(string Name, int Seats, string locationId = "null"){
         if (Name == "") return false;
         if (Seats <= 0) return false;
         foreach (var hall in App.Halls){

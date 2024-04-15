@@ -31,7 +31,7 @@ public static class LocationPresentation {
         }
     }
 
-    public static string? GetLocation(){
+    public static string GetLocation(){
         List<(string, string)> LocationsOrdered = new();
         foreach (var location in App.Locations){
             LocationsOrdered.Add((location.Key, location.Value.Name));
@@ -57,7 +57,7 @@ public static class LocationPresentation {
                 }
             } catch (ArgumentOutOfRangeException){
                 if (choice == LocationsOrdered.Count){
-                    return null;
+                    return "null";
                 } else {
                     Console.WriteLine("Invalid choice");
                     Thread.Sleep(2500);

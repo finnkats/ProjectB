@@ -5,9 +5,9 @@ public class Hall {
     [JsonPropertyName("Seats")]
     public int Seats { get; set; }
     [JsonPropertyName("Location")]
-    public string? LocationId { get; set; }
+    public string LocationId { get; set; }
     
-    public Hall(string name, int seats, string? locationId = null){
+    public Hall(string name, int seats, string locationId = "null"){
         Name = name;
         Seats = seats;
         LocationId = locationId;

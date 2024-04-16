@@ -1,1 +1,119 @@
-{"ID0":{"Name":"Soldaat van Oranje","Genres":["Dutch","War"],"Active":true},"ID1":{"Name":"Lion King","Genres":["Family","Disney","Sad"],"Active":true}}
+{
+    "ID0": {
+        "Name": "Soldaat van Oranje",
+        "Genres": [
+            "Dutch",
+            "War"
+        ],
+        "Active": true
+    },
+    "ID1": {
+        "Name": "Lion King",
+        "Genres": [
+            "Family",
+            "Disney",
+            "Sad"
+        ],
+        "Active": true
+    },
+    "ID2": {
+        "Name": "Hamlet",
+        "Genres": [
+            "Tragedy",
+            "Drama"
+        ],
+        "Active": true
+    },
+    "ID3": {
+        "Name": "Romeo and Juliet",
+        "Genres": [
+            "Tragedy",
+            "Drama",
+            "Love"
+        ],
+        "Active": true
+    },
+    "ID4": {
+        "Name": "Long Day\u0027s Journey Into Night",
+        "Genres": [
+            "Tragedy",
+            "Drama",
+            "Family"
+        ],
+        "Active": true
+    },
+    "ID5": {
+        "Name": "Wicked Little Letters",
+        "Genres": [
+            "Comedy",
+            "Drama",
+            "Mystery"
+        ],
+        "Active": true
+    },
+    "ID6": {
+        "Name": "The Zone of Interest",
+        "Genres": [
+            "Drama",
+            "War"
+        ],
+        "Active": true
+    },
+    "ID7": {
+        "Name": "Sonny Boy",
+        "Genres": [
+            "Roman",
+            "History"
+        ],
+        "Active": true
+    },
+    "ID8": {
+        "Name": "Pink Project the Band",
+        "Genres": [
+            "Music"
+        ],
+        "Active": true
+    },
+    "ID9": {
+        "Name": "Sribi Switi",
+        "Genres": [
+            "Dance",
+            "Youth",
+            "4\u002B"
+        ],
+        "Active": true
+    },
+    "ID10": {
+        "Name": "Women Connected",
+        "Genres": [
+            "Feminism",
+            "Connection"
+        ],
+        "Active": true
+    },
+    "ID11": {
+        "Name": "Compagnie 21",
+        "Genres": [
+            "Dance",
+            "Inclusivity"
+        ],
+        "Active": true
+    },
+    "ID12": {
+        "Name": "MIST",
+        "Genres": [
+            "Dance",
+            "Happy",
+            "Adult"
+        ],
+        "Active": true
+    },
+    "ID13": {
+        "Name": "Nabil",
+        "Genres": [
+            "Cabaret",
+            "Music"
+        ],
+        "Active": true
+    }
+}

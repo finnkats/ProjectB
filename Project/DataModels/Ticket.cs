@@ -9,12 +9,15 @@ public class Ticket{
     public string Time {get; set;}
     [JsonPropertyName("Hall")]
     public string Hall {get; set;}
+    [JsonPropertyName("Active")]
+    public bool IsActive {get; set;}
 
-    public Ticket(string PerformanceId, string Date, string Time, string Hall){
+    public Ticket(string PerformanceId, string Date, string Time, string Hall, bool isActive){
         this.PerformanceId = PerformanceId;
         this.Date = Date;
         this.Time = Time;
         this.Hall = Hall;
+        this.IsActive = isActive;
     }
 
     public void UpdateData(){

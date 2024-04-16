@@ -3,8 +3,8 @@ using Logic;
 public static class MainTicketSystem{
     // public static Tuple<bool,string,string>? IsTesting {get; set;}
     public static (bool,string,string)? IsTesting {get; set;}
-    public static void CreateBookTicket(string performanceId, string date, string time, string room){
-        Ticket createNewTicket = new Ticket(performanceId, date, time, room);
+    public static void CreateBookTicket(string performanceId, string date, string time, string room, bool activity){
+        Ticket createNewTicket = new Ticket(performanceId, date, time, room, activity);
         TicketPresentation.PrintTicket(createNewTicket);
         createNewTicket.UpdateData();
     }

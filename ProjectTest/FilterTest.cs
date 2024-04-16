@@ -1,4 +1,4 @@
-namespace ProjectTest.FilterTewst;
+namespace ProjectTest.FilterTest;
 
 [TestClass]
 public class FilterTest{

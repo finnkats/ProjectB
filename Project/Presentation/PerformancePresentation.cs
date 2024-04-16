@@ -9,8 +9,8 @@ public static class PerformancePresentation
         string? performanceName = Console.ReadLine();
         Console.Clear();
   
-        var genres = GetGenres();
-  
+        var genres = GenrePresenation.GetGenres();
+
         Console.WriteLine("Will the performance be currently active?");
         Console.WriteLine("\n1. Yes");
         Console.WriteLine("2. No");
@@ -27,24 +27,6 @@ public static class PerformancePresentation
         Thread.Sleep(3500);
         Console.Clear();
     }
-
-    public static List<string> GetGenres(){
-        List<string> Genres = new List<string>();
-        string? genre = default;
-        Console.WriteLine("Enter Q to stop adding Genres\n");
-        while (genre?.ToLower() != "q")
-        {
-            Console.WriteLine("Genre: ");
-            genre = Console.ReadLine();
-            Console.WriteLine();
-
-            if(genre?.ToLower() != "q"){
-                Genres.Add(genre ?? "");
-            }
-        }
-        Console.Clear();
-        return Genres;
-    } 
 
     public static string? PerformanceChoice(string question, bool onlyActive=false){
         Console.Clear();
@@ -99,7 +81,12 @@ public static class PerformancePresentation
         while (true){
             Console.Clear();
             Console.WriteLine($"1: Change name \"{App.Performances[performanceId].Name}\"");
-            Console.WriteLine($"2: Change genres \"{String.Join('|', App.Performances[performanceId].Genres)}\"");
+            List<string> currentGenres = new();
+            foreach (var genreId in App.Performances[performanceId].Genres){
+                currentGenres.Add(App.Genres[genreId].Name);
+            }
+            string seperator = ", ";
+            Console.WriteLine($"2: Change genres: [{String.Join(seperator, currentGenres)}]");
             Console.WriteLine($"3: Change active status \"{App.Performances[performanceId].Active}\"");
             Console.WriteLine("4: Exit\n");
             Int32.TryParse(Console.ReadLine(), out int choice);
@@ -112,7 +99,7 @@ public static class PerformancePresentation
             }
             else if (choice == 2){
                 Console.Clear();
-                List<string> genres = GetGenres();
+                List<string> genres = GenrePresenation.GetGenres(performanceId);
                 PerformanceLogic.ChangeGenres(genres, performanceId, App.Performances);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);

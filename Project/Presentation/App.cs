@@ -10,6 +10,8 @@ public static class App
     public static readonly Dictionary<string, Account> Accounts = AccountDataAccess.ReadAccounts();
     public static readonly Dictionary<string, List<Play>> Plays = PlayDataAccess.ReadPlays();
     public static readonly List<UserTicket> Tickets = TicketDataAccess.ReadTickets();
+    public static readonly Dictionary<string, Location> Locations = LocationDataAccess.ReadLocations();
+    public static readonly Dictionary<string, Hall> Halls = HallDataAccess.ReadHalls();
 
     public static void Start()
     {
@@ -25,7 +27,6 @@ public static class App
     public static Menu ModifyPerformances = new("Modify Performances");
     public static Menu ModifyCategories = new("Modify Categories");
     public static Menu ModifyLocations = new("Modify Locations");
-    public static Menu EditLocation = new("Edit Location");
     public static Menu ExampleMenu1 = new("Example Menu 1");
 
     public static void CreateMenus()
@@ -52,8 +53,8 @@ public static class App
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue); // TODO add view Performance function
-        HomePage.AddAllOption("View Tickets", TicketPresentation.PrintTickets); // TODO add view ticket function // for now linked to ticket system
+        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue);
+        HomePage.AddAllOption("View Tickets", TicketPresentation.PrintTickets);
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
@@ -88,17 +89,14 @@ public static class App
 
         // Modify Locations
         ModifyLocations.PreviousMenu = AdminFeatures;
-        ModifyLocations.AddAllOption("Add Location", Example.DoNothing); // TODO add add category function
-        ModifyLocations.AddAllOption("Edit Location", EditLocation.SetToCurrentMenu); // TODO add edit category function
+        ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation);
+        ModifyLocations.AddAllOption("Edit Location", LocationPresentation.EditLocationStart);
+        ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall);
+        ModifyLocations.AddAllOption("Edit Hall", HallPresentation.EditHallStart);
         ModifyLocations.AddCurrentOption("Add Location");
         ModifyLocations.AddCurrentOption("Edit Location");
-
-        // Edit Location
-        EditLocation.PreviousMenu = ModifyLocations;
-        EditLocation.AddAllOption("Add Hall", Example.DoNothing); // TODO add add hall function
-        EditLocation.AddAllOption("Edit Hall", Example.DoNothing); // TODO add edit hall function
-        EditLocation.AddCurrentOption("Add Hall");
-        EditLocation.AddCurrentOption("Edit Hall");
+        ModifyLocations.AddCurrentOption("Add Hall");
+        ModifyLocations.AddCurrentOption("Edit Hall");
 
         //  Example Menu 1
         ExampleMenu1.PreviousMenu = FrontPage;

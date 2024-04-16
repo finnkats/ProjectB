@@ -17,6 +17,5 @@ public class MenuLayoutTest{
         Assert.IsTrue(App.ModifyPerformances.PreviousMenu == App.AdminFeatures, "6");
         Assert.IsTrue(App.ModifyCategories.PreviousMenu == App.AdminFeatures, "7");
         Assert.IsTrue(App.ModifyLocations.PreviousMenu == App.AdminFeatures, "8");
-        Assert.IsTrue(App.EditLocation.PreviousMenu == App.ModifyLocations, "9");
     }
 }

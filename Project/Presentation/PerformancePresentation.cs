@@ -99,6 +99,19 @@ public static class PerformancePresentation
             }
             else if (choice == 2){
                 Console.Clear();
+                List<string> RemovedGenreIds = new();
+                foreach (var genreId in App.Performances[performanceId].Genres){
+                    Console.WriteLine($"Do you want to remove '{App.Genres[genreId].Name}' from '{App.Performances[performanceId].Name}'? (Y/N)");
+                    string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
+                    if (removeGenre.StartsWith("Y")){
+                        currentGenres.Remove(App.Genres[genreId].Name);
+                        RemovedGenreIds.Add(genreId);
+                    }
+                    Console.WriteLine();
+                }
+                RemovedGenreIds.ForEach(genreId => App.Performances[performanceId].Genres.Remove(genreId));
+
+                Console.Clear();
                 List<string> genres = GenrePresenation.GetGenres(performanceId);
                 PerformanceLogic.ChangeGenres(genres, performanceId, App.Performances);
                 Console.WriteLine("Successfully changed genres");

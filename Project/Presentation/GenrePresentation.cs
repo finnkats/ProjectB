@@ -53,14 +53,14 @@ public static class GenrePresenation {
             Console.Clear();
             Console.WriteLine("Choose a genre:");
             foreach (var genre in GenresOrdered){
-                genres += $"{index++}: {genre.Item2}";
+                genres += $"{index++}: {genre.Item2}\n";
             }
-            genres += $"\n{index}: Cancel";
+            genres += $"\n{index}: Exit\n";
             Console.WriteLine(genres);
 
             try {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){
-                    Console.WriteLine("\nInvalid input\n");
+                    Console.WriteLine("\nInvalid input");
                     continue;
                 }
                 return GenresOrdered[choice - 1].Item1;

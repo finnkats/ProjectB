@@ -1,18 +1,27 @@
+using System.Security.Authentication.ExtendedProtection;
+using System.Threading;
+
 public static class TicketPresentation{
     public static void PrintTickets(){
         while (true){
             Console.Clear();
-            if(App.Tickets != null){
+            if(App.Tickets.Count != 0){
                 foreach(UserTicket ticketPair in App.Tickets){
-                    if (ticketPair.User != App.LoggedInUsername) continue;
+                    if (ticketPair.User == App.LoggedInUsername && ticketPair.Ticket.IsActive){
                     Console.WriteLine(ticketPair.Ticket.TicketInfo());
+                    Console.WriteLine(ticketPair.Ticket.IsActive);
+                    } else{
+                        if(NoBooksMenu()) return;
+                        else{Console.WriteLine("Not possible option");}
+                    }
                 }
+                Console.WriteLine("1: Edit Ticket");
+                Console.WriteLine("2: To Exit");
             }
             else{
-                Console.WriteLine("No tickets booked");
+                if(NoBooksMenu()) break;
+                else{Console.WriteLine("Not possible option");}
             }
-            Console.WriteLine("1: Edit Ticket");
-            Console.WriteLine("2: To Exit");
             string? inputChoice = Console.ReadLine();
             if (inputChoice == "1"){
                 Console.Clear();
@@ -51,15 +60,25 @@ public static class TicketPresentation{
         }
 
         while (true) {
-            Console.Write("Please select the ticket you want to cancel:\n>");
+            Console.Write("Please select the ticket you want to cancel (or type 'exit' to end):\n>");
             string? input = Console.ReadLine();
-            if (int.TryParse(input, out int index) && index >= 1 && index-1 < filteredTickets.Count) {
+            if(input.ToLower() == "exit"){
+                Console.WriteLine("Process stopped");
+                Thread.Sleep(1500);
+                break;
+            }
+            if (int.TryParse(input, out int index) && index >= 1 && index <= filteredTickets.Count) {
                 Console.WriteLine("Are you sure you want to cancel this ticket? (y/n)");
                 string? confirmation = Console.ReadLine();
                 if (confirmation.ToLower() == "y") {
                     UserTicket ticketToCancel = filteredTickets[index-1];
-                    filteredTickets.RemoveAt(index-1);
-                    App.Tickets.Remove(ticketToCancel);
+                    // Later change for the UserTicket structure
+                    foreach(var ticketInApp in App.Tickets){
+                        if(ticketInApp == ticketToCancel){
+                            ticketInApp.Ticket.IsActive = false;
+                            break;
+                        }
+                    }
                     Console.WriteLine("Ticket cancelled successfully :)");
                     Thread.Sleep(1500);
                     break;
@@ -74,6 +93,13 @@ public static class TicketPresentation{
                 Console.WriteLine("Invalid input. Please enter a valid number.");
             }
         }
+    }
+
+    public static bool NoBooksMenu(){
+        Console.WriteLine("No tickets booked");
+        Console.Write("1: To Exit\n>");
+        string? exitChoice = Console.ReadLine();
+        return exitChoice == "1";
     }
 
     // public static List<UserTicket> SortList(){

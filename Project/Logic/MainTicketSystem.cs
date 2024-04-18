@@ -35,4 +35,12 @@ public static class MainTicketSystem{
         }
         return (false, loginName, loginPassword);
     }
+
+    public static void CheckOutdatedTickets(){
+        // Change the for loop after the UserTicket has been changed
+        foreach(var userTicket in App.Tickets){
+            // code to check time with DateTime object
+            // DateTime.Now;
+        }
+    }
 }

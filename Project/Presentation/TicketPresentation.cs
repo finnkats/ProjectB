@@ -9,14 +9,13 @@ public static class TicketPresentation{
                 foreach(UserTicket ticketPair in App.Tickets){
                     if (ticketPair.User == App.LoggedInUsername){
                     Console.WriteLine(ticketPair.Ticket.TicketInfo());
-                    // Console.WriteLine(ticketPair.Ticket.IsActive);
                     } else{
                         if(NoBooksMenu()) return;
                         else{Console.WriteLine("Not possible option");}
                     }
                 }
                 Console.WriteLine("1: Edit Ticket");
-                Console.WriteLine("2: To Exit");
+                Console.Write("2: To Exit\n>");
             }
             else{
                 if(NoBooksMenu()) break;
@@ -26,7 +25,7 @@ public static class TicketPresentation{
             if (inputChoice == "1"){
                 Console.Clear();
                 Console.WriteLine("1: Cancel Tickets");
-                Console.WriteLine("2: Exit");
+                Console.Write("2: Exit\n>");
                 string? inputChoice2 = Console.ReadLine();
                 if(inputChoice2 == "1"){
                     CancelTicket();
@@ -51,16 +50,30 @@ public static class TicketPresentation{
         Console.Clear();
         List<UserTicket> filteredTickets = new List<UserTicket>();
         int i = 1;
+        int j = 1;
         foreach (UserTicket userTicket in App.Tickets){
             if (userTicket.User == App.LoggedInUsername){
                 // This i++ works by using the int i first before incrementing
-                Console.WriteLine($"{i++}: {userTicket.Ticket.TicketInfo()}");
-                filteredTickets.Add(userTicket);
+                if(userTicket.Ticket.IsActive){
+                    Console.WriteLine($"{i++}: {userTicket.Ticket.TicketInfo()}");
+                    filteredTickets.Add(userTicket);
+                }
+            }
+        }
+        if(filteredTickets.Count != 0){Console.WriteLine();}
+        Console.WriteLine("Archived tickets:");
+        foreach (UserTicket userTicket in App.Tickets){
+            if (userTicket.User == App.LoggedInUsername){
+                // This i++ works by using the int i first before incrementing
+                if(!userTicket.Ticket.IsActive){
+                    Console.WriteLine($"{j++}: {userTicket.Ticket.TicketInfo()}");
+                }
             }
         }
 
         while (true) {
-            Console.Write("Please select the ticket you want to cancel (or type 'exit' to end):\n>");
+            if(filteredTickets.Count == 0){Console.WriteLine("\nNo tickets available to cancel, please enter 'exit' to go back.");}
+            else{Console.Write("\nPlease select the ticket you want to cancel (or type 'exit' to end):\n>");}
             string? input = Console.ReadLine();
             if(input == null) return; //For now
             if(input.ToLower() == "exit"){
@@ -92,7 +105,7 @@ public static class TicketPresentation{
                     Console.WriteLine("Invalid option. Please try again");
                 }
             } else {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
+                Console.WriteLine("Invalid input. Please try agian.");
             }
         }
     }
@@ -103,14 +116,4 @@ public static class TicketPresentation{
         string? exitChoice = Console.ReadLine();
         return exitChoice == "1";
     }
-
-    // public static List<UserTicket> SortList(){
-    //     List<UserTicket> filteredTickets = new List<UserTicket>();
-    //     foreach (UserTicket ticket in App.Tickets){
-    //         if (ticket.User == App.LoggedInUsername){
-    //             filteredTickets.Add(ticket);
-    //         }
-    //     }
-    //     return filteredTickets;
-    // }
 }

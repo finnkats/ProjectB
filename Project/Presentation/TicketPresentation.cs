@@ -22,4 +22,10 @@ public static class TicketPresentation{
         Console.WriteLine(ticket.TicketInfo());
         Thread.Sleep(6000);
     }
+
+    public static void TicketMenu()
+    {
+        Console.Clear();
+
+    }
 }

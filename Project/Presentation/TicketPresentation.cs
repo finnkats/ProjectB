@@ -61,11 +61,11 @@ public static class TicketPresentation{
             }
         }
         if(filteredTickets.Count != 0){Console.WriteLine();}
-        Console.WriteLine("Archived tickets:");
         foreach (UserTicket userTicket in App.Tickets){
             if (userTicket.User == App.LoggedInUsername){
                 // This i++ works by using the int i first before incrementing
                 if(!userTicket.Ticket.IsActive){
+                    if(j == 1)Console.WriteLine("Archived tickets:");
                     Console.WriteLine($"{j++}: {userTicket.Ticket.TicketInfo()}");
                 }
             }
@@ -84,16 +84,10 @@ public static class TicketPresentation{
             if (int.TryParse(input, out int index) && index >= 1 && index <= filteredTickets.Count) {
                 Console.WriteLine("Are you sure you want to cancel this ticket? (y/n)");
                 string? confirmation = Console.ReadLine();
-                if (confirmation.ToLower() == "y") {
+                if(confirmation == null)Console.WriteLine("Please enter again");
+                if (confirmation!.ToLower() == "y") {
                     UserTicket ticketToCancel = filteredTickets[index-1];
-                    // Later change for the UserTicket structure
-                    foreach(var ticketInApp in App.Tickets){
-                        if(ticketInApp == ticketToCancel){
-                            ticketInApp.Ticket.IsActive = false;
-                            TicketDataAccess.UpdateTickets();
-                            break;
-                        }
-                    }
+                    MainTicketSystem.CancelTicketLogic(ticketToCancel);
                     Console.WriteLine("Ticket cancelled successfully :)");
                     Thread.Sleep(1500);
                     break;

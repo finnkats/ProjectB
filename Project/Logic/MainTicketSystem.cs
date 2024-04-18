@@ -36,11 +36,30 @@ public static class MainTicketSystem{
         return (false, loginName, loginPassword);
     }
 
+    // Needs to change when UserTicket is changed
+    public static void CancelTicketLogic(UserTicket ticketToCancel){
+        // Note: the ticketInApp here is a reference type not a copy of the class
+        foreach(var ticketInApp in App.Tickets){
+            if(ticketInApp == ticketToCancel){
+                ticketInApp.Ticket.IsActive = false;
+                TicketDataAccess.UpdateTickets();
+                break;
+            }
+        }
+    }
+
     public static void CheckOutdatedTickets(){
         // Change the for loop after the UserTicket has been changed
         foreach(var userTicket in App.Tickets){
-            // code to check time with DateTime object
-            // DateTime.Now;
+            // Check time (string) with current DateTime
+            DateTime currentTime = DateTime.Now;
+            string currentTicketDateTime = $"{userTicket.Ticket.Date} {userTicket.Ticket.Time}";
+            if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
+                if(ticketDate < currentTime){
+                    userTicket.Ticket.IsActive = false;
+                    TicketDataAccess.UpdateTickets();
+                }
+            }
         }
     }
 }

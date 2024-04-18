@@ -35,4 +35,8 @@ public static class MainTicketSystem{
         }
         return (false, loginName, loginPassword);
     }
+    public static void SortActiveTicket()
+    {
+
+    }
 }

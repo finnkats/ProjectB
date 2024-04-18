@@ -23,7 +23,7 @@ public class TicketSystemTest{
     [TestMethod]
     // Test if Ticket.cs can update the Json file
     public void TestMethodJsonUpdate(){
-        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "L");
+        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "L", true);
         testTicket.UpdateData();
         Assert.IsTrue(!string.IsNullOrEmpty(File.ReadAllText(JsonPath)));
     }
@@ -31,17 +31,17 @@ public class TicketSystemTest{
     [TestMethod]
     // Test if the Ticket reader works and actually returns the list List<KeyValueClass>
     public void TestTicketReaderReturnsList(){
-        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "L");
+        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "L", true);
         testTicket.UpdateData();
-        Assert.IsTrue(App.Tickets != null && App.Tickets.Count > 0);
+        Assert.IsTrue(App.Tickets.Count != 0 && App.Tickets.Count > 0);
     }
 
     [TestMethod]
     // Test if the Tickets are able to be printed in the terminal
     public void TestPrintTicketInfo(){
-        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "ID0");
+        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "ID0", true);
         testTicket.UpdateData();
-        Ticket testTicket2 = new Ticket("ID0", "01-02-2001", "18:00", "ID0");
+        Ticket testTicket2 = new Ticket("ID0", "01-02-2001", "18:00", "ID0", true);
         testTicket2.UpdateData();
 
         string name = App.Performances["ID0"].Name;
@@ -54,13 +54,13 @@ public class TicketSystemTest{
 
     [TestMethod]
     public void TestMoreTickets(){
-        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "L");
+        Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "L", true);
         testTicket.UpdateData();
-        Ticket testTicket2 = new Ticket("ID0", "01-02-2001", "15:00", "A");
+        Ticket testTicket2 = new Ticket("ID0", "01-02-2001", "15:00", "A", true);
         testTicket2.UpdateData();
-        Ticket testTicket3 = new Ticket("ID0", "01-02-2002", "18:00", "B");
+        Ticket testTicket3 = new Ticket("ID0", "01-02-2002", "18:00", "B", true);
         testTicket3.UpdateData();
-        Assert.IsTrue(App.Tickets != null && App.Tickets.Count > 2);
+        Assert.IsTrue(App.Tickets.Count != 0 && App.Tickets.Count > 2);
     }
 
     [TestMethod]

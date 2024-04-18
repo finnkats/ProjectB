@@ -25,7 +25,13 @@ public class Ticket{
     }
 
     public string TicketInfo() {
-        return $"The play you booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +
-               $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name}";
+        if(IsActive){
+            return $"The play you booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +
+                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name}.";
+        }
+        else{
+            return $"This play has been cancelled. The play you had booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +
+                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name}.";
+        }
     }  
 }

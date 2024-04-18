@@ -10,7 +10,7 @@ public static class MainTicketSystem{
     }
 
     public static void ShowTicketInfo(){
-        if(App.Tickets != null){
+        if(App.Tickets.Count != 0){
             foreach(UserTicket ticketPair in App.Tickets){
                 if (ticketPair.User != App.LoggedInUsername) continue;
                 Console.WriteLine(ticketPair.Ticket.TicketInfo());

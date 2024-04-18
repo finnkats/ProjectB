@@ -7,9 +7,9 @@ public static class TicketPresentation{
             Console.Clear();
             if(App.Tickets.Count != 0){
                 foreach(UserTicket ticketPair in App.Tickets){
-                    if (ticketPair.User == App.LoggedInUsername && ticketPair.Ticket.IsActive){
+                    if (ticketPair.User == App.LoggedInUsername){
                     Console.WriteLine(ticketPair.Ticket.TicketInfo());
-                    Console.WriteLine(ticketPair.Ticket.IsActive);
+                    // Console.WriteLine(ticketPair.Ticket.IsActive);
                     } else{
                         if(NoBooksMenu()) return;
                         else{Console.WriteLine("Not possible option");}
@@ -62,6 +62,7 @@ public static class TicketPresentation{
         while (true) {
             Console.Write("Please select the ticket you want to cancel (or type 'exit' to end):\n>");
             string? input = Console.ReadLine();
+            if(input == null) return; //For now
             if(input.ToLower() == "exit"){
                 Console.WriteLine("Process stopped");
                 Thread.Sleep(1500);
@@ -76,6 +77,7 @@ public static class TicketPresentation{
                     foreach(var ticketInApp in App.Tickets){
                         if(ticketInApp == ticketToCancel){
                             ticketInApp.Ticket.IsActive = false;
+                            TicketDataAccess.UpdateTickets();
                             break;
                         }
                     }

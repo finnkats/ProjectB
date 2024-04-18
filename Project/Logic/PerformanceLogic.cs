@@ -32,8 +32,13 @@ public static class PerformanceLogic{
             if (onlyActive && !performance.Item2.Active) continue;
             string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
             if (onlyActive){
-                string genres = String.Join(", ", performance.Item2.Genres);
-                performanceString += $"[{genres}]";
+                List<string> currentGenres = new();
+                foreach (var genreId in App.Performances[performance.Item1].Genres){
+                    currentGenres.Add(App.Genres[genreId].Name);
+                }
+                currentGenres.Sort();
+                string seperator = ", ";
+                performanceString += $"[{String.Join(seperator, currentGenres)}]";
             }
             PerformanceOptions.Add((performance.Item1, performanceString));
         }

@@ -12,6 +12,7 @@ public static class App
     public static readonly List<UserTicket> Tickets = TicketDataAccess.ReadTickets();
     public static readonly Dictionary<string, Location> Locations = LocationDataAccess.ReadLocations();
     public static readonly Dictionary<string, Hall> Halls = HallDataAccess.ReadHalls();
+    public static readonly Dictionary<string, Genre> Genres = GenreDataAccess.ReadGenres();
 
     public static void Start()
     {
@@ -25,7 +26,7 @@ public static class App
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");
     public static Menu ModifyPerformances = new("Modify Performances");
-    public static Menu ModifyCategories = new("Modify Categories");
+    public static Menu ModifyGenres = new("Modify Genres");
     public static Menu ModifyLocations = new("Modify Locations");
     public static Menu ExampleMenu1 = new("Example Menu 1");
 
@@ -63,11 +64,11 @@ public static class App
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;
         AdminFeatures.AddAllOption("Modify Performances", ModifyPerformances.SetToCurrentMenu);
-        AdminFeatures.AddAllOption("Modify Categories", ModifyCategories.SetToCurrentMenu);
+        AdminFeatures.AddAllOption("Modify Genres", ModifyGenres.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Modify Locations", ModifyLocations.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
         AdminFeatures.AddCurrentOption("Modify Performances");
-        AdminFeatures.AddCurrentOption("Modify Categories");
+        AdminFeatures.AddCurrentOption("Modify Genres");
         AdminFeatures.AddCurrentOption("Modify Locations");
         AdminFeatures.AddCurrentOption("Check Statistics");
 
@@ -80,12 +81,12 @@ public static class App
         ModifyPerformances.AddCurrentOption("Edit Performance");
         ModifyPerformances.AddCurrentOption("Add Play");
 
-        // Modify Categories
-        ModifyCategories.PreviousMenu = AdminFeatures;
-        ModifyCategories.AddAllOption("Add Category", Example.DoNothing); // TODO add add category function
-        ModifyCategories.AddAllOption("Edit Category", Example.DoNothing); // TODO add edit category function
-        ModifyCategories.AddCurrentOption("Add Category");
-        ModifyCategories.AddCurrentOption("Edit Category");
+        // Modify Genres
+        ModifyGenres.PreviousMenu = AdminFeatures;
+        ModifyGenres.AddAllOption("Add Genre", GenrePresenation.AddGenre); // TODO add add genre function
+        ModifyGenres.AddAllOption("Edit Genre", GenrePresenation.EditGenreStart); // TODO add edit genre function
+        ModifyGenres.AddCurrentOption("Add Genre");
+        ModifyGenres.AddCurrentOption("Edit Genre");
 
         // Modify Locations
         ModifyLocations.PreviousMenu = AdminFeatures;

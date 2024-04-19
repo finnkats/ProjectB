@@ -22,11 +22,11 @@ public static class PerformanceLogic{
         List<(string, string)> PerformanceOptions = new();
         List<(string, Performance)> PerformancesOrdered = new();
 
-        foreach (KeyValuePair<string, Performance> performance in App.Performances){
-            if (onlyActive && !performance.Value.Active) continue;
-            PerformancesOrdered.Add((performance.Key, performance.Value));
+        foreach (KeyValuePair<string, Performance> performance in App.Performances){    // Iterate through performance dictionary
+            if (onlyActive && !performance.Value.Active) continue;  // If onlyActive is true and performance.Value.Active (activeness of the performance) is false, skip this loop
+            PerformancesOrdered.Add((performance.Key, performance.Value));  // Adds the ID and performance object as a tuple to the PerformancesOrdered list
         }
-        PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();
+        PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();  // Performances get ordered alphabetically by name
 
         foreach (var performance in PerformancesOrdered){
             if (onlyActive && !performance.Item2.Active) continue;

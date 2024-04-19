@@ -23,11 +23,6 @@ public static class PerformanceLogic{
             return false;
         }
 
-        if (!App.Performances.ContainsKey(performanceID))
-        {
-            return false;
-        }
-
         Performance performance = App.Performances[performanceID];
 
         foreach (string genreID in performance.Genres)
@@ -38,7 +33,7 @@ public static class PerformanceLogic{
             }
         }
 
-        return false;
+        return false; // Vraag over 'PerformancePresentation'
     }
 
     public static List<(string, string)> GetPerformanceOptions(bool onlyActive){

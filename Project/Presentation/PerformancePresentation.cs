@@ -30,11 +30,11 @@ public static class PerformancePresentation
 
     public static string? PerformanceChoice(string question, bool onlyActive=false){
         Console.Clear();
-
         var PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive);
         int page = 1;
         int pages = (PerformanceOptions.Count + 4) / 5;
         int offset = 0;
+        int exitOptionIndex = onlyActive ? 2 : 1;
 
         while (true){
             Console.Clear();
@@ -50,14 +50,25 @@ public static class PerformancePresentation
                 Console.WriteLine($"{PerformanceOptionsScope.Count + 2}: Previous page");
                 offset = 2;
             }
-            Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Exit\n");
-
+            if (onlyActive){
+                Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Filter");
+            }
+            
+            Console.WriteLine($"{PerformanceOptionsScope.Count + exitOptionIndex + offset}: Exit\n");
             Console.WriteLine(question);
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {
-                string performanceId = PerformanceOptionsScope[choice - 1].Item1;
-                return performanceId;
+                if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
+                    List<string> genres = GenrePresenation.GetGenres(question: "What genres are you interested in?");
+                    //var filteredPerformanceOptions = PerformanceLogic.FilterPerformancesByGenres(genres);
+                    //PerformanceOptions = filteredPerformanceOptions;
+                }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
+                    return null;
+                } else{
+                    string performanceId = PerformanceOptionsScope[choice - 1].Item1;
+                    return performanceId;
+                }
             } catch (ArgumentOutOfRangeException) {
                 if (choice == PerformanceOptionsScope.Count() + 1 + offset) return null;
                 else if (offset == 2){

@@ -72,7 +72,7 @@ public static class GenrePresenation {
         }
     }
 
-    public static List<string> GetGenres(string PerformanceId = ""){
+    public static List<string> GetGenres(string PerformanceId = "", string question = "Which genre belongs to this performance?"){
         if (PerformanceId != "" && !App.Performances.ContainsKey(PerformanceId)) PerformanceId = "";
         List<string> PerformanceGenres = (PerformanceId == "") ? new() : App.Performances[PerformanceId].Genres;
 
@@ -91,7 +91,7 @@ public static class GenrePresenation {
             List<string> currentGenres = new();
             PerformanceGenres.ForEach(genreId => currentGenres.Add(App.Genres[genreId].Name));
             Console.WriteLine($"Current genres: [{String.Join(seperator, currentGenres)}]\n");
-            Console.WriteLine("Which genres belong to this performance?");
+            Console.WriteLine(question);
             string genres = "";
             int index = 1;
             foreach (var genre in GenresOrdered){

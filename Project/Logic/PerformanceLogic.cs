@@ -16,6 +16,16 @@ public static class PerformanceLogic{
         return $"ID{newId}";
     }
 
+    public static void HasGenre(string performanceID = null, List<string> genreID = null) // 'performance.Value.Genres;' contains a string of GenreID'S
+    {
+        foreach (KeyValuePair<string, Performance> performance in App.Performances)
+        {   
+            var obj = performance.Value.Active;
+            Type type = obj.GetType();
+            Console.WriteLine(obj);
+        }
+    }
+
     public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
         int index = 0;
         // id, performance string

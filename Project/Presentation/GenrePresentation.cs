@@ -1,4 +1,4 @@
-public static class GenrePresenation {
+public static class GenrePresentation {
     public static void AddGenre(){
         List<int> ages = new(){0, 6, 9, 13, 17};
         while (true){

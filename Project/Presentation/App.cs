@@ -83,8 +83,8 @@ public static class App
 
         // Modify Genres
         ModifyGenres.PreviousMenu = AdminFeatures;
-        ModifyGenres.AddAllOption("Add Genre", GenrePresenation.AddGenre); // TODO add add genre function
-        ModifyGenres.AddAllOption("Edit Genre", GenrePresenation.EditGenreStart); // TODO add edit genre function
+        ModifyGenres.AddAllOption("Add Genre", GenrePresentation.AddGenre); // TODO add add genre function
+        ModifyGenres.AddAllOption("Edit Genre", GenrePresentation.EditGenreStart); // TODO add edit genre function
         ModifyGenres.AddCurrentOption("Add Genre");
         ModifyGenres.AddCurrentOption("Edit Genre");
 

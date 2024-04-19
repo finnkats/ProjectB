@@ -9,7 +9,7 @@ public static class PerformancePresentation
         string? performanceName = Console.ReadLine();
         Console.Clear();
   
-        var genres = GenrePresenation.GetGenres();
+        var genres = GenrePresentation.GetGenres();
 
         Console.WriteLine("Will the performance be currently active?");
         Console.WriteLine("\n1. Yes");
@@ -60,7 +60,7 @@ public static class PerformancePresentation
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {
                 if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
-                    List<string> genres = GenrePresenation.GetGenres(question: "What genres are you interested in?");
+                    List<string> genres = GenrePresentation.GetGenres(question: "What genres are you interested in?");
                     //var filteredPerformanceOptions = PerformanceLogic.FilterPerformancesByGenres(genres);
                     //PerformanceOptions = filteredPerformanceOptions;
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
@@ -123,7 +123,7 @@ public static class PerformancePresentation
                 RemovedGenreIds.ForEach(genreId => App.Performances[performanceId].Genres.Remove(genreId));
 
                 Console.Clear();
-                List<string> genres = GenrePresenation.GetGenres(performanceId);
+                List<string> genres = GenrePresentation.GetGenres(performanceId);
                 PerformanceLogic.ChangeGenres(genres, performanceId, App.Performances);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);

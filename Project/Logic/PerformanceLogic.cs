@@ -16,14 +16,29 @@ public static class PerformanceLogic{
         return $"ID{newId}";
     }
 
-    public static void HasGenre(string performanceID = null, List<string> genreID = null) // 'performance.Value.Genres;' contains a string of GenreID'S
-    {
-        foreach (KeyValuePair<string, Performance> performance in App.Performances)
-        {   
-            var obj = performance.Value.Active;
-            Type type = obj.GetType();
-            Console.WriteLine(obj);
+    public static bool HasGenre(string performanceID = null, List<string> passedGenreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
+    {                                                                                               // 'performance.Key is the performanceID
+        if (performanceID == null || passedGenreIDList == null)
+        {
+            return false;
         }
+
+        if (!App.Performances.ContainsKey(performanceID))
+        {
+            return false;
+        }
+
+        Performance performance = App.Performances[performanceID];
+
+        foreach (string genreID in performance.Genres)
+        {
+            if (passedGenreIDList.Contains(genreID))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
@@ -34,6 +49,7 @@ public static class PerformanceLogic{
 
         foreach (KeyValuePair<string, Performance> performance in App.Performances){    // Iterate through performance dictionary
             if (onlyActive && !performance.Value.Active) continue;  // If onlyActive is true and performance.Value.Active (activeness of the performance) is false, skip this loop
+            // if (filterActive && HasGenre(performance.Key, ))
             PerformancesOrdered.Add((performance.Key, performance.Value));  // Adds the ID and performance object as a tuple to the PerformancesOrdered list
         }
         PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();  // Performances get ordered alphabetically by name
@@ -52,7 +68,6 @@ public static class PerformanceLogic{
             }
             PerformanceOptions.Add((performance.Item1, performanceString));
         }
-        
         return PerformanceOptions;
     }
 

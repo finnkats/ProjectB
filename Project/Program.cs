@@ -24,5 +24,6 @@ while (App.CurrentMenu != null){
     else invalidInput = true;
     Console.Clear();
 }
-
+List<string> GenreIDList = new List<string> { "ID1", "ID2" };
+Console.WriteLine(PerformanceLogic.HasGenre("ID1", GenreIDList));
 Console.WriteLine("Exiting program...");

@@ -65,7 +65,7 @@ public static class TicketPresentation{
             if (userTicket.User == App.LoggedInUsername){
                 // This i++ works by using the int i first before incrementing
                 if(!userTicket.Ticket.IsActive){
-                    if(j == 1)Console.WriteLine("Archived tickets:");
+                    if(j == 1)Console.WriteLine("Ticket History:");
                     Console.WriteLine($"{j++}: {userTicket.Ticket.TicketInfo()}");
                 }
             }
@@ -81,22 +81,29 @@ public static class TicketPresentation{
                 Thread.Sleep(1500);
                 break;
             }
-            if (int.TryParse(input, out int index) && index >= 1 && index <= filteredTickets.Count) {
-                Console.WriteLine("Are you sure you want to cancel this ticket? (y/n)");
-                string? confirmation = Console.ReadLine();
-                if(confirmation == null)Console.WriteLine("Please enter again");
-                if (confirmation!.ToLower() == "y") {
-                    UserTicket ticketToCancel = filteredTickets[index-1];
-                    MainTicketSystem.CancelTicketLogic(ticketToCancel);
-                    Console.WriteLine("Ticket cancelled successfully :)");
-                    Thread.Sleep(1500);
-                    break;
-                } else if (confirmation.ToLower() == "n") {
-                    Console.WriteLine("Stopped the process...");
-                    Thread.Sleep(1500);
-                    break;
-                } else {
-                    Console.WriteLine("Invalid option. Please try again");
+            if (int.TryParse(input, out int index) && index >= 1 && index <= filteredTickets.Count){
+                if(MainTicketSystem.CancellationIsNotOneDayBefore(filteredTickets[index-1])){
+                    Console.WriteLine("Are you sure you want to cancel this ticket? (y/n)");
+                    string? confirmation = Console.ReadLine();
+                    if(confirmation == null)Console.WriteLine("Please enter again");
+                    if (confirmation!.ToLower() == "y") {
+                        UserTicket ticketToCancel = filteredTickets[index-1];
+                        MainTicketSystem.CancelTicketLogic(ticketToCancel);
+                        Console.WriteLine("Ticket cancelled successfully :)");
+                        Console.WriteLine("Your money will be returned in a few work days");
+                        Thread.Sleep(1500);
+                        break;
+                    } else if (confirmation.ToLower() == "n") {
+                        Console.WriteLine("Stopped the process...");
+                        Thread.Sleep(1500);
+                        break;
+                    } else {
+                        Console.WriteLine("Invalid option. Please try again");
+                    }
+                }
+                else{
+                    Console.WriteLine("Cannot cancel the ticket because the performance is tommorow");
+                    Thread.Sleep(2000);
                 }
             } else {
                 Console.WriteLine("Invalid input. Please try agian.");

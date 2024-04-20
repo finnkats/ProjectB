@@ -62,4 +62,14 @@ public static class MainTicketSystem{
             }
         }
     }
+
+    public static bool CancellationIsNotOneDayBefore(UserTicket userTicket){
+        DateTime currentTime = DateTime.Now;
+        string currentTicketDateTime = $"{userTicket.Ticket.Date} {userTicket.Ticket.Time}";
+        if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
+            DateTime oneDayBefore = ticketDate.AddDays(-1);
+            return currentTime < oneDayBefore;
+        }
+        return false;
+    }
 }

@@ -56,11 +56,19 @@ public static class PerformancePresentation
             
             Console.WriteLine($"{PerformanceOptionsScope.Count + exitOptionIndex + offset}: Exit\n");
             Console.WriteLine(question);
+            List<(string, Performance)> FilteredPerformances = new List<(string, Performance)>(); // Contains performance ID'S that are filtered
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {
                 if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
                     List<string> genres = GenrePresentation.GetGenres(question: "What genres are you interested in?");
+                    foreach (var performance in App.Performances)
+                    {
+                        if (PerformanceLogic.HasGenre(performance.Key, genres))
+                        {
+                            FilteredPerformances.Add((performance.Key, performance.Value));
+                        }
+                    }
                     //var filteredPerformanceOptions = PerformanceLogic.FilterPerformancesByGenres(genres);
                     //PerformanceOptions = filteredPerformanceOptions;
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){

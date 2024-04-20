@@ -16,9 +16,9 @@ public static class PerformanceLogic{
         return $"ID{newId}";
     }
 
-    public static bool HasGenre(string performanceID = null, List<string> passedGenreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
+    public static bool HasGenre(string performanceID = null, List<string> genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
     {                                                                                               // 'performance.Key is the performanceID
-        if (performanceID == null || passedGenreIDList == null)
+        if (performanceID == null || genreIDList == null)
         {
             return false;
         }
@@ -27,7 +27,7 @@ public static class PerformanceLogic{
 
         foreach (string genreID in performance.Genres)
         {
-            if (passedGenreIDList.Contains(genreID))
+            if (genreIDList.Contains(genreID))
             {
                 return true;
             }
@@ -36,7 +36,7 @@ public static class PerformanceLogic{
         return false; // Vraag over 'PerformancePresentation'
     }
 
-    public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
+    public static List<(string, string)> GetPerformanceOptions(bool onlyActive, List<(string, Performance)> filteredPerformances = null){
         int index = 0;
         // id, performance string
         List<(string, string)> PerformanceOptions = new();
@@ -44,7 +44,10 @@ public static class PerformanceLogic{
 
         foreach (KeyValuePair<string, Performance> performance in App.Performances){    // Iterate through performance dictionary
             if (onlyActive && !performance.Value.Active) continue;  // If onlyActive is true and performance.Value.Active (activeness of the performance) is false, skip this loop
-            // if (filterActive && HasGenre(performance.Key, ))
+            if (onlyActive && filteredPerformances != null)
+            {
+                filteredPerformancesOrdered = filteredPerformances.OrderBy(performance => performance.Item2.Name).ToList();
+            }
             PerformancesOrdered.Add((performance.Key, performance.Value));  // Adds the ID and performance object as a tuple to the PerformancesOrdered list
         }
         PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();  // Performances get ordered alphabetically by name

@@ -17,7 +17,7 @@ public static class PerformanceLogic{
     }
 
     public static bool HasGenre(string performanceID = null, List<string> genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
-    {                                                                                               // 'performance.Key is the performanceID
+    {                                                                                         // 'performance.Key' is the performanceID
         if (performanceID == null || genreIDList == null)
         {
             return false;
@@ -25,18 +25,19 @@ public static class PerformanceLogic{
 
         Performance performance = App.Performances[performanceID];
 
-        foreach (string genreID in performance.Genres)
+        foreach (string genreID in performance.Genres)  // Looping through the genres list, which contains GenreID'S
         {
-            if (genreIDList.Contains(genreID))
+            if (genreIDList.Contains(genreID))  // If the passed Genre ID list contains the genreID; return true
             {
                 return true;
             }
         }
 
-        return false; // Vraag over 'PerformancePresentation'
+        return false;
     }
 
     private static List<(string, string)> AssignStringGenre(List<(string, Performance)> PerformancesOrdered, bool onlyActive, int index)
+    // Made latter part of 'GetPerformanceOptions' a new method as the avoid code repetition
     {   
         List<(string, string)> PerformanceOptions = new();
         foreach (var performance in PerformancesOrdered){
@@ -60,7 +61,7 @@ public static class PerformanceLogic{
         int index = 0;
         // id, performance string
         List<(string, Performance)> PerformancesOrdered = new();
-        List<(string, Performance)> filteredPerformancesOrdered = new();
+        List<(string, Performance)> filteredPerformancesOrdered = new(); // To order 'filteredPerformances' alphabetically
 
         foreach (KeyValuePair<string, Performance> performance in App.Performances){    // Iterate through performance dictionary
             if (onlyActive && !performance.Value.Active) continue;  // If onlyActive is true and performance.Value.Active (activeness of the performance) is false, skip this loop

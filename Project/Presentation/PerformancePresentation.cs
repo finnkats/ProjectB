@@ -64,9 +64,9 @@ public static class PerformancePresentation
                     List<string> genres = GenrePresentation.GetGenres(question: "What genres are you interested in?");
                     foreach (var performance in App.Performances)
                     {
-                        if (PerformanceLogic.HasGenre(performance.Key, genres))
+                        if (PerformanceLogic.HasGenre(performance.Key, genres)) // If genreID is present within the performance.Key
                         {
-                            FilteredPerformances.Add((performance.Key, performance.Value));
+                            FilteredPerformances.Add((performance.Key, performance.Value)); // Adds the performance ID and Performance Object to the 'FilteredPerformances' list (line 59)
                         }
                     }
                     

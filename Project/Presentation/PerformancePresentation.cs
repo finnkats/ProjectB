@@ -41,6 +41,7 @@ public static class PerformancePresentation
             pages = (PerformanceOptions.Count + 4) / 5;
             if (pages <= 1) offset = 0;
             var PerformanceOptionsScope = PerformanceOptions.Skip(0 + (5 * (page - 1))).Take(5).ToList();
+            if (PerformanceOptionsScope.Count == 0) Console.WriteLine("No current performance have these genres");
             foreach (var performanceOption in PerformanceOptionsScope){
                 Console.WriteLine(performanceOption.Item2);
             }

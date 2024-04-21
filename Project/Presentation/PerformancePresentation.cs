@@ -62,15 +62,8 @@ public static class PerformancePresentation
             try {
                 if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
                     List<string> genres = GenrePresentation.GetGenres(question: "What genres are you interested in?");
-                    foreach (var performance in App.Performances)
-                    {
-                        if (PerformanceLogic.HasGenre(performance.Key, genres)) // If genreID is present within the performance.Key
-                        {
-                            FilteredPerformances.Add((performance.Key, performance.Value)); // Adds the performance ID and Performance Object to the 'FilteredPerformances' list (line 59)
-                        }
-                    }
-                    
-                    PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive, FilteredPerformances);
+                    var filteredPerformanceOptions = PerformanceLogic.FilteredPerformanceOptions(genres);
+                    PerformanceOptions = filteredPerformanceOptions;
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
                     return null;
                 } else{

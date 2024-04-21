@@ -36,10 +36,46 @@ public static class PerformanceLogic{
         return false;
     }
 
-    private static List<(string, string)> AssignStringGenre(List<(string, Performance)> PerformancesOrdered, bool onlyActive, int index)
-    // Made latter part of 'GetPerformanceOptions' a new method as the avoid code repetition
+    public static List<(string, string)>? FilteredPerformanceOptions(List<string> genreIDList)
     {   
+        var PerformanceOptions = GetPerformanceOptions(true);
+        List<(string, string)> FilteredPerformanceOptionsList = new();
+
+        if (genreIDList.Count == 0)
+        {
+            return PerformanceOptions;
+        }
+
+        foreach (var performance in PerformanceOptions)
+        {   
+            if (HasGenre(performance.Item1, genreIDList))
+            {
+                FilteredPerformanceOptionsList.Add(performance);
+            }
+            
+        }
+
+        if (FilteredPerformanceOptionsList.Count == 0)
+        {
+            Console.WriteLine("No current performance have these genres");
+        }
+
+        return FilteredPerformanceOptionsList;
+    }
+
+    
+    public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
+        int index = 0;
+        // id, performance string
         List<(string, string)> PerformanceOptions = new();
+        List<(string, Performance)> PerformancesOrdered = new();
+
+        foreach (KeyValuePair<string, Performance> performance in App.Performances){
+            if (onlyActive && !performance.Value.Active) continue;
+            PerformancesOrdered.Add((performance.Key, performance.Value));
+        }
+        PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();
+
         foreach (var performance in PerformancesOrdered){
             if (onlyActive && !performance.Item2.Active) continue;
             string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
@@ -49,32 +85,15 @@ public static class PerformanceLogic{
                     currentGenres.Add(App.Genres[genreId].Name);
                 }
                 currentGenres.Sort();
-                string separator = ", ";
-                performanceString += $"[{String.Join(separator, currentGenres)}]";
+                string seperator = ", ";
+                performanceString += $"[{String.Join(seperator, currentGenres)}]";
             }
             PerformanceOptions.Add((performance.Item1, performanceString));
         }
+        
         return PerformanceOptions;
     }
 
-    public static List<(string, string)> GetPerformanceOptions(bool onlyActive, List<(string, Performance)> filteredPerformances = null){
-        int index = 0;
-        // id, performance string
-        List<(string, Performance)> PerformancesOrdered = new();
-        List<(string, Performance)> filteredPerformancesOrdered = new(); // To order 'filteredPerformances' alphabetically
-
-        foreach (KeyValuePair<string, Performance> performance in App.Performances){    // Iterate through performance dictionary
-            if (onlyActive && !performance.Value.Active) continue;  // If onlyActive is true and performance.Value.Active (activeness of the performance) is false, skip this loop
-            if (onlyActive && filteredPerformances != null && filteredPerformances.Count > 0)
-            {
-                filteredPerformancesOrdered = filteredPerformances.OrderBy(performance => performance.Item2.Name).ToList();
-                return (filteredPerformancesOrdered, onlyActive, index);
-            }
-            PerformancesOrdered.Add((performance.Key, performance.Value));  // Adds the ID and performance object as a tuple to the PerformancesOrdered list
-        }
-        PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();  // Performances get ordered alphabetically by name
-        return AssignStringGenre(PerformancesOrdered, onlyActive, index);
-    }
 
     public static void PerformanceCatalogue(){
         Console.Clear();

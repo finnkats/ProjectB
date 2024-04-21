@@ -24,5 +24,11 @@ while (App.CurrentMenu != null){
     else invalidInput = true;
     Console.Clear();
 }
-
+List<string> genreIDList = new List<string> {"ID1", "ID2"};
+var PerformanceOptions = PerformanceLogic.GetPerformanceOptions(true);
+var filteredPerformanceOptionsList = PerformanceLogic.FilteredPerformanceOptions(genreIDList);
+foreach (var item in filteredPerformanceOptionsList)
+{
+    Console.WriteLine(item);
+}
 Console.WriteLine("Exiting program...");

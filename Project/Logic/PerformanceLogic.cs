@@ -46,11 +46,14 @@ public static class PerformanceLogic{
             return PerformanceOptions;
         }
 
+        int performanceIndex = 1;
         foreach (var performance in PerformanceOptions)
         {   
             if (HasGenre(performance.Item1, genreIDList))
             {
-                FilteredPerformanceOptionsList.Add(performance);
+                // overwrites index of the option that will be printed for the menu
+                string performanceOptionString = $"{performanceIndex++}: {performance.Item2.Split(':')[1]}";
+                FilteredPerformanceOptionsList.Add((performance.Item1, performanceOptionString));
             }
             
         }

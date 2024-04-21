@@ -16,7 +16,7 @@ public static class PerformanceLogic{
         return $"ID{newId}";
     }
 
-    public static bool HasGenre(string performanceID = null, List<string> genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
+    public static bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
     {                                                                                         // 'performance.Key' is the performanceID
         if (performanceID == null || genreIDList == null)
         {
@@ -36,7 +36,7 @@ public static class PerformanceLogic{
         return false;
     }
 
-    public static List<(string, string)>? FilteredPerformanceOptions(List<string> genreIDList)
+    public static List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
     {   
         var PerformanceOptions = GetPerformanceOptions(true);
         List<(string, string)> FilteredPerformanceOptionsList = new();
@@ -53,11 +53,6 @@ public static class PerformanceLogic{
                 FilteredPerformanceOptionsList.Add(performance);
             }
             
-        }
-
-        if (FilteredPerformanceOptionsList.Count == 0)
-        {
-            Console.WriteLine("No current performance have these genres");
         }
 
         return FilteredPerformanceOptionsList;

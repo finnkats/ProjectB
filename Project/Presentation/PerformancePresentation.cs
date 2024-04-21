@@ -32,12 +32,14 @@ public static class PerformancePresentation
         Console.Clear();
         var PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive);
         int page = 1;
-        int pages = (PerformanceOptions.Count + 4) / 5;
+        int pages;
         int offset = 0;
         int exitOptionIndex = onlyActive ? 2 : 1;
 
         while (true){
             Console.Clear();
+            pages = (PerformanceOptions.Count + 4) / 5;
+            if (pages <= 1) offset = 0;
             var PerformanceOptionsScope = PerformanceOptions.Skip(0 + (5 * (page - 1))).Take(5).ToList();
             foreach (var performanceOption in PerformanceOptionsScope){
                 Console.WriteLine(performanceOption.Item2);
@@ -56,7 +58,6 @@ public static class PerformancePresentation
             
             Console.WriteLine($"{PerformanceOptionsScope.Count + exitOptionIndex + offset}: Exit\n");
             Console.WriteLine(question);
-            List<(string, Performance)> FilteredPerformances = new List<(string, Performance)>(); // Contains performance ID'S that are filtered
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {

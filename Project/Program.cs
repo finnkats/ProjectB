@@ -25,8 +25,4 @@ while (App.CurrentMenu != null){
     Console.Clear();
 }
 
-foreach (var item in PerformanceLogic.GetPerformanceOptions(true))
-{
-    Console.WriteLine(item);
-}
 Console.WriteLine("Exiting program...");

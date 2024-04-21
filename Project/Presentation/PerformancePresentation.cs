@@ -69,8 +69,8 @@ public static class PerformancePresentation
                             FilteredPerformances.Add((performance.Key, performance.Value));
                         }
                     }
-                    //var filteredPerformanceOptions = PerformanceLogic.FilterPerformancesByGenres(genres);
-                    //PerformanceOptions = filteredPerformanceOptions;
+                    
+                    PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive, FilteredPerformances);
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
                     return null;
                 } else{

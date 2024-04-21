@@ -36,22 +36,9 @@ public static class PerformanceLogic{
         return false; // Vraag over 'PerformancePresentation'
     }
 
-    public static List<(string, string)> GetPerformanceOptions(bool onlyActive, List<(string, Performance)> filteredPerformances = null){
-        int index = 0;
-        // id, performance string
+    private static List<(string, string)> AssignStringGenre(List<(string, Performance)> PerformancesOrdered, bool onlyActive, int index)
+    {   
         List<(string, string)> PerformanceOptions = new();
-        List<(string, Performance)> PerformancesOrdered = new();
-
-        foreach (KeyValuePair<string, Performance> performance in App.Performances){    // Iterate through performance dictionary
-            if (onlyActive && !performance.Value.Active) continue;  // If onlyActive is true and performance.Value.Active (activeness of the performance) is false, skip this loop
-            if (onlyActive && filteredPerformances != null)
-            {
-                filteredPerformancesOrdered = filteredPerformances.OrderBy(performance => performance.Item2.Name).ToList();
-            }
-            PerformancesOrdered.Add((performance.Key, performance.Value));  // Adds the ID and performance object as a tuple to the PerformancesOrdered list
-        }
-        PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();  // Performances get ordered alphabetically by name
-
         foreach (var performance in PerformancesOrdered){
             if (onlyActive && !performance.Item2.Active) continue;
             string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
@@ -61,12 +48,31 @@ public static class PerformanceLogic{
                     currentGenres.Add(App.Genres[genreId].Name);
                 }
                 currentGenres.Sort();
-                string seperator = ", ";
-                performanceString += $"[{String.Join(seperator, currentGenres)}]";
+                string separator = ", ";
+                performanceString += $"[{String.Join(separator, currentGenres)}]";
             }
             PerformanceOptions.Add((performance.Item1, performanceString));
         }
         return PerformanceOptions;
+    }
+
+    public static List<(string, string)> GetPerformanceOptions(bool onlyActive, List<(string, Performance)> filteredPerformances = null){
+        int index = 0;
+        // id, performance string
+        List<(string, Performance)> PerformancesOrdered = new();
+        List<(string, Performance)> filteredPerformancesOrdered = new();
+
+        foreach (KeyValuePair<string, Performance> performance in App.Performances){    // Iterate through performance dictionary
+            if (onlyActive && !performance.Value.Active) continue;  // If onlyActive is true and performance.Value.Active (activeness of the performance) is false, skip this loop
+            if (onlyActive && filteredPerformances != null && filteredPerformances.Count > 0)
+            {
+                filteredPerformancesOrdered = filteredPerformances.OrderBy(performance => performance.Item2.Name).ToList();
+                return (filteredPerformancesOrdered, onlyActive, index);
+            }
+            PerformancesOrdered.Add((performance.Key, performance.Value));  // Adds the ID and performance object as a tuple to the PerformancesOrdered list
+        }
+        PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();  // Performances get ordered alphabetically by name
+        return AssignStringGenre(PerformancesOrdered, onlyActive, index);
     }
 
     public static void PerformanceCatalogue(){

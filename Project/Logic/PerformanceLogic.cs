@@ -16,6 +16,52 @@ public static class PerformanceLogic{
         return $"ID{newId}";
     }
 
+    public static bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
+    {                                                                                         // 'performance.Key' is the performanceID
+        if (performanceID == null || genreIDList == null)
+        {
+            return false;
+        }
+
+        Performance performance = App.Performances[performanceID];
+
+        foreach (string genreID in performance.Genres)  // Looping through the genres list, which contains GenreID'S
+        {
+            if (genreIDList.Contains(genreID))  // If the passed Genre ID list contains the genreID; return true
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
+    {   
+        var PerformanceOptions = GetPerformanceOptions(true);
+        List<(string, string)> FilteredPerformanceOptionsList = new();
+
+        if (genreIDList.Count == 0)
+        {
+            return PerformanceOptions;
+        }
+
+        int performanceIndex = 1;
+        foreach (var performance in PerformanceOptions)
+        {   
+            if (HasGenre(performance.Item1, genreIDList))
+            {
+                // overwrites index of the option that will be printed for the menu
+                string performanceOptionString = $"{performanceIndex++}: {performance.Item2.Split(':')[1]}";
+                FilteredPerformanceOptionsList.Add((performance.Item1, performanceOptionString));
+            }
+            
+        }
+
+        return FilteredPerformanceOptionsList;
+    }
+
+    
     public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
         int index = 0;
         // id, performance string
@@ -32,14 +78,20 @@ public static class PerformanceLogic{
             if (onlyActive && !performance.Item2.Active) continue;
             string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
             if (onlyActive){
-                string genres = String.Join(", ", performance.Item2.Genres);
-                performanceString += $"[{genres}]";
+                List<string> currentGenres = new();
+                foreach (var genreId in App.Performances[performance.Item1].Genres){
+                    currentGenres.Add(App.Genres[genreId].Name);
+                }
+                currentGenres.Sort();
+                string seperator = ", ";
+                performanceString += $"[{String.Join(seperator, currentGenres)}]";
             }
             PerformanceOptions.Add((performance.Item1, performanceString));
         }
         
         return PerformanceOptions;
     }
+
 
     public static void PerformanceCatalogue(){
         Console.Clear();

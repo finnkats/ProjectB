@@ -9,8 +9,8 @@ public static class PerformancePresentation
         string? performanceName = Console.ReadLine();
         Console.Clear();
   
-        var genres = GetGenres();
-  
+        var genres = GenrePresentation.GetGenres();
+
         Console.WriteLine("Will the performance be currently active?");
         Console.WriteLine("\n1. Yes");
         Console.WriteLine("2. No");
@@ -28,35 +28,20 @@ public static class PerformancePresentation
         Console.Clear();
     }
 
-    public static List<string> GetGenres(){
-        List<string> Genres = new List<string>();
-        string? genre = default;
-        Console.WriteLine("Enter Q to stop adding Genres\n");
-        while (genre?.ToLower() != "q")
-        {
-            Console.WriteLine("Genre: ");
-            genre = Console.ReadLine();
-            Console.WriteLine();
-
-            if(genre?.ToLower() != "q"){
-                Genres.Add(genre ?? "");
-            }
-        }
-        Console.Clear();
-        return Genres;
-    } 
-
     public static string? PerformanceChoice(string question, bool onlyActive=false){
         Console.Clear();
-
         var PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive);
         int page = 1;
-        int pages = (PerformanceOptions.Count + 4) / 5;
+        int pages;
         int offset = 0;
+        int exitOptionIndex = onlyActive ? 2 : 1;
 
         while (true){
             Console.Clear();
+            pages = (PerformanceOptions.Count + 4) / 5;
+            if (pages <= 1) offset = 0;
             var PerformanceOptionsScope = PerformanceOptions.Skip(0 + (5 * (page - 1))).Take(5).ToList();
+            if (PerformanceOptionsScope.Count == 0) Console.WriteLine("No current performance have these genres");
             foreach (var performanceOption in PerformanceOptionsScope){
                 Console.WriteLine(performanceOption.Item2);
             }
@@ -68,14 +53,25 @@ public static class PerformancePresentation
                 Console.WriteLine($"{PerformanceOptionsScope.Count + 2}: Previous page");
                 offset = 2;
             }
-            Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Exit\n");
-
+            if (onlyActive){
+                Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Filter");
+            }
+            
+            Console.WriteLine($"{PerformanceOptionsScope.Count + exitOptionIndex + offset}: Exit\n");
             Console.WriteLine(question);
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             try {
-                string performanceId = PerformanceOptionsScope[choice - 1].Item1;
-                return performanceId;
+                if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
+                    List<string> genres = GenrePresentation.GetGenres(question: "What genres are you interested in?");
+                    var filteredPerformanceOptions = PerformanceLogic.FilteredPerformanceOptions(genres);
+                    PerformanceOptions = filteredPerformanceOptions;
+                }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
+                    return null;
+                } else{
+                    string performanceId = PerformanceOptionsScope[choice - 1].Item1;
+                    return performanceId;
+                }
             } catch (ArgumentOutOfRangeException) {
                 if (choice == PerformanceOptionsScope.Count() + 1 + offset) return null;
                 else if (offset == 2){
@@ -99,7 +95,12 @@ public static class PerformancePresentation
         while (true){
             Console.Clear();
             Console.WriteLine($"1: Change name \"{App.Performances[performanceId].Name}\"");
-            Console.WriteLine($"2: Change genres \"{String.Join('|', App.Performances[performanceId].Genres)}\"");
+            List<string> currentGenres = new();
+            foreach (var genreId in App.Performances[performanceId].Genres){
+                currentGenres.Add(App.Genres[genreId].Name);
+            }
+            string seperator = ", ";
+            Console.WriteLine($"2: Change genres: [{String.Join(seperator, currentGenres)}]");
             Console.WriteLine($"3: Change active status \"{App.Performances[performanceId].Active}\"");
             Console.WriteLine("4: Exit\n");
             Int32.TryParse(Console.ReadLine(), out int choice);
@@ -112,7 +113,20 @@ public static class PerformancePresentation
             }
             else if (choice == 2){
                 Console.Clear();
-                List<string> genres = GetGenres();
+                List<string> RemovedGenreIds = new();
+                foreach (var genreId in App.Performances[performanceId].Genres){
+                    Console.WriteLine($"Do you want to remove '{App.Genres[genreId].Name}' from '{App.Performances[performanceId].Name}'? (Y/N)");
+                    string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
+                    if (removeGenre.StartsWith("Y")){
+                        currentGenres.Remove(App.Genres[genreId].Name);
+                        RemovedGenreIds.Add(genreId);
+                    }
+                    Console.WriteLine();
+                }
+                RemovedGenreIds.ForEach(genreId => App.Performances[performanceId].Genres.Remove(genreId));
+
+                Console.Clear();
+                List<string> genres = GenrePresentation.GetGenres(performanceId);
                 PerformanceLogic.ChangeGenres(genres, performanceId, App.Performances);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);

@@ -29,18 +29,35 @@ public static class TicketPresentation{
         var TicketsList = MainTicketSystem.SortActiveTicket();
         if (TicketsList != null)
         {
-
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Inactive Tickets");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(new string('-', 82));
             Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "Performance Name", "Date", "Time",
                 "Hall"));
+            Console.WriteLine(new string('-', 82));
+
             foreach (Ticket ticket in TicketsList[1])
             {
-                Console.WriteLine(
-                    String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", ticket.PerformanceId, "test2", "test3", "test4"));
+                Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", App.Performances[ticket.PerformanceId].Name, ticket.Date, ticket.Time, ticket.Hall));
                 Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "", "", "", ""));
                 Console.WriteLine(new string('-', 82));
 
             }
-        }
+            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n\n\nactive Tickets");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(new string('-', 82));
+            Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "Performance Name", "Date", "Time",
+                "Hall"));
+            Console.WriteLine(new string('-', 82));
+
+            foreach (Ticket ticket in TicketsList[1])
+            {
+                Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", App.Performances[ticket.PerformanceId].Name, ticket.Date, ticket.Time, ticket.Hall));
+                Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "", "", "", ""));
+                Console.WriteLine(new string('-', 82));
+            }
     }
 }

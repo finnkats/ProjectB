@@ -63,7 +63,7 @@ public static class MainTicketSystem
         {
             foreach (UserTicket ticketPair in App.Tickets)
             {
-                if (ticketPair.Ticket.Active == true)
+                if (ticketPair.Ticket.IsActive == true)
                 {
                     ActiveTickets.Add(ticketPair.Ticket);
                 }

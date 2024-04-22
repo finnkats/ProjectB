@@ -27,4 +27,12 @@ public static class TicketDataAccess{
         writer.Write(listJson);
         writer.Close();
     }
+
+    public static void UpdateTickets(){
+        string JsonPath = @"DataSources/tickets.json";
+        StreamWriter writer = new(JsonPath);
+        string listJson = JsonSerializer.Serialize(App.Tickets);
+        writer.Write(listJson);
+        writer.Close();
+    }
 }

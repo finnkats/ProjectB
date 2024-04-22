@@ -18,6 +18,7 @@ public static class App
     {
         // Fill in all Menu's
         CreateMenus();
+        MainTicketSystem.CheckOutdatedTickets();
     }
 
     // Add new menu's here

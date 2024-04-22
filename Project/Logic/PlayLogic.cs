@@ -36,7 +36,7 @@ public static class PlayLogic
             }
         }
 
-        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall);
+        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall, true);
     }
 
     public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){

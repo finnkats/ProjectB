@@ -24,5 +24,4 @@ while (App.CurrentMenu != null){
     else invalidInput = true;
     Console.Clear();
 }
-
 Console.WriteLine("Exiting program...");

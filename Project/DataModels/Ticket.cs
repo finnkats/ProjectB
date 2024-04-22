@@ -52,4 +52,8 @@ public class Ticket : IEquatable<Ticket>{
             return false;
         }
     }
+
+    public override int GetHashCode(){
+        return HashCode.Combine(PerformanceId, Date, Time, Hall, IsActive);
+    }
 }

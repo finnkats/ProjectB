@@ -3,16 +3,19 @@ using System.Threading;
 
 public static class TicketPresentation{
     public static void PrintTickets(){
+        bool hasTickets = false;
         while (true){
             Console.Clear();
             if(App.Tickets.Count != 0){
                 foreach(UserTicket ticketPair in App.Tickets){
                     if (ticketPair.User == App.LoggedInUsername){
-                    Console.WriteLine(ticketPair.Ticket.TicketInfo());
-                    } else{
-                        if(NoBooksMenu()) return;
-                        else{Console.WriteLine("Not possible option");}
+                        Console.WriteLine(ticketPair.Ticket.TicketInfo());
+                        hasTickets = true;
                     }
+                }
+                if(!hasTickets){
+                    if(NoBooksMenu()) break;
+                    else{Console.WriteLine("Not possible option");}
                 }
                 Console.WriteLine("1: Edit Ticket");
                 Console.Write("2: To Exit\n>");

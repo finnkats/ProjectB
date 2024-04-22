@@ -31,7 +31,7 @@ public static class TicketPresentation
         Thread.Sleep(6000);
     }
 
-    public static void TicketMenu()
+    public static Ticket TicketMenu()
     {
         Console.Clear();
         var TicketsList = MainTicketSystem.SortActiveTicket();
@@ -62,7 +62,7 @@ public static class TicketPresentation
                 "Hall"));
             Console.WriteLine(new string('-', 82));
 
-            foreach (Ticket ticket in TicketsList[1])
+            foreach (Ticket ticket in TicketsList[0])
             {
                 Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|",
                     App.Performances[ticket.PerformanceId].Name, ticket.Date, ticket.Time, ticket.Hall));
@@ -77,7 +77,20 @@ public static class TicketPresentation
             }
             Console.WriteLine("Q. I don't want to cancel any tickets\n");
             string? userInput = Console.ReadLine();
+            if (userInput != null)
+            {
+                if (userInput.ToLower() == "q")
+                {
+                    return null;
+                }
 
+                else
+                {
+                    int IndexInt = Convert.ToInt32(userInput);
+                    int ReturnIndex = IndexInt - 1;
+                    return TicketsList[0][ReturnIndex];
+                }
+            }
 
         }
     }

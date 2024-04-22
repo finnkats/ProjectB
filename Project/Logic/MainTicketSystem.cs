@@ -72,4 +72,30 @@ public static class MainTicketSystem{
         }
         return false;
     }
+
+    public static List<List<Ticket>> SortActiveTicket()
+    {
+        List<Ticket> ActiveTickets = new();
+        List<Ticket> InactiveTickets = new();
+        List <List< Ticket>> ReturnLists = new();
+
+
+        if (App.Tickets != null)
+        {
+            foreach (UserTicket ticketPair in App.Tickets)
+            {
+                if (ticketPair.Ticket.IsActive == true)
+                {
+                    ActiveTickets.Add(ticketPair.Ticket);
+                }
+                else
+                {
+                    InactiveTickets.Add(ticketPair.Ticket);
+                }
+            }
+        }
+        ReturnLists.Add(ActiveTickets);
+        ReturnLists.Add(InactiveTickets);
+        return ReturnLists;
+    }
 }

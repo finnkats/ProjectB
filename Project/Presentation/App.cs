@@ -56,7 +56,7 @@ public static class App
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue);
-        HomePage.AddAllOption("View Tickets", TicketPresentation.PrintTickets);
+        HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);

@@ -8,7 +8,7 @@ public static class MainTicketSystem
 
     public static void CreateBookTicket(string performanceId, string date, string time, string room)
     {
-        Ticket createNewTicket = new Ticket(performanceId, date, time, room);
+        Ticket createNewTicket = new Ticket(performanceId, date, time, room, true);
         TicketPresentation.PrintTicket(createNewTicket);
         createNewTicket.UpdateData();
     }
@@ -73,7 +73,6 @@ public static class MainTicketSystem
                 }
             }
         }
-
         ReturnLists.Add(ActiveTickets);
         ReturnLists.Add(InactiveTickets);
         return ReturnLists;

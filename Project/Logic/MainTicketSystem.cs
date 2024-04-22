@@ -1,4 +1,5 @@
 using Logic;
+using System.Collections.Generic;
 
 public static class MainTicketSystem
 {
@@ -51,10 +52,12 @@ public static class MainTicketSystem
         return (false, loginName, loginPassword);
     }
 
-    public list<Ticket> SortActiveTicket(int TicketPicker)
+    public static List<List<Ticket>> SortActiveTicket()
     {
-        List<Ticket> ActiveTickets = new List<Ticket>();
-        List<Ticket> InactiveTickets = new List<Ticket>();
+        List<Ticket> ActiveTickets = new();
+        List<Ticket> InactiveTickets = new();
+        List <List< Ticket>> ReturnLists = new();
+
 
         if (App.Tickets != null)
         {
@@ -65,22 +68,14 @@ public static class MainTicketSystem
                     ActiveTickets.Add(ticketPair.Ticket);
                 }
                 else
-                { 
-                    InactiveTickets.Add(ticketPair.Ticket)
-                }
-                    // Made it so you have to use this function twice to get both list, can be changed if this is wished
-            }
-
-                if (TicketPicker == 1)
                 {
-                    return ActiveTickets;
-                }
-                else if (TicketPicker == 2)
-                {
-                    return InactiveTickets;
+                    InactiveTickets.Add(ticketPair.Ticket);
                 }
             }
         }
-        return new List<Ticket>();
+
+        ReturnLists.Add(ActiveTickets);
+        ReturnLists.Add(InactiveTickets);
+        return ReturnLists;
     }
 }

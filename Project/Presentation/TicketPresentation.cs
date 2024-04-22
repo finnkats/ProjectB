@@ -26,6 +26,21 @@ public static class TicketPresentation{
     public static void TicketMenu()
     {
         Console.Clear();
+        var TicketsList = MainTicketSystem.SortActiveTicket();
+        if (TicketsList != null)
+        {
 
+            Console.WriteLine(new string('-', 82));
+            Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "Performance Name", "Date", "Time",
+                "Hall"));
+            foreach (Ticket ticket in TicketsList[1])
+            {
+                Console.WriteLine(
+                    String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", ticket.PerformanceId, "test2", "test3", "test4"));
+                Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "", "", "", ""));
+                Console.WriteLine(new string('-', 82));
+
+            }
+        }
     }
 }

@@ -1,4 +1,10 @@
 public static class HallLogic {
+    // Function gets called to add A hall
+    // It checks if the name isn't empty or seats is <= 0 or a hall with the same name already exists
+    // Returns if it successfully added the hall
+
+    // A hall can be made without instantly linking it to a location, the location will be the string "null"
+    // in that case
     public static bool AddHall(string Name, int Seats, string locationId = "null"){
         if (Name == "") return false;
         if (Seats <= 0) return false;

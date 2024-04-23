@@ -5,6 +5,7 @@ using System.Threading;
 namespace Logic;
 public static class AccountLogic
 {
+    // This function can be called with or without login info
     public static void Login(string inputName = "", string inputPassword = "")
     {
         // Check if a user is already logged in
@@ -14,6 +15,7 @@ public static class AccountLogic
         while (loginLoop)
         {
             string loginName, loginPassword;
+            // See if the function got login info, otherwise ask for it
             if (inputName != "") (loginName, loginPassword) = (inputName, inputPassword);
             else (loginName, loginPassword) = AccountPresentation.GetLoginDetails();
             bool found = false;

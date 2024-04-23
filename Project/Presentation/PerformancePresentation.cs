@@ -2,6 +2,7 @@ using System;
 
 public static class PerformancePresentation
 {
+    // Similar to other Presentation file comments (previous ones)
     public static void AddPerformance(){
         Console.Clear();
         Console.WriteLine("Enter a performance you want to add.");
@@ -28,6 +29,7 @@ public static class PerformancePresentation
         Console.Clear();
     }
 
+    // This is the catalogue, this should probably the base for future menu's
     public static string? PerformanceChoice(string question, bool onlyActive=false){
     // Clear the console
     Console.Clear();
@@ -110,12 +112,14 @@ public static class PerformancePresentation
 }
 
 
+    // Similar to other Presentation file comments (previous ones)
     public static void EditPerformanceStart(){
         string? performanceId = PerformanceChoice("Choose the performance you want to edit:");
         if (performanceId == null) return;
         EditPerformance(performanceId);
     }
 
+    // Similar to other Presentation file comments (previous ones)
     public static void EditPerformance(string performanceId){
         while (true){
             Console.Clear();

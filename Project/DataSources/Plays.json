@@ -1,702 +1,702 @@
 {
     "ID0": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         }
     ],
     "ID1": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         }
     ],
     "ID2": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         }
     ],
     "ID3": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         }
     ],
     "ID4": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         }
     ],
     "ID5": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         }
     ],
     "ID6": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         }
     ],
     "ID7": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         }
     ],
     "ID8": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         }
     ],
     "ID9": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         }
     ],
     "ID10": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         }
     ],
     "ID11": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID3"
         }
     ],
     "ID12": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID1"
         }
     ],
     "ID13": [
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "18:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "20:00:00",
             "Date": "30/04/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater het Kruispunt",
+            "Location": "ID0",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID0"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "12:00:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         },
         {
-            "Location": "Theater Zuidplein",
+            "Location": "ID1",
             "Time": "14:30:00",
             "Date": "01/05/2024",
-            "Hall": "THEATERZAAL"
+            "Hall": "ID2"
         }
     ]
 }

@@ -1,7 +1,13 @@
-﻿App.Start();
+﻿using Logic;
+
+App.Start();
 //Console.Clear();
-// Turn on "Demo" mode if any program arguments are given
-if (args.Length != 0) App.AddAllMenus();
+// program arguments
+if (args.Length != 0) {
+    if (args[0].ToLower() == "demo") App.AddAllMenus();
+    else if (args[0].ToLower() == "admin") AccountLogic.Login("Admin123", "Password123");
+}
+
 bool invalidInput = false;
 string? menuString;
 while (App.CurrentMenu != null){
@@ -18,5 +24,4 @@ while (App.CurrentMenu != null){
     else invalidInput = true;
     Console.Clear();
 }
-
 Console.WriteLine("Exiting program...");

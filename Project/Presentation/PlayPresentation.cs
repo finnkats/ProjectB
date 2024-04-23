@@ -3,30 +3,6 @@ using System.Globalization;
 
 public static class PlayPresentation
 {
-    // TODO: add method that gets all locations and puts them in a list
-    public static List<string> LocationOptions = new() {"Theater het Kruispunt", "Theater Zuidplein"};
-    public static string SelectLocation(){
-        Console.Clear();
-        // Loop through the available location options and display them to the user
-        for (int i = 0; i < LocationOptions.Count; i++) {
-            Console.WriteLine($"{i + 1}. {LocationOptions[i]}");
-            }
-
-            Console.Write("Select an option: ");
-            string ?choice = Console.ReadLine();
-
-            int index;
-            // Check if the user input is a valid integer index within the range of options
-            if (int.TryParse(choice, out index) && index >= 1 && index <= LocationOptions.Count) {
-            // If the input is valid, return the selected location
-                return LocationOptions[index - 1];
-            } else {
-                Console.WriteLine("Invalid choice.");
-                return SelectLocation();
-        }
-    }
-
-
     public static string? PrintDates(string selectedLocation, List<Play> playOptions){
         Console.Clear();
         (string? datesString, Dictionary<int, string>? datesOptions) = PlayLogic.GetDates(selectedLocation, playOptions);
@@ -79,19 +55,8 @@ public static class PlayPresentation
         string? playId = PerformancePresentation.PerformanceChoice("For what performance do you want to add a play?");
         if (playId == null) return;
 
-        string location;
-        while (true){
-            Console.Clear();
-            Console.WriteLine("What location?\n1: Theater het Kruispunt\n2: Theater Zuidplein");
-            Int32.TryParse(Console.ReadLine(), out int choice);
-            if (choice == 1){
-                location = "Theater het Kruispunt";
-                break;
-            } else if (choice == 2){
-                location = "Theater Zuidplein";
-                break;
-            }
-        }
+        string location = LocationPresentation.GetLocation("What location?", "Cancel");
+        if (location == "null") return;
 
         string time;
         while (true){
@@ -117,8 +82,8 @@ public static class PlayPresentation
             break;
         }
 
-        // for now
-        string hall = "THEATERZAAL";
+        string hall = HallPresentation.GetHall(location);
+        if (hall == "null") return;
 
         if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
         else Console.WriteLine("Couldn't add play");

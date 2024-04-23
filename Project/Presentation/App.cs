@@ -10,11 +10,15 @@ public static class App
     public static readonly Dictionary<string, Account> Accounts = AccountDataAccess.ReadAccounts();
     public static readonly Dictionary<string, List<Play>> Plays = PlayDataAccess.ReadPlays();
     public static readonly List<UserTicket> Tickets = TicketDataAccess.ReadTickets();
+    public static readonly Dictionary<string, Location> Locations = LocationDataAccess.ReadLocations();
+    public static readonly Dictionary<string, Hall> Halls = HallDataAccess.ReadHalls();
+    public static readonly Dictionary<string, Genre> Genres = GenreDataAccess.ReadGenres();
 
     public static void Start()
     {
         // Fill in all Menu's
         CreateMenus();
+        MainTicketSystem.CheckOutdatedTickets();
     }
 
     // Add new menu's here
@@ -23,9 +27,8 @@ public static class App
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");
     public static Menu ModifyPerformances = new("Modify Performances");
-    public static Menu ModifyCategories = new("Modify Categories");
+    public static Menu ModifyGenres = new("Modify Genres");
     public static Menu ModifyLocations = new("Modify Locations");
-    public static Menu EditLocation = new("Edit Location");
     public static Menu ExampleMenu1 = new("Example Menu 1");
 
     public static void CreateMenus()
@@ -52,8 +55,8 @@ public static class App
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue); // TODO add view Performance function
-        HomePage.AddAllOption("View Tickets", TicketPresentation.PrintTickets); // TODO add view ticket function // for now linked to ticket system
+        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue);
+        HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
@@ -62,11 +65,11 @@ public static class App
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;
         AdminFeatures.AddAllOption("Modify Performances", ModifyPerformances.SetToCurrentMenu);
-        AdminFeatures.AddAllOption("Modify Categories", ModifyCategories.SetToCurrentMenu);
+        AdminFeatures.AddAllOption("Modify Genres", ModifyGenres.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Modify Locations", ModifyLocations.SetToCurrentMenu);
         AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
         AdminFeatures.AddCurrentOption("Modify Performances");
-        AdminFeatures.AddCurrentOption("Modify Categories");
+        AdminFeatures.AddCurrentOption("Modify Genres");
         AdminFeatures.AddCurrentOption("Modify Locations");
         AdminFeatures.AddCurrentOption("Check Statistics");
 
@@ -79,26 +82,23 @@ public static class App
         ModifyPerformances.AddCurrentOption("Edit Performance");
         ModifyPerformances.AddCurrentOption("Add Play");
 
-        // Modify Categories
-        ModifyCategories.PreviousMenu = AdminFeatures;
-        ModifyCategories.AddAllOption("Add Category", Example.DoNothing); // TODO add add category function
-        ModifyCategories.AddAllOption("Edit Category", Example.DoNothing); // TODO add edit category function
-        ModifyCategories.AddCurrentOption("Add Category");
-        ModifyCategories.AddCurrentOption("Edit Category");
+        // Modify Genres
+        ModifyGenres.PreviousMenu = AdminFeatures;
+        ModifyGenres.AddAllOption("Add Genre", GenrePresentation.AddGenre); // TODO add add genre function
+        ModifyGenres.AddAllOption("Edit Genre", GenrePresentation.EditGenreStart); // TODO add edit genre function
+        ModifyGenres.AddCurrentOption("Add Genre");
+        ModifyGenres.AddCurrentOption("Edit Genre");
 
         // Modify Locations
         ModifyLocations.PreviousMenu = AdminFeatures;
-        ModifyLocations.AddAllOption("Add Location", Example.DoNothing); // TODO add add category function
-        ModifyLocations.AddAllOption("Edit Location", EditLocation.SetToCurrentMenu); // TODO add edit category function
+        ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation);
+        ModifyLocations.AddAllOption("Edit Location", LocationPresentation.EditLocationStart);
+        ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall);
+        ModifyLocations.AddAllOption("Edit Hall", HallPresentation.EditHallStart);
         ModifyLocations.AddCurrentOption("Add Location");
         ModifyLocations.AddCurrentOption("Edit Location");
-
-        // Edit Location
-        EditLocation.PreviousMenu = ModifyLocations;
-        EditLocation.AddAllOption("Add Hall", Example.DoNothing); // TODO add add hall function
-        EditLocation.AddAllOption("Edit Hall", Example.DoNothing); // TODO add edit hall function
-        EditLocation.AddCurrentOption("Add Hall");
-        EditLocation.AddCurrentOption("Edit Hall");
+        ModifyLocations.AddCurrentOption("Add Hall");
+        ModifyLocations.AddCurrentOption("Edit Hall");
 
         //  Example Menu 1
         ExampleMenu1.PreviousMenu = FrontPage;

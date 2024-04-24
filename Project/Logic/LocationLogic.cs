@@ -1,4 +1,6 @@
 public static class LocationLogic {
+    // Same story as the other Logic files
+    // App.Halls is a list of Hall id's linked to this location (can be empty)
     public static bool AddLocation(string Name, List<string> Halls){
         if (Name == "") return false;
         foreach (var location in App.Locations){
@@ -17,6 +19,7 @@ public static class LocationLogic {
         return $"ID{App.Locations.Count}";
     }
 
+    // Similar to other logic
     public static bool ChangeName(string id, string name){
         if (!App.Locations.ContainsKey(id)) return false;
         if (name == "") return false;
@@ -29,6 +32,7 @@ public static class LocationLogic {
         return true;
     }
 
+    // Similar to other logic
     public static bool ChangeHalls(string id, List<string>? halls = null){
         if (halls == null) halls = HallPresentation.GetUnlinkedHalls(id);
         if (!App.Locations.ContainsKey(id)) return false;

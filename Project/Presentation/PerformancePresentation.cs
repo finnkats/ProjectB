@@ -157,12 +157,12 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
                 Console.Clear();
                 List<string> genres = App.genrePresentation.GetGenres(performanceId);
-                App.performanceLogic.ChangeGenres(genres, performanceId, App.Performances);
+                App.performanceLogic.ChangeGenres(genres, performanceId);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);
             }
             else if (choice == 3){
-                App.performanceLogic.ChangeActive(performanceId, App.Performances);
+                App.performanceLogic.ChangeActive(performanceId);
                 Console.WriteLine("Successfully changed active status");
                 Thread.Sleep(2500);
             }

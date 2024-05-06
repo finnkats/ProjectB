@@ -7,7 +7,7 @@ public class Genre : IEditable
     [JsonPropertyName("Age")]
     public int Age {get; set;}
     [JsonIgnore]
-    public List<int> ages = new(){0, 6, 9, 13, 17};
+    public static List<int> Ages = new(){0, 6, 9, 13, 17};
     public Genre(string name, int age){
         Name = name;
         Age = age;

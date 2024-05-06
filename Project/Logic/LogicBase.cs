@@ -1,4 +1,4 @@
-public class LogicBase<T> where T : IEditable{
+public abstract class LogicBase<T> where T : IEditable{
     // A reference to App.Objects for T
     public Dictionary<string, T> Dict;
     public LogicBase(){

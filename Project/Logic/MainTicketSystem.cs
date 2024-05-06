@@ -3,12 +3,14 @@ using Logic;
 public static class MainTicketSystem{
     // public static Tuple<bool,string,string>? IsTesting {get; set;}
     public static (bool,string,string)? IsTesting {get; set;}
+    // Creates a new Ticket (UserTicket)
     public static void CreateBookTicket(string performanceId, string date, string time, string room, bool activity){
         Ticket createNewTicket = new Ticket(performanceId, date, time, room, activity);
         TicketPresentation.PrintTicket(createNewTicket);
         createNewTicket.UpdateData();
     }
 
+    // Prints a string of ticket info (currently called after creating a ticket as confirmation)
     public static void ShowTicketInfo(){
         if(App.Tickets.Count != 0){
             foreach(UserTicket ticketPair in App.Tickets){
@@ -21,6 +23,8 @@ public static class MainTicketSystem{
         }
     }
 
+    // Gets login info and checks if logged in person is an admin
+    // this method probably already exists in AccountLogic
     public static (bool, string, string) LoginCheckAdmin(){
         string loginName, loginPassword;
         (loginName, loginPassword) = (IsTesting != null && IsTesting.Value.Item1) ? (IsTesting.Value.Item2, IsTesting.Value.Item3) : AccountPresentation.GetLoginDetails();
@@ -63,6 +67,7 @@ public static class MainTicketSystem{
         }
     }
 
+    // Checks if ticket is less than a day old or not
     public static bool CancellationIsNotOneDayBefore(UserTicket userTicket){
         DateTime currentTime = DateTime.Now;
         string currentTicketDateTime = $"{userTicket.Ticket.Date} {userTicket.Ticket.Time}";
@@ -73,6 +78,8 @@ public static class MainTicketSystem{
         return false;
     }
 
+    // 2 lists, active and inactive tickets
+    // returns these lists in a list [0] is inactive and [1] active (should become a tuple or something)
     public static List<List<Ticket>> SortActiveTicket()
     {
         List<Ticket> ActiveTickets = new();

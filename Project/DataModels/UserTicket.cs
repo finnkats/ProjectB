@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
 
+// This class should not exist anymore
+
 public class UserTicket{
     [JsonPropertyName("User")]
     public string User {get; set;}

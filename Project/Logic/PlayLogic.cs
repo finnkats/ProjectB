@@ -127,4 +127,12 @@ public static class PlayLogic
         }
         return FilteredPlays;
     }
+
+    public static List<Play> GetPlaysFromPresentations(string playID){
+        if (App.Plays.ContainsKey(playID)){
+            return App.Plays[playID];
+        } else {
+            return new List<Play>();
+        }
+    }
 }

@@ -1,38 +1,30 @@
 public class PerformanceLogic : LogicBase<Performance>{
-    // Again, same story as other Logic
     public bool AddPerformance(string name, List<string> genres, bool active){
-        if (name == "") return false;
-        foreach (var performance in App.Performances.Values){
-            if (performance.Name.ToLower() == name.ToLower()) return false;
-        }
-
-        Performance NewPerformance = new(name, genres, active);
         string AssignedId = GetID();
-        App.Performances.Add(AssignedId, NewPerformance);
-        PerformanceDataAccess.UpdatePerformances();
-        PlayLogic.AddNewId(AssignedId);
+        bool success = AddObject(new Performance(name, genres, active));
+        if (!success) return false;
+        App.Plays.Add(AssignedId, new List<Play>());
+        PlayDataAccess.UpdatePlays();
         return true;
     }
 
-    // Similar to other logic
-    public void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
-        Performances[id].Genres = genres;
+    // Change list of genres
+    public void ChangeGenres(List<string> genres, string id){
+        App.Performances[id].Genres = genres;
         PerformanceDataAccess.UpdatePerformances();
         return;
     }
 
     // Changes active value
-    public void ChangeActive(string id, Dictionary<string, Performance> Performances){
-        Performances[id].Active = !Performances[id].Active;
+    public void ChangeActive(string id){
+        App.Performances[id].Active = !App.Performances[id].Active;
+        PerformanceDataAccess.UpdatePerformances();
     }
 
     // Checks if a performance contains a genre from the given list of genres
     public bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
     {                                                                                         // 'performance.Key' is the performanceID
-        if (performanceID == null || genreIDList == null)
-        {
-            return false;
-        }
+        if (performanceID == null || genreIDList == null) return false;
 
         Performance performance = App.Performances[performanceID];
 
@@ -46,6 +38,7 @@ public class PerformanceLogic : LogicBase<Performance>{
 
         return false;
     }
+
 
     // Returns a list of performanceId, string made for printing
     // containing the genres from the list

@@ -18,6 +18,23 @@ public class LogicBase<T> where T : IEditable{
         Dict = objDict;
     }
 
+    // Checks if name exists, assigns id and updates database
+    // Call this in objects own "AddObject" after validating other properties of object
+    public bool AddObject(T obj){
+        if (obj is null) return false;
+        if (!ValidName(obj.Name)) return false;
+        Dict.Add(GetID(), obj);
+
+        // Update data TODO
+        PerformanceDataAccess.UpdatePerformances();
+        LocationDataAccess.UpdateLocations();
+        HallDataAccess.UpdateHalls();
+        GenreDataAccess.UpdateGenres();
+
+
+        return true;
+    }
+
     public string GetID(){
         return $"ID{Dict.Count}";
     }
@@ -43,8 +60,13 @@ public class LogicBase<T> where T : IEditable{
         if (!Dict.ContainsKey(id)) return false;
         if (!ValidName(name, id)) return false;
         Dict[id].Name = name;
-        // Update DataAccess
+        
+        // Update data TODO
+        PerformanceDataAccess.UpdatePerformances();
+        LocationDataAccess.UpdateLocations();
+        HallDataAccess.UpdateHalls();
         GenreDataAccess.UpdateGenres();
+
         return true;
     }
 }

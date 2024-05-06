@@ -24,7 +24,7 @@ public static class PlayLogic
         AllViewings = OneMonthFilter(AllViewings);
         
         // Gets the location
-        string ViewingLocation = LocationPresentation.GetLocation("Select a location:", "Exit");
+        string ViewingLocation = App.locationPresentation.GetLocation("Select a location:", "Exit");
         if (ViewingLocation == "null") return;
 
         // Gets the date
@@ -99,11 +99,6 @@ public static class PlayLogic
 
         if (timesString == $"Available times on {chosenDate}:\n") timesString = null;
         return (timesString, timeOptions);
-    }
-
-    public static void AddNewId(string id){
-        App.Plays.Add(id, new List<Play>());
-        PlayDataAccess.UpdatePlays();
     }
 
     public static bool AddPlay(string location, string time, string date, string hall, string playId){

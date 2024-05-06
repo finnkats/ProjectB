@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Performance
+public class Performance : IHasName
 {
     [JsonPropertyName("Name")]
 	public string Name {get; set;}

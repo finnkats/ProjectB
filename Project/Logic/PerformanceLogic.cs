@@ -1,10 +1,12 @@
 public static class PerformanceLogic{
     // Again, same story as other Logic
     public static bool AddPerformance(string name, List<string> genres, bool active){
-        Performance NewPerformance = new(name, genres, active);
+        if (name == "") return false;
         foreach (var performance in App.Performances.Values){
             if (performance.Name.ToLower() == name.ToLower()) return false;
         }
+
+        Performance NewPerformance = new(name, genres, active);
         string AssignedId = AssignId();
         App.Performances.Add(AssignedId, NewPerformance);
         PerformanceDataAccess.UpdatePerformances();
@@ -16,6 +18,29 @@ public static class PerformanceLogic{
     public static string AssignId(){
         int newId = App.Performances.Count();
         return $"ID{newId}";
+    }
+
+    // Similar to other logic
+    public static bool ChangeName(string name, string id, Dictionary<string, Performance> Performances){
+        foreach (var performance in Performances.Values){
+            if (performance.Name == name) return false;
+        }
+
+        Performances[id].Name = name;
+        PerformanceDataAccess.UpdatePerformances();
+        return true;
+    }
+
+    // Similar to other logic
+    public static void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
+        Performances[id].Genres = genres;
+        PerformanceDataAccess.UpdatePerformances();
+        return;
+    }
+
+    // Changes active value
+    public static void ChangeActive(string id, Dictionary<string, Performance> Performances){
+        Performances[id].Active = !Performances[id].Active;
     }
 
     // Checks if a performance contains a genre from the given list of genres
@@ -109,28 +134,5 @@ public static class PerformanceLogic{
         string? performanceId = PerformancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket:", true);
         if (performanceId == null) return;
         PlayLogic.Choose(performanceId);
-    }
-
-    // Similar to other logic
-    public static bool ChangeName(string name, string id, Dictionary<string, Performance> Performances){
-        foreach (var performance in Performances.Values){
-            if (performance.Name == name) return false;
-        }
-
-        Performances[id].Name = name;
-        PerformanceDataAccess.UpdatePerformances();
-        return true;
-    }
-
-    // Similar to other logic
-    public static void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
-        Performances[id].Genres = genres;
-        PerformanceDataAccess.UpdatePerformances();
-        return;
-    }
-
-    // Changes active value
-    public static void ChangeActive(string id, Dictionary<string, Performance> Performances){
-        Performances[id].Active = !Performances[id].Active;
     }
 }

@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
-public class Hall {
+public class Hall : IHasName
+{
     [JsonPropertyName("Name")]
     public string Name { get; set; }
     [JsonPropertyName("Seats")]

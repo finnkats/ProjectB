@@ -20,9 +20,9 @@ public class Ticket : IEquatable<Ticket>{
         this.IsActive = isActive;
     }
 
-    public void UpdateData(){
-        TicketDataAccess.UpdateTickets(this);
-    }
+    // public void UpdateData(){
+    //     TicketDataAccess.UpdateTickets(this);
+    // }
 
     public string TicketInfo() {
         if(IsActive){

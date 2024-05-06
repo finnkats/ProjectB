@@ -1,50 +1,33 @@
-public static class PerformanceLogic{
+public class PerformanceLogic : LogicBase<Performance>{
     // Again, same story as other Logic
-    public static bool AddPerformance(string name, List<string> genres, bool active){
+    public bool AddPerformance(string name, List<string> genres, bool active){
         if (name == "") return false;
         foreach (var performance in App.Performances.Values){
             if (performance.Name.ToLower() == name.ToLower()) return false;
         }
 
         Performance NewPerformance = new(name, genres, active);
-        string AssignedId = AssignId();
+        string AssignedId = GetID();
         App.Performances.Add(AssignedId, NewPerformance);
         PerformanceDataAccess.UpdatePerformances();
         PlayLogic.AddNewId(AssignedId);
         return true;
     }
 
-    // Same
-    public static string AssignId(){
-        int newId = App.Performances.Count();
-        return $"ID{newId}";
-    }
-
     // Similar to other logic
-    public static bool ChangeName(string name, string id, Dictionary<string, Performance> Performances){
-        foreach (var performance in Performances.Values){
-            if (performance.Name == name) return false;
-        }
-
-        Performances[id].Name = name;
-        PerformanceDataAccess.UpdatePerformances();
-        return true;
-    }
-
-    // Similar to other logic
-    public static void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
+    public void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
         Performances[id].Genres = genres;
         PerformanceDataAccess.UpdatePerformances();
         return;
     }
 
     // Changes active value
-    public static void ChangeActive(string id, Dictionary<string, Performance> Performances){
+    public void ChangeActive(string id, Dictionary<string, Performance> Performances){
         Performances[id].Active = !Performances[id].Active;
     }
 
     // Checks if a performance contains a genre from the given list of genres
-    public static bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
+    public bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
     {                                                                                         // 'performance.Key' is the performanceID
         if (performanceID == null || genreIDList == null)
         {
@@ -66,7 +49,7 @@ public static class PerformanceLogic{
 
     // Returns a list of performanceId, string made for printing
     // containing the genres from the list
-    public static List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
+    public List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
     {   
         var PerformanceOptions = GetPerformanceOptions(true);
         List<(string, string)> FilteredPerformanceOptionsList = new();
@@ -93,7 +76,7 @@ public static class PerformanceLogic{
 
     // Returns a list of performanceId, string made for printing,
     // if onlyActive is true, it only contains Active performances
-    public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
+    public List<(string, string)> GetPerformanceOptions(bool onlyActive){
         int index = 0;
         // list of id, performance string
         List<(string, string)> PerformanceOptions = new();
@@ -129,9 +112,9 @@ public static class PerformanceLogic{
     }
 
 
-    public static void PerformanceCatalogue(){
+    public void PerformanceCatalogue(){
         Console.Clear();
-        string? performanceId = PerformancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket:", true);
+        string? performanceId = App.performancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket:", true);
         if (performanceId == null) return;
         PlayLogic.Choose(performanceId);
     }

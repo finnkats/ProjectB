@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Performance : IHasName
+public class Performance : IEditable
 {
     [JsonPropertyName("Name")]
 	public string Name {get; set;}

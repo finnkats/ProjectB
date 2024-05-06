@@ -1,5 +1,7 @@
-public class LogicBase<T> where T : IHasName{
-    public virtual bool AddObject(T obj){
+public class LogicBase<T> where T : IEditable{
+    // A reference to App.Objects for T
+    public Dictionary<string, T> Dict;
+    public LogicBase(){
         // fields are all Fields of App
         var fields = typeof(App).GetFields();
 
@@ -12,22 +14,37 @@ public class LogicBase<T> where T : IHasName{
                 break;
             }
         }
-        if (objDict is null) return false;
+        if (objDict is null) throw new Exception($"App.{typeof(T).Name}s does not exist");
+        Dict = objDict;
+    }
 
-        // Check if object with the same name already exists
-        foreach (var dictObj in objDict.Values){
-            if (dictObj.Name.ToLower() == obj.Name.ToLower()){
+    public string GetID(){
+        return $"ID{Dict.Count}";
+    }
+
+    public bool ValidName(string inputName, string? id = null){
+        if (inputName == "") return false;
+
+        // If ID is given, you don't have to loop through the dictionary
+        if (id != null) {
+            return !(Dict[id].Name.ToLower() == inputName.ToLower());
+        }
+
+        foreach (var dictObj in Dict.Values){
+            if (dictObj.Name.ToLower() == inputName.ToLower()){
+                //Console.WriteLine($"{typeof(T).Name.ToLower()} with name {inputName} already exists\n");
                 return false;
             }
         }
-
-        // Add object to dictionary | This also adds it to App.Objects because its a reference
-        objDict.Add(GetID(objDict), obj);
-        // DataAccess.UpdateData
         return true;
     }
 
-    private string GetID(Dictionary<string, T> objDict){
-        return $"ID{objDict.Count}";
+    public bool ChangeName(string id, string name){
+        if (!Dict.ContainsKey(id)) return false;
+        if (!ValidName(name, id)) return false;
+        Dict[id].Name = name;
+        // Update DataAccess
+        GenreDataAccess.UpdateGenres();
+        return true;
     }
 }

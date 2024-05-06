@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Location : IHasName
+public class Location : IEditable
 {
     [JsonPropertyName("Name")]
     public string Name { get; set; }

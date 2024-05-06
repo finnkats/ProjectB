@@ -1,7 +1,9 @@
-public static class GenrePresentation {
+public class GenrePresentation : PresentationBase<Genre>{
+    public GenrePresentation(LogicBase<Genre> logic) : base(logic){}
+
     // It checks logic here, that the respected logic file also checks,
     // this should be fixed
-    public static void AddGenre(){
+    public void AddGenre(){
         List<int> ages = new(){0, 6, 9, 13, 17};
         while (true){
             Console.Clear();
@@ -29,7 +31,7 @@ public static class GenrePresentation {
                 continue;
             }
 
-            if (!GenreLogic.AddGenre(Name, Age)){
+            if (!App.genreLogic.AddGenre(Name, Age)){
                 Console.WriteLine("An error occurred while adding genre. Try again.");
                 Thread.Sleep(3000);
                 continue;
@@ -43,7 +45,7 @@ public static class GenrePresentation {
 
     // Returns an id of a genre
     // This is one of many menu's that look similar to eachother, so this should be refactored
-    public static string GetGenre(){
+    public string GetGenre(){
         List<(string, string)> GenresOrdered = new();
         foreach (var genre in App.Genres){
             GenresOrdered.Add((genre.Key, $"{genre.Value.Name} ({genre.Value.Age})"));
@@ -82,7 +84,7 @@ public static class GenrePresentation {
     // if question is gives, it changes the question which is asked in the menu
     // this is also one of many menu's i think that are similar to others, so we should see how we are going
     // to refactor this, as there are a few differences between the other similar functions
-    public static List<string> GetGenres(string PerformanceId = "", string question = "Which genre belongs to this performance?"){
+    public List<string> GetGenres(string PerformanceId = "", string question = "Which genre belongs to this performance?"){
         if (PerformanceId != "" && !App.Performances.ContainsKey(PerformanceId)) PerformanceId = "";
         List<string> PerformanceGenres = (PerformanceId == "") ? new() : App.Performances[PerformanceId].Genres;
 
@@ -131,7 +133,7 @@ public static class GenrePresentation {
     }
 
     // Start method for the EditGenre menu, this will be the same for all other similar files
-    public static void EditGenreStart(){
+    public void EditGenreStart(){
         string genreId = GetGenre();
         if (genreId == "null") return;
         EditGenre(genreId);
@@ -141,7 +143,7 @@ public static class GenrePresentation {
     // and then also changes it,
     // this menu again is very similar to others, so we should see how we are going
     // to refactor it
-    public static void EditGenre(string genreId){
+    public void EditGenre(string genreId){
         List<int> ages = new(){0, 6, 9, 13, 17};
         while (true){
             Console.Clear();
@@ -154,7 +156,7 @@ public static class GenrePresentation {
                 Console.WriteLine($"Enter new name for {App.Genres[genreId].Name}:");
                 string oldName = App.Genres[genreId].Name;
                 string newName = Console.ReadLine() ?? "";
-                if (!GenreLogic.ChangeName(genreId, newName)){
+                if (!App.genreLogic.ChangeName(genreId, newName)){
                     Console.WriteLine($"Couldn't change name, either invalid or '{newName}' already exists");
                 } else {
                     Console.WriteLine($"Successfully changed '{oldName}' to '{newName}'");
@@ -172,7 +174,7 @@ public static class GenrePresentation {
                     Thread.Sleep(2000);
                     continue;
                 }
-                if (!GenreLogic.ChangeAge(genreId, newAge)){
+                if (!App.genreLogic.ChangeAge(genreId, newAge)){
                     Console.WriteLine($"An error occured while changing age-rating. Try again");
                 } else {
                     Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");

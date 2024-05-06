@@ -1,8 +1,10 @@
 using System.Globalization;
 
-public static class HallPresentation {
+public class HallPresentation : PresentationBase<Hall>{
+    public HallPresentation(LogicBase<Hall> logic) : base(logic){}
+
     // Similar to other Presentation file comments (previous ones)
-    public static void AddHall(){
+    public void AddHall(){
         while(true){
             Console.Clear();
             Console.WriteLine("Enter hall name:");
@@ -28,9 +30,9 @@ public static class HallPresentation {
                 continue;
             }
             
-            string locationId = LocationPresentation.GetLocation();
+            string locationId = App.locationPresentation.GetLocation();
 
-            if (!HallLogic.AddHall(Name, Seats, locationId)){
+            if (!App.hallLogic.AddHall(Name, Seats, locationId)){
                 Console.WriteLine("Error occurred while adding hall. Try again");
                 Thread.Sleep(2500);
                 continue;
@@ -45,7 +47,7 @@ public static class HallPresentation {
     }
 
     // GetHall is similar to GetGenre
-    public static string GetHall(string locationId = ""){
+    public string GetHall(string locationId = ""){
         List<(string, string)> HallsOrdered = new();
         if (locationId != ""){
             if (!App.Locations.ContainsKey(locationId)) return "null";
@@ -86,7 +88,7 @@ public static class HallPresentation {
     }
 
     // GetUnlinkedHalls is similar to GetGenres
-    public static List<string> GetUnlinkedHalls(string LocationId = ""){
+    public List<string> GetUnlinkedHalls(string LocationId = ""){
         if (LocationId != "" && !App.Locations.ContainsKey(LocationId)) LocationId = "";
         List<string> LocationHalls = (LocationId == "") ? new() : App.Locations[LocationId].Halls;
 
@@ -135,14 +137,14 @@ public static class HallPresentation {
     }
 
     // Similar to other Presentation file comments (previous ones)
-    public static void EditHallStart(){
+    public void EditHallStart(){
         string hallId = GetHall();
         if (hallId == "null") return;
         EditHall(hallId);
     }
 
     // Similar to other Presentation file comments (previous ones)
-    public static void EditHall(string hallId){
+    public void EditHall(string hallId){
         while (true){
             Console.Clear();
             Console.WriteLine($"1: Change name \"{App.Halls[hallId].Name}\"");
@@ -158,7 +160,7 @@ public static class HallPresentation {
                 Console.WriteLine($"Enter new name for '{App.Halls[hallId].Name}':");
                 string oldName = App.Halls[hallId].Name;
                 string newName = Console.ReadLine() ?? "";
-                if (!HallLogic.ChangeName(hallId, newName)){
+                if (!App.hallLogic.ChangeName(hallId, newName)){
                     Console.WriteLine($"Couldn't change name, either invalid or '{newName}' already exists");
                 } else {
                     Console.WriteLine($"Successfully changed '{oldName}' to '{newName}'");
@@ -174,7 +176,7 @@ public static class HallPresentation {
                     Thread.Sleep(2000);
                     continue;
                 }
-                if (!HallLogic.ChangeSeats(hallId, newSeats)){
+                if (!App.hallLogic.ChangeSeats(hallId, newSeats)){
                     Console.WriteLine($"Couldn't change seats, value too low");
                 } else {
                     Console.WriteLine($"Successfully changed '{oldSeats}' to '{newSeats}'");
@@ -183,7 +185,7 @@ public static class HallPresentation {
 
             } else if (choice == "3"){
                 string oldLocation = (App.Halls[hallId].LocationId == "null") ? $"No location": $"{App.Locations[App.Halls[hallId].LocationId].Name}";
-                string newLocationId = LocationPresentation.GetLocation($"New location for {App.Halls[hallId].Name}, " +
+                string newLocationId = App.locationPresentation.GetLocation($"New location for {App.Halls[hallId].Name}, " +
                                                             $"currently: {oldLocation}:\n", "Remove hall from location");
                 App.Halls[hallId].LocationId = newLocationId;
                 HallDataAccess.UpdateHalls();

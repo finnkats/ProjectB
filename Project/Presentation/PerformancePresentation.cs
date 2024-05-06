@@ -1,16 +1,17 @@
 using System;
 
-public static class PerformancePresentation
-{
+public class PerformancePresentation : PresentationBase<Performance>{
+    public PerformancePresentation(LogicBase<Performance> Logic) : base(Logic) {}
+
     // Similar to other Presentation file comments (previous ones)
-    public static void AddPerformance(){
+    public void AddPerformance(){
         Console.Clear();
         Console.WriteLine("Enter a performance you want to add.");
         Console.WriteLine("Performance name: ");
         string? performanceName = Console.ReadLine();
         Console.Clear();
   
-        var genres = GenrePresentation.GetGenres();
+        var genres = App.genrePresentation.GetGenres();
 
         Console.WriteLine("Will the performance be currently active?");
         Console.WriteLine("\n1. Yes");
@@ -19,7 +20,7 @@ public static class PerformancePresentation
         bool active = (Console.ReadLine() == "1");
 
         Console.Clear();
-        if (PerformanceLogic.AddPerformance(performanceName ?? "", genres, active)){
+        if (App.performanceLogic.AddPerformance(performanceName ?? "", genres, active)){
             Console.WriteLine($"Performance {performanceName} has been added");
         } else {
             Console.WriteLine($"Performance {performanceName} already exists");
@@ -30,12 +31,12 @@ public static class PerformancePresentation
     }
 
     // This is the catalogue, this should probably the base for future menu's
-    public static string? PerformanceChoice(string question, bool onlyActive=false){
+    public string? PerformanceChoice(string question, bool onlyActive=false){
     // Clear the console
     Console.Clear();
     
     // Get the list of performance options based on whether only active performances are requested
-    var PerformanceOptions = PerformanceLogic.GetPerformanceOptions(onlyActive);
+    var PerformanceOptions = App.performanceLogic.GetPerformanceOptions(onlyActive);
     
     // Initialize variables for pagination
     int page = 1;
@@ -85,8 +86,8 @@ public static class PerformancePresentation
             // Handle user choices
             if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
                 // Filter performance options based on user-selected genres
-                List<string> genres = GenrePresentation.GetGenres(question: "What genres are you interested in?");
-                var filteredPerformanceOptions = PerformanceLogic.FilteredPerformanceOptions(genres);
+                List<string> genres = App.genrePresentation.GetGenres(question: "What genres are you interested in?");
+                var filteredPerformanceOptions = App.performanceLogic.FilteredPerformanceOptions(genres);
                 PerformanceOptions = filteredPerformanceOptions;
             }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
                 // Return null if user chooses to exit
@@ -113,14 +114,14 @@ public static class PerformancePresentation
 
 
     // Similar to other Presentation file comments (previous ones)
-    public static void EditPerformanceStart(){
+    public void EditPerformanceStart(){
         string? performanceId = PerformanceChoice("Choose the performance you want to edit:");
         if (performanceId == null) return;
         EditPerformance(performanceId);
     }
 
     // Similar to other Presentation file comments (previous ones)
-    public static void EditPerformance(string performanceId){
+    public void EditPerformance(string performanceId){
         while (true){
             Console.Clear();
             Console.WriteLine($"1: Change name \"{App.Performances[performanceId].Name}\"");
@@ -136,7 +137,7 @@ public static class PerformancePresentation
             if (choice == 1){
                 Console.Clear();
                 Console.WriteLine("Enter new name:\n");
-                if (PerformanceLogic.ChangeName(Console.ReadLine() ?? "", performanceId, App.Performances)) Console.WriteLine("Successfully changed name");
+                if (App.performanceLogic.ChangeName(Console.ReadLine() ?? "", performanceId)) Console.WriteLine("Successfully changed name");
                 else Console.WriteLine("Couldn't change name");
                 Thread.Sleep(2500);
             }
@@ -155,13 +156,13 @@ public static class PerformancePresentation
                 RemovedGenreIds.ForEach(genreId => App.Performances[performanceId].Genres.Remove(genreId));
 
                 Console.Clear();
-                List<string> genres = GenrePresentation.GetGenres(performanceId);
-                PerformanceLogic.ChangeGenres(genres, performanceId, App.Performances);
+                List<string> genres = App.genrePresentation.GetGenres(performanceId);
+                App.performanceLogic.ChangeGenres(genres, performanceId, App.Performances);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);
             }
             else if (choice == 3){
-                PerformanceLogic.ChangeActive(performanceId, App.Performances);
+                App.performanceLogic.ChangeActive(performanceId, App.Performances);
                 Console.WriteLine("Successfully changed active status");
                 Thread.Sleep(2500);
             }

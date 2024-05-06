@@ -1,6 +1,8 @@
-public static class LocationPresentation {
+public class LocationPresentation : PresentationBase<Location>{
+    public LocationPresentation(LogicBase<Location> logic) : base(logic) {}
+
     // Similar to other Presentation file comments (previous ones)
-    public static void AddLocation(){
+    public void AddLocation(){
         while (true){
             Console.Clear();
             Console.WriteLine("Enter name for location:");
@@ -18,9 +20,9 @@ public static class LocationPresentation {
                 }
             }
 
-            var Halls = HallPresentation.GetUnlinkedHalls();
+            var Halls = App.hallPresentation.GetUnlinkedHalls();
 
-            if (!LocationLogic.AddLocation(Name, Halls)){
+            if (!App.locationLogic.AddLocation(Name, Halls)){
                 Console.WriteLine("An error occured while adding location. Try again");
                 Thread.Sleep(2500);
                 continue;
@@ -37,7 +39,7 @@ public static class LocationPresentation {
     }
 
     // Similar to GetGenre / GetHall etc.
-    public static string GetLocation(string question = "In which location is this hall?\n", string exit = "No location yet"){
+    public string GetLocation(string question = "In which location is this hall?\n", string exit = "No location yet"){
         List<(string, string)> LocationsOrdered = new();
         foreach (var location in App.Locations){
             LocationsOrdered.Add((location.Key, location.Value.Name));
@@ -74,14 +76,14 @@ public static class LocationPresentation {
     }
 
     // Similar to other Presentation file comments (previous ones)
-    public static void EditLocationStart(){
+    public void EditLocationStart(){
         string locationId = GetLocation("Which location do you want to edit?", "Cancel");
         if (locationId == "null") return;
         EditLocation(locationId);
     }
 
     // Similar to other Presentation file comments (previous ones)
-    public static void EditLocation(string locationId){
+    public void EditLocation(string locationId){
         while (true){
             Console.Clear();
             Console.WriteLine($"1: Change name \"{App.Locations[locationId].Name}\"");
@@ -97,7 +99,7 @@ public static class LocationPresentation {
                 Console.WriteLine($"Enter new name for '{App.Locations[locationId].Name}':");
                 string oldName = App.Locations[locationId].Name;
                 string newName = Console.ReadLine() ?? "";
-                if (!LocationLogic.ChangeName(locationId, newName)){
+                if (!App.locationLogic.ChangeName(locationId, newName)){
                     Console.WriteLine($"Couldn't change name, either invalid or '{newName}' already exists");
                 } else {
                     Console.WriteLine($"Successfully changed '{oldName}' to '{newName}'");
@@ -125,7 +127,7 @@ public static class LocationPresentation {
                                   
                 string addHall = Console.ReadLine()?.ToUpper() ?? "";
                 if (addHall.StartsWith("Y")){
-                    App.Locations[locationId].Halls = HallPresentation.GetUnlinkedHalls(locationId);
+                    App.Locations[locationId].Halls = App.hallPresentation.GetUnlinkedHalls(locationId);
                 }
 
                 LocationDataAccess.UpdateLocations();

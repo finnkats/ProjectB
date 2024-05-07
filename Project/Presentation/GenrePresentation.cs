@@ -1,16 +1,10 @@
 public class GenrePresentation : PresentationBase<Genre>{
     public GenrePresentation(LogicBase<Genre> logic) : base(logic){}
 
-    // It checks logic here, that the respected logic file also checks,
-    // this should be fixed
     public void AddGenre(){
         Console.Clear();
-        string? genreName;
-        while (true){
-            genreName = GetNameInput();
-            if (genreName is null) return;
-            break;
-        }
+        string? genreName = GetNameInput();
+        if (genreName is null) return;
         Console.WriteLine();
 
         int genreAge;

@@ -3,7 +3,6 @@ using System.Globalization;
 public class HallPresentation : PresentationBase<Hall>{
     public HallPresentation(LogicBase<Hall> logic) : base(logic){}
 
-    // Similar to other Presentation file comments (previous ones)
     public void AddHall(){
         Console.Clear();
         string? hallName = GetNameInput();

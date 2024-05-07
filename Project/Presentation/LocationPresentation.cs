@@ -1,7 +1,6 @@
 public class LocationPresentation : PresentationBase<Location>{
     public LocationPresentation(LogicBase<Location> logic) : base(logic) {}
 
-    // Similar to other Presentation file comments (previous ones)
     public void AddLocation(){
         Console.Clear();
         string? locationName = GetNameInput();

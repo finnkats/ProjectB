@@ -3,7 +3,6 @@ using System;
 public class PerformancePresentation : PresentationBase<Performance>{
     public PerformancePresentation(LogicBase<Performance> Logic) : base(Logic) {}
 
-    // Similar to other Presentation file comments (previous ones)
     public void AddPerformance(){
         Console.Clear();
         string? performanceName = GetNameInput();

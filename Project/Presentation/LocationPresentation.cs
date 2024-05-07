@@ -7,7 +7,7 @@ public class LocationPresentation : PresentationBase<Location>{
         if (locationName is null) return;
         Console.WriteLine();
 
-        var Halls = App.hallPresentation.GetUnlinkedHalls();
+        var Halls = App.hallPresentation.GetItemList();
         if (!App.locationLogic.AddLocation(locationName, Halls)){
             Console.WriteLine("An error occured while adding location.");
             Thread.Sleep(2500);
@@ -50,7 +50,7 @@ public class LocationPresentation : PresentationBase<Location>{
                                   
                 string addHall = Console.ReadLine()?.ToUpper() ?? "";
                 if (addHall.StartsWith("Y")){
-                    Logic.Dict[locationId].Halls = App.hallPresentation.GetUnlinkedHalls(locationId);
+                    Logic.Dict[locationId].Halls = App.hallPresentation.GetItemList(locationId);
                 }
                 
                 DataAccess.UpdateItem<Location>();

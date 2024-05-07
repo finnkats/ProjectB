@@ -139,4 +139,69 @@ public class PresentationBase<T> where T : IEditable{
             }
         }
     }
+
+
+    // Only for Genres and Halls
+    // I know it looks and uses similar code to GetItem, but I can't think of any way to incorporate that code here
+    public List<string> GetItemList(string objectId = ""){
+        // Don't know a better way of doing this
+
+        // itemIds is a list of the Ids which will eventually be returned
+        List<string> itemIds = new();
+        if (typeof(T) == typeof(Genre)){
+            if (App.Performances.ContainsKey(objectId)) itemIds = App.Performances[objectId].Genres;
+        } else if (typeof(T) == typeof(Hall)){
+            if (App.Locations.ContainsKey(objectId)) itemIds = App.Locations[objectId].Halls;
+        } else return new List<string>();
+
+        // itemsOrdered is the items with id and name, which is used for printing what options are available
+        List<(string, string)> itemsOrdered = new();
+        foreach (var itemPair in Logic.Dict){
+            // Don't add the genres that are int itemIds already
+            if (typeof(T) == typeof(Genre) && itemIds.Contains(itemPair.Key)) continue;
+            // Don't add the halls which are already linked to a location
+            if (itemPair.Value.GetType() == typeof(Hall) && App.Halls[itemPair.Key].LocationId == "null") continue;
+            itemsOrdered.Add((itemPair.Key, itemPair.Value.Name));
+        }
+        itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();
+        
+        string seperator = ", ";
+        while (true){
+            Console.Clear();
+            int index = 1;
+            int choice = -1;
+
+            // currentItems is a list of names of currently selected items, used for printing
+            List<string> currentItems = new();
+            itemIds.ForEach(itemId => currentItems.Add(Logic.Dict[itemId].Name));
+            currentItems.Sort();
+
+            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(seperator, currentItems)}]\n");
+            Console.WriteLine($"Choose {typeof(T).Name.ToLower()}s:");
+
+            string menu = "";
+            foreach (var itemPair in itemsOrdered){
+                menu += $"{index++} {itemPair.Item2}\n";
+            }
+            menu += $"\n{index}: Confirm";
+            Console.WriteLine(menu);
+
+            try {
+                if (!Int32.TryParse(Console.ReadLine(), out choice)){
+                    Console.WriteLine("\nInvalid input\n");
+                    Thread.Sleep(2500);
+                } else {
+                    itemIds.Add(itemsOrdered[choice - 1].Item1);
+                    itemsOrdered.RemoveAt(choice - 1);
+                }
+            } catch (ArgumentOutOfRangeException){
+                if (choice - 1 == itemsOrdered.Count){
+                    return itemIds;
+                } else {
+                    Console.WriteLine("Invalid choice");
+                    Thread.Sleep(2500);
+                }
+            }
+        }
+    }
 }

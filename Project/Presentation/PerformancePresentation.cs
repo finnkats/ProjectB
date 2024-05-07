@@ -9,7 +9,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
         if (performanceName is null) return;
         Console.WriteLine();
   
-        var genres = App.genrePresentation.GetGenres();
+        var genres = App.genrePresentation.GetItemList();
         Console.WriteLine();
 
         Console.WriteLine("Will the performance be currently active?\n1. Yes\n2. Exit\nAnything else. No");
@@ -55,7 +55,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 RemovedGenreIds.ForEach(genreId => Logic.Dict[performanceId].Genres.Remove(genreId));
 
                 Console.Clear();
-                List<string> genres = App.genrePresentation.GetGenres(performanceId);
+                List<string> genres = App.genrePresentation.GetItemList(performanceId);
                 App.performanceLogic.ChangeGenres(genres, performanceId);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);
@@ -124,7 +124,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 // Handle user choices
                 if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
                     // Filter performance options based on user-selected genres
-                    List<string> genres = App.genrePresentation.GetGenres(question: "What genres are you interested in?");
+                    List<string> genres = App.genrePresentation.GetItemList();
                     var filteredPerformanceOptions = App.performanceLogic.FilteredPerformanceOptions(genres);
                     PerformanceOptions = filteredPerformanceOptions;
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){

@@ -7,7 +7,7 @@ public static class GenreLogic {
         Genre newGenre = new Genre(name, age);
         string genreId = AssignId();
         App.Genres.Add(genreId, newGenre);
-        GenreDataAccess.UpdateGenres();
+        DataAccess.UpdateItem<Genre>();
         return true;
     }
 
@@ -23,7 +23,7 @@ public static class GenreLogic {
             if (genre.Value.Name.ToLower() == name.ToLower()) return false;
         }
         App.Genres[id].Name = name;
-        GenreDataAccess.UpdateGenres();
+        DataAccess.UpdateItem<Genre>();
         return true;
     }
 
@@ -32,7 +32,7 @@ public static class GenreLogic {
         if (!App.Genres.ContainsKey(id)) return false;
         if (age < 0) return false;
         App.Genres[id].Age = age;
-        GenreDataAccess.UpdateGenres();
+        DataAccess.UpdateItem<Genre>();
         return true;
     }
 }

@@ -8,7 +8,7 @@ public static class MainTicketSystem{
             App.Tickets[App.LoggedInUsername] = new List<Ticket>();
         }
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
-        TicketDataAccess.UpdateTickets();
+        DataAccess.UpdateList<Ticket>();
         TicketPresentation.PrintTicket(createNewTicket);
         // createNewTicket.UpdateData(); before
     }
@@ -54,7 +54,7 @@ public static class MainTicketSystem{
         // }
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
-        TicketDataAccess.UpdateTickets();
+        DataAccess.UpdateList<Ticket>();
     }
 
     public static void CheckOutdatedTickets(){
@@ -66,7 +66,7 @@ public static class MainTicketSystem{
                 if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
                     if(ticketDate < currentTime){
                         ticket.IsActive = false;
-                        TicketDataAccess.UpdateTickets();
+                        DataAccess.UpdateList<Ticket>();
                     }
                 }
             }

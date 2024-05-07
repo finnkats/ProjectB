@@ -181,7 +181,7 @@ public static class HallPresentation {
                 string newLocationId = LocationPresentation.GetLocation($"New location for {App.Halls[hallId].Name}, " +
                                                             $"currently: {oldLocation}:\n", "Remove hall from location");
                 App.Halls[hallId].LocationId = newLocationId;
-                HallDataAccess.UpdateHalls();
+                DataAccess.UpdateItem<Hall>();
                 Console.WriteLine($"Successfully changed '{App.Halls[hallId].Name}' location from '{oldLocation}' to " +
                                   ((newLocationId == "null") ? $"'No location'": $"'{App.Locations[newLocationId].Name}'"));
                 Thread.Sleep(6000);

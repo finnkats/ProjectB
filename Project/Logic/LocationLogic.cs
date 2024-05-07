@@ -9,7 +9,7 @@ public static class LocationLogic {
         Halls.ForEach(hall => App.Halls[hall].LocationId = locationId);
         Location newLocation = new(Name, Halls);
         App.Locations.Add(locationId, newLocation);
-        LocationDataAccess.UpdateLocations();
+        DataAccess.UpdateItem<Location>();
         return true;
     }
 
@@ -25,7 +25,7 @@ public static class LocationLogic {
             if (location.Value.Name.ToLower() == name.ToLower()) return false;
         }
         App.Locations[id].Name = name;
-        LocationDataAccess.UpdateLocations();
+        DataAccess.UpdateItem<Location>();
         return true;
     }
 

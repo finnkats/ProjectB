@@ -124,7 +124,7 @@ public static class LocationPresentation {
                     App.Locations[locationId].Halls = HallPresentation.GetUnlinkedHalls(locationId);
                 }
 
-                LocationDataAccess.UpdateLocations();
+                DataAccess.UpdateItem<Location>();
                 Console.WriteLine("Successfully changed halls");
                 Thread.Sleep(1500);
 

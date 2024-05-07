@@ -4,43 +4,40 @@ public class GenrePresentation : PresentationBase<Genre>{
     // It checks logic here, that the respected logic file also checks,
     // this should be fixed
     public void AddGenre(){
-        List<int> ages = new(){0, 6, 9, 13, 17};
+        Console.Clear();
+        string? genreName;
         while (true){
-            Console.Clear();
-            Console.WriteLine("Enter genre name:");
-            string Name = Console.ReadLine() ?? "";
-            if (Name == ""){
-                Console.Write("Invalid name");
-                Thread.Sleep(2500);
-                continue;
-            }
-            foreach (var genre in App.Genres){
-                if (genre.Value.Name.ToLower() == Name.ToLower()){
-                    Console.Write($"Genre with name {Name} already exists");
-                    Thread.Sleep(3000);
-                    return;
-                }
-            }
+            genreName = GetNameInput();
+            if (genreName is null) return;
+            break;
+        }
+        Console.WriteLine();
 
-            Console.WriteLine();
-            Console.WriteLine($"Enter age-rating for {Name}\n" + 
-                              "0: For everyone\n6: For 6+\n9: For 9+\n13: For 13+\n17: For 17+");
-            if (!Int32.TryParse(Console.ReadLine(), out int Age) || !ages.Contains(Age)){
-                Console.WriteLine("Invalid input");
-                Thread.Sleep(2500);
-                continue;
+        int genreAge;
+        while (true){
+            genreAge = -1;
+            Console.WriteLine($"Enter age-rating for genre {genreName}");
+            Console.WriteLine(Genre.AgeString() + "'-1' to exit");
+            Int32.TryParse(Console.ReadLine(), out genreAge);
+            if (genreAge == -1){
+                Console.WriteLine("Exitting");
+                return;
             }
+            if (!App.genreLogic.ValidAge(genreAge)){
+                Console.WriteLine($"{genreAge} is not a valid age-rating");
+            } else break;
+        }
+        Console.WriteLine();
 
-            if (!App.genreLogic.AddGenre(Name, Age)){
-                Console.WriteLine("An error occurred while adding genre. Try again.");
-                Thread.Sleep(3000);
-                continue;
-            }
-
-            Console.WriteLine($"Genre {Name} with age-rating {Age} has been added.");
-            Thread.Sleep(5000);
+        if (!App.genreLogic.AddGenre(genreName, genreAge)){
+            Console.WriteLine("An error occurred while adding genre.");
+            Thread.Sleep(3000);
             return;
         }
+
+        Console.WriteLine($"Genre {genreName} with age-rating {genreAge} has been added.");
+        Thread.Sleep(5000);
+        return;
     }
 
     // Returns an id of a genre

@@ -5,45 +5,37 @@ public class HallPresentation : PresentationBase<Hall>{
 
     // Similar to other Presentation file comments (previous ones)
     public void AddHall(){
-        while(true){
-            Console.Clear();
-            Console.WriteLine("Enter hall name:");
-            string Name = Console.ReadLine() ?? "";
-            if (Name == ""){
-                Console.Write("Invalid name");
-                Thread.Sleep(2500);
-                continue;
-            }
-            foreach (var hall in App.Halls){
-                if (hall.Value.Name.ToLower() == Name.ToLower()){
-                    Console.Write($"Hall with name {Name} already exists");
-                    Thread.Sleep(3000);
-                    return;
-                }
-            }
+        Console.Clear();
+        string? hallName = GetNameInput();
+        if (hallName is null) return;
+        Console.WriteLine();
 
-            Console.WriteLine();
-            Console.WriteLine("Enter amount of seats in hall:");
-            if (!Int32.TryParse(Console.ReadLine(), out int Seats) || Seats <= 0){
-                Console.WriteLine("Invalid amount of seats");
-                Thread.Sleep(2500);
-                continue;
+        int hallSeats;
+        while (true){
+            hallSeats = -1;
+            Console.WriteLine($"Enter seats for hall {hallName}\n-1 to exit");
+            Int32.TryParse(Console.ReadLine(), out hallSeats);
+            if (hallSeats == -1){
+                Console.WriteLine("Exitting");
+                return;
             }
-            
-            string locationId = App.locationPresentation.GetLocation();
-
-            if (!App.hallLogic.AddHall(Name, Seats, locationId)){
-                Console.WriteLine("Error occurred while adding hall. Try again");
-                Thread.Sleep(2500);
-                continue;
-            }
-    
-            Console.Clear();
-            string locationAdded = (locationId == "null") ? "null" : $" to location {App.Locations[locationId].Name}";
-            Console.WriteLine($"Hall '{Name}' with {Seats} seats has been added" + locationAdded);
-            Thread.Sleep(5000);
-            break;
+            if (hallSeats <= 0){
+                Console.WriteLine($"{hallSeats} is not a valid amount of seats");
+            } else break;
         }
+        Console.WriteLine();
+
+        string locationId = App.locationPresentation.GetLocation();
+        
+        if (!App.hallLogic.AddHall(hallName, hallSeats, locationId)){
+            Console.WriteLine("An error occurred while adding hall.");
+            Thread.Sleep(3000);
+            return;
+        }
+
+        string locationAdded = (locationId == "null") ? "null" : $" to location {App.Locations[locationId].Name}";
+        Console.WriteLine($"Hall '{hallName}' with {hallSeats} seats has been added" + locationAdded);
+        Thread.Sleep(5000);
     }
 
     // GetHall is similar to GetGenre

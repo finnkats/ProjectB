@@ -6,28 +6,29 @@ public class PerformancePresentation : PresentationBase<Performance>{
     // Similar to other Presentation file comments (previous ones)
     public void AddPerformance(){
         Console.Clear();
-        Console.WriteLine("Enter a performance you want to add.");
-        Console.WriteLine("Performance name: ");
-        string? performanceName = Console.ReadLine();
-        Console.Clear();
+        string? performanceName = GetNameInput();
+        if (performanceName is null) return;
+        Console.WriteLine();
   
         var genres = App.genrePresentation.GetGenres();
+        Console.WriteLine();
 
-        Console.WriteLine("Will the performance be currently active?");
-        Console.WriteLine("\n1. Yes");
-        Console.WriteLine("2. No");
-
-        bool active = (Console.ReadLine() == "1");
+        Console.WriteLine("Will the performance be currently active?\n1. Yes\n2. Exit\nAnything else. No");
+        string activeInput = Console.ReadLine() ?? "";
+        if (activeInput == "2") return;
+        bool active = activeInput == "1";
 
         Console.Clear();
-        if (App.performanceLogic.AddPerformance(performanceName ?? "", genres, active)){
-            Console.WriteLine($"Performance {performanceName} has been added");
-        } else {
-            Console.WriteLine($"Performance {performanceName} already exists");
+        if (!App.performanceLogic.AddPerformance(performanceName, genres, active)){
+            Console.WriteLine("An error occured while adding performance.");
         }
 
-        Thread.Sleep(3500);
-        Console.Clear();
+        string seperator = ", ";
+        List<string> currentGenres = new();
+        genres.ForEach(genreId => currentGenres.Add(App.Genres[genreId].Name));
+        Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + ") " +
+                          $"with genres [{String.Join(seperator, currentGenres)}] has been added");
+        Thread.Sleep(5000);
     }
 
     // This is the catalogue, this should probably the base for future menu's

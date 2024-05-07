@@ -3,39 +3,23 @@ public class LocationPresentation : PresentationBase<Location>{
 
     // Similar to other Presentation file comments (previous ones)
     public void AddLocation(){
-        while (true){
-            Console.Clear();
-            Console.WriteLine("Enter name for location:");
-            string Name = Console.ReadLine() ?? "";
-            if (Name == ""){
-                Console.Write("Invalid name");
-                Thread.Sleep(2500);
-                continue;
-            }
-            foreach (var location in App.Locations){
-                if (location.Value.Name.ToLower() == Name.ToLower()){
-                    Console.Write($"Location with name {Name} already exists");
-                    Thread.Sleep(3000);
-                    return;
-                }
-            }
+        Console.Clear();
+        string? locationName = GetNameInput();
+        if (locationName is null) return;
+        Console.WriteLine();
 
-            var Halls = App.hallPresentation.GetUnlinkedHalls();
-
-            if (!App.locationLogic.AddLocation(Name, Halls)){
-                Console.WriteLine("An error occured while adding location. Try again");
-                Thread.Sleep(2500);
-                continue;
-            }
-
-            Console.Clear();
-            string seperator = ", ";
-            List<string> currentHalls = new();
-            Halls.ForEach(hallId => currentHalls.Add(App.Halls[hallId].Name));
-            Console.WriteLine($"Location '{Name}' with halls [{String.Join(seperator, currentHalls)}] has been added");
-            Thread.Sleep(5000);
-            break;
+        var Halls = App.hallPresentation.GetUnlinkedHalls();
+        if (!App.locationLogic.AddLocation(locationName, Halls)){
+            Console.WriteLine("An error occured while adding location.");
+            Thread.Sleep(2500);
+            return;
         }
+
+        string seperator = ", ";
+        List<string> currentHalls = new();
+        Halls.ForEach(hallId => currentHalls.Add(App.Halls[hallId].Name));
+        Console.WriteLine($"Location '{locationName}' with halls [{String.Join(seperator, currentHalls)}] has been added");
+        Thread.Sleep(5000);
     }
 
     // Similar to GetGenre / GetHall etc.

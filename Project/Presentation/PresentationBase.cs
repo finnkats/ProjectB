@@ -10,7 +10,7 @@ public class PresentationBase<T> where T : IEditable{
 
     // Returns a string for name that was input
     public string? GetNameInput(){
-        Console.Clear();
+        //Console.Clear();
         string inputName = "";
         bool validName = false;
         while (!validName){
@@ -22,6 +22,9 @@ public class PresentationBase<T> where T : IEditable{
                 return null;
             }
             validName = Logic.ValidName(inputName);
+            if (!validName){
+                Console.WriteLine($"{typeof(T).Name} with name {inputName} already exists\n");
+            }
         }
         return inputName;
     }

@@ -3,8 +3,12 @@ public class GenreLogic : LogicBase<Genre>{
     // It checks if the name isn't empty or the genre with the same name already exists
     // Returns if it successfully added the genre
     public bool AddGenre(string name, int age){
-        if (!Genre.Ages.Contains(age)) return false;
+        if (!ValidAge(age)) return false;
         return base.AddObject(new Genre(name, age));
+    }
+
+    public bool ValidAge(int age){
+        return Genre.Ages.Contains(age);
     }
 
     public bool ChangeAge(string id, int age){

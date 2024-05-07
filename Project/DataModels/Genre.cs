@@ -12,4 +12,12 @@ public class Genre : IEditable
         Name = name;
         Age = age;
     }
+
+    public static string AgeString(){
+        string ageString = "'0' for everyone\n";
+        foreach (int age in Ages.Skip(1)){
+            ageString += $"'{age}' for {age}+\n";
+        }
+        return ageString;
+    }
 }

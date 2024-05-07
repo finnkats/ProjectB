@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Ticket : IEquatable<Ticket>{
+public class Ticket : IEquatable<Ticket>, IDataAccessList {
     [JsonPropertyName("PerformanceId")]
     public string PerformanceId {get; set;}
     [JsonPropertyName("Date")]

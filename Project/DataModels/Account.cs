@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-public class Account
+public class Account : IDataAccessItem
 {
     [JsonPropertyName("Name")]
     public string Name {get; set;}

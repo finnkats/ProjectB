@@ -6,13 +6,13 @@ public static class App
 
     public static Menu? CurrentMenu;
 
-    public static readonly Dictionary<string, Performance> Performances = PerformanceDataAccess.ReadPerformances();
-    public static readonly Dictionary<string, Account> Accounts = AccountDataAccess.ReadAccounts();
-    public static readonly Dictionary<string, List<Play>> Plays = PlayDataAccess.ReadPlays();
-    public static readonly Dictionary<string,List<Ticket>> Tickets = TicketDataAccess.ReadTickets();
-    public static readonly Dictionary<string, Location> Locations = LocationDataAccess.ReadLocations();
-    public static readonly Dictionary<string, Hall> Halls = HallDataAccess.ReadHalls();
-    public static readonly Dictionary<string, Genre> Genres = GenreDataAccess.ReadGenres();
+    public static readonly Dictionary<string, Performance> Performances = DataAccess.ReadItem<Performance>();
+    public static readonly Dictionary<string, Account> Accounts = DataAccess.ReadItem<Account>();
+    public static readonly Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
+    public static readonly Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
+    public static readonly Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
+    public static readonly Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
+    public static readonly Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
 
     public static void Start()
     {

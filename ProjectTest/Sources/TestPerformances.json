@@ -1,0 +1,35 @@
+{
+  "ID0": {
+    "Name": "Soldaat van Oranje",
+    "Genres": [
+      "ID5",
+      "ID6"
+    ],
+    "Active": true
+  },
+  "ID1": {
+    "Name": "Lion King",
+    "Genres": [
+      "ID2",
+      "ID9"
+    ],
+    "Active": true
+  },
+  "ID2": {
+    "Name": "Hamlet",
+    "Genres": [
+      "ID0",
+      "ID4"
+    ],
+    "Active": true
+  },
+  "ID3": {
+    "Name": "Romeo and Juliet",
+    "Genres": [
+      "ID0",
+      "ID4",
+      "ID7"
+    ],
+    "Active": true
+  }
+}

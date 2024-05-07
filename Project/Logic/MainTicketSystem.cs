@@ -84,13 +84,16 @@ public static class MainTicketSystem{
         {
             foreach (UserTicket ticketPair in App.Tickets)
             {
-                if (ticketPair.Ticket.IsActive == true)
+                if (App.LoggedInUsername == ticketPair.User)
                 {
-                    ActiveTickets.Add(ticketPair.Ticket);
-                }
-                else
-                {
-                    InactiveTickets.Add(ticketPair.Ticket);
+                    if (ticketPair.Ticket.IsActive == true)
+                    {
+                        ActiveTickets.Add(ticketPair.Ticket);
+                    }
+                    else
+                    {
+                        InactiveTickets.Add(ticketPair.Ticket);
+                    }
                 }
             }
         }

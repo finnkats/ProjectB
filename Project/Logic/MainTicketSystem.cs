@@ -4,7 +4,11 @@ public static class MainTicketSystem{
     public static (bool,string,string)? IsTesting {get; set;}
     public static void CreateBookTicket(string performanceId, string date, string time, string room, bool activity){
         Ticket createNewTicket = new Ticket(performanceId, date, time, room, activity);
-        TicketDataAccess.AddItemDictionary(App.Tickets, App.LoggedInUsername, createNewTicket);
+        if(!App.Tickets.ContainsKey(App.LoggedInUsername)){
+            App.Tickets[App.LoggedInUsername] = new List<Ticket>();
+        }
+        App.Tickets[App.LoggedInUsername].Add(createNewTicket);
+        TicketDataAccess.UpdateTickets();
         TicketPresentation.PrintTicket(createNewTicket);
         // createNewTicket.UpdateData(); before
     }

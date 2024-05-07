@@ -29,14 +29,6 @@ public static class TicketDataAccess{
     //     writer.Close();
     // }
 
-    public static void AddItemDictionary<TKey, Tvalue>(Dictionary<TKey, List<Tvalue>> dict, TKey key, Tvalue value) where TKey:notnull{
-        if(!dict.ContainsKey(key)){
-            dict[key] = new List<Tvalue>();
-        }
-        dict[key].Add(value);
-        TicketDataAccess.UpdateTickets();
-    }
-
     // public static List<Tvalue> ReturnDictValueList<TKey, Tvalue>(Dictionary<TKey, List<Tvalue>> dict) where TKey:notnull{
     //     foreach(KeyValuePair<TKey, List<Tvalue>> dictCollection in dict){
     //         // code

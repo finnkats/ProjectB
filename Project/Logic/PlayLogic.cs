@@ -24,7 +24,7 @@ public static class PlayLogic
         AllViewings = OneMonthFilter(AllViewings);
         
         // Gets the location
-        string ViewingLocation = App.locationPresentation.GetLocation("Select a location:", "Exit");
+        string ViewingLocation = App.locationPresentation.GetItem("Select a location:", "Exit");
         if (ViewingLocation == "null") return;
 
         // Gets the date

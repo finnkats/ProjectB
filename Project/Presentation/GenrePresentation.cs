@@ -35,7 +35,7 @@ public class GenrePresentation : PresentationBase<Genre>{
     }
 
     public void EditGenreStart(){
-        string genreId = GetGenre();
+        string genreId = GetItem("Which genre do you want to edit?", "Exit");
         if (genreId == "null") genreId = "";
         while (true){
             int choice = EditObject(genreId);
@@ -56,41 +56,6 @@ public class GenrePresentation : PresentationBase<Genre>{
                     Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");
                 }
                 Thread.Sleep(4000);
-            }
-        }
-    }
-
-    // Returns an id of a genre
-    // This is one of many menu's that look similar to eachother, so this should be refactored
-    public string GetGenre(){
-        List<(string, string)> GenresOrdered = new();
-        foreach (var genre in App.Genres){
-            GenresOrdered.Add((genre.Key, $"{genre.Value.Name} ({genre.Value.Age})"));
-        }
-        GenresOrdered = GenresOrdered.OrderBy(genre => genre.Item2).ToList();
-
-        int index = 1;
-        string genres = "";
-        while (true){
-            int choice = -1;
-            Console.Clear();
-            Console.WriteLine("Choose a genre:");
-            foreach (var genre in GenresOrdered){
-                genres += $"{index++}: {genre.Item2}\n";
-            }
-            genres += $"\n{index}: Exit\n";
-            Console.WriteLine(genres);
-
-            try {
-                if (!Int32.TryParse(Console.ReadLine(), out choice)){
-                    Console.WriteLine("\nInvalid input");
-                    continue;
-                }
-                return GenresOrdered[choice - 1].Item1;
-            } catch (ArgumentOutOfRangeException){
-                if (choice - 1 == GenresOrdered.Count) return "null";
-                Console.WriteLine("Invalid choice");
-                Thread.Sleep(2000);
             }
         }
     }

@@ -90,4 +90,53 @@ public class PresentationBase<T> where T : IEditable{
             } else return choice;
         }
     }
+
+    public string GetItem(string question, string exit, string locationId = ""){
+        List<(string, string)> itemsOrdered = new();
+        // Don't know a better way of doing this
+        if (typeof(T) == typeof(Hall) && locationId != ""){
+            if (!App.Locations.ContainsKey(locationId)) return "null";
+            App.Locations[locationId].Halls.ForEach(hallId => itemsOrdered.Add((hallId, Logic.Dict[hallId].Name)));
+        } else {
+            foreach (var itemPair in Logic.Dict){
+                itemsOrdered.Add((itemPair.Key, itemPair.Value.Name));
+            }
+        }
+        itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();
+
+        int index = 1;
+        string menu = "";
+        while (true){
+            int choice = -1;
+            Console.Clear();
+            Console.WriteLine(question);
+            
+            foreach (var itemPair in itemsOrdered){
+                menu += $"{index++}: {itemPair.Item2}";
+
+                // Again can't think of a way to seperate this better
+                // if this object is a hall, then add the location of the hall after it
+                if (typeof(T) == typeof(Hall)){
+                    string locationIdOfHall = App.Halls[itemPair.Item1].LocationId;
+                    menu += (locationIdOfHall == "null") ? "\tNo location" : $"\t({App.Locations[locationIdOfHall].Name})";
+                }
+
+                menu += "\n";
+            }
+            menu += $"{index}: {exit}";
+            
+            Console.WriteLine(menu);
+            try {
+                if (!Int32.TryParse(Console.ReadLine(), out choice)){
+                    Console.WriteLine("\nInvalid input\n");
+                    continue;
+                }
+                return itemsOrdered[choice - 1].Item1;
+            } catch (ArgumentOutOfRangeException){
+                if (choice - 1 == itemsOrdered.Count) return "null";
+                Console.WriteLine("Invalid choice");
+                Thread.Sleep(2000);
+            }
+        }
+    }
 }

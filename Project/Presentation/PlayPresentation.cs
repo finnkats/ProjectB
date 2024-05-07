@@ -58,7 +58,7 @@ public static class PlayPresentation
         string? playId = App.performancePresentation.PerformanceChoice("For what performance do you want to add a play?");
         if (playId == null) return;
 
-        string location = App.locationPresentation.GetLocation("What location?", "Cancel");
+        string location = App.locationPresentation.GetItem("Choose a location:", "Cancel");
         if (location == "null") return;
 
         string time;
@@ -85,7 +85,7 @@ public static class PlayPresentation
             break;
         }
 
-        string hall = App.hallPresentation.GetHall(location);
+        string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
         if (hall == "null") return;
 
         if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");

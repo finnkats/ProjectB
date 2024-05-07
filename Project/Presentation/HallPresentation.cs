@@ -24,7 +24,7 @@ public class HallPresentation : PresentationBase<Hall>{
         }
         Console.WriteLine();
 
-        string locationId = App.locationPresentation.GetLocation();
+        string locationId = App.locationPresentation.GetItem("In which location is this hall?", "No location yet");
         
         if (!App.hallLogic.AddHall(hallName, hallSeats, locationId)){
             Console.WriteLine("An error occurred while adding hall.");
@@ -38,7 +38,7 @@ public class HallPresentation : PresentationBase<Hall>{
     }
 
     public void EditHallStart(){
-        string hallId = GetHall();
+        string hallId = GetItem("Which hall do you want to edit?", "Exit");
         if (hallId == "null") hallId = "";
         while (true){
             int choice = EditObject(hallId);
@@ -60,7 +60,7 @@ public class HallPresentation : PresentationBase<Hall>{
                 Thread.Sleep(4000);
             } else if (choice == 3){
                 string oldLocation = (Logic.Dict[hallId].LocationId == "null") ? $"No location": $"{App.Locations[Logic.Dict[hallId].LocationId].Name}";
-                string newLocationId = App.locationPresentation.GetLocation($"New location for {Logic.Dict[hallId].Name}, " +
+                string newLocationId = App.locationPresentation.GetItem($"New location for {Logic.Dict[hallId].Name}, " +
                                                             $"currently: {oldLocation}:\n", "Remove hall from location");
                 Logic.Dict[hallId].LocationId = newLocationId;
                 DataAccess.UpdateItem<Hall>();
@@ -71,47 +71,6 @@ public class HallPresentation : PresentationBase<Hall>{
         }
     }
     
-    // GetHall is similar to GetGenre
-    public string GetHall(string locationId = ""){
-        List<(string, string)> HallsOrdered = new();
-        if (locationId != ""){
-            if (!App.Locations.ContainsKey(locationId)) return "null";
-            App.Locations[locationId].Halls.ForEach(hallId => HallsOrdered.Add((hallId, App.Halls[hallId].Name)));
-        } else {
-            foreach (var hall in App.Halls){
-                HallsOrdered.Add((hall.Key, hall.Value.Name));
-            }
-        }
-        HallsOrdered = HallsOrdered.OrderBy(hall => hall.Item2).ToList();
-
-        int index = 1;
-        string halls = "";
-        while (true){
-            int choice = -1;
-            Console.Clear();
-            Console.WriteLine("Choose a hall:");
-            foreach (var hall in HallsOrdered){
-                string hallLocationId = App.Halls[hall.Item1].LocationId;
-                halls += $"{index++}: {hall.Item2}";
-                halls += (hallLocationId == "null") ? "\tNo location\n" : $"\t({App.Locations[hallLocationId].Name})\n";
-            }
-            halls += $"\n{index}: Cancel";
-            Console.WriteLine(halls);
-
-            try {
-                if (!Int32.TryParse(Console.ReadLine(), out choice)){
-                    Console.WriteLine("\nInvalid input\n");
-                    continue;
-                }
-                return HallsOrdered[choice - 1].Item1;
-            } catch (ArgumentOutOfRangeException){
-                if (choice - 1 == HallsOrdered.Count) return "null";
-                Console.WriteLine("Invalid choice");
-                Thread.Sleep(2000);
-            }
-        }
-    }
-
     // GetUnlinkedHalls is similar to GetGenres
     public List<string> GetUnlinkedHalls(string LocationId = ""){
         if (LocationId != "" && !App.Locations.ContainsKey(LocationId)) LocationId = "";

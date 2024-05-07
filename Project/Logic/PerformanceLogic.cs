@@ -1,5 +1,4 @@
 public static class PerformanceLogic{
-    // Again, same story as other Logic
     public static bool AddPerformance(string name, List<string> genres, bool active){
         Performance NewPerformance = new(name, genres, active);
         foreach (var performance in App.Performances.Values){
@@ -7,18 +6,16 @@ public static class PerformanceLogic{
         }
         string AssignedId = AssignId();
         App.Performances.Add(AssignedId, NewPerformance);
-        DataAccess.UpdateItem<Performance>();
+        PerformanceDataAccess.UpdatePerformances();
         PlayLogic.AddNewId(AssignedId);
         return true;
     }
 
-    // Same
     public static string AssignId(){
         int newId = App.Performances.Count();
         return $"ID{newId}";
     }
 
-    // Checks if a performance contains a genre from the given list of genres
     public static bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
     {                                                                                         // 'performance.Key' is the performanceID
         if (performanceID == null || genreIDList == null)
@@ -39,8 +36,6 @@ public static class PerformanceLogic{
         return false;
     }
 
-    // Returns a list of performanceId, string made for printing
-    // containing the genres from the list
     public static List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
     {   
         var PerformanceOptions = GetPerformanceOptions(true);
@@ -66,24 +61,19 @@ public static class PerformanceLogic{
         return FilteredPerformanceOptionsList;
     }
 
-    // Returns a list of performanceId, string made for printing,
-    // if onlyActive is true, it only contains Active performances
+    
     public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
         int index = 0;
-        // list of id, performance string
+        // id, performance string
         List<(string, string)> PerformanceOptions = new();
-        // list of id, performance
         List<(string, Performance)> PerformancesOrdered = new();
 
-        // Adds the performances to PerformancesOrdered
         foreach (KeyValuePair<string, Performance> performance in App.Performances){
             if (onlyActive && !performance.Value.Active) continue;
             PerformancesOrdered.Add((performance.Key, performance.Value));
         }
-        // Sorts the performances by alphabet 
         PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();
 
-        // Goes over the performances and then adds the (id, string (made for printing)) to PerformanceOptions
         foreach (var performance in PerformancesOrdered){
             if (onlyActive && !performance.Item2.Active) continue;
             string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
@@ -99,7 +89,6 @@ public static class PerformanceLogic{
             PerformanceOptions.Add((performance.Item1, performanceString));
         }
         
-        // Returns the string, which is basically a menu
         return PerformanceOptions;
     }
 
@@ -111,25 +100,22 @@ public static class PerformanceLogic{
         PlayLogic.Choose(performanceId);
     }
 
-    // Similar to other logic
     public static bool ChangeName(string name, string id, Dictionary<string, Performance> Performances){
         foreach (var performance in Performances.Values){
             if (performance.Name == name) return false;
         }
 
         Performances[id].Name = name;
-        DataAccess.UpdateItem<Performance>();
+        PerformanceDataAccess.UpdatePerformances();
         return true;
     }
 
-    // Similar to other logic
     public static void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
         Performances[id].Genres = genres;
-        DataAccess.UpdateItem<Performance>();
+        PerformanceDataAccess.UpdatePerformances();
         return;
     }
 
-    // Changes active value
     public static void ChangeActive(string id, Dictionary<string, Performance> Performances){
         Performances[id].Active = !Performances[id].Active;
     }

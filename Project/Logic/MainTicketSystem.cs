@@ -1,27 +1,19 @@
 using Logic;
 
 public static class MainTicketSystem{
+    // public static Tuple<bool,string,string>? IsTesting {get; set;}
     public static (bool,string,string)? IsTesting {get; set;}
-    // Creates a new Ticket (UserTicket)
     public static void CreateBookTicket(string performanceId, string date, string time, string room, bool activity){
         Ticket createNewTicket = new Ticket(performanceId, date, time, room, activity);
-        if(!App.Tickets.ContainsKey(App.LoggedInUsername)){
-            App.Tickets[App.LoggedInUsername] = new List<Ticket>();
-        }
-        App.Tickets[App.LoggedInUsername].Add(createNewTicket);
-        DataAccess.UpdateList<Ticket>();
         TicketPresentation.PrintTicket(createNewTicket);
-        // createNewTicket.UpdateData(); before
+        createNewTicket.UpdateData();
     }
 
-    // Prints a string of ticket info (currently called after creating a ticket as confirmation)
     public static void ShowTicketInfo(){
         if(App.Tickets.Count != 0){
-            foreach(KeyValuePair<string, List<Ticket>> userTicket in App.Tickets){
-                if (userTicket.Key != App.LoggedInUsername) continue;
-                foreach(var ticket in userTicket.Value){
-                    Console.WriteLine(ticket.TicketInfo());
-                }
+            foreach(UserTicket ticketPair in App.Tickets){
+                if (ticketPair.User != App.LoggedInUsername) continue;
+                Console.WriteLine(ticketPair.Ticket.TicketInfo());
             }
         }
         else{
@@ -29,8 +21,6 @@ public static class MainTicketSystem{
         }
     }
 
-    // Gets login info and checks if logged in person is an admin
-    // this method probably already exists in AccountLogic
     public static (bool, string, string) LoginCheckAdmin(){
         string loginName, loginPassword;
         (loginName, loginPassword) = (IsTesting != null && IsTesting.Value.Item1) ? (IsTesting.Value.Item2, IsTesting.Value.Item3) : AccountPresentation.GetLoginDetails();
@@ -46,40 +36,36 @@ public static class MainTicketSystem{
         return (false, loginName, loginPassword);
     }
 
-    public static void CancelTicketLogic(Ticket ticketToCancel){
+    // Needs to change when UserTicket is changed
+    public static void CancelTicketLogic(UserTicket ticketToCancel){
         // Note: the ticketInApp here is a reference type not a copy of the class
-        // OLD
-        // foreach(var ticketInApp in App.Tickets){
-        //     if(ticketInApp == ticketToCancel){
-        //         ticketInApp.Ticket.IsActive = false;
-        //         TicketDataAccess.UpdateTickets();
-        //         break;
-        //     }
-        // }
-        // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
-        ticketToCancel.IsActive = false;
-        DataAccess.UpdateList<Ticket>();
+        foreach(var ticketInApp in App.Tickets){
+            if(ticketInApp == ticketToCancel){
+                ticketInApp.Ticket.IsActive = false;
+                TicketDataAccess.UpdateTickets();
+                break;
+            }
+        }
     }
 
     public static void CheckOutdatedTickets(){
+        // Change the for loop after the UserTicket has been changed
         foreach(var userTicket in App.Tickets){
             // Check time (string) with current DateTime
             DateTime currentTime = DateTime.Now;
-            foreach(Ticket ticket in userTicket.Value){
-                string currentTicketDateTime = $"{ticket.Date} {ticket.Time}";
-                if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
-                    if(ticketDate < currentTime){
-                        ticket.IsActive = false;
-                        DataAccess.UpdateList<Ticket>();
-                    }
+            string currentTicketDateTime = $"{userTicket.Ticket.Date} {userTicket.Ticket.Time}";
+            if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
+                if(ticketDate < currentTime){
+                    userTicket.Ticket.IsActive = false;
+                    TicketDataAccess.UpdateTickets();
                 }
             }
         }
     }
 
-    public static bool CancellationIsNotOneDayBefore(Ticket userTicket){
+    public static bool CancellationIsNotOneDayBefore(UserTicket userTicket){
         DateTime currentTime = DateTime.Now;
-        string currentTicketDateTime = $"{userTicket.Date} {userTicket.Time}";
+        string currentTicketDateTime = $"{userTicket.Ticket.Date} {userTicket.Ticket.Time}";
         if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
             DateTime oneDayBefore = ticketDate.AddDays(-1);
             return currentTime < oneDayBefore;
@@ -87,8 +73,6 @@ public static class MainTicketSystem{
         return false;
     }
 
-    // 2 lists, active and inactive tickets
-    // returns these lists in a list [0] is inactive and [1] active (should become a tuple or something)
     public static List<List<Ticket>> SortActiveTicket()
     {
         List<Ticket> ActiveTickets = new();
@@ -98,15 +82,17 @@ public static class MainTicketSystem{
 
         if (App.Tickets != null)
         {
-            if(App.Tickets.ContainsKey(App.LoggedInUsername)){
-                foreach(Ticket ticket in App.Tickets[App.LoggedInUsername]){
-                    if (ticket.IsActive == true)
+            foreach (UserTicket ticketPair in App.Tickets)
+            {
+                if (App.LoggedInUsername == ticketPair.User)
+                {
+                    if (ticketPair.Ticket.IsActive == true)
                     {
-                        ActiveTickets.Add(ticket);
+                        ActiveTickets.Add(ticketPair.Ticket);
                     }
                     else
                     {
-                        InactiveTickets.Add(ticket);
+                        InactiveTickets.Add(ticketPair.Ticket);
                     }
                 }
             }

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Location : IDataAccessItem {
+public class Location {
     [JsonPropertyName("Name")]
     public string Name { get; set; }
     [JsonPropertyName("Halls")]

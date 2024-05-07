@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-public class Play : IDataAccessList {
+public class Play {
     [JsonPropertyName("Location")]
     public string Location { get; set; }
     [JsonPropertyName("Time")]

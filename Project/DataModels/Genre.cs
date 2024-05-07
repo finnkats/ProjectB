@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Genre : IDataAccessItem {
+public class Genre {
     [JsonPropertyName("Name")]
     public string Name {get; set;}
     [JsonPropertyName("Age")]

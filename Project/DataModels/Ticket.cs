@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Ticket : IEquatable<Ticket>, IDataAccessList {
+public class Ticket : IEquatable<Ticket>{
     [JsonPropertyName("PerformanceId")]
     public string PerformanceId {get; set;}
     [JsonPropertyName("Date")]
@@ -20,9 +20,9 @@ public class Ticket : IEquatable<Ticket>, IDataAccessList {
         this.IsActive = isActive;
     }
 
-    // public void UpdateData(){
-    //     TicketDataAccess.UpdateTickets(this);
-    // }
+    public void UpdateData(){
+        TicketDataAccess.UpdateTickets(this);
+    }
 
     public string TicketInfo() {
         if(IsActive){

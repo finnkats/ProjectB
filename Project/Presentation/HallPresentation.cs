@@ -1,7 +1,6 @@
 using System.Globalization;
 
 public static class HallPresentation {
-    // Similar to other Presentation file comments (previous ones)
     public static void AddHall(){
         while(true){
             Console.Clear();
@@ -44,7 +43,6 @@ public static class HallPresentation {
         }
     }
 
-    // GetHall is similar to GetGenre
     public static string GetHall(string locationId = ""){
         List<(string, string)> HallsOrdered = new();
         if (locationId != ""){
@@ -85,7 +83,6 @@ public static class HallPresentation {
         }
     }
 
-    // GetUnlinkedHalls is similar to GetGenres
     public static List<string> GetUnlinkedHalls(string LocationId = ""){
         if (LocationId != "" && !App.Locations.ContainsKey(LocationId)) LocationId = "";
         List<string> LocationHalls = (LocationId == "") ? new() : App.Locations[LocationId].Halls;
@@ -134,14 +131,12 @@ public static class HallPresentation {
         }
     }
 
-    // Similar to other Presentation file comments (previous ones)
     public static void EditHallStart(){
         string hallId = GetHall();
         if (hallId == "null") return;
         EditHall(hallId);
     }
 
-    // Similar to other Presentation file comments (previous ones)
     public static void EditHall(string hallId){
         while (true){
             Console.Clear();
@@ -186,7 +181,7 @@ public static class HallPresentation {
                 string newLocationId = LocationPresentation.GetLocation($"New location for {App.Halls[hallId].Name}, " +
                                                             $"currently: {oldLocation}:\n", "Remove hall from location");
                 App.Halls[hallId].LocationId = newLocationId;
-                DataAccess.UpdateItem<Hall>();
+                HallDataAccess.UpdateHalls();
                 Console.WriteLine($"Successfully changed '{App.Halls[hallId].Name}' location from '{oldLocation}' to " +
                                   ((newLocationId == "null") ? $"'No location'": $"'{App.Locations[newLocationId].Name}'"));
                 Thread.Sleep(6000);

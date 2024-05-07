@@ -1,4 +1,10 @@
 public static class HallLogic {
+    // Function gets called to add A hall
+    // It checks if the name isn't empty or seats is <= 0 or a hall with the same name already exists
+    // Returns if it successfully added the hall
+
+    // A hall can be made without instantly linking it to a location, the location will be the string "null"
+    // in that case
     public static bool AddHall(string Name, int Seats, string locationId = "null"){
         if (Name == "") return false;
         if (Seats <= 0) return false;
@@ -9,7 +15,7 @@ public static class HallLogic {
         Hall newHall = new(Name, Seats, locationId);
         string hallId = AssignId();
         App.Halls.Add(hallId, newHall);
-        HallDataAccess.UpdateHalls();
+        DataAccess.UpdateItem<Hall>();
         return true;
     }
 
@@ -25,7 +31,7 @@ public static class HallLogic {
             if (hall.Value.Name.ToLower() == name.ToLower()) return false;
         }
         App.Halls[id].Name = name;
-        HallDataAccess.UpdateHalls();
+        DataAccess.UpdateItem<Hall>();
         return true;
     }
 
@@ -33,7 +39,7 @@ public static class HallLogic {
         if (!App.Halls.ContainsKey(id)) return false;
         if (seats <= 0) return false;
         App.Halls[id].Seats = seats;
-        HallDataAccess.UpdateHalls();
+        DataAccess.UpdateItem<Hall>();
         return true;
     }
 }

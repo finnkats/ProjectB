@@ -1,4 +1,6 @@
 public static class GenrePresentation {
+    // It checks logic here, that the respected logic file also checks,
+    // this should be fixed
     public static void AddGenre(){
         List<int> ages = new(){0, 6, 9, 13, 17};
         while (true){
@@ -39,6 +41,8 @@ public static class GenrePresentation {
         }
     }
 
+    // Returns an id of a genre
+    // This is one of many menu's that look similar to eachother, so this should be refactored
     public static string GetGenre(){
         List<(string, string)> GenresOrdered = new();
         foreach (var genre in App.Genres){
@@ -72,6 +76,12 @@ public static class GenrePresentation {
         }
     }
 
+    // Get genre's returns a list of Genres
+    // it can take both a performanceid and or question,
+    // if a performance id is given, then PerformanceGenres will already be populated with genres
+    // if question is gives, it changes the question which is asked in the menu
+    // this is also one of many menu's i think that are similar to others, so we should see how we are going
+    // to refactor this, as there are a few differences between the other similar functions
     public static List<string> GetGenres(string PerformanceId = "", string question = "Which genre belongs to this performance?"){
         if (PerformanceId != "" && !App.Performances.ContainsKey(PerformanceId)) PerformanceId = "";
         List<string> PerformanceGenres = (PerformanceId == "") ? new() : App.Performances[PerformanceId].Genres;
@@ -120,12 +130,17 @@ public static class GenrePresentation {
         }
     }
 
+    // Start method for the EditGenre menu, this will be the same for all other similar files
     public static void EditGenreStart(){
         string genreId = GetGenre();
         if (genreId == "null") return;
         EditGenre(genreId);
     }
 
+    // This is the menu that gets options to change a value from the respected object
+    // and then also changes it,
+    // this menu again is very similar to others, so we should see how we are going
+    // to refactor it
     public static void EditGenre(string genreId){
         List<int> ages = new(){0, 6, 9, 13, 17};
         while (true){

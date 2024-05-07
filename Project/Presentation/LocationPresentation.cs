@@ -1,4 +1,5 @@
 public static class LocationPresentation {
+    // Similar to other Presentation file comments (previous ones)
     public static void AddLocation(){
         while (true){
             Console.Clear();
@@ -35,6 +36,7 @@ public static class LocationPresentation {
         }
     }
 
+    // Similar to GetGenre / GetHall etc.
     public static string GetLocation(string question = "In which location is this hall?\n", string exit = "No location yet"){
         List<(string, string)> LocationsOrdered = new();
         foreach (var location in App.Locations){
@@ -71,12 +73,14 @@ public static class LocationPresentation {
         }
     }
 
+    // Similar to other Presentation file comments (previous ones)
     public static void EditLocationStart(){
         string locationId = GetLocation("Which location do you want to edit?", "Cancel");
         if (locationId == "null") return;
         EditLocation(locationId);
     }
 
+    // Similar to other Presentation file comments (previous ones)
     public static void EditLocation(string locationId){
         while (true){
             Console.Clear();
@@ -124,7 +128,7 @@ public static class LocationPresentation {
                     App.Locations[locationId].Halls = HallPresentation.GetUnlinkedHalls(locationId);
                 }
 
-                LocationDataAccess.UpdateLocations();
+                DataAccess.UpdateItem<Location>();
                 Console.WriteLine("Successfully changed halls");
                 Thread.Sleep(1500);
 

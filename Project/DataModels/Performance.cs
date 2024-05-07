@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Performance
+public class Performance : IDataAccessItem
 {
     [JsonPropertyName("Name")]
 	public string Name {get; set;}

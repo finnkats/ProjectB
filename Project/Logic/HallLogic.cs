@@ -15,7 +15,7 @@ public static class HallLogic {
         Hall newHall = new(Name, Seats, locationId);
         string hallId = AssignId();
         App.Halls.Add(hallId, newHall);
-        HallDataAccess.UpdateHalls();
+        DataAccess.UpdateItem<Hall>();
         return true;
     }
 
@@ -31,7 +31,7 @@ public static class HallLogic {
             if (hall.Value.Name.ToLower() == name.ToLower()) return false;
         }
         App.Halls[id].Name = name;
-        HallDataAccess.UpdateHalls();
+        DataAccess.UpdateItem<Hall>();
         return true;
     }
 
@@ -39,7 +39,7 @@ public static class HallLogic {
         if (!App.Halls.ContainsKey(id)) return false;
         if (seats <= 0) return false;
         App.Halls[id].Seats = seats;
-        HallDataAccess.UpdateHalls();
+        DataAccess.UpdateItem<Hall>();
         return true;
     }
 }

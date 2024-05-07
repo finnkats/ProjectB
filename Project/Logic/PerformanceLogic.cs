@@ -7,7 +7,7 @@ public static class PerformanceLogic{
         }
         string AssignedId = AssignId();
         App.Performances.Add(AssignedId, NewPerformance);
-        PerformanceDataAccess.UpdatePerformances();
+        DataAccess.UpdateItem<Performance>();
         PlayLogic.AddNewId(AssignedId);
         return true;
     }
@@ -118,14 +118,14 @@ public static class PerformanceLogic{
         }
 
         Performances[id].Name = name;
-        PerformanceDataAccess.UpdatePerformances();
+        DataAccess.UpdateItem<Performance>();
         return true;
     }
 
     // Similar to other logic
     public static void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
         Performances[id].Genres = genres;
-        PerformanceDataAccess.UpdatePerformances();
+        DataAccess.UpdateItem<Performance>();
         return;
     }
 

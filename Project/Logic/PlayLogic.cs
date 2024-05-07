@@ -103,14 +103,14 @@ public static class PlayLogic
 
     public static void AddNewId(string id){
         App.Plays.Add(id, new List<Play>());
-        PlayDataAccess.UpdatePlays();
+        DataAccess.UpdateList<Play>();
     }
 
     public static bool AddPlay(string location, string time, string date, string hall, string playId){
         if (!App.Plays.ContainsKey(playId)) return false;
         Play newPlay = new(location, time, date, hall, playId);
         App.Plays[playId].Add(newPlay);
-        PlayDataAccess.UpdatePlays();
+        DataAccess.UpdateList<Play>();
 
         return true;
     }

@@ -1,6 +1,6 @@
 public class PresentationBase<T> where T : IEditable{
     // Reference to logic class from T
-    private LogicBase<T> Logic;
+    protected LogicBase<T> Logic;
     public PresentationBase(LogicBase<T> logic) => Logic = logic;
     
     public virtual void AddObject(){
@@ -29,9 +29,9 @@ public class PresentationBase<T> where T : IEditable{
         return inputName;
     }
 
-    public void EditObject(string? objectId){
+    public int EditObject(string objectId){
         // Get object
-        if (objectId is null) return;
+        if (objectId == "") return 0;
         T obj = Logic.Dict[objectId];
 
         // Get all properties of type T
@@ -73,7 +73,7 @@ public class PresentationBase<T> where T : IEditable{
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             Console.WriteLine();
-            if (choice == 0){
+            if (choice == 0 || choice > index){
                 Console.WriteLine("Not a valid choice");
                 Thread.Sleep(2500);
             } else if (choice == index){
@@ -86,15 +86,14 @@ public class PresentationBase<T> where T : IEditable{
                 GenreDataAccess.UpdateGenres();
 
                 Thread.Sleep(1500);
-                return;
+                return 0;
             } else if (choice == 1) {       // Because Name is first property, it will always be 1;
                 string? newName = GetNameInput();
                 if (newName == null) continue;
                 Console.WriteLine($"Changed {obj.Name} to {newName}");
                 obj.Name = newName;
                 Thread.Sleep(2500);
-            }
-            //break;
+            } else return choice;
         }
     }
 }

@@ -123,44 +123,18 @@ public class GenrePresentation : PresentationBase<Genre>{
         }
     }
 
-    // Start method for the EditGenre menu, this will be the same for all other similar files
     public void EditGenreStart(){
         string genreId = GetGenre();
-        if (genreId == "null") return;
-        EditGenre(genreId);
-    }
-
-    // This is the menu that gets options to change a value from the respected object
-    // and then also changes it,
-    // this menu again is very similar to others, so we should see how we are going
-    // to refactor it
-    public void EditGenre(string genreId){
-        List<int> ages = new(){0, 6, 9, 13, 17};
+        if (genreId == "null") genreId = "";
         while (true){
-            Console.Clear();
-            Console.WriteLine($"1: Change name \"{App.Genres[genreId].Name}\"");
-            Console.WriteLine($"2: Change age-rating \"{App.Genres[genreId].Age}\"");
-            Console.WriteLine("3: Exit\n");
-            string choice = Console.ReadLine() ?? "";
-
-            if (choice == "1"){
-                Console.WriteLine($"Enter new name for {App.Genres[genreId].Name}:");
-                string oldName = App.Genres[genreId].Name;
-                string newName = Console.ReadLine() ?? "";
-                if (!App.genreLogic.ChangeName(genreId, newName)){
-                    Console.WriteLine($"Couldn't change name, either invalid or '{newName}' already exists");
-                } else {
-                    Console.WriteLine($"Successfully changed '{oldName}' to '{newName}'");
-                }
-                Thread.Sleep(4000);
-            }
-
-            else if (choice == "2"){
+            int choice = EditObject(genreId);
+            if (choice == 0) return;
+            if (choice == 2){
                 Console.Clear();
-                Console.WriteLine($"Enter new age-rating for '{App.Genres[genreId].Name}', currently: {App.Genres[genreId].Age}\n" +
-                                   "0: For everyone\n6: For 6+\n9: For 9+\n13: For 13+\n17: For 17+");
-                int oldAge = App.Genres[genreId].Age;
-                if (!Int32.TryParse(Console.ReadLine(), out int newAge) || !ages.Contains(newAge)){
+                Console.Write($"Enter new age-rating for '{Logic.Dict[genreId].Name}', currently: {Logic.Dict[genreId].Age}\n" +
+                                   Genre.AgeString());
+                int oldAge = Logic.Dict[genreId].Age;
+                if (!Int32.TryParse(Console.ReadLine(), out int newAge) || !Genre.Ages.Contains(newAge)){
                     Console.WriteLine("Invalid input");
                     Thread.Sleep(2000);
                     continue;
@@ -171,13 +145,6 @@ public class GenrePresentation : PresentationBase<Genre>{
                     Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");
                 }
                 Thread.Sleep(4000);
-            }
-
-            else if (choice == "3"){
-                return;
-            } else {
-                Console.WriteLine("Invalid input");
-                Thread.Sleep(2000);
             }
         }
     }

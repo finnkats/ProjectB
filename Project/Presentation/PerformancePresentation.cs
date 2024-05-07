@@ -112,40 +112,20 @@ public class PerformancePresentation : PresentationBase<Performance>{
     }
 }
 
-
-    // Similar to other Presentation file comments (previous ones)
     public void EditPerformanceStart(){
-        string? performanceId = PerformanceChoice("Choose the performance you want to edit:");
-        if (performanceId == null) return;
-        EditPerformance(performanceId);
-    }
-
-    // Similar to other Presentation file comments (previous ones)
-    public void EditPerformance(string performanceId){
+        string performanceId = PerformanceChoice("Choose the performance you want to edit:") ?? "";
         while (true){
-            Console.Clear();
-            Console.WriteLine($"1: Change name \"{App.Performances[performanceId].Name}\"");
-            List<string> currentGenres = new();
-            foreach (var genreId in App.Performances[performanceId].Genres){
-                currentGenres.Add(App.Genres[genreId].Name);
-            }
-            string seperator = ", ";
-            Console.WriteLine($"2: Change genres: [{String.Join(seperator, currentGenres)}]");
-            Console.WriteLine($"3: Change active status \"{App.Performances[performanceId].Active}\"");
-            Console.WriteLine("4: Exit\n");
-            Int32.TryParse(Console.ReadLine(), out int choice);
-            if (choice == 1){
+            int choice = EditObject(performanceId);
+            if (choice == 0) return;
+            if (choice == 2){
                 Console.Clear();
-                Console.WriteLine("Enter new name:\n");
-                if (App.performanceLogic.ChangeName(Console.ReadLine() ?? "", performanceId)) Console.WriteLine("Successfully changed name");
-                else Console.WriteLine("Couldn't change name");
-                Thread.Sleep(2500);
-            }
-            else if (choice == 2){
-                Console.Clear();
+                List<string> currentGenres = new();
+                foreach (var genreId in Logic.Dict[performanceId].Genres){
+                    currentGenres.Add(App.Genres[genreId].Name);
+                }
                 List<string> RemovedGenreIds = new();
-                foreach (var genreId in App.Performances[performanceId].Genres){
-                    Console.WriteLine($"Do you want to remove '{App.Genres[genreId].Name}' from '{App.Performances[performanceId].Name}'? (Y/N)");
+                foreach (var genreId in Logic.Dict[performanceId].Genres){
+                    Console.WriteLine($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N)");
                     string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
                     if (removeGenre.StartsWith("Y")){
                         currentGenres.Remove(App.Genres[genreId].Name);
@@ -153,7 +133,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                     }
                     Console.WriteLine();
                 }
-                RemovedGenreIds.ForEach(genreId => App.Performances[performanceId].Genres.Remove(genreId));
+                RemovedGenreIds.ForEach(genreId => Logic.Dict[performanceId].Genres.Remove(genreId));
 
                 Console.Clear();
                 List<string> genres = App.genrePresentation.GetGenres(performanceId);
@@ -165,9 +145,6 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 App.performanceLogic.ChangeActive(performanceId);
                 Console.WriteLine("Successfully changed active status");
                 Thread.Sleep(2500);
-            }
-            else if (choice == 4){
-                return;
             }
         }
     }

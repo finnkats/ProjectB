@@ -127,41 +127,16 @@ public class HallPresentation : PresentationBase<Hall>{
         }
     }
 
-    // Similar to other Presentation file comments (previous ones)
     public void EditHallStart(){
         string hallId = GetHall();
-        if (hallId == "null") return;
-        EditHall(hallId);
-    }
-
-    // Similar to other Presentation file comments (previous ones)
-    public void EditHall(string hallId){
+        if (hallId == "null") hallId = "";
         while (true){
-            Console.Clear();
-            Console.WriteLine($"1: Change name \"{App.Halls[hallId].Name}\"");
-            Console.WriteLine($"2: Change amount of seats \"{App.Halls[hallId].Seats}\"");
-            Console.WriteLine($"3: Change location this hall is linked to \"" + 
-                                ((App.Halls[hallId].LocationId == "null") ? "No location" : App.Locations[App.Halls[hallId].LocationId].Name)
-                                + "\"");
-            Console.WriteLine("4: Exit\n");
-            string choice = Console.ReadLine() ?? "";
-
-            if (choice == "1"){
+            int choice = EditObject(hallId);
+            if (choice == 0) return;
+            if (choice == 2){
                 Console.Clear();
-                Console.WriteLine($"Enter new name for '{App.Halls[hallId].Name}':");
-                string oldName = App.Halls[hallId].Name;
-                string newName = Console.ReadLine() ?? "";
-                if (!App.hallLogic.ChangeName(hallId, newName)){
-                    Console.WriteLine($"Couldn't change name, either invalid or '{newName}' already exists");
-                } else {
-                    Console.WriteLine($"Successfully changed '{oldName}' to '{newName}'");
-                }
-                Thread.Sleep(4000);
-
-            } else if (choice == "2"){
-                Console.Clear();
-                Console.WriteLine($"Enter new amount of seats for '{App.Halls[hallId].Name}', currently: {App.Halls[hallId].Seats}:");
-                int oldSeats = App.Halls[hallId].Seats;
+                Console.WriteLine($"Enter new amount of seats for '{Logic.Dict[hallId].Name}', currently: {Logic.Dict[hallId].Seats}:");
+                int oldSeats = Logic.Dict[hallId].Seats;
                 if (!Int32.TryParse(Console.ReadLine(), out int newSeats)){
                     Console.WriteLine("Invalid input");
                     Thread.Sleep(2000);
@@ -174,21 +149,16 @@ public class HallPresentation : PresentationBase<Hall>{
                 }
                 Thread.Sleep(4000);
 
-            } else if (choice == "3"){
-                string oldLocation = (App.Halls[hallId].LocationId == "null") ? $"No location": $"{App.Locations[App.Halls[hallId].LocationId].Name}";
-                string newLocationId = App.locationPresentation.GetLocation($"New location for {App.Halls[hallId].Name}, " +
+            } else if (choice == 3){
+                string oldLocation = (Logic.Dict[hallId].LocationId == "null") ? $"No location": $"{App.Locations[Logic.Dict[hallId].LocationId].Name}";
+                string newLocationId = App.locationPresentation.GetLocation($"New location for {Logic.Dict[hallId].Name}, " +
                                                             $"currently: {oldLocation}:\n", "Remove hall from location");
-                App.Halls[hallId].LocationId = newLocationId;
+                Logic.Dict[hallId].LocationId = newLocationId;
                 HallDataAccess.UpdateHalls();
-                Console.WriteLine($"Successfully changed '{App.Halls[hallId].Name}' location from '{oldLocation}' to " +
+                Console.WriteLine($"Successfully changed '{Logic.Dict[hallId].Name}' location from '{oldLocation}' to " +
                                   ((newLocationId == "null") ? $"'No location'": $"'{App.Locations[newLocationId].Name}'"));
                 Thread.Sleep(6000);
 
-            } else if (choice == "4"){
-                return;
-            } else {
-                Console.WriteLine("Invalid input");
-                Thread.Sleep(2000);
             }
         }
     }

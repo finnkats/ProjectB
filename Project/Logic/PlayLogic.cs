@@ -105,7 +105,7 @@ public static class PlayLogic
         if (!App.Plays.ContainsKey(playId)) return false;
         Play newPlay = new(location, time, date, hall, playId);
         App.Plays[playId].Add(newPlay);
-        PlayDataAccess.UpdatePlays();
+        DataAccess.UpdateList<Play>();
 
         return true;
     }

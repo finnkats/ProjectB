@@ -8,7 +8,7 @@ public class LocationLogic : LogicBase<Location>{
         if (halls == null) halls = App.hallPresentation.GetUnlinkedHalls(id);
         if (!App.Locations.ContainsKey(id)) return false;
         App.Locations[id].Halls = halls;
-        LocationDataAccess.UpdateLocations();
+        DataAccess.UpdateItem<Location>();
         return true;
     }
 }

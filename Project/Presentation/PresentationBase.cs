@@ -78,13 +78,7 @@ public class PresentationBase<T> where T : IEditable{
                 Thread.Sleep(2500);
             } else if (choice == index){
                 Console.WriteLine("Exiting..");
-
-                // TODO Update DataAccess here
-                PerformanceDataAccess.UpdatePerformances();
-                LocationDataAccess.UpdateLocations();
-                HallDataAccess.UpdateHalls();
-                GenreDataAccess.UpdateGenres();
-
+                DataAccess.UpdateItem<T>();
                 Thread.Sleep(1500);
                 return 0;
             } else if (choice == 1) {       // Because Name is first property, it will always be 1;

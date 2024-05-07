@@ -24,14 +24,7 @@ public abstract class LogicBase<T> where T : IEditable{
         if (obj is null) return false;
         if (!ValidName(obj.Name)) return false;
         Dict.Add(GetID(), obj);
-
-        // Update data TODO
-        PerformanceDataAccess.UpdatePerformances();
-        LocationDataAccess.UpdateLocations();
-        HallDataAccess.UpdateHalls();
-        GenreDataAccess.UpdateGenres();
-
-
+        DataAccess.UpdateItem<T>();
         return true;
     }
 
@@ -60,13 +53,7 @@ public abstract class LogicBase<T> where T : IEditable{
         if (!Dict.ContainsKey(id)) return false;
         if (!ValidName(name, id)) return false;
         Dict[id].Name = name;
-        
-        // Update data TODO
-        PerformanceDataAccess.UpdatePerformances();
-        LocationDataAccess.UpdateLocations();
-        HallDataAccess.UpdateHalls();
-        GenreDataAccess.UpdateGenres();
-
+        DataAccess.UpdateItem<T>();
         return true;
     }
 }

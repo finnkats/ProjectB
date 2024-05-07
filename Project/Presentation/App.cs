@@ -6,26 +6,26 @@ public static class App
 
     public static Menu? CurrentMenu;
 
-    public static readonly Dictionary<string, Performance> Performances = PerformanceDataAccess.ReadPerformances();
+    public static readonly Dictionary<string, Performance> Performances = DataAccess.ReadItem<Performance>();
     public static readonly PerformanceLogic performanceLogic = new PerformanceLogic();
     public static readonly PerformancePresentation performancePresentation = new PerformancePresentation(performanceLogic);
 
-    public static readonly Dictionary<string, Location> Locations = LocationDataAccess.ReadLocations();
+    public static readonly Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
     public static readonly LocationLogic locationLogic = new LocationLogic();
     public static readonly LocationPresentation locationPresentation = new LocationPresentation(locationLogic);
 
-    public static readonly Dictionary<string, Hall> Halls = HallDataAccess.ReadHalls();
+    public static readonly Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
     public static readonly HallLogic hallLogic = new HallLogic();
     public static readonly HallPresentation hallPresentation = new HallPresentation(hallLogic);
 
-    public static readonly Dictionary<string, Genre> Genres = GenreDataAccess.ReadGenres();
+    public static readonly Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
     public static readonly GenreLogic genreLogic = new GenreLogic();
     public static readonly GenrePresentation genrePresentation = new GenrePresentation(genreLogic);
 
 
-    public static readonly Dictionary<string, Account> Accounts = AccountDataAccess.ReadAccounts();
-    public static readonly Dictionary<string, List<Play>> Plays = PlayDataAccess.ReadPlays();
-    public static readonly List<UserTicket> Tickets = TicketDataAccess.ReadTickets();
+    public static readonly Dictionary<string, Account> Accounts = DataAccess.ReadItem<Account>();
+    public static readonly Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
+    public static readonly Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
 
     public static void Start()
     {

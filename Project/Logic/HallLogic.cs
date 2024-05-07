@@ -14,7 +14,7 @@ public class HallLogic : LogicBase<Hall> {
         if (!App.Halls.ContainsKey(id)) return false;
         if (seats <= 0) return false;
         App.Halls[id].Seats = seats;
-        HallDataAccess.UpdateHalls();
+        DataAccess.UpdateItem<Hall>();
         return true;
     }
 }

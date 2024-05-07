@@ -4,21 +4,21 @@ public class PerformanceLogic : LogicBase<Performance>{
         bool success = AddObject(new Performance(name, genres, active));
         if (!success) return false;
         App.Plays.Add(AssignedId, new List<Play>());
-        PlayDataAccess.UpdatePlays();
+        DataAccess.UpdateList<Play>();
         return true;
     }
 
     // Change list of genres
     public void ChangeGenres(List<string> genres, string id){
         App.Performances[id].Genres = genres;
-        PerformanceDataAccess.UpdatePerformances();
+        DataAccess.UpdateItem<Performance>();
         return;
     }
 
     // Changes active value
     public void ChangeActive(string id){
         App.Performances[id].Active = !App.Performances[id].Active;
-        PerformanceDataAccess.UpdatePerformances();
+        DataAccess.UpdateItem<Performance>();
     }
 
     // Checks if a performance contains a genre from the given list of genres

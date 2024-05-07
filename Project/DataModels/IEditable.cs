@@ -1,4 +1,4 @@
-public interface IEditable {
+public interface IEditable : IDataAccessItem {
     public string Name {get; set;}
 }
 

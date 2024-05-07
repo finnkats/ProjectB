@@ -52,11 +52,10 @@ public class LocationPresentation : PresentationBase<Location>{
                 if (addHall.StartsWith("Y")){
                     Logic.Dict[locationId].Halls = App.hallPresentation.GetUnlinkedHalls(locationId);
                 }
-
-                LocationDataAccess.UpdateLocations();
+                
+                DataAccess.UpdateItem<Location>();
                 Console.WriteLine("Successfully changed halls");
                 Thread.Sleep(1500);
-
             }
         }
     }

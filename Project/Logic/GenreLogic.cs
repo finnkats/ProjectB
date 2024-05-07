@@ -15,7 +15,7 @@ public class GenreLogic : LogicBase<Genre>{
         if (!App.Genres.ContainsKey(id)) return false;
         if (!Genre.Ages.Contains(age)) return false;
         App.Genres[id].Age = age;
-        GenreDataAccess.UpdateGenres();
+        DataAccess.UpdateItem<Genre>();
         return true;
     }
 }

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-public class Genre : IEditable 
+public class Genre : IDataAccessItem, IEditable
 {
     [Editable]
     [JsonPropertyName("Name")]

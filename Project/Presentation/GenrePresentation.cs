@@ -34,6 +34,32 @@ public class GenrePresentation : PresentationBase<Genre>{
         return;
     }
 
+    public void EditGenreStart(){
+        string genreId = GetGenre();
+        if (genreId == "null") genreId = "";
+        while (true){
+            int choice = EditObject(genreId);
+            if (choice == 0) return;
+            if (choice == 2){
+                Console.Clear();
+                Console.Write($"Enter new age-rating for '{Logic.Dict[genreId].Name}', currently: {Logic.Dict[genreId].Age}\n" +
+                                   Genre.AgeString());
+                int oldAge = Logic.Dict[genreId].Age;
+                if (!Int32.TryParse(Console.ReadLine(), out int newAge) || !Genre.Ages.Contains(newAge)){
+                    Console.WriteLine("Invalid input");
+                    Thread.Sleep(2000);
+                    continue;
+                }
+                if (!App.genreLogic.ChangeAge(genreId, newAge)){
+                    Console.WriteLine($"An error occured while changing age-rating. Try again");
+                } else {
+                    Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");
+                }
+                Thread.Sleep(4000);
+            }
+        }
+    }
+
     // Returns an id of a genre
     // This is one of many menu's that look similar to eachother, so this should be refactored
     public string GetGenre(){
@@ -119,32 +145,6 @@ public class GenrePresentation : PresentationBase<Genre>{
                     Console.WriteLine("Invalid choice");
                     Thread.Sleep(2500);
                 }
-            }
-        }
-    }
-
-    public void EditGenreStart(){
-        string genreId = GetGenre();
-        if (genreId == "null") genreId = "";
-        while (true){
-            int choice = EditObject(genreId);
-            if (choice == 0) return;
-            if (choice == 2){
-                Console.Clear();
-                Console.Write($"Enter new age-rating for '{Logic.Dict[genreId].Name}', currently: {Logic.Dict[genreId].Age}\n" +
-                                   Genre.AgeString());
-                int oldAge = Logic.Dict[genreId].Age;
-                if (!Int32.TryParse(Console.ReadLine(), out int newAge) || !Genre.Ages.Contains(newAge)){
-                    Console.WriteLine("Invalid input");
-                    Thread.Sleep(2000);
-                    continue;
-                }
-                if (!App.genreLogic.ChangeAge(genreId, newAge)){
-                    Console.WriteLine($"An error occured while changing age-rating. Try again");
-                } else {
-                    Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");
-                }
-                Thread.Sleep(4000);
             }
         }
     }

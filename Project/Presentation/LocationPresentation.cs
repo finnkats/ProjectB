@@ -21,43 +21,6 @@ public class LocationPresentation : PresentationBase<Location>{
         Thread.Sleep(5000);
     }
 
-    // Similar to GetGenre / GetHall etc.
-    public string GetLocation(string question = "In which location is this hall?\n", string exit = "No location yet"){
-        List<(string, string)> LocationsOrdered = new();
-        foreach (var location in App.Locations){
-            LocationsOrdered.Add((location.Key, location.Value.Name));
-        }
-        LocationsOrdered = LocationsOrdered.OrderBy(location => location.Item2).ToList();
-
-        while(true){
-            int choice = -1;
-            Console.Clear();
-            Console.WriteLine(question);
-            int index = 1;
-            string locations = "";
-            foreach (var location in LocationsOrdered){
-                locations += $"{index++}: {location.Item2}\n";
-            }
-            locations += $"\n{index}: " + exit;
-            Console.WriteLine(locations);
-
-            try {
-                if (!Int32.TryParse(Console.ReadLine(), out choice)){
-                    Console.WriteLine("\nInvalid input\n");
-                } else {
-                    return LocationsOrdered[choice - 1].Item1;
-                }
-            } catch (ArgumentOutOfRangeException){
-                if (choice - 1 == LocationsOrdered.Count){
-                    return "null";
-                } else {
-                    Console.WriteLine("Invalid choice");
-                    Thread.Sleep(2500);
-                }
-            }
-        }
-    }
-
     public void EditLocationStart(){
         string locationId = GetLocation("Which location do you want to edit?", "Cancel");
         if (locationId == "null") locationId = "";
@@ -94,6 +57,43 @@ public class LocationPresentation : PresentationBase<Location>{
                 Console.WriteLine("Successfully changed halls");
                 Thread.Sleep(1500);
 
+            }
+        }
+    }
+
+    // Similar to GetGenre / GetHall etc.
+    public string GetLocation(string question = "In which location is this hall?\n", string exit = "No location yet"){
+        List<(string, string)> LocationsOrdered = new();
+        foreach (var location in App.Locations){
+            LocationsOrdered.Add((location.Key, location.Value.Name));
+        }
+        LocationsOrdered = LocationsOrdered.OrderBy(location => location.Item2).ToList();
+
+        while(true){
+            int choice = -1;
+            Console.Clear();
+            Console.WriteLine(question);
+            int index = 1;
+            string locations = "";
+            foreach (var location in LocationsOrdered){
+                locations += $"{index++}: {location.Item2}\n";
+            }
+            locations += $"\n{index}: " + exit;
+            Console.WriteLine(locations);
+
+            try {
+                if (!Int32.TryParse(Console.ReadLine(), out choice)){
+                    Console.WriteLine("\nInvalid input\n");
+                } else {
+                    return LocationsOrdered[choice - 1].Item1;
+                }
+            } catch (ArgumentOutOfRangeException){
+                if (choice - 1 == LocationsOrdered.Count){
+                    return "null";
+                } else {
+                    Console.WriteLine("Invalid choice");
+                    Thread.Sleep(2500);
+                }
             }
         }
     }

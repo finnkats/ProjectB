@@ -37,6 +37,42 @@ public class HallPresentation : PresentationBase<Hall>{
         Thread.Sleep(5000);
     }
 
+    public void EditHallStart(){
+        string hallId = GetHall();
+        if (hallId == "null") hallId = "";
+        while (true){
+            int choice = EditObject(hallId);
+            if (choice == 0) return;
+            if (choice == 2){
+                Console.Clear();
+                Console.WriteLine($"Enter new amount of seats for '{Logic.Dict[hallId].Name}', currently: {Logic.Dict[hallId].Seats}:");
+                int oldSeats = Logic.Dict[hallId].Seats;
+                if (!Int32.TryParse(Console.ReadLine(), out int newSeats)){
+                    Console.WriteLine("Invalid input");
+                    Thread.Sleep(2000);
+                    continue;
+                }
+                if (!App.hallLogic.ChangeSeats(hallId, newSeats)){
+                    Console.WriteLine($"Couldn't change seats, value too low");
+                } else {
+                    Console.WriteLine($"Successfully changed '{oldSeats}' to '{newSeats}'");
+                }
+                Thread.Sleep(4000);
+
+            } else if (choice == 3){
+                string oldLocation = (Logic.Dict[hallId].LocationId == "null") ? $"No location": $"{App.Locations[Logic.Dict[hallId].LocationId].Name}";
+                string newLocationId = App.locationPresentation.GetLocation($"New location for {Logic.Dict[hallId].Name}, " +
+                                                            $"currently: {oldLocation}:\n", "Remove hall from location");
+                Logic.Dict[hallId].LocationId = newLocationId;
+                HallDataAccess.UpdateHalls();
+                Console.WriteLine($"Successfully changed '{Logic.Dict[hallId].Name}' location from '{oldLocation}' to " +
+                                  ((newLocationId == "null") ? $"'No location'": $"'{App.Locations[newLocationId].Name}'"));
+                Thread.Sleep(6000);
+
+            }
+        }
+    }
+    
     // GetHall is similar to GetGenre
     public string GetHall(string locationId = ""){
         List<(string, string)> HallsOrdered = new();
@@ -123,42 +159,6 @@ public class HallPresentation : PresentationBase<Hall>{
                     Console.WriteLine("Invalid choice");
                     Thread.Sleep(2500);
                 }
-            }
-        }
-    }
-
-    public void EditHallStart(){
-        string hallId = GetHall();
-        if (hallId == "null") hallId = "";
-        while (true){
-            int choice = EditObject(hallId);
-            if (choice == 0) return;
-            if (choice == 2){
-                Console.Clear();
-                Console.WriteLine($"Enter new amount of seats for '{Logic.Dict[hallId].Name}', currently: {Logic.Dict[hallId].Seats}:");
-                int oldSeats = Logic.Dict[hallId].Seats;
-                if (!Int32.TryParse(Console.ReadLine(), out int newSeats)){
-                    Console.WriteLine("Invalid input");
-                    Thread.Sleep(2000);
-                    continue;
-                }
-                if (!App.hallLogic.ChangeSeats(hallId, newSeats)){
-                    Console.WriteLine($"Couldn't change seats, value too low");
-                } else {
-                    Console.WriteLine($"Successfully changed '{oldSeats}' to '{newSeats}'");
-                }
-                Thread.Sleep(4000);
-
-            } else if (choice == 3){
-                string oldLocation = (Logic.Dict[hallId].LocationId == "null") ? $"No location": $"{App.Locations[Logic.Dict[hallId].LocationId].Name}";
-                string newLocationId = App.locationPresentation.GetLocation($"New location for {Logic.Dict[hallId].Name}, " +
-                                                            $"currently: {oldLocation}:\n", "Remove hall from location");
-                Logic.Dict[hallId].LocationId = newLocationId;
-                HallDataAccess.UpdateHalls();
-                Console.WriteLine($"Successfully changed '{Logic.Dict[hallId].Name}' location from '{oldLocation}' to " +
-                                  ((newLocationId == "null") ? $"'No location'": $"'{App.Locations[newLocationId].Name}'"));
-                Thread.Sleep(6000);
-
             }
         }
     }

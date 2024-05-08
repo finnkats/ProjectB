@@ -7,12 +7,25 @@ public static class App
     public static Menu? CurrentMenu;
 
     public static readonly Dictionary<string, Performance> Performances = DataAccess.ReadItem<Performance>();
+    public static readonly PerformanceLogic performanceLogic = new PerformanceLogic();
+    public static readonly PerformancePresentation performancePresentation = new PerformancePresentation(performanceLogic);
+
+    public static readonly Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
+    public static readonly LocationLogic locationLogic = new LocationLogic();
+    public static readonly LocationPresentation locationPresentation = new LocationPresentation(locationLogic);
+
+    public static readonly Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
+    public static readonly HallLogic hallLogic = new HallLogic();
+    public static readonly HallPresentation hallPresentation = new HallPresentation(hallLogic);
+
+    public static readonly Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
+    public static readonly GenreLogic genreLogic = new GenreLogic();
+    public static readonly GenrePresentation genrePresentation = new GenrePresentation(genreLogic);
+
+
     public static readonly Dictionary<string, Account> Accounts = DataAccess.ReadItem<Account>();
     public static readonly Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
     public static readonly Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
-    public static readonly Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
-    public static readonly Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
-    public static readonly Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
 
     public static void Start()
     {
@@ -55,7 +68,7 @@ public static class App
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue);
+        HomePage.AddAllOption("View Performances", performanceLogic.PerformanceCatalogue);
         HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
         HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
@@ -75,8 +88,8 @@ public static class App
 
         //  Modify Performances
         ModifyPerformances.PreviousMenu = AdminFeatures;
-        ModifyPerformances.AddAllOption("Add Performance", PerformancePresentation.AddPerformance);
-        ModifyPerformances.AddAllOption("Edit Performance", PerformancePresentation.EditPerformanceStart);
+        ModifyPerformances.AddAllOption("Add Performance", performancePresentation.AddPerformance);
+        ModifyPerformances.AddAllOption("Edit Performance", performancePresentation.EditPerformanceStart);
         ModifyPerformances.AddAllOption("Add Play", PlayPresentation.AddPlayDetails);
         ModifyPerformances.AddCurrentOption("Add Performance");
         ModifyPerformances.AddCurrentOption("Edit Performance");
@@ -84,17 +97,17 @@ public static class App
 
         // Modify Genres
         ModifyGenres.PreviousMenu = AdminFeatures;
-        ModifyGenres.AddAllOption("Add Genre", GenrePresentation.AddGenre); // TODO add add genre function
-        ModifyGenres.AddAllOption("Edit Genre", GenrePresentation.EditGenreStart); // TODO add edit genre function
+        ModifyGenres.AddAllOption("Add Genre", genrePresentation.AddGenre); // TODO add add genre function
+        ModifyGenres.AddAllOption("Edit Genre", genrePresentation.EditGenreStart); // TODO add edit genre function
         ModifyGenres.AddCurrentOption("Add Genre");
         ModifyGenres.AddCurrentOption("Edit Genre");
 
         // Modify Locations
         ModifyLocations.PreviousMenu = AdminFeatures;
-        ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation);
-        ModifyLocations.AddAllOption("Edit Location", LocationPresentation.EditLocationStart);
-        ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall);
-        ModifyLocations.AddAllOption("Edit Hall", HallPresentation.EditHallStart);
+        ModifyLocations.AddAllOption("Add Location", locationPresentation.AddLocation);
+        ModifyLocations.AddAllOption("Edit Location", locationPresentation.EditLocationStart);
+        ModifyLocations.AddAllOption("Add Hall", hallPresentation.AddHall);
+        ModifyLocations.AddAllOption("Edit Hall", hallPresentation.EditHallStart);
         ModifyLocations.AddCurrentOption("Add Location");
         ModifyLocations.AddCurrentOption("Edit Location");
         ModifyLocations.AddCurrentOption("Add Hall");

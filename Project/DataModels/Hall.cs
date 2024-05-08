@@ -1,9 +1,15 @@
 using System.Text.Json.Serialization;
-public class Hall : IDataAccessItem {
+public class Hall : IDataAccessItem, IEditable
+{
+    [Editable]
     [JsonPropertyName("Name")]
     public string Name { get; set; }
+
+    [Editable]
     [JsonPropertyName("Seats")]
     public int Seats { get; set; }
+
+    [Editable]
     [JsonPropertyName("LocationId")]
     public string LocationId { get; set; }
     

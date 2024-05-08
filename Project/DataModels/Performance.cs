@@ -1,11 +1,16 @@
 using System.Text.Json.Serialization;
 
-public class Performance : IDataAccessItem
+public class Performance : IDataAccessItem, IEditable
 {
+    [Editable]
     [JsonPropertyName("Name")]
 	public string Name {get; set;}
+
+    [Editable]
     [JsonPropertyName("Genres")]
     public List<string> Genres {get; set;}
+
+    [Editable]
     [JsonPropertyName("Active")]
     public bool Active {get; set;}
 

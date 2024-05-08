@@ -24,7 +24,7 @@ public static class PlayLogic
         AllViewings = OneMonthFilter(AllViewings);
         
         // Gets the location
-        string ViewingLocation = LocationPresentation.GetLocation("Select a location:", "Exit");
+        string ViewingLocation = App.locationPresentation.GetItem("Select a location:", "Exit");
         if (ViewingLocation == "null") return;
 
         // Gets the date
@@ -101,11 +101,6 @@ public static class PlayLogic
         return (timesString, timeOptions);
     }
 
-    public static void AddNewId(string id){
-        App.Plays.Add(id, new List<Play>());
-        DataAccess.UpdateList<Play>();
-    }
-
     public static bool AddPlay(string location, string time, string date, string hall, string playId){
         if (!App.Plays.ContainsKey(playId)) return false;
         Play newPlay = new(location, time, date, hall, playId);
@@ -126,5 +121,13 @@ public static class PlayLogic
             }
         }
         return FilteredPlays;
+    }
+
+    public static List<Play> GetPlaysFromPresentations(string playID){
+        if (App.Plays.ContainsKey(playID)){
+            return App.Plays[playID];
+        } else {
+            return new List<Play>();
+        }
     }
 }

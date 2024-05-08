@@ -1,30 +1,30 @@
-public static class PerformanceLogic{
-    // Again, same story as other Logic
-    public static bool AddPerformance(string name, List<string> genres, bool active){
-        Performance NewPerformance = new(name, genres, active);
-        foreach (var performance in App.Performances.Values){
-            if (performance.Name.ToLower() == name.ToLower()) return false;
-        }
-        string AssignedId = AssignId();
-        App.Performances.Add(AssignedId, NewPerformance);
-        DataAccess.UpdateItem<Performance>();
-        PlayLogic.AddNewId(AssignedId);
+public class PerformanceLogic : LogicBase<Performance>{
+    public bool AddPerformance(string name, List<string> genres, bool active){
+        string AssignedId = GetID();
+        bool success = AddObject(new Performance(name, genres, active));
+        if (!success) return false;
+        App.Plays.Add(AssignedId, new List<Play>());
+        DataAccess.UpdateList<Play>();
         return true;
     }
 
-    // Same
-    public static string AssignId(){
-        int newId = App.Performances.Count();
-        return $"ID{newId}";
+    // Change list of genres
+    public void ChangeGenres(List<string> genres, string id){
+        App.Performances[id].Genres = genres;
+        DataAccess.UpdateItem<Performance>();
+        return;
+    }
+
+    // Changes active value
+    public void ChangeActive(string id){
+        App.Performances[id].Active = !App.Performances[id].Active;
+        DataAccess.UpdateItem<Performance>();
     }
 
     // Checks if a performance contains a genre from the given list of genres
-    public static bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
+    public bool HasGenre(string? performanceID = null, List<string>? genreIDList = null) // 'performance.Value.Genres;' contains a string of GenreID'S
     {                                                                                         // 'performance.Key' is the performanceID
-        if (performanceID == null || genreIDList == null)
-        {
-            return false;
-        }
+        if (performanceID == null || genreIDList == null) return false;
 
         Performance performance = App.Performances[performanceID];
 
@@ -39,9 +39,10 @@ public static class PerformanceLogic{
         return false;
     }
 
+
     // Returns a list of performanceId, string made for printing
     // containing the genres from the list
-    public static List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
+    public List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
     {   
         var PerformanceOptions = GetPerformanceOptions(true);
         List<(string, string)> FilteredPerformanceOptionsList = new();
@@ -57,7 +58,7 @@ public static class PerformanceLogic{
             if (HasGenre(performance.Item1, genreIDList))
             {
                 // overwrites index of the option that will be printed for the menu
-                string performanceOptionString = $"{performanceIndex++}: {performance.Item2.Split(':')[1]}";
+                string performanceOptionString = $"{performanceIndex++}: {performance.Item2}";
                 FilteredPerformanceOptionsList.Add((performance.Item1, performanceOptionString));
             }
             
@@ -68,8 +69,7 @@ public static class PerformanceLogic{
 
     // Returns a list of performanceId, string made for printing,
     // if onlyActive is true, it only contains Active performances
-    public static List<(string, string)> GetPerformanceOptions(bool onlyActive){
-        int index = 0;
+    public List<(string, string)> GetPerformanceOptions(bool onlyActive){
         // list of id, performance string
         List<(string, string)> PerformanceOptions = new();
         // list of id, performance
@@ -86,7 +86,7 @@ public static class PerformanceLogic{
         // Goes over the performances and then adds the (id, string (made for printing)) to PerformanceOptions
         foreach (var performance in PerformancesOrdered){
             if (onlyActive && !performance.Item2.Active) continue;
-            string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
+            string performanceString = performance.Item2.Name.PadRight(40);
             if (onlyActive){
                 List<string> currentGenres = new();
                 foreach (var genreId in App.Performances[performance.Item1].Genres){
@@ -104,33 +104,10 @@ public static class PerformanceLogic{
     }
 
 
-    public static void PerformanceCatalogue(){
+    public void PerformanceCatalogue(){
         Console.Clear();
-        string? performanceId = PerformancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket:", true);
+        string? performanceId = App.performancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket:", true);
         if (performanceId == null) return;
         PlayLogic.Choose(performanceId);
-    }
-
-    // Similar to other logic
-    public static bool ChangeName(string name, string id, Dictionary<string, Performance> Performances){
-        foreach (var performance in Performances.Values){
-            if (performance.Name == name) return false;
-        }
-
-        Performances[id].Name = name;
-        DataAccess.UpdateItem<Performance>();
-        return true;
-    }
-
-    // Similar to other logic
-    public static void ChangeGenres(List<string> genres, string id, Dictionary<string, Performance> Performances){
-        Performances[id].Genres = genres;
-        DataAccess.UpdateItem<Performance>();
-        return;
-    }
-
-    // Changes active value
-    public static void ChangeActive(string id, Dictionary<string, Performance> Performances){
-        Performances[id].Active = !Performances[id].Active;
     }
 }

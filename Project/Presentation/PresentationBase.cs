@@ -104,9 +104,9 @@ public class PresentationBase<T> where T : IEditable{
         }
         itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();
 
-        int index = 1;
-        string menu = "";
         while (true){
+            string menu = "";
+            int index = 1;
             int choice = -1;
             Console.Clear();
             Console.WriteLine(question);
@@ -124,8 +124,8 @@ public class PresentationBase<T> where T : IEditable{
                 menu += "\n";
             }
             menu += $"{index}: {exit}";
-            
             Console.WriteLine(menu);
+            
             try {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){
                     Console.WriteLine("\nInvalid input\n");

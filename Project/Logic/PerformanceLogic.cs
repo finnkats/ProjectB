@@ -58,7 +58,7 @@ public class PerformanceLogic : LogicBase<Performance>{
             if (HasGenre(performance.Item1, genreIDList))
             {
                 // overwrites index of the option that will be printed for the menu
-                string performanceOptionString = $"{performanceIndex++}: {performance.Item2.Split(':')[1]}";
+                string performanceOptionString = $"{performanceIndex++}: {performance.Item2}";
                 FilteredPerformanceOptionsList.Add((performance.Item1, performanceOptionString));
             }
             
@@ -70,7 +70,6 @@ public class PerformanceLogic : LogicBase<Performance>{
     // Returns a list of performanceId, string made for printing,
     // if onlyActive is true, it only contains Active performances
     public List<(string, string)> GetPerformanceOptions(bool onlyActive){
-        int index = 0;
         // list of id, performance string
         List<(string, string)> PerformanceOptions = new();
         // list of id, performance
@@ -87,7 +86,7 @@ public class PerformanceLogic : LogicBase<Performance>{
         // Goes over the performances and then adds the (id, string (made for printing)) to PerformanceOptions
         foreach (var performance in PerformancesOrdered){
             if (onlyActive && !performance.Item2.Active) continue;
-            string performanceString = $"{(index++ % 5) + 1}: {performance.Item2.Name}".PadRight(40);
+            string performanceString = performance.Item2.Name.PadRight(40);
             if (onlyActive){
                 List<string> currentGenres = new();
                 foreach (var genreId in App.Performances[performance.Item1].Genres){

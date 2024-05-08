@@ -85,6 +85,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
         
         // Infinite loop to keep the menu running until an option is chosen or the user exits
         while (true){
+            int printIndex = 1;
             // Clear the console
             Console.Clear();
             
@@ -98,7 +99,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             
             // Display the performance options for the current page
             foreach (var performanceOption in PerformanceOptionsScope){
-                Console.WriteLine(performanceOption.Item2);
+                Console.WriteLine($"{printIndex++}: " + performanceOption.Item2);
             }
             Console.WriteLine();
 

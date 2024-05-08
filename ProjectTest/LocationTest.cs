@@ -1,43 +1,43 @@
+using System.Runtime.CompilerServices;
+
 namespace ProjectTest.LocationTest;
 
 [TestClass]
 public class LocationTest{
-    [ClassInitialize]
-    public static void Setup(TestContext testContext){
-        if (!App.Locations.ContainsKey("TESTID1")) App.Locations.Add("TESTID1", new Location("Test Location 1", new List<string>(){"TESTHALL1", "TESTHALL2"}));
-        if (!App.Locations.ContainsKey("TESTID2")) App.Locations.Add("TESTID2", new Location("Test Location 2", new List<string>()));
-        if (!App.Halls.ContainsKey("TESTHALL1")) App.Halls.Add("TESTHALL1", new Hall("Test Hall 1", 500, "TESTID1"));
-        if (!App.Halls.ContainsKey("TESTHALL2")) App.Halls.Add("TESTHALL2", new Hall("Test Hall 2", 500, "TESTID1"));
+
+    [TestInitialize]
+    public void Reset(){
+        TestDataFiller.FillApp();
     }
 
     [TestMethod]
     public void AddHall(){
-        Assert.IsFalse(HallLogic.AddHall("", 500, "TESTID1"));
-        Assert.IsFalse(HallLogic.AddHall("New Name", -100, "TESTID1"));
-        Assert.IsFalse(HallLogic.AddHall("Test Hall 1", 500, "TESTID1"));
+        Assert.IsFalse(App.hallLogic.AddHall("", 500, "ID0"));
+        Assert.IsFalse(App.hallLogic.AddHall("New Name", -100, "ID0"));
+        Assert.IsFalse(App.hallLogic.AddHall("NAME3", 500, "ID0"));
         
         int before = App.Halls.Count;
-        Assert.IsTrue(HallLogic.AddHall("Test Hall 3", 500, "TESTID1"));
+        Assert.IsTrue(App.hallLogic.AddHall("NAME20", 500, "ID0"));
         Assert.AreEqual(before + 1, App.Halls.Count);
     }
 
     [TestMethod]
     public void AddLocation(){
-        Assert.IsFalse(LocationLogic.AddLocation("", new List<string>()));
-        Assert.IsFalse(LocationLogic.AddLocation("Test Location 1", new List<string>()));
+        Assert.IsFalse(App.locationLogic.AddLocation("", new List<string>()));
+        Assert.IsFalse(App.locationLogic.AddLocation("Location1", new List<string>()));
         
         int before = App.Locations.Count;
-        Assert.IsTrue(LocationLogic.AddLocation("Test Location 3", new List<string>()));
+        Assert.IsTrue(App.locationLogic.AddLocation("Location3", new List<string>()));
         Assert.AreEqual(before + 1, App.Locations.Count);
     }
 
     [TestMethod]
     public void ChangeName(){
-        Assert.IsFalse(HallLogic.ChangeName("TESTHALL1", "Test Hall 2"));
-        Assert.IsTrue(HallLogic.ChangeName("TESTHALL1", "Test Hall 1 New"));
+        Assert.IsFalse(App.hallLogic.ChangeName("ID0", "NAME2"));
+        Assert.IsTrue(App.hallLogic.ChangeName("ID0", "NAME20"));
     
-        Assert.IsFalse(LocationLogic.ChangeName("TESTID1", "Test Location 2"));
-        Assert.IsTrue(LocationLogic.ChangeName("TESTID1", "Test Location 1 New"));
+        Assert.IsFalse(App.locationLogic.ChangeName("ID0", "Location2"));
+        Assert.IsTrue(App.locationLogic.ChangeName("ID0", "Location20"));
 
     }
 }

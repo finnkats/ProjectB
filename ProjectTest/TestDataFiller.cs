@@ -22,6 +22,8 @@ namespace ProjectTest
             App.Halls.Clear();
             App.Accounts = DataAccess.ReadItem<Account>();
             App.Halls = DataAccess.ReadItem<Hall>();
+            App.Locations.Clear();
+            App.Locations = DataAccess.ReadItem<Location>();
         }
     }
 }

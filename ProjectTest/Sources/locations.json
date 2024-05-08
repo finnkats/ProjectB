@@ -1,10 +1,10 @@
 {
   "ID0": {
-    "Name": "Theater het Kruispunt",
-    "Halls": [ "ID0" ]
+      "Name": "Location1",
+      "Halls": ["ID0"]
   },
   "ID1": {
-    "Name": "Theater Zuidplein",
-    "Halls": [ "ID1", "ID2", "ID3" ]
+      "Name": "Location2",
+      "Halls": ["ID1", "ID2", "ID3"]
   }
 }

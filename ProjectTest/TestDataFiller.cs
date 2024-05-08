@@ -19,7 +19,9 @@ namespace ProjectTest
         public static void FillApp()
         {
             App.Accounts.Clear();
+            App.Halls.Clear();
             App.Accounts = DataAccess.ReadItem<Account>();
+            App.Halls = DataAccess.ReadItem<Hall>();
         }
     }
 }

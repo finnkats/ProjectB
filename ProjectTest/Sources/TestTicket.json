@@ -1,32 +1,27 @@
-[
-  {
-    "User": "Marco",
-    "Ticket": {
+{
+  "Marco": [
+    {
       "PerformanceId": "ID1",
       "Date": "06/06/2024",
       "Time": "20:00:00",
       "Hall": "ID0",
       "Active": true
-    }
-  },
-  {
-    "User": "Peter",
-    "Ticket": {
+    },
+  ]
+  "Peter": [
+    {
       "PerformanceId": "ID2",
       "Date": "10/06/2024",
       "Time": "18:00:00",
       "Hall": "ID0",
       "Active": true
-    }
-  },
-  {
-    "User": "Peter",
-    "Ticket": {
+    },
+    {
       "PerformanceId": "ID2",
       "Date": "30/06/2024",
       "Time": "18:00:00",
-      "Hall": "ID1",
+      "Hall": "ID0",
       "Active": true
     }
-  }
-]
+  ]
+}

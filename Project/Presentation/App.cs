@@ -11,12 +11,12 @@ public static class App
     public static readonly PerformancePresentation performancePresentation = new PerformancePresentation(performanceLogic);
 
     public static Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
-    public static readonly LocationLogic locationLogic = new LocationLogic();
-    public static readonly LocationPresentation locationPresentation = new LocationPresentation(locationLogic);
+    public static LocationLogic locationLogic = new LocationLogic();
+    public static LocationPresentation locationPresentation = new LocationPresentation(locationLogic);
 
     public static Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
-    public static readonly HallLogic hallLogic = new HallLogic();
-    public static readonly HallPresentation hallPresentation = new HallPresentation(hallLogic);
+    public static HallLogic hallLogic = new HallLogic();
+    public static HallPresentation hallPresentation = new HallPresentation(hallLogic);
 
     public static Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
     public static readonly GenreLogic genreLogic = new GenreLogic();

@@ -33,10 +33,10 @@ public class LocationTest{
 
     [TestMethod]
     public void ChangeName(){
-        Assert.IsFalse(App.hallLogic.ChangeName("ID0", "NAME2"));
+        Assert.IsFalse(App.hallLogic.ChangeName("ID0", "NAME1"));
         Assert.IsTrue(App.hallLogic.ChangeName("ID0", "NAME20"));
     
-        Assert.IsFalse(App.locationLogic.ChangeName("ID0", "Location2"));
+        Assert.IsFalse(App.locationLogic.ChangeName("ID0", "Location1"));
         Assert.IsTrue(App.locationLogic.ChangeName("ID0", "Location20"));
 
     }

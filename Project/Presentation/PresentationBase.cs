@@ -160,7 +160,7 @@ public class PresentationBase<T> where T : IEditable{
             // Don't add the genres that are int itemIds already
             if (typeof(T) == typeof(Genre) && itemIds.Contains(itemPair.Key)) continue;
             // Don't add the halls which are already linked to a location
-            if (itemPair.Value.GetType() == typeof(Hall) && App.Halls[itemPair.Key].LocationId == "null") continue;
+            if (itemPair.Value.GetType() == typeof(Hall) && App.Halls[itemPair.Key].LocationId != "null") continue;
             itemsOrdered.Add((itemPair.Key, itemPair.Value.Name));
         }
         itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();

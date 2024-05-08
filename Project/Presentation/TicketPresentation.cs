@@ -63,13 +63,16 @@ public static class TicketPresentation{
             try {
                 if (!Int32.TryParse(userInput, out int IndexInt)) return; 
                 int ReturnIndex = IndexInt - 1;
-                foreach (UserTicket userTicket in App.Tickets){
-                    if (userTicket.Ticket == TicketsList[0][ReturnIndex]){
-                        if (!MainTicketSystem.CancellationIsNotOneDayBefore(userTicket)){
-                            Console.WriteLine("Can't refund ticket because the performance is tomorrow");
-                            return;
+                foreach (KeyValuePair<string, List<Ticket>> userTicket in App.Tickets){
+                    foreach(Ticket ticket in userTicket.Value){
+                        if (ticket == TicketsList[0][ReturnIndex]){
+                            if (!MainTicketSystem.CancellationIsNotOneDayBefore(ticket)){
+                                Console.WriteLine("Can't refund ticket because the performance is tomorrow");
+                                return;
+                            }
+                            MainTicketSystem.CancelTicketLogic(ticket);
+                            Console.WriteLine("Program has gone through here");
                         }
-                        MainTicketSystem.CancelTicketLogic(userTicket);
                     }
                 }
                 Console.WriteLine($"Refunded {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name}");

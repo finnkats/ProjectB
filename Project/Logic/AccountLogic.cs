@@ -92,7 +92,7 @@ public static class AccountLogic
             return;
         }
         App.Accounts.Add(name, new Account(name, password, false));
-        AccountDataAccess.UpdateAccounts();
+        DataAccess.UpdateItem<Account>();
         AccountPresentation.PrintMessage("\nAccount has been created.");
         Thread.Sleep(1000);
         AccountLogic.Login(name, password);

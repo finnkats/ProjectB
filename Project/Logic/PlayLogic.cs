@@ -2,7 +2,10 @@ using System.Text.Json;
 using System.Globalization;
 public static class PlayLogic
 {
+    //  This is the start of creating a ticket
     public static void Choose(string performanceId){
+        // Checks if logged in user is no one, (means user should login)
+        // or if admin is logged in (should now be able to buy a ticket)
         if(App.LoggedInUsername == "Unknown"){
             bool readyToPay = TicketLoginPresentation.ChooseLoginOption();
             if(!readyToPay){
@@ -14,20 +17,25 @@ public static class PlayLogic
             return;
         }
 
+        // Gets a list of plays from a performance from the given performanceId
         List<Play> AllViewings;
         if (App.Plays.ContainsKey(performanceId)) AllViewings = App.Plays[performanceId];
         else AllViewings = new();
         AllViewings = OneMonthFilter(AllViewings);
         
-        string ViewingLocation = LocationPresentation.GetLocation("Select a location:", "Exit");
+        // Gets the location
+        string ViewingLocation = App.locationPresentation.GetItem("Select a location:", "Exit");
         if (ViewingLocation == "null") return;
 
+        // Gets the date
         string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
         if (ViewingDate == null) return;
 
+        // Gets the time
         string? ViewingTime = PlayPresentation.PrintTimes(ViewingLocation, ViewingDate, AllViewings);
         if (ViewingTime == null) return;
 
+        // Gets the hall
         string ViewingHall = "";
         foreach (var viewing in AllViewings){
             if (viewing.Date == ViewingDate && viewing.Time == ViewingTime){
@@ -36,9 +44,13 @@ public static class PlayLogic
             }
         }
 
+        // Creates the ticket
         MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall, true);
     }
 
+    // returns a string (which is basically a menu)
+    // and a Dictionary of int and string (where int is the index of the option shown in the menu) and
+    // string is the string of the date
     public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
         string? datesString = "";
@@ -67,6 +79,7 @@ public static class PlayLogic
         return (datesString, dateOptions);
     }
 
+    // Does the same as GetDates but then with times
     public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         if (playOptions.Count() == 0) return (null, null);
         string? timesString = $"Available times on {chosenDate}:\n";
@@ -88,20 +101,16 @@ public static class PlayLogic
         return (timesString, timeOptions);
     }
 
-    public static void AddNewId(string id){
-        App.Plays.Add(id, new List<Play>());
-        PlayDataAccess.UpdatePlays();
-    }
-
     public static bool AddPlay(string location, string time, string date, string hall, string playId){
         if (!App.Plays.ContainsKey(playId)) return false;
         Play newPlay = new(location, time, date, hall, playId);
         App.Plays[playId].Add(newPlay);
-        PlayDataAccess.UpdatePlays();
+        DataAccess.UpdateList<Play>();
 
         return true;
     }
 
+    // Gets a list of plays and returns all plays which are less than 1 month in the future
     public static List<Play> OneMonthFilter(List<Play> Plays){
         DateTime OneMonthDate = DateTime.Now.Date.AddMonths(1);
         List<Play> FilteredPlays = new();
@@ -112,5 +121,13 @@ public static class PlayLogic
             }
         }
         return FilteredPlays;
+    }
+
+    public static List<Play> GetPlaysFromPresentations(string playID){
+        if (App.Plays.ContainsKey(playID)){
+            return App.Plays[playID];
+        } else {
+            return new List<Play>();
+        }
     }
 }

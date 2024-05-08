@@ -3,6 +3,7 @@ using System.Globalization;
 
 public static class PlayPresentation
 {
+    // returns the chosen date
     public static string? PrintDates(string selectedLocation, List<Play> playOptions){
         Console.Clear();
         (string? datesString, Dictionary<int, string>? datesOptions) = PlayLogic.GetDates(selectedLocation, playOptions);
@@ -27,6 +28,7 @@ public static class PlayPresentation
         return chosenDate;
     }
 
+    // returns the chosen time
     public static string? PrintTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
         Console.Clear();
         (string? timesString, Dictionary<int, string>? timesOptions) = PlayLogic.GetTimes(selectedLocation, chosenDate, playOptions);
@@ -51,11 +53,12 @@ public static class PlayPresentation
         return chosenTime;
     }
 
+    // Collects the data needed to add a play
     public static void AddPlayDetails(){
-        string? playId = PerformancePresentation.PerformanceChoice("For what performance do you want to add a play?");
+        string? playId = App.performancePresentation.PerformanceChoice("For what performance do you want to add a play?");
         if (playId == null) return;
 
-        string location = LocationPresentation.GetLocation("What location?", "Cancel");
+        string location = App.locationPresentation.GetItem("Choose a location:", "Cancel");
         if (location == "null") return;
 
         string time;
@@ -82,7 +85,7 @@ public static class PlayPresentation
             break;
         }
 
-        string hall = HallPresentation.GetHall(location);
+        string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
         if (hall == "null") return;
 
         if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");

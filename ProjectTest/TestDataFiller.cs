@@ -18,7 +18,8 @@ namespace ProjectTest
 
         public static void FillApp()
         {
-            
+            App.Accounts.Clear();
+            App.Accounts = DataAccess.ReadItem<Account>();
         }
     }
 }

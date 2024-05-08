@@ -1,18 +1,12 @@
 {
-  "Admin123": {
-    "Name": "Admin123",
-    "Password": "Password123",
+  "Admin1": {
+    "Name": "Admin1",
+    "Password": "Password1",
     "IsAdmin": true
   },
-
-  "Peter": {
-    "Name": "Peter",
-    "Password": "password",
-    "IsAdmin": false
-  },
-  "Marco": {
-    "Name": "Marco",
-    "Password": "p4ssw0rd",
+  "User1": {
+    "Name": "User1",
+    "Password": "Password2",
     "IsAdmin": false
   }
 }

@@ -21,24 +21,24 @@ public static class AccountPresentation
         {
             key = Console.ReadKey(true);
 
-            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+            // Check if the entered key is a valid character (letter or number)
+            if (char.IsLetterOrDigit(key.KeyChar))
             {
                 password.Append(key.KeyChar);
                 Console.Write("*");
             }
-            else
+            else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
             {
-                if (key.Key == ConsoleKey.Backspace && password.Length > 0)
-                {
-                    password.Remove(password.Length - 1, 1);
-                    Console.Write("\b \b");
-                }
+                // Handle backspace to remove the last character
+                password.Remove(password.Length - 1, 1);
+                Console.Write("\b \b");
             }
         } while (key.Key != ConsoleKey.Enter);
 
         Console.WriteLine();
         return password.ToString();
     }
+
 
     public static (string, string) GetLoginDetails()
     {

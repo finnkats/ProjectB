@@ -12,6 +12,7 @@ public static class AccountPresentation
         return false;
     }
 
+
     private static string MaskPasswordInput()
     {
         StringBuilder password = new StringBuilder();
@@ -50,6 +51,7 @@ public static class AccountPresentation
 
         Console.WriteLine("Password:");
         string loginPassword = MaskPasswordInput();
+        Console.WriteLine();
         return (loginName ?? "null", loginPassword);
     }
 
@@ -78,12 +80,13 @@ public static class AccountPresentation
 
     public static bool DoubleCheckPassword(string? password)
     {
-        Console.WriteLine("\nConfirm Password:");
+        Console.WriteLine("Confirm Password:");
         string confirmedPassword = MaskPasswordInput(); // Get the confirmed password
+
 
         if (confirmedPassword != password)
         {
-            Console.WriteLine("Passwords is not correct.");
+            Console.WriteLine("Password is not correct.");
             Thread.Sleep(2000);
             return false;
         }

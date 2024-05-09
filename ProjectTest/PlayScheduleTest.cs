@@ -6,26 +6,22 @@ using System.Text.Json;
 namespace ProjectTest.PlayScheduleTests;
 
 [TestClass]
-public class MovieScheduleTest
+public class PlayScheduleTest
 {
-    [ClassInitialize]
-    public static void Setup(TestContext testContext){
-        if (!App.Locations.ContainsKey("TESTID1")) App.Locations.Add("TESTID1", new Location("Test Location 1", new List<string>(){"TESTHALL1", "TESTHALL2"}));
-        if (!App.Locations.ContainsKey("TESTID2")) App.Locations.Add("TESTID2", new Location("Test Location 2", new List<string>()));
-        if (!App.Halls.ContainsKey("TESTHALL1")) App.Halls.Add("TESTHALL1", new Hall("Test Hall 1", 500, "TESTID1"));
-        if (!App.Halls.ContainsKey("TESTHALL2")) App.Halls.Add("TESTHALL2", new Hall("Test Hall 2", 500, "TESTID1"));
-        if (!App.Performances.ContainsKey("TESTID")) App.Performances.Add("TESTID", new Performance("Test Performance", new List<string>(), false));
+    [TestInitialize]
+    public void Reset(){
+        TestDataFiller.FillApp();
     }
 
     [TestMethod]
     public void GetDatesTest(){
-        string Location1 = "TESTID1";
-        string Location2 = "TESTID2";
+        string Location1 = "ID0";
+        string Location2 = "ID1";
         List<Play> Viewings = new(){
-            new Play(Location1, "00:00", "01/01/2024", "TESTHALL1", "TESTID"),
-            new Play(Location1, "00:00", "02/01/2024", "TESTHALL1", "TESTID"),
-            new Play(Location2, "00:00", "01/02/2024", "TESTHALL1", "TESTID"),
-            new Play(Location2, "00:00", "02/02/2024", "TESTHALL1", "TESTID"),
+            new Play(Location1, "00:00", "01/01/2024", "ID0", "ID0"),
+            new Play(Location1, "00:00", "02/01/2024", "ID1", "ID0"),
+            new Play(Location2, "00:00", "01/02/2024", "ID2", "ID1"),
+            new Play(Location2, "00:00", "02/02/2024", "ID3", "ID2"),
         };
 
         string? datesString;
@@ -55,13 +51,13 @@ public class MovieScheduleTest
     
     [TestMethod]
     public void GetTimesTest(){
-        string Location1 = "TESTID1";
-        string Location2 = "TESTID2";
+        string Location1 = "ID0";
+        string Location2 = "ID1";
         List<Play> Viewings = new(){
-            new Play(Location1, "19:21:13", "01/01/2024", "TESTHALL1", "TESTID"),
-            new Play(Location1, "20:30:00", "01/01/2024", "TESTHALL1", "TESTID"),
-            new Play(Location2, "17:40:00", "01/01/2024", "TESTHALL1", "TESTID"),
-            new Play(Location2, "09:15:00", "01/01/2024", "TESTHALL1", "TESTID"),
+            new Play(Location1, "19:21:13", "01/01/2024", "ID0", "ID0"),
+            new Play(Location1, "20:30:00", "01/01/2024", "ID1", "ID0"),
+            new Play(Location2, "17:40:00", "01/01/2024", "ID2", "ID1"),
+            new Play(Location2, "09:15:00", "01/01/2024", "ID3", "ID2")
         };
 
         string? TimeString;

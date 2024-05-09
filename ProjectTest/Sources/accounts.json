@@ -1,0 +1,13 @@
+{
+    "Admin1": {
+      "Name": "Admin1",
+      "Password": "Password1",
+      "IsAdmin": true
+    },
+    "User1": {
+      "Name": "User1",
+      "Password": "Password2",
+      "IsAdmin": false
+    }
+  }
+  

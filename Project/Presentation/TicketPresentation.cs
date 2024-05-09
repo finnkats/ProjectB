@@ -69,13 +69,12 @@ public static class TicketPresentation{
                     };
                     bool ticketFound = false;
                     int ReturnIndex = IndexInt - 1;
-                    //foreach (KeyValuePair<string, List<Ticket>> userTicket in App.Tickets){
                     foreach (Ticket ticket in App.Tickets[App.LoggedInUsername]){
-                        if (ticket != TicketsList[0][ReturnIndex]){
-                            if (!MainTicketSystem.CancellationIsNotOneDayBefore(ticket)) break;
-                            ticketFound = true;
-                            MainTicketSystem.CancelTicketLogic(ticket);
-                        }
+                        if (ticket != TicketsList[0][ReturnIndex]) continue;
+                        if (!MainTicketSystem.CancellationIsNotOneDayBefore(ticket)) break;
+                        ticketFound = true;
+                        MainTicketSystem.CancelTicketLogic(ticket);
+                        break;
                     }
                     if (ticketFound) Console.WriteLine($"Refunded {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name}");
                     else Console.WriteLine("Can't refund ticket because the performance is tomorrow");

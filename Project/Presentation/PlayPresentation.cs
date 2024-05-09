@@ -4,6 +4,54 @@ using System.Globalization;
 public static class PlayPresentation
 {
     // returns the chosen date
+    public static void DisplayViewings(List<Play> playOptions)
+{
+    Console.Clear();
+    Console.WriteLine("Viewings\n----------------------------------------------------------------------------------");
+    Console.WriteLine("|Performance # |Performance Name    |Date               |Time               |Hall               |");
+    Console.WriteLine("----------------------------------------------------------------------------------");
+
+    for (int i = 0; i < playOptions.Count; i++)
+    {
+        var viewing = playOptions[i];
+        Console.WriteLine($"|{i + 1,-14}|{viewing.PerformanceId,-20}|{viewing.Date,-19}|{viewing.Time,-19}|{viewing.Hall,-19}|");
+    }
+    Console.WriteLine("----------------------------------------------------------------------------------");
+
+    int chosenIndex = -1;
+    while (chosenIndex == -1)
+    {
+        Console.Write("Select a performance by entering its index or '0' to cancel: ");
+        string? choice = Console.ReadLine();
+        if (int.TryParse(choice, out int index))
+        {
+            if (index == 0)
+            {
+                Console.WriteLine("Cancelled.");
+                Thread.Sleep(1500);
+                return;
+            }
+            else if (index > 0 && index <= playOptions.Count)
+            {
+                chosenIndex = index - 1;
+            }
+            else
+            {
+                Console.WriteLine("Invalid index.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input.");
+        }
+    }
+
+    var chosenViewing = playOptions[chosenIndex];
+    Console.WriteLine($"You chose Performance #{chosenIndex + 1}: {chosenViewing.PerformanceId} on {chosenViewing.Date} at {chosenViewing.Time} in {chosenViewing.Hall}");
+
+    // Further actions with the chosen viewing, such as ticket booking
+}
+
     public static string? PrintDates(string selectedLocation, List<Play> playOptions){
         Console.Clear();
         (string? datesString, Dictionary<int, string>? datesOptions) = PlayLogic.GetDates(selectedLocation, playOptions);

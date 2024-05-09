@@ -1,5 +1,9 @@
-using System.Text.Json;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Threading;
+
 public static class PlayLogic
 {
     //  This is the start of creating a ticket
@@ -23,29 +27,10 @@ public static class PlayLogic
         else AllViewings = new();
         AllViewings = OneMonthFilter(AllViewings);
         
-        // Gets the location
-        string ViewingLocation = App.locationPresentation.GetItem("Select a location:", "Exit");
-        if (ViewingLocation == "null") return;
+        // Display all viewings and allow user to choose
+        PlayPresentation.DisplayViewings(AllViewings);
 
-        // Gets the date
-        string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
-        if (ViewingDate == null) return;
-
-        // Gets the time
-        string? ViewingTime = PlayPresentation.PrintTimes(ViewingLocation, ViewingDate, AllViewings);
-        if (ViewingTime == null) return;
-
-        // Gets the hall
-        string ViewingHall = "";
-        foreach (var viewing in AllViewings){
-            if (viewing.Date == ViewingDate && viewing.Time == ViewingTime){
-                ViewingHall = viewing.Hall;
-                break;
-            }
-        }
-
-        // Creates the ticket
-        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall, true);
+        // Further actions based on the chosen viewing
     }
 
     // returns a string (which is basically a menu)
@@ -64,7 +49,7 @@ public static class PlayLogic
                 availableDates.Add(viewing.Date);
             }
         }
-        List<string> availableDatesOrdered = availableDates.Order().ToList();
+        List<string> availableDatesOrdered = availableDates.OrderBy(date => DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture)).ToList();
 
         int dateCounter = 1;
         Dictionary<int, string> dateOptions = new Dictionary<int, string>();
@@ -131,3 +116,5 @@ public static class PlayLogic
         }
     }
 }
+
+

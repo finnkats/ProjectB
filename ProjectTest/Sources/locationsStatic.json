@@ -1,0 +1,16 @@
+{
+    "ID0": {
+        "Name": "Location1",
+        "Halls": [
+            "ID0"
+        ]
+    },
+    "ID1": {
+        "Name": "Location2",
+        "Halls": [
+            "ID1",
+            "ID2",
+            "ID3"
+        ]
+    }
+}

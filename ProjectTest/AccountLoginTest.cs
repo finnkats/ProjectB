@@ -1,9 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ProjectTest;
 using System;
 using System.IO;
 using System.Text;
 
-namespace Logic.Tests
+namespace Logic.Tests.AccountTest
 {
     [TestClass]
     public class AccountLogicTests
@@ -18,6 +19,7 @@ namespace Logic.Tests
 
         [TestInitialize]
         public void Reset(){
+            TestDataFiller.FillApp();
             AccountLogic.Logout();
         }
 
@@ -26,8 +28,8 @@ namespace Logic.Tests
         public void CheckLoginTest()
         {
             // Arrange
-            string loginName = "Admin123";
-            string loginPassword = "Password123";
+            string loginName = "Admin1";
+            string loginPassword = "Password1";
 
             Account wrongAdmin = new("Wrong", "Wrong", true);
             Assert.IsFalse(AccountLogic.CheckLogin(loginName, loginPassword, wrongAdmin), "Login should not be successful");
@@ -41,12 +43,12 @@ namespace Logic.Tests
 
         [TestMethod]
         public void AdminLogin(){
-            string loginName = "Admin123";
-            string loginPassword = "Password123";
-            Account Admin = new(loginName, loginPassword, true);
+            string loginName = "Admin1";
+            string loginPassword = "Password1";
             AccountLogic.Login(loginName, loginPassword);
 
             Assert.AreNotEqual("Unknown", App.LoggedInUsername);
+            Assert.AreEqual("Admin1", App.LoggedInUsername);
 
             string menuString = App.HomePage.MenuString();
             Assert.IsTrue(menuString.Contains("Admin Features"), menuString);
@@ -55,12 +57,12 @@ namespace Logic.Tests
 
         [TestMethod]
         public void CustomerLogin(){
-            string loginName = "Soufiane";
-            string loginPassword = "password";
-            Account Customer = new(loginName, loginPassword, false);
+            string loginName = "User1";
+            string loginPassword = "Password2";
             AccountLogic.Login(loginName, loginPassword);
 
             Assert.AreNotEqual("Unknown", App.LoggedInUsername);
+            Assert.AreEqual("User1", App.LoggedInUsername);
 
             string menuString = App.HomePage.MenuString();
             Assert.IsTrue(menuString.Contains("View Tickets"), menuString);

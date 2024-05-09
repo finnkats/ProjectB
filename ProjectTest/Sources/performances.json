@@ -1,0 +1,25 @@
+{
+    "ID0": {
+      "Name": "Performance 1",
+      "Genres": [
+        "ID0",
+        "ID3"
+      ],
+      "Active": true
+    },
+    "ID1": {
+      "Name": "Performance 2",
+      "Genres": [
+        "ID1",
+        "ID2"
+      ],
+      "Active": true
+    },
+    "ID2": {
+      "Name": "Performance 3",
+      "Genres": [
+        "ID0"
+      ],
+      "Active": true
+    }
+}

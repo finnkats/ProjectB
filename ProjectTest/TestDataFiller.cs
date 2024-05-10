@@ -32,7 +32,9 @@ namespace ProjectTest
             App.genreLogic.Dict = App.Genres;
     
             File.WriteAllText("../../../Sources/plays.json", File.ReadAllText("../../../Sources/playsStatic.json"));
+            File.WriteAllText("../../../Sources/archivedplays.json", File.ReadAllText("../../../Sources/playsStatic.json"));
             App.Plays = DataAccess.ReadList<Play>();
+            App.ArchivedPlays = DataAccess.ReadList<ArchivedPlay>();
 
             File.WriteAllText("../../../Sources/tickets.json", File.ReadAllText("../../../Sources/ticketsStatic.json"));
             App.Tickets = DataAccess.ReadList<Ticket>();

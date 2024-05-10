@@ -4,7 +4,7 @@ using System.Globalization;
 public static class PlayPresentation
 {
     // returns the chosen date
-    public static void DisplayViewings(List<Play> playOptions)
+    public static void DisplayViewings(List<Play> playOptions, string performanceId)
 {
     Console.Clear();
     Console.WriteLine("Viewings\n----------------------------------------------------------------------------------");
@@ -33,6 +33,15 @@ public static class PlayPresentation
             }
             else if (index > 0 && index <= playOptions.Count)
             {
+                // Get the chosen viewing
+                var chosenViewing = playOptions[index - 1];
+                
+                // Here you'd create the ticket with the chosen details
+                MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.Time, chosenViewing.Hall, true);
+
+                // Optionally, you can inform the user about the ticket creation
+                Console.WriteLine("Ticket created successfully!");
+
                 chosenIndex = index - 1;
             }
             else
@@ -45,12 +54,8 @@ public static class PlayPresentation
             Console.WriteLine("Invalid input.");
         }
     }
-
-    var chosenViewing = playOptions[chosenIndex];
-    Console.WriteLine($"You chose Performance #{chosenIndex + 1}: {chosenViewing.PerformanceId} on {chosenViewing.Date} at {chosenViewing.Time} in {chosenViewing.Hall}");
-
-    // Further actions with the chosen viewing, such as ticket booking
 }
+
 
     public static string? PrintDates(string selectedLocation, List<Play> playOptions){
         Console.Clear();

@@ -28,9 +28,8 @@ public static class PlayLogic
         AllViewings = OneMonthFilter(AllViewings);
         
         // Display all viewings and allow user to choose
-        PlayPresentation.DisplayViewings(AllViewings);
+        PlayPresentation.DisplayViewings(AllViewings, performanceId);
 
-        // Further actions based on the chosen viewing
     }
 
     // returns a string (which is basically a menu)

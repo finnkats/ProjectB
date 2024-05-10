@@ -104,10 +104,14 @@ public static class PlayLogic
 
     public static bool AddPlay(string location, string time, string date, string hall, string playId){
         if (!App.Plays.ContainsKey(playId)) return false;
+        if (!ValidDate(date)) return false;
+        if (!ValidTime(time)) return false;
+        time += ":00";
         Play newPlay = new(location, time, date, hall, playId);
         App.Plays[playId].Add(newPlay);
         DataAccess.UpdateList<Play>();
-
+        App.ArchivedPlays[playId].Add(new ArchivedPlay(location, time, date, hall, playId));
+        DataAccess.UpdateList<ArchivedPlay>();
         return true;
     }
 
@@ -144,5 +148,21 @@ public static class PlayLogic
             }
         }
         DataAccess.UpdateList<Play>();
+    }
+
+    public static bool ValidTime(string givenTime){
+        string[] times = givenTime.Split(':');
+        if (times.Length != 2) return false;
+        if (!Int32.TryParse(times[0], out int hours)) return false;
+        if (!Int32.TryParse(times[1], out int minutes)) return false;
+        if (0 > hours || hours > 23) return false;
+        if (0 > minutes || minutes > 59) return false;
+        return true;
+    }
+
+    public static bool ValidDate(string givenDate){
+        if (!DateTime.TryParseExact(givenDate, "dd/MM/yyyy", null, DateTimeStyles.None, out DateTime date)) return false;
+        if (date < DateTime.Now.AddDays(1)) return false;
+        return true;
     }
 }

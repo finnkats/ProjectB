@@ -47,9 +47,6 @@ public static class AccountPresentation
             }
         } while (key.Key != ConsoleKey.Enter); // Repeat until the Enter key is pressed
 
-        // Move the cursor to the next line
-        Console.WriteLine();
-
         // Return the password as a string
         return password.ToString();
     }

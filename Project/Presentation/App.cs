@@ -33,6 +33,7 @@ public static class App
         // Fill in all Menu's
         CreateMenus();
         MainTicketSystem.CheckOutdatedTickets();
+        PlayLogic.RemoveOutdatedPlays();
     }
 
     // Add new menu's here

@@ -137,7 +137,7 @@ public static class PlayLogic
             // Get the time for 1 hour in the future
             DateTime dateLimit = DateTime.Now.Add(DateTime.Now.TimeOfDay).AddHours(1);
             // Loop backwards over list, so removing wont cause errors
-            for (int i = playList.Count; i >= 0; i--){
+            for (int i = playList.Count - 1; i >= 0; i--){
                 if (!DateTime.TryParse($"{playList[i].Date} {playList[i].Time}", out DateTime playDate)) continue;
                 if (playDate > dateLimit) continue;
                 playList.RemoveAt(i);

@@ -61,18 +61,18 @@ public static class PlayPresentation
         string location = App.locationPresentation.GetItem("Choose a location:", "Cancel");
         if (location == "null") return;
 
-        string time;
+        string startTime;
         while (true){
             Console.Clear();
             Console.WriteLine("What time? [HH:MM]");
-            time = Console.ReadLine() ?? "99:99";
-            string[] times = time.Split(':');
+            startTime = Console.ReadLine() ?? "99:99";
+            string[] times = startTime.Split(':');
             if (times.Length != 2) continue;
             if (!Int32.TryParse(times[0], out int hours)) continue;
             if (!Int32.TryParse(times[1], out int minutes)) continue;
             if (0 > hours || hours > 23) continue;
             if (0 > minutes || minutes > 59) continue;
-            time = $"{time}:00";
+            startTime = $"{startTime}:00";
             break;
         }
 
@@ -88,7 +88,7 @@ public static class PlayPresentation
         string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
         if (hall == "null") return;
 
-        if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
+        if (PlayLogic.AddPlay(location, startTime, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
         else Console.WriteLine("Couldn't add play");
         Thread.Sleep(2500);
     }

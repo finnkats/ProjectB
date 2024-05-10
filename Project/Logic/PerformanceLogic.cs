@@ -1,7 +1,7 @@
 public class PerformanceLogic : LogicBase<Performance>{
-    public bool AddPerformance(string name, List<string> genres, bool active){
+    public bool AddPerformance(string name, int runtime, List<string> genres, bool active){
         string AssignedId = GetID();
-        bool success = AddObject(new Performance(name, genres, active));
+        bool success = AddObject(new Performance(name, runtime, genres, active));
         if (!success) return false;
         App.Plays.Add(AssignedId, new List<Play>());
         DataAccess.UpdateList<Play>();

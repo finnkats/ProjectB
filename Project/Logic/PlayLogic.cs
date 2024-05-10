@@ -38,13 +38,23 @@ public static class PlayLogic
         // Gets the hall
         string ViewingHall = "";
         foreach (var viewing in AllViewings){
-            if (viewing.Date == ViewingDate && viewing.Time == ViewingTime){
+            if (viewing.Date == ViewingDate && viewing.StartTime == ViewingTime){
                 ViewingHall = viewing.Hall;
                 break;
             }
         }
 
         // Creates the ticket
+        foreach (Play play in AllViewings) {
+            if (play.Location == ViewingLocation && play.Date == ViewingDate && play.StartTime == ViewingTime && play.Hall == ViewingHall) {
+                if (play.BookedSeats == App.Halls[ViewingHall].Seats) {
+                    Console.WriteLine("Selected Play is full");
+                    Thread.Sleep(2500);
+                    return;
+                }
+                play.BookedSeats += 1;
+            }
+        }
         MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall, true);
     }
 
@@ -86,13 +96,13 @@ public static class PlayLogic
         int timeCounter = 1;
         Dictionary<int, string> timeOptions = new Dictionary<int, string>();
 
-        var playOptionsOrdered = playOptions.OrderBy(performance => performance.Time).ToList();
+        var playOptionsOrdered = playOptions.OrderBy(performance => performance.StartTime).ToList();
         foreach (var viewing in playOptionsOrdered)
         {
             if (viewing.Location == selectedLocation && viewing.Date == chosenDate)
             {
-                timesString += $"{timeCounter}: {viewing.Time} in {App.Halls[viewing.Hall].Name}\n";
-                timeOptions.Add(timeCounter, viewing.Time);
+                timesString += $"{timeCounter}: {viewing.StartTime} in {App.Halls[viewing.Hall].Name}\n";
+                timeOptions.Add(timeCounter, viewing.StartTime);
                 timeCounter++;
             }
         }
@@ -101,9 +111,9 @@ public static class PlayLogic
         return (timesString, timeOptions);
     }
 
-    public static bool AddPlay(string location, string time, string date, string hall, string playId){
+    public static bool AddPlay(string location, string startTime, string date, string hall, string playId){
         if (!App.Plays.ContainsKey(playId)) return false;
-        Play newPlay = new(location, time, date, hall, playId);
+        Play newPlay = new(location, startTime, date, hall, playId);
         App.Plays[playId].Add(newPlay);
         DataAccess.UpdateList<Play>();
 

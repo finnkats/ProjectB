@@ -8,6 +8,21 @@ public class PerformancePresentation : PresentationBase<Performance>{
         string? performanceName = GetNameInput();
         if (performanceName is null) return;
         Console.WriteLine();
+
+        int runtime;
+        while(true){
+            Console.Write("Enter the runtime in minutes:\n>");
+            string runtimeInput = Console.ReadLine() ?? "";
+            bool runtimeBool = int.TryParse(runtimeInput, out runtime);
+            if(!runtimeBool){Console.WriteLine("Invalid input. Please enter a valid number representing minutes.");}
+            else if(runtimeBool){
+                Console.WriteLine($"Are you sure that the runtime will be in {runtime} minutes?\n>");
+                string confirmRuntime = Console.ReadLine() ?? "";
+                if(confirmRuntime.ToLower() == "y"){break;}
+                else if(confirmRuntime.ToLower() == "n"){continue;}
+                else{Console.WriteLine("Please confirm by entering \'y\' (Yes) or \'n\' (No)");}
+            }
+        }
   
         var genres = App.genrePresentation.GetItemList();
         Console.WriteLine();
@@ -18,14 +33,14 @@ public class PerformancePresentation : PresentationBase<Performance>{
         bool active = activeInput == "1";
 
         Console.Clear();
-        if (!App.performanceLogic.AddPerformance(performanceName, genres, active)){
+        if (!App.performanceLogic.AddPerformance(performanceName, runtime, genres, active)){
             Console.WriteLine("An error occured while adding performance.");
         }
 
         string seperator = ", ";
         List<string> currentGenres = new();
         genres.ForEach(genreId => currentGenres.Add(App.Genres[genreId].Name));
-        Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + ") " +
+        Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + $"), {runtime} minutes" +
                           $"with genres [{String.Join(seperator, currentGenres)}] has been added");
         Thread.Sleep(5000);
     }

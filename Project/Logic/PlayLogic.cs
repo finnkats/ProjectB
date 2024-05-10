@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Globalization;
+using System.Data;
 public static class PlayLogic
 {
     //  This is the start of creating a ticket
@@ -129,5 +130,19 @@ public static class PlayLogic
         } else {
             return new List<Play>();
         }
+    }
+
+    public static void RemoveOutdatedPlays(){
+        foreach (var playList in App.Plays.Values){
+            // Get the time for 1 hour in the future
+            DateTime dateLimit = DateTime.Now.Add(DateTime.Now.TimeOfDay).AddHours(1);
+            // Loop backwards over list, so removing wont cause errors
+            for (int i = playList.Count; i >= 0; i--){
+                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].Time}", out DateTime playDate)) continue;
+                if (playDate > dateLimit) continue;
+                playList.RemoveAt(i);
+            }
+        }
+        DataAccess.UpdateList<Play>();
     }
 }

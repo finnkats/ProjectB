@@ -88,7 +88,11 @@ public static class PlayPresentation
         string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
         if (hall == "null") return;
 
-        if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
+        if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)){
+            Console.WriteLine("Play has been added");
+            App.ArchivedPlays[playId].Add(new ArchivedPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId));
+            DataAccess.UpdateList<ArchivedPlay>();
+        }
         else Console.WriteLine("Couldn't add play");
         Thread.Sleep(2500);
     }

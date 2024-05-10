@@ -15,30 +15,45 @@ public static class AccountPresentation
 
     private static string MaskPasswordInput()
     {
+        // Initialize a StringBuilder to store the password
         StringBuilder password = new StringBuilder();
+
+        // Declare a variable to store the key pressed by the user
         ConsoleKeyInfo key;
 
+        // Loop until the user presses the Enter key
         do
         {
+            // Read a single key from the console without displaying it
             key = Console.ReadKey(true);
 
             // Check if the entered key is a valid character (letter or number)
             if (char.IsLetterOrDigit(key.KeyChar))
             {
+                // Append the character to the password StringBuilder
                 password.Append(key.KeyChar);
+
+                // Display an asterisk (*) on the console to mask the input
                 Console.Write("*");
             }
+            // Check if the Backspace key is pressed and the password is not empty
             else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
             {
-                // Handle backspace to remove the last character
+                // Remove the last character from the password
                 password.Remove(password.Length - 1, 1);
+
+                // Move the cursor back one position to overwrite the character with a space
                 Console.Write("\b \b");
             }
-        } while (key.Key != ConsoleKey.Enter);
+        } while (key.Key != ConsoleKey.Enter); // Repeat until the Enter key is pressed
 
+        // Move the cursor to the next line
         Console.WriteLine();
+
+        // Return the password as a string
         return password.ToString();
     }
+
 
 
     public static (string, string) GetLoginDetails()

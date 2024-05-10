@@ -45,6 +45,17 @@ public static class PlayLogic
         }
 
         // Creates the ticket
+        foreach (Play play in AllViewings) {
+            if (play.Location == ViewingLocation && play.Date == ViewingDate && play.Time == ViewingTime && play.Hall == ViewingHall) {
+                if (play.CurrentSeats == App.Halls[ViewingHall].Seats) {
+                    Console.WriteLine("Selected Play is full");
+                    Thread.Sleep(2500);
+                    return;
+                }
+                play.CurrentSeats += 1;
+            }
+        }
+
         MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall, true);
     }
 

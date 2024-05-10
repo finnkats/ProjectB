@@ -54,9 +54,8 @@ public static class PlayPresentation
     }
 
     // Collects the data needed to add a play
-    public static void AddPlayDetails(){
-        string? playId = App.performancePresentation.PerformanceChoice("For what performance do you want to add a play?");
-        if (playId == null) return;
+    public static void AddPlayDetails(string performanceId){
+        if (performanceId == null) return;
 
         string location = App.locationPresentation.GetItem("Choose a location:", "Cancel");
         if (location == "null") return;
@@ -88,7 +87,7 @@ public static class PlayPresentation
         string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
         if (hall == "null") return;
 
-        if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
+        if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, performanceId)) Console.WriteLine("Play has been added");
         else Console.WriteLine("Couldn't add play");
         Thread.Sleep(2500);
     }

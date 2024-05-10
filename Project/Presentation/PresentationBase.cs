@@ -69,6 +69,8 @@ public class PresentationBase<T> where T : IEditable{
 
                 Console.WriteLine($"{index++}: Change {property.Name.PadRight(25)} {value}");
             }
+            
+            if (typeof(T) == typeof(Performance)) Console.WriteLine($"{index++}: Add play for this performance");
             Console.WriteLine($"{index}: Exit");
 
             Int32.TryParse(Console.ReadLine(), out int choice);
@@ -91,8 +93,10 @@ public class PresentationBase<T> where T : IEditable{
         }
     }
 
-    public string GetItem(string question, string exit, string locationId = ""){
+    public string GetItem(string question, string exit, string locationId = "", bool InEditMenu = false){
         List<(string, string)> itemsOrdered = new();
+        int EditOffset = InEditMenu ? 1 : 0;
+        
         // Don't know a better way of doing this
         if (typeof(T) == typeof(Hall) && locationId != ""){
             if (!App.Locations.ContainsKey(locationId)) return "null";
@@ -123,7 +127,12 @@ public class PresentationBase<T> where T : IEditable{
 
                 menu += "\n";
             }
-            menu += $"{index}: {exit}";
+            
+            if (InEditMenu){
+                menu += $"\n{index++}: Add New {typeof(T).Name}";
+            }
+
+            menu += $"\n{index}: {exit}";
             Console.WriteLine(menu);
             
             try {
@@ -133,7 +142,8 @@ public class PresentationBase<T> where T : IEditable{
                 }
                 return itemsOrdered[choice - 1].Item1;
             } catch (ArgumentOutOfRangeException){
-                if (choice - 1 == itemsOrdered.Count) return "null";
+                if (InEditMenu && choice == itemsOrdered.Count + 1) return "add";
+                if (choice == itemsOrdered.Count + 1 + EditOffset) return "null";
                 Console.WriteLine("Invalid choice");
                 Thread.Sleep(2000);
             }

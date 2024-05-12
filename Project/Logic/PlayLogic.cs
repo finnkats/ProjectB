@@ -142,7 +142,7 @@ public static class PlayLogic
     {
         List<Play> filteredPlays = new();
         foreach (Play play in plays) {
-            if (play.BookedSeats == App.Halls[play.Hall].Seats) {
+            if (play.BookedSeats != App.Halls[play.Hall].Seats) {
                 filteredPlays.Add(play);
             }
         }

@@ -22,6 +22,7 @@ public static class PlayLogic
         if (App.Plays.ContainsKey(performanceId)) AllViewings = App.Plays[performanceId];
         else AllViewings = new();
         AllViewings = OneMonthFilter(AllViewings);
+        AllViewings = FilterFullPlays(AllViewings);
         
         // Gets the location
         string ViewingLocation = App.locationPresentation.GetItem("Select a location:", "Exit");
@@ -47,12 +48,7 @@ public static class PlayLogic
         // Creates the ticket
         foreach (Play play in AllViewings) {
             if (play.Location == ViewingLocation && play.Date == ViewingDate && play.Time == ViewingTime && play.Hall == ViewingHall) {
-                if (play.CurrentSeats == App.Halls[ViewingHall].Seats) {
-                    Console.WriteLine("Selected Play is full");
-                    Thread.Sleep(2500);
-                    return;
-                }
-                play.CurrentSeats += 1;
+                play.BookedSeats += 1;
             }
         }
 
@@ -140,5 +136,16 @@ public static class PlayLogic
         } else {
             return new List<Play>();
         }
+    }
+
+    public static List<Play> FilterFullPlays(List<Play> plays)
+    {
+        List<Play> filteredPlays = new();
+        foreach (Play play in plays) {
+            if (play.BookedSeats == App.Halls[play.Hall].Seats) {
+                filteredPlays.Add(play);
+            }
+        }
+        return filteredPlays;
     }
 }

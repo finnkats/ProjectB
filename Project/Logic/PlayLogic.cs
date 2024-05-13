@@ -26,6 +26,7 @@ public static class PlayLogic
         if (App.Plays.ContainsKey(performanceId)) AllViewings = App.Plays[performanceId];
         else AllViewings = new();
         AllViewings = OneMonthFilter(AllViewings);
+        AllViewings = FilterFullPlays(AllViewings);
         
         // Display all viewings and allow user to choose
         PlayPresentation.DisplayViewings(AllViewings, performanceId);
@@ -59,6 +60,27 @@ public static class PlayLogic
             return App.Plays[playID];
         } else {
             return new List<Play>();
+        }
+    }
+
+    public static List<Play> FilterFullPlays(List<Play> plays)
+    {
+        List<Play> filteredPlays = plays;
+        foreach (Play play in plays) {
+            if (play.BookedSeats == App.Halls[play.Hall].Seats) {
+                filteredPlays.Remove(play);
+            }
+        }
+        return filteredPlays;
+    }
+    public static void AddBooking(Ticket newTicket)
+    {
+        foreach (Play play in App.Plays[newTicket.PerformanceId]) {
+            if (play.Date == newTicket.Date && play.Time == newTicket.Time && play.Hall == newTicket.Hall) {
+                play.BookedSeats += 1;
+                DataAccess.UpdateList<Play>();
+                break;
+            }
         }
     }
 }

@@ -51,16 +51,6 @@ public class HallPresentation : PresentationBase<Hall>{
         while (true){
             int choice = EditObject(hallId);
             if (choice == 0) return;
-            else if (choice == 2){
-                string oldLocation = (Logic.Dict[hallId].LocationId == "null") ? $"No location": $"{App.Locations[Logic.Dict[hallId].LocationId].Name}";
-                string newLocationId = App.locationPresentation.GetItem($"New location for {Logic.Dict[hallId].Name}, " +
-                                                            $"currently: {oldLocation}:\n", "Remove hall from location");
-                Logic.Dict[hallId].LocationId = newLocationId;
-                DataAccess.UpdateItem<Hall>();
-                Console.WriteLine($"Successfully changed '{Logic.Dict[hallId].Name}' location from '{oldLocation}' to " +
-                                  ((newLocationId == "null") ? $"'No location'": $"'{App.Locations[newLocationId].Name}'"));
-                Thread.Sleep(6000);
-            }
         }
     }
 }

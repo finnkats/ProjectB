@@ -7,6 +7,10 @@ public class Performance : IDataAccessItem, IEditable
 	public string Name {get; set;}
 
     [Editable]
+    [JsonPropertyName("RuntimeInMin")]
+    public int RuntimeInMin {get; set;}
+
+    [Editable]
     [JsonPropertyName("Genres")]
     public List<string> Genres {get; set;}
 
@@ -14,9 +18,11 @@ public class Performance : IDataAccessItem, IEditable
     [JsonPropertyName("Active")]
     public bool Active {get; set;}
 
-    public Performance(string Name, List<string> Genres, bool Active)
+    [JsonConstructor]
+    public Performance(string Name, int runtimeInMin, List<string> Genres, bool Active)
     {
         this.Name = Name;
+        this.RuntimeInMin = runtimeInMin;
         this.Genres = Genres;
         this.Active = Active;
     }

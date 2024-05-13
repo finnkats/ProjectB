@@ -11,12 +11,12 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
         int runtime;
         while(true){
-            Console.Write("Enter the runtime in minutes:\n>");
+            Console.WriteLine("Enter the runtime in minutes:");
             string runtimeInput = Console.ReadLine() ?? "";
             bool runtimeBool = int.TryParse(runtimeInput, out runtime);
             if(!runtimeBool){Console.WriteLine("Invalid input. Please enter a valid number representing minutes.");}
             else if(runtimeBool){
-                Console.WriteLine($"Are you sure that the runtime will be in {runtime} minutes?\n>");
+                Console.WriteLine($"Are you sure that the runtime will be in {runtime} minutes?");
                 string confirmRuntime = Console.ReadLine() ?? "";
                 if(confirmRuntime.ToLower() == "y"){break;}
                 else if(confirmRuntime.ToLower() == "n"){continue;}
@@ -40,7 +40,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
         string seperator = ", ";
         List<string> currentGenres = new();
         genres.ForEach(genreId => currentGenres.Add(App.Genres[genreId].Name));
-        Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + $"), {runtime} minutes" +
+        Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + $"), {runtime} minutes " +
                           $"with genres [{String.Join(seperator, currentGenres)}] has been added");
         Thread.Sleep(5000);
     }

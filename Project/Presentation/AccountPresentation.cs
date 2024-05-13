@@ -98,7 +98,7 @@ public static class AccountPresentation
 
         if (confirmedPassword != password)
         {
-            Console.WriteLine("Password is not correct.");
+            Console.WriteLine("\nPassword is not correct.");
             Thread.Sleep(2000);
             return false;
         }

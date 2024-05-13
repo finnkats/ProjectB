@@ -25,6 +25,7 @@ public static class App
 
     public static Dictionary<string, Account> Accounts = DataAccess.ReadItem<Account>();
     public static Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
+    public static Dictionary<string, List<ArchivedPlay>> ArchivedPlays = DataAccess.ReadList<ArchivedPlay>();
     public static Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
 
     public static void Start()
@@ -32,6 +33,7 @@ public static class App
         // Fill in all Menu's
         CreateMenus();
         MainTicketSystem.CheckOutdatedTickets();
+        PlayLogic.RemoveOutdatedPlays();
     }
 
     // Add new menu's here

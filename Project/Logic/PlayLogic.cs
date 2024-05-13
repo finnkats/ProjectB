@@ -1,5 +1,9 @@
-using System.Text.Json;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Threading;
+
 public static class PlayLogic
 {
     //  This is the start of creating a ticket
@@ -24,88 +28,9 @@ public static class PlayLogic
         AllViewings = OneMonthFilter(AllViewings);
         AllViewings = FilterFullPlays(AllViewings);
         
-        // Gets the location
-        string ViewingLocation = App.locationPresentation.GetItem("Select a location:", "Exit");
-        if (ViewingLocation == "null") return;
+        // Display all viewings and allow user to choose
+        PlayPresentation.DisplayViewings(AllViewings, performanceId);
 
-        // Gets the date
-        string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
-        if (ViewingDate == null) return;
-
-        // Gets the time
-        string? ViewingTime = PlayPresentation.PrintTimes(ViewingLocation, ViewingDate, AllViewings);
-        if (ViewingTime == null) return;
-
-        // Gets the hall
-        string ViewingHall = "";
-        foreach (var viewing in AllViewings){
-            if (viewing.Date == ViewingDate && viewing.Time == ViewingTime){
-                ViewingHall = viewing.Hall;
-                break;
-            }
-        }
-
-        // Creates the ticket
-        foreach (Play play in AllViewings) {
-            if (play.Location == ViewingLocation && play.Date == ViewingDate && play.Time == ViewingTime && play.Hall == ViewingHall) {
-                play.BookedSeats += 1;
-            }
-        }
-
-        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall, true);
-    }
-
-    // returns a string (which is basically a menu)
-    // and a Dictionary of int and string (where int is the index of the option shown in the menu) and
-    // string is the string of the date
-    public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
-        if (playOptions.Count() == 0) return (null, null);
-        string? datesString = "";
-        datesString += "Available dates:\n";
-
-        HashSet<string> availableDates = new HashSet<string>();
-        foreach (var viewing in playOptions)
-        {
-            if (viewing.Location == selectedLocation)
-            {
-                availableDates.Add(viewing.Date);
-            }
-        }
-        List<string> availableDatesOrdered = availableDates.Order().ToList();
-
-        int dateCounter = 1;
-        Dictionary<int, string> dateOptions = new Dictionary<int, string>();
-        foreach (var date in availableDatesOrdered)
-        {
-            datesString += $"{dateCounter}: {date}\n";
-            dateOptions.Add(dateCounter, date);
-            dateCounter++;
-        }
-        
-        if (datesString == "Available dates:\n") datesString = null;
-        return (datesString, dateOptions);
-    }
-
-    // Does the same as GetDates but then with times
-    public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
-        if (playOptions.Count() == 0) return (null, null);
-        string? timesString = $"Available times on {chosenDate}:\n";
-        int timeCounter = 1;
-        Dictionary<int, string> timeOptions = new Dictionary<int, string>();
-
-        var playOptionsOrdered = playOptions.OrderBy(performance => performance.Time).ToList();
-        foreach (var viewing in playOptionsOrdered)
-        {
-            if (viewing.Location == selectedLocation && viewing.Date == chosenDate)
-            {
-                timesString += $"{timeCounter}: {viewing.Time} in {App.Halls[viewing.Hall].Name}\n";
-                timeOptions.Add(timeCounter, viewing.Time);
-                timeCounter++;
-            }
-        }
-
-        if (timesString == $"Available times on {chosenDate}:\n") timesString = null;
-        return (timesString, timeOptions);
     }
 
     public static bool AddPlay(string location, string time, string date, string hall, string playId){
@@ -149,3 +74,5 @@ public static class PlayLogic
         return filteredPlays;
     }
 }
+
+

@@ -4,54 +4,59 @@ using System.Globalization;
 public static class PlayPresentation
 {
     // returns the chosen date
-    public static string? PrintDates(string selectedLocation, List<Play> playOptions){
-        Console.Clear();
-        (string? datesString, Dictionary<int, string>? datesOptions) = PlayLogic.GetDates(selectedLocation, playOptions);
-        if (datesString == null || datesOptions == null){
-            Console.WriteLine("No viewings for the play");
-            Thread.Sleep(2500);
-            return null;
-        }
-        Console.WriteLine(datesString);
+    public static void DisplayViewings(List<Play> playOptions, string performanceId)
+{
+    Console.Clear();
+    Console.WriteLine($"Plays for {App.Performances[performanceId].Name}\n------------------------------------------------------------------");
+    Console.WriteLine($"|# |Location               |Date        |Time      |Hall         |");
+    Console.WriteLine("------------------------------------------------------------------");
 
-        string? chosenDate = null;
-        while (chosenDate == null){
-            Console.Write("Select a date: ");
-            string? dateChoice = Console.ReadLine();
-    
-            if (int.TryParse(dateChoice, out int chosenDateIndex) && datesOptions.ContainsKey(chosenDateIndex))
-            {
-                chosenDate = datesOptions[chosenDateIndex];
-            }
-            else Console.WriteLine("Invalid choice.");
-        }
-        return chosenDate;
+    // Sort the playOptions by location
+    playOptions.Sort((a, b) => string.Compare(App.Locations[a.Location].Name, App.Locations[b.Location].Name));
+
+    for (int i = 0; i < playOptions.Count; i++)
+    {
+        var viewing = playOptions[i];
+        string locationName = App.Locations[viewing.Location].Name;
+        string hallName = App.Halls[viewing.Hall].Name;
+
+        // Truncate strings if they are too long
+        if (locationName.Length > 29)
+            locationName = $"{locationName.Substring(0, 26)}...";
+        if (hallName.Length > 14)
+            hallName = $"{hallName.Substring(0, 10)}...";
+
+        Console.WriteLine($"|{i + 1,-2}|{locationName,-23}|{viewing.Date,-12}|{viewing.Time,-7}  |{hallName,-13}|");
     }
+    Console.WriteLine("------------------------------------------------------------------");
 
-    // returns the chosen time
-    public static string? PrintTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
-        Console.Clear();
-        (string? timesString, Dictionary<int, string>? timesOptions) = PlayLogic.GetTimes(selectedLocation, chosenDate, playOptions);
-        if (timesString == null || timesOptions == null){
-            Console.WriteLine("No times for the play");
-            Thread.Sleep(2500);
-            return null;
-        }
-        Console.WriteLine(timesString);
+    int chosenIndex = -1;
+    while (chosenIndex == -1){
 
-        string? chosenTime = null;
-        while (chosenTime == null){
-            Console.Write("Select a time: ");
-            string? timeChoice = Console.ReadLine();
-            if (int.TryParse(timeChoice, out int chosenTimeIndex) && timesOptions.ContainsKey(chosenTimeIndex))
-            {
-                chosenTime = timesOptions[chosenTimeIndex];
-            }
-            else Console.WriteLine("Invalid choice.");
-        }
+        Console.Write("Select a performance by entering its index or '0' to cancel: ");
         
-        return chosenTime;
+        string? choice = Console.ReadLine();
+        if (int.TryParse(choice, out int index)){
+            if (index == 0){
+                Console.WriteLine("Cancelled.");
+                Thread.Sleep(1500);
+                return;
+            }else if (index > 0 && index <= playOptions.Count){
+                // Get the chosen viewing
+                var chosenViewing = playOptions[index - 1];
+
+                // Here you'd create the ticket with the chosen details
+                MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.Time, chosenViewing.Hall, true);
+
+                chosenIndex = index - 1;
+            }else{
+                Console.WriteLine("Invalid index.");
+            }
+        }else{
+            Console.WriteLine("Invalid input.");
+        }
     }
+}
 
     // Collects the data needed to add a play
     public static void AddPlayDetails(){

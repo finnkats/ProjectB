@@ -65,13 +65,23 @@ public static class PlayLogic
 
     public static List<Play> FilterFullPlays(List<Play> plays)
     {
-        List<Play> filteredPlays = new();
+        List<Play> filteredPlays = plays;
         foreach (Play play in plays) {
-            if (play.BookedSeats != App.Halls[play.Hall].Seats) {
-                filteredPlays.Add(play);
+            if (play.BookedSeats == App.Halls[play.Hall].Seats) {
+                filteredPlays.Remove(play);
             }
         }
         return filteredPlays;
+    }
+    public static void AddBooking(Ticket newTicket)
+    {
+        foreach (Play play in App.Plays[newTicket.PerformanceId]) {
+            if (play.Date == newTicket.Date && play.Time == newTicket.Time && play.Hall == newTicket.Hall) {
+                play.BookedSeats += 1;
+                DataAccess.UpdateList<Play>();
+                break;
+            }
+        }
     }
 }
 

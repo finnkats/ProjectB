@@ -87,6 +87,7 @@ public static class PlayPresentation
 
         string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
         if (hall == "null") return;
+        if(!PlayLogic.IsHallAvailable(DateTime.Parse(startTime), date, hall)){return;}
 
         if (PlayLogic.AddPlay(location, startTime, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
         else Console.WriteLine("Couldn't add play");

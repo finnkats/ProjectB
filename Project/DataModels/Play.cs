@@ -29,4 +29,7 @@ public class Play : IDataAccessList {
         this.BookedSeats = 0;
         this.PerformanceId = performanceId;
     }
+
+    public DateTime? GetStartTime() => DateTime.Parse(this.StartTime);
+    public DateTime? GetEndTime() => DateTime.Parse(this.EndTime);
 }

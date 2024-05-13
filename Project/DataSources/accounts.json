@@ -1,1 +1,27 @@
-{"Admin123":{"Name":"Admin123","Password":"Password123","IsAdmin":true},"Soufiane":{"Name":"Soufiane","Password":"password","IsAdmin":false},"Max":{"Name":"Max","Password":"p4ssw0rd","IsAdmin":false},"Finn":{"Name":"Finn","Password":"Kats","IsAdmin":false},"Benny":{"Name":"Benny","Password":"Pws","IsAdmin":false}}
+{
+    "Admin123": {
+        "Name": "Admin123",
+        "Password": "Password123",
+        "IsAdmin": true
+    },
+    "Soufiane": {
+        "Name": "Soufiane",
+        "Password": "password",
+        "IsAdmin": false
+    },
+    "Max": {
+        "Name": "Max",
+        "Password": "p4ssw0rd",
+        "IsAdmin": false
+    },
+    "Finn": {
+        "Name": "Finn",
+        "Password": "Kats",
+        "IsAdmin": false
+    },
+    "Benny": {
+        "Name": "Benny",
+        "Password": "Pws",
+        "IsAdmin": false
+    }
+}

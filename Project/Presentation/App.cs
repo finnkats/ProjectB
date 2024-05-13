@@ -41,9 +41,6 @@ public static class App
     public static Menu SignInUp = new("Sign in / up");
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");
-    public static Menu ModifyPerformances = new("Modify Performances");
-    public static Menu ModifyGenres = new("Modify Genres");
-    public static Menu ModifyLocations = new("Modify Locations");
     public static Menu ExampleMenu1 = new("Example Menu 1");
 
     public static void CreateMenus()
@@ -79,41 +76,16 @@ public static class App
 
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;
-        AdminFeatures.AddAllOption("Modify Performances", ModifyPerformances.SetToCurrentMenu);
-        AdminFeatures.AddAllOption("Modify Genres", ModifyGenres.SetToCurrentMenu);
-        AdminFeatures.AddAllOption("Modify Locations", ModifyLocations.SetToCurrentMenu);
+        AdminFeatures.AddAllOption("Modify Performances", performancePresentation.EditPerformanceStart);
+        AdminFeatures.AddAllOption("Modify Genres", genrePresentation.EditGenreStart);
+        AdminFeatures.AddAllOption("Modify Locations", locationPresentation.EditLocationStart);
+        AdminFeatures.AddAllOption("Modify Halls", hallPresentation.EditHallStart);
         AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
         AdminFeatures.AddCurrentOption("Modify Performances");
         AdminFeatures.AddCurrentOption("Modify Genres");
+        AdminFeatures.AddCurrentOption("Modify Halls");
         AdminFeatures.AddCurrentOption("Modify Locations");
         AdminFeatures.AddCurrentOption("Check Statistics");
-
-        //  Modify Performances
-        ModifyPerformances.PreviousMenu = AdminFeatures;
-        ModifyPerformances.AddAllOption("Add Performance", performancePresentation.AddPerformance);
-        ModifyPerformances.AddAllOption("Edit Performance", performancePresentation.EditPerformanceStart);
-        ModifyPerformances.AddAllOption("Add Play", PlayPresentation.AddPlayDetails);
-        ModifyPerformances.AddCurrentOption("Add Performance");
-        ModifyPerformances.AddCurrentOption("Edit Performance");
-        ModifyPerformances.AddCurrentOption("Add Play");
-
-        // Modify Genres
-        ModifyGenres.PreviousMenu = AdminFeatures;
-        ModifyGenres.AddAllOption("Add Genre", genrePresentation.AddGenre); // TODO add add genre function
-        ModifyGenres.AddAllOption("Edit Genre", genrePresentation.EditGenreStart); // TODO add edit genre function
-        ModifyGenres.AddCurrentOption("Add Genre");
-        ModifyGenres.AddCurrentOption("Edit Genre");
-
-        // Modify Locations
-        ModifyLocations.PreviousMenu = AdminFeatures;
-        ModifyLocations.AddAllOption("Add Location", locationPresentation.AddLocation);
-        ModifyLocations.AddAllOption("Edit Location", locationPresentation.EditLocationStart);
-        ModifyLocations.AddAllOption("Add Hall", hallPresentation.AddHall);
-        ModifyLocations.AddAllOption("Edit Hall", hallPresentation.EditHallStart);
-        ModifyLocations.AddCurrentOption("Add Location");
-        ModifyLocations.AddCurrentOption("Edit Location");
-        ModifyLocations.AddCurrentOption("Add Hall");
-        ModifyLocations.AddCurrentOption("Edit Hall");
 
         //  Example Menu 1
         ExampleMenu1.PreviousMenu = FrontPage;

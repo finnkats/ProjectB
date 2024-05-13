@@ -8,7 +8,6 @@ public class Hall : IDataAccessItem, IEditable
     [JsonPropertyName("Seats")]
     public int Seats { get; set; }
 
-    [Editable]
     [JsonPropertyName("LocationId")]
     public string LocationId { get; set; }
     

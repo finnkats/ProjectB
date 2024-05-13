@@ -44,7 +44,6 @@ public class PresentationBase<T> where T : IEditable{
             foreach (var property in properties) {
                 var val = typeof(T).GetProperty(property.Name)?.GetValue(obj, null);
                 string value = "";
-                string name = "";
 
                 // Don't know a better way of doing this without "hardcoding" the type check
                 // Values get formatted here properly
@@ -62,12 +61,7 @@ public class PresentationBase<T> where T : IEditable{
                     value = $"[{String.Join(seperator, names)}]";
                 } else value = $"'{val}'";
 
-                if (property.Name == "LocationId" && typeof(T) == typeof(Hall)){
-                    name = "Location";
-                    value = $"'{App.locationLogic.Dict[App.hallLogic.Dict[objectId].LocationId].Name}'";
-                } else name = property.Name;
-
-                Console.WriteLine($"{index++}: Change {name.PadRight(25)} {value}");
+                Console.WriteLine($"{index++}: Change {property.Name.PadRight(25)} {value}");
             }
             
             if (typeof(T) == typeof(Performance)) Console.WriteLine($"{index++}: Add play for this performance");

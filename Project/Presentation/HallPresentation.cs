@@ -12,14 +12,16 @@ public class HallPresentation : PresentationBase<Hall>{
         int hallSeats;
         while (true){
             hallSeats = -1;
-            Console.WriteLine($"Enter seats for hall {hallName}\n-1 to exit");
-            Int32.TryParse(Console.ReadLine(), out hallSeats);
-            if (hallSeats == -1){
+            Console.WriteLine($"Enter seats for hall {hallName}\nQ to exit");
+            string seatChoice = Console.ReadLine()?.ToLower() ?? "";
+            if (seatChoice == "q"){
                 Console.WriteLine("Exitting");
                 return;
             }
+            Int32.TryParse(seatChoice, out hallSeats);
             if (hallSeats <= 0){
-                Console.WriteLine($"{hallSeats} is not a valid amount of seats");
+                Console.WriteLine($"{seatChoice} is not a valid amount of seats\n");
+                
             } else break;
         }
         Console.WriteLine();

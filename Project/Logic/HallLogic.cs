@@ -9,12 +9,4 @@ public class HallLogic : LogicBase<Hall> {
         if (Seats <= 0) return false;
         return base.AddObject(new Hall(Name, Seats, locationId));
     }
-
-    public bool ChangeSeats(string id, int seats){
-        if (!App.Halls.ContainsKey(id)) return false;
-        if (seats <= 0) return false;
-        App.Halls[id].Seats = seats;
-        DataAccess.UpdateItem<Hall>();
-        return true;
-    }
 }

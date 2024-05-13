@@ -49,22 +49,7 @@ public class HallPresentation : PresentationBase<Hall>{
         while (true){
             int choice = EditObject(hallId);
             if (choice == 0) return;
-            if (choice == 2){
-                Console.Clear();
-                Console.WriteLine($"Enter new amount of seats for '{Logic.Dict[hallId].Name}', currently: {Logic.Dict[hallId].Seats}:");
-                int oldSeats = Logic.Dict[hallId].Seats;
-                if (!Int32.TryParse(Console.ReadLine(), out int newSeats)){
-                    Console.WriteLine("Invalid input");
-                    Thread.Sleep(2000);
-                    continue;
-                }
-                if (!App.hallLogic.ChangeSeats(hallId, newSeats)){
-                    Console.WriteLine($"Couldn't change seats, value too low");
-                } else {
-                    Console.WriteLine($"Successfully changed '{oldSeats}' to '{newSeats}'");
-                }
-                Thread.Sleep(4000);
-            } else if (choice == 3){
+            else if (choice == 2){
                 string oldLocation = (Logic.Dict[hallId].LocationId == "null") ? $"No location": $"{App.Locations[Logic.Dict[hallId].LocationId].Name}";
                 string newLocationId = App.locationPresentation.GetItem($"New location for {Logic.Dict[hallId].Name}, " +
                                                             $"currently: {oldLocation}:\n", "Remove hall from location");

@@ -66,34 +66,45 @@ public static class PlayPresentation
         string location = App.locationPresentation.GetItem("Choose a location:", "Cancel");
         if (location == "null") return;
 
+        string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
+        if (hall == "null") {
+            Console.WriteLine("Cancelling adding of play");
+            return;
+        }
+
+        string date;
+        while (true){
+            Console.Clear();
+            Console.WriteLine($"{App.Performances[playId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name}\n");
+            Console.WriteLine("What date? [DD/MM/YYYY]? (can't be today or in the past)");
+            string givenDate = Console.ReadLine() ?? "";
+            if (!PlayLogic.ValidDate(givenDate)) continue;
+            date = givenDate;
+            break;
+        }
+
         string time;
         while (true){
             Console.Clear();
+            Console.WriteLine($"{App.Performances[playId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date}\n");
             Console.WriteLine("What time? [HH:MM]");
             time = Console.ReadLine() ?? "99:99";
-            string[] times = time.Split(':');
-            if (times.Length != 2) continue;
-            if (!Int32.TryParse(times[0], out int hours)) continue;
-            if (!Int32.TryParse(times[1], out int minutes)) continue;
-            if (0 > hours || hours > 23) continue;
-            if (0 > minutes || minutes > 59) continue;
-            time = $"{time}:00";
+            if (!PlayLogic.ValidTime(time)) continue;
             break;
         }
 
-        DateTime date;
-        while (true){
-            Console.Clear();
-            Console.WriteLine("What date? [DD/MM/YYYY]? (can't be today or in the past)");
-            if (!DateTime.TryParseExact(Console.ReadLine(), "dd/MM/yyyy", null, DateTimeStyles.None, out date)) continue;
-            if (date < DateTime.Now.AddDays(1)) continue;
-            break;
+        Console.Clear();
+
+        Console.WriteLine("Do you want to add play? (Y/N)");
+        Console.WriteLine($"{App.Performances[playId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date} : {time}");
+        string choice = Console.ReadLine() ?? "";
+        if (!choice.ToLower().StartsWith('y')){
+            Console.WriteLine("Cancelling adding of play");
+            return;
         }
+        Console.WriteLine();
 
-        string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
-        if (hall == "null") return;
-
-        if (PlayLogic.AddPlay(location, time, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
+        if (PlayLogic.AddPlay(location, time, date, hall, playId)) Console.WriteLine("Play has been added");
         else Console.WriteLine("Couldn't add play");
         Thread.Sleep(2500);
     }

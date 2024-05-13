@@ -5,6 +5,8 @@ public class PerformanceLogic : LogicBase<Performance>{
         if (!success) return false;
         App.Plays.Add(AssignedId, new List<Play>());
         DataAccess.UpdateList<Play>();
+        App.ArchivedPlays.Add(AssignedId, new List<ArchivedPlay>());
+        DataAccess.UpdateList<ArchivedPlay>();
         return true;
     }
 

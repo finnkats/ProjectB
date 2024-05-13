@@ -67,7 +67,7 @@ public class PresentationBase<T> where T : IEditable{
                     value = $"'{App.locationLogic.Dict[App.hallLogic.Dict[objectId].LocationId].Name}'";
                 } else name = property.Name;
 
-                Console.WriteLine($"{index++}: Change {property.Name.PadRight(25)} {value}");
+                Console.WriteLine($"{index++}: Change {name.PadRight(25)} {value}");
             }
             
             if (typeof(T) == typeof(Performance)) Console.WriteLine($"{index++}: Add play for this performance");

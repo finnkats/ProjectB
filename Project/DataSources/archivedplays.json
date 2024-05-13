@@ -1,702 +1,814 @@
 {
     "ID0": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         }
     ],
     "ID1": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 1
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/06/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/06/2024",
+          "Hall": "ID0",
+          "BookedSeats": 1
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/06/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/06/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         }
     ],
     "ID2": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         }
     ],
     "ID3": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/07/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/07/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "21/07/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "21/07/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/06/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/06/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/06/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/06/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         }
     ],
     "ID4": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         }
     ],
     "ID5": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         }
     ],
     "ID6": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         }
     ],
     "ID7": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         }
     ],
     "ID8": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         }
     ],
     "ID9": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         }
     ],
     "ID10": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         }
     ],
     "ID11": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID3"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID3",
+          "BookedSeats": 0
         }
     ],
     "ID12": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID1"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID1",
+          "BookedSeats": 0
         }
     ],
     "ID13": [
         {
-            "Location": "ID0",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "18:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "18:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "20:00:00",
-            "Date": "30/04/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "20:00:00",
+          "Date": "30/04/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID0",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID0"
+          "Location": "ID0",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID0",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "12:00:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "12:00:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         },
         {
-            "Location": "ID1",
-            "Time": "14:30:00",
-            "Date": "01/05/2024",
-            "Hall": "ID2"
+          "Location": "ID1",
+          "Time": "14:30:00",
+          "Date": "01/05/2024",
+          "Hall": "ID2",
+          "BookedSeats": 0
         }
     ]
 }

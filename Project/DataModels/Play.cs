@@ -8,6 +8,8 @@ public class Play : IDataAccessList {
     public string Date { get; set; }
     [JsonPropertyName("Hall")]
     public string Hall { get; set; }
+    [JsonPropertyName("BookedSeats")]
+    public int BookedSeats { get; set; }
     [JsonIgnore]
     public string PerformanceId { get; set; }
 
@@ -16,6 +18,7 @@ public class Play : IDataAccessList {
         this.Time = time;
         this.Date = date;
         this.Hall = hall;
+        this.BookedSeats = 0;
         this.PerformanceId = performanceId;
     }
 }

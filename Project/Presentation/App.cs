@@ -55,8 +55,8 @@ public static class App
         FrontPage.AddAllOption("Home Page", HomePage.SetToCurrentMenu);
         FrontPage.AddAllOption("Sign in / up", SignInUp.SetToCurrentMenu);
         FrontPage.AddAllOption("Logout", AccountLogic.Logout);
-        FrontPage.AddAllOption($"Notifications", Example.DoNothing);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
+        FrontPage.AddAllOption($"{NotificationLogic.GetString()}", Example.DoNothing);
         FrontPage.AddCurrentOption("Home Page");
         FrontPage.AddCurrentOption("Sign in / up");
 

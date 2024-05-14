@@ -16,6 +16,8 @@ public class Menu{
         } catch (ArgumentException) {}
     }
 
+    public void RemoveAllOption(string optionName) => AllOptions.Remove(optionName);
+
     public void AddCurrentOption(string optionName){
         // Dont allow duplicate options or options which arent in AllOptions
         if (CurrentOptions.Contains(optionName)) return;

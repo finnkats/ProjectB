@@ -2,26 +2,36 @@
     "Admin123": {
         "Name": "Admin123",
         "Password": "Password123",
-        "IsAdmin": true
+        "IsAdmin": true,
+        "Location": "null",
+        "Genres": []
     },
     "Soufiane": {
         "Name": "Soufiane",
         "Password": "password",
-        "IsAdmin": false
+        "IsAdmin": false,
+        "Location": "null",
+        "Genres": []
     },
     "Max": {
         "Name": "Max",
         "Password": "p4ssw0rd",
-        "IsAdmin": false
+        "IsAdmin": false,
+        "Location": "null",
+        "Genres": []
     },
     "Finn": {
         "Name": "Finn",
         "Password": "Kats",
-        "IsAdmin": false
+        "IsAdmin": false,
+        "Location": "null",
+        "Genres": []
     },
     "Benny": {
         "Name": "Benny",
         "Password": "Pws",
-        "IsAdmin": false
+        "IsAdmin": false,
+        "Location": "null",
+        "Genres": []
     }
 }

@@ -27,6 +27,7 @@ public static class App
     public static Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
     public static Dictionary<string, List<ArchivedPlay>> ArchivedPlays = DataAccess.ReadList<ArchivedPlay>();
     public static Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
+    public static Dictionary<string, List<Notification>> Notifications = DataAccess.ReadList<Notification>();
 
     public static void Start()
     {
@@ -54,6 +55,7 @@ public static class App
         FrontPage.AddAllOption("Home Page", HomePage.SetToCurrentMenu);
         FrontPage.AddAllOption("Sign in / up", SignInUp.SetToCurrentMenu);
         FrontPage.AddAllOption("Logout", AccountLogic.Logout);
+        FrontPage.AddAllOption($"Notifications", Example.DoNothing);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
         FrontPage.AddCurrentOption("Home Page");
         FrontPage.AddCurrentOption("Sign in / up");

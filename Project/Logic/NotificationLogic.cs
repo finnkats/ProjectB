@@ -26,15 +26,17 @@ public static class NotificationLogic {
         return $"View Notifications ({App.Notifications[App.LoggedInUsername].Count})";
     }
 
-    public static void UpdateNotificationOption(){
+    public static void UpdateNotificationOption(bool add){
         string before = GetString();
-        App.FrontPage.RemoveAllOption(before);
-        App.FrontPage.RemoveCurrentOption(before);
+        App.HomePage.RemoveAllOption(before);
+        App.HomePage.RemoveCurrentOption(before);
 
         DataAccess.UpdateList<Notification>();
 
-        string after = GetString();
-        App.FrontPage.AddAllOption(after, NotificationPresentation.NotificationMenu);
-        App.FrontPage.AddCurrentOption(after);
+        if (add){
+            string after = GetString();
+            App.HomePage.AddAllOption(after, NotificationPresentation.NotificationMenu);
+            App.HomePage.AddCurrentOption(after);
+        }
     }
 }

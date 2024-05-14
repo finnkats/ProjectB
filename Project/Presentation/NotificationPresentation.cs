@@ -52,7 +52,7 @@ public static class NotificationPresentation {
                 Thread.Sleep(1000);
                 continue;
             } else if (choice == index){
-                NotificationLogic.UpdateNotificationOption();
+                NotificationLogic.UpdateNotificationOption(true);
                 Console.WriteLine("\nExiting...");
                 Thread.Sleep(1500);
                 return;

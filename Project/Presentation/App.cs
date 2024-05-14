@@ -56,7 +56,6 @@ public static class App
         FrontPage.AddAllOption("Sign in / up", SignInUp.SetToCurrentMenu);
         FrontPage.AddAllOption("Logout", AccountLogic.Logout);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
-        //FrontPage.AddAllOption(NotificationLogic.GetString(), Example.DoNothing);
         FrontPage.AddCurrentOption("Home Page");
         FrontPage.AddCurrentOption("Sign in / up");
 
@@ -71,7 +70,6 @@ public static class App
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Performances", performanceLogic.PerformanceCatalogue);
         HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
-        //HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
         HomePage.AddAllOption("Edit Account Settings", NotificationPresentation.AccountSettings); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         HomePage.AddCurrentOption("View Performances");

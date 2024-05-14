@@ -40,7 +40,7 @@ public static class AccountLogic
                     App.HomePage.AddCurrentOption("View Tickets");
                     App.HomePage.AddCurrentOption("View Notifications");
                     App.HomePage.AddCurrentOption("Edit Account Settings");
-                    NotificationLogic.UpdateNotificationOption();
+                    NotificationLogic.UpdateNotificationOption(true);
 
                     AccountPresentation.PrintSuccess($"Welcome back {account.Name}");
                     loginLoop = false;
@@ -80,7 +80,7 @@ public static class AccountLogic
         App.HomePage.RemoveCurrentOption("View Notifications");
         App.HomePage.RemoveCurrentOption("Edit Account Settings");
         App.HomePage.RemoveCurrentOption("Admin Features");
-        App.FrontPage.RemoveCurrentOption("Notifications");
+        NotificationLogic.UpdateNotificationOption(false);
 
         App.FrontPage.AddCurrentOption("Sign in / up");
         App.FrontPage.SetToCurrentMenu();

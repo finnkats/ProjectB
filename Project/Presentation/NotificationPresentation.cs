@@ -43,13 +43,13 @@ public static class NotificationPresentation {
             Console.Clear();
             Console.WriteLine("Your preferences:");
             Console.WriteLine($"{location} | {genres}\n");
-            Console.WriteLine("Notifications:\n");
+            Console.WriteLine("Notifications:");
             if (App.Notifications[App.LoggedInUsername].Count == 0) Console.WriteLine("No notifications");
             int index = 1;
             foreach (Notification notification in App.Notifications[App.LoggedInUsername]){
                 Console.WriteLine($"{index++}: {notification.ToString()}");
             }
-            Console.WriteLine($"{index}: Exit\n");
+            Console.WriteLine($"\n{index}: Exit\n");
             Console.WriteLine("Choose a notification to remove (read)");
             Int32.TryParse(Console.ReadLine(), out int choice);
             if (choice <= 0 || choice > index){

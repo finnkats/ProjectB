@@ -16,7 +16,7 @@ public static class PlayPresentation
 
         string? chosenDate = null;
         while (chosenDate == null){
-            Console.Write("Select a date: ");
+            Console.Write("Select a date:\n> ");
             string? dateChoice = Console.ReadLine();
     
             if (int.TryParse(dateChoice, out int chosenDateIndex) && datesOptions.ContainsKey(chosenDateIndex))
@@ -41,7 +41,7 @@ public static class PlayPresentation
 
         string? chosenTime = null;
         while (chosenTime == null){
-            Console.Write("Select a time: ");
+            Console.Write("Select a time:\n> ");
             string? timeChoice = Console.ReadLine();
             if (int.TryParse(timeChoice, out int chosenTimeIndex) && timesOptions.ContainsKey(chosenTimeIndex))
             {
@@ -64,7 +64,7 @@ public static class PlayPresentation
         string startTime;
         while (true){
             Console.Clear();
-            Console.WriteLine("What time? [HH:MM]");
+            Console.Write("What time? [HH:MM]\n> ");
             startTime = Console.ReadLine() ?? "99:99";
             string[] times = startTime.Split(':');
             if (times.Length != 2) continue;
@@ -79,7 +79,7 @@ public static class PlayPresentation
         DateTime date;
         while (true){
             Console.Clear();
-            Console.WriteLine("What date? [DD/MM/YYYY]? (can't be today or in the past)");
+            Console.Write("What date? [DD/MM/YYYY]? (can't be today or in the past)\n> ");
             if (!DateTime.TryParseExact(Console.ReadLine(), "dd/MM/yyyy", null, DateTimeStyles.None, out date)) continue;
             if (date < DateTime.Now.AddDays(1)) continue;
             break;

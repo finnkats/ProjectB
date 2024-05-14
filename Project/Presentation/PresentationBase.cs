@@ -14,7 +14,7 @@ public class PresentationBase<T> where T : IEditable{
         string inputName = "";
         bool validName = false;
         while (!validName){
-            Console.WriteLine($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)");
+            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)\n> ");
             inputName = Console.ReadLine() ?? "";
             if (inputName == ""){
                 Console.WriteLine("Exiting..");
@@ -69,7 +69,7 @@ public class PresentationBase<T> where T : IEditable{
 
                 Console.WriteLine($"{index++}: Change {property.Name.PadRight(25)} {value}");
             }
-            Console.WriteLine($"{index}: Exit");
+            Console.Write($"{index}: Exit\n> ");
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             Console.WriteLine();
@@ -123,8 +123,8 @@ public class PresentationBase<T> where T : IEditable{
 
                 menu += "\n";
             }
-            menu += $"{index}: {exit}";
-            Console.WriteLine(menu);
+            menu += $"{index}: {exit}\n> ";
+            Console.Write(menu);
             
             try {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){
@@ -183,8 +183,8 @@ public class PresentationBase<T> where T : IEditable{
             foreach (var itemPair in itemsOrdered){
                 menu += $"{index++} {itemPair.Item2}\n";
             }
-            menu += $"\n{index}: Confirm";
-            Console.WriteLine(menu);
+            menu += $"\n{index}: Confirm\n> ";
+            Console.Write(menu);
 
             try {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){

@@ -118,4 +118,21 @@ public class PlayScheduleTest
         Assert.IsFalse(IsNotAvailable3);
         Assert.IsTrue(IsNotAvailable4);
     }
+
+    [TestMethod]
+    public void TestEndTimeIsSet(){
+        string Location1 = "ID0";
+        string Location2 = "ID1";
+        List<Play> Viewings = new(){
+            new Play(Location1, "19:21:13", "01/01/2025", "ID0", "ID0"),
+            new Play(Location1, "20:30:00", "01/01/2025", "ID1", "ID0"),
+            new Play(Location2, "17:50:00", "01/01/2025", "ID2", "ID1"),
+            new Play(Location2, "09:15:00", "01/01/2025", "ID3", "ID2"),
+            new Play(Location2, "09:15:00", "01/01/2025", "null", "ID2")
+        };
+        App.Plays.Add($"{App.Plays.Count}", Viewings);
+
+        Assert.AreEqual(120, App.Performances["ID0"].RuntimeInMin);
+        Assert.AreEqual(120, App.Performances["ID1"].RuntimeInMin);
+    }
 }

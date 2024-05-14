@@ -18,7 +18,7 @@ public class Notification : IDataAccessList
         if (Performance == null) return "";
         if (Location == null) return "";
         if (Time == null) return "";
-        string text = $"{App.Performances[Performance].Name} has been added in {App.Locations[Location]} ({Time})";
+        string text = $"{App.Performances[Performance].Name} has been added in {App.Locations[Location].Name} ({Time})";
         return text;
     }
 }

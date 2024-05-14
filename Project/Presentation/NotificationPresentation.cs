@@ -43,7 +43,7 @@ public static class NotificationPresentation {
             Console.Clear();
             Console.WriteLine("Your preferences:");
             Console.WriteLine($"{location} | {genres}\n");
-            Console.WriteLine("Notifications:");
+            Console.WriteLine("Notifications:\n");
             if (App.Notifications[App.LoggedInUsername].Count == 0) Console.WriteLine("No notifications");
             int index = 1;
             foreach (Notification notification in App.Notifications[App.LoggedInUsername]){

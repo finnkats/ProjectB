@@ -40,7 +40,6 @@ public static class AccountLogic
                     App.HomePage.AddCurrentOption("View Tickets");
                     App.HomePage.AddCurrentOption("View Notifications");
                     App.HomePage.AddCurrentOption("Edit Account Settings");
-                    NotificationLogic.UpdateNotificationOption(true);
 
                     AccountPresentation.PrintSuccess($"Welcome back {account.Name}");
                     loginLoop = false;
@@ -48,6 +47,7 @@ public static class AccountLogic
 
                 App.LoggedInUsername = loginName;
                 // Remove sign in / up option from frontpage, and add logout
+                if (!account.IsAdmin) NotificationLogic.UpdateNotificationOption(true);
                 App.FrontPage.RemoveCurrentOption("Sign in / up");
                 App.FrontPage.AddCurrentOption("Logout");
                 App.HomePage.SetToCurrentMenu();

@@ -21,22 +21,39 @@ public static class NotificationLogic {
         DataAccess.UpdateItem<Account>();
     }
 
-    public static string GetString(){
-        if (App.LoggedInUsername == "Unknown") return "View Notifications (0)";
-        return $"View Notifications ({App.Notifications[App.LoggedInUsername].Count})";
+    public static string GetString(int? num = null){
+        int count = 0;
+        if (App.LoggedInUsername == "Unknown") count = 0;
+        else if (num != null) count = (int)num;
+        else count = App.Notifications[App.LoggedInUsername].Count;
+        return $"View Notifications ({count})";
     }
 
-    public static void UpdateNotificationOption(bool add){
-        string before = GetString();
-        App.HomePage.RemoveAllOption(before);
-        App.HomePage.RemoveCurrentOption(before);
+    public static void UpdateNotificationOption(bool add, int? original = null){
+        string option = GetString(original);
+        App.HomePage.RemoveAllOption(option);
+        App.HomePage.RemoveCurrentOption(option);
 
-        DataAccess.UpdateList<Notification>();
+        option = GetString();
 
         if (add){
-            string after = GetString();
-            App.HomePage.AddAllOption(after, NotificationPresentation.NotificationMenu);
-            App.HomePage.AddCurrentOption(after);
+            App.HomePage.AddAllOption(option, NotificationPresentation.NotificationMenu);
+            App.HomePage.AddCurrentOption(option);
         }
+
+        DataAccess.UpdateList<Notification>();
+    }
+
+    public static void SendOutNotifications(Play play){
+        Notification notification = new(play.PerformanceId, play.Location);
+        foreach (var account in App.Accounts){
+            foreach (string genre in account.Value.Genres){
+                if (App.Performances[play.PerformanceId].Genres.Contains(genre)){
+                    App.Notifications[account.Key].Add(notification);
+                    break;
+                }
+            }
+        }
+        DataAccess.UpdateList<Notification>();
     }
 }

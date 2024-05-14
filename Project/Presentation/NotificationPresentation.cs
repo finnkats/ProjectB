@@ -36,13 +36,15 @@ public static class NotificationPresentation {
             Thread.Sleep(3000);
             return;
         }
+
         (string location, string genres) = NotificationLogic.UpdatePrintInfo();
+        int originalNotificationCount = App.Notifications[App.LoggedInUsername].Count;
         while (true){
             Console.Clear();
             Console.WriteLine($"{location} | {genres}\n");
             int index = 1;
             foreach (Notification notification in App.Notifications[App.LoggedInUsername]){
-                Console.WriteLine($"{index++}: {notification.Text} ({notification.Time})");
+                Console.WriteLine($"{index++}: {notification.ToString()}");
             }
             Console.WriteLine($"{index}: Exit\n");
             Console.WriteLine("Choose a notification to remove (read)");
@@ -52,12 +54,12 @@ public static class NotificationPresentation {
                 Thread.Sleep(1000);
                 continue;
             } else if (choice == index){
-                NotificationLogic.UpdateNotificationOption(true);
+                NotificationLogic.UpdateNotificationOption(true, originalNotificationCount);
                 Console.WriteLine("\nExiting...");
                 Thread.Sleep(1500);
                 return;
             } else {
-                App.Notifications[App.LoggedInUsername].RemoveAt(index);
+                App.Notifications[App.LoggedInUsername].RemoveAt(choice - 1);
             }
         }
     }

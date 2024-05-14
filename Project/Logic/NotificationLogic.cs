@@ -47,6 +47,7 @@ public static class NotificationLogic {
     public static void SendOutNotifications(Play play){
         Notification notification = new(play.PerformanceId, play.Location);
         foreach (var account in App.Accounts){
+            if (account.Value.Location != play.Location) continue;
             foreach (string genre in account.Value.Genres){
                 if (App.Performances[play.PerformanceId].Genres.Contains(genre)){
                     App.Notifications[account.Key].Add(notification);

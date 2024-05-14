@@ -140,4 +140,32 @@ public static class PlayLogic
             return new List<Play>();
         }
     }
+
+    public static bool IsHallAvailable(string location, DateTime date, string startTime, string hall){
+        TimeSpan parsedStartTime = TimeSpan.Parse(startTime);
+
+        DateTime proposedStartDateTime = date.Add(parsedStartTime);
+
+        // Check if there are existing plays in the same hall at the same time
+        foreach (var playList in App.Plays.Values){
+            foreach(var play in playList){
+                if (play.Location == location && play.Hall == hall){
+                    string existingPlayStartStr = $"{play.Date} {play.StartTime}";
+                    string existingPlayEndStr = $"{play.Date} {play.EndTime}";
+                    DateTime existingPlayStart = DateTime.Parse(existingPlayStartStr);
+                    DateTime existingPlayEnd = DateTime.Parse(existingPlayEndStr);
+                    int? currentRuntime = App.performanceLogic.GetRuntime(play.PerformanceId);
+                    // DateTime existingPlayEnd = existingPlayStart.AddMinutes((double)currentRuntime!);
+
+                    // Check for time overlap
+                    // Console.WriteLine($"Check:\n{existingPlayStart}\n{existingPlayEnd}");
+                    // Thread.Sleep(10000);
+                    if (proposedStartDateTime <= existingPlayEnd && proposedStartDateTime.AddMinutes((double)currentRuntime!) >= existingPlayStart){
+                        return false; // Hall is not available
+                    }
+                }
+            }
+        }
+        return true; // Hall is available
+    }
 }

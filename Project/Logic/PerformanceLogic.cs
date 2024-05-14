@@ -110,4 +110,13 @@ public class PerformanceLogic : LogicBase<Performance>{
         if (performanceId == null) return;
         PlayLogic.Choose(performanceId);
     }
+
+    public int? GetRuntime(string performanceID){
+        foreach(var performancePair in App.Performances){
+            if(performancePair.Key == performanceID){
+                return performancePair.Value.RuntimeInMin;
+            }
+        }
+        return null;
+    }
 }

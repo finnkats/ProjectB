@@ -27,10 +27,18 @@ public class PerformancePresentation : PresentationBase<Performance>{
         var genres = App.genrePresentation.GetItemList();
         Console.WriteLine();
 
-        Console.WriteLine("Will the performance be currently active?\n1. Yes\n2. Exit\nAnything else. No");
-        string activeInput = Console.ReadLine() ?? "";
-        if (activeInput == "2") return;
-        bool active = activeInput == "1";
+        bool active;
+        while(true){
+            Console.WriteLine("Will the performance be currently active?\n1. Yes\n2. Exit\nAnything else. No");
+            string activeInput = Console.ReadLine() ?? "";
+            if (activeInput == "2") return;
+            else if(activeInput != "1"){
+                Console.WriteLine("Please enter a correct choice (1 or 2)");
+                continue;
+            }
+            active = activeInput == "1";
+            break;
+        }
 
         Console.Clear();
         if (!App.performanceLogic.AddPerformance(performanceName, runtime, genres, active)){

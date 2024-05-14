@@ -86,8 +86,11 @@ public static class PlayPresentation
         }
 
         string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
-        if (hall == "null") return;
-        if(!PlayLogic.IsHallAvailable(DateTime.Parse(startTime), date, hall)){return;}
+        if (!PlayLogic.IsHallAvailable(location, date, startTime, hall)){
+            Console.WriteLine("This hall is not available at the selected date and time. Please choose different details.");
+            Thread.Sleep(5000);
+            return; // Exit the method if hall is not available
+        }
 
         if (PlayLogic.AddPlay(location, startTime, date.ToString(@"dd\/MM\/yyyy"), hall, playId)) Console.WriteLine("Play has been added");
         else Console.WriteLine("Couldn't add play");

@@ -142,8 +142,8 @@ public static class PlayLogic
     }
 
     public static bool IsHallAvailable(string location, DateTime date, string startTime, string hall){
+        if(hall == "null") return true;
         TimeSpan parsedStartTime = TimeSpan.Parse(startTime);
-
         DateTime proposedStartDateTime = date.Add(parsedStartTime);
 
         // Check if there are existing plays in the same hall at the same time

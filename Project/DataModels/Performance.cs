@@ -6,7 +6,6 @@ public class Performance : IDataAccessItem, IEditable
     [JsonPropertyName("Name")]
 	public string Name {get; set;}
 
-    [Editable]
     [JsonPropertyName("RuntimeInMin")]
     public int RuntimeInMin {get; set;}
 

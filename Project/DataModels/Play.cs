@@ -18,7 +18,6 @@ public class Play : IDataAccessList {
     public string Hall { get; set; }
     [JsonPropertyName("BookedSeats")]
     public int BookedSeats { get; set; }
-    // [JsonIgnore]
     [JsonPropertyName("PerformanceId")]
     // PlayId is performanceId
     public string PerformanceId { get; set; }
@@ -31,7 +30,4 @@ public class Play : IDataAccessList {
         this.BookedSeats = 0;
         this.PerformanceId = performanceId;
     }
-
-    // public DateTime? GetStartTime() => DateTime.Parse(this.StartTime);
-    // public DateTime? GetEndTime() => DateTime.Parse(this.EndTime);
 }

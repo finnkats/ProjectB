@@ -19,7 +19,7 @@ public class PerformanceTest{
         List<string> genres = new(){"Genre 1", "Genre 2"};
         bool active = false;
 
-        App.performanceLogic.AddPerformance(name, genres, active);
+        App.performanceLogic.AddPerformance(name, 120, genres, active);
 
         Performance? Performance = null;
         foreach (var performance in App.Performances.Values){
@@ -38,8 +38,8 @@ public class PerformanceTest{
     [TestMethod]
     public void DuplicateTest(){
         int Amount = App.Performances.Count();
-        App.performanceLogic.AddPerformance("Performance 4", new List<string>(){"Genre 1", "Genre 2"}, false);
-        App.performanceLogic.AddPerformance("Performance 4", new List<string>(){"Genre 1", "Genre 2"}, false);
+        App.performanceLogic.AddPerformance("Performance 4", 120, new List<string>(){"Genre 1", "Genre 2"}, false);
+        App.performanceLogic.AddPerformance("Performance 4", 120, new List<string>(){"Genre 1", "Genre 2"}, false);
 
         Assert.AreEqual(Amount + 1, App.Performances.Count());
     }
@@ -48,7 +48,7 @@ public class PerformanceTest{
     public void AssignIdTest(){
         int baseAmount = App.Performances.Count();
 
-        Console.WriteLine(App.performanceLogic.AddPerformance("Performance 4", new List<string>(){"Genre 1", "Genre 2"}, false));
+        Console.WriteLine(App.performanceLogic.AddPerformance("Performance 4", 120, new List<string>(){"Genre 1", "Genre 2"}, false));
         
         Assert.AreEqual(1, App.Performances.Count() - baseAmount);
         Assert.IsTrue(App.Performances.ContainsKey($"ID{baseAmount}"));

@@ -84,4 +84,38 @@ public class PlayScheduleTest
         Assert.IsTrue(TimeString?.Contains("09:15:00"));
         Assert.IsFalse(TimeString?.Contains("19:21:13"));
     }
+
+    [TestMethod]
+    public void IsHallAvailableTest_HallIsFree(){
+        // With no plays added, assumes that json file is empty List with no plays.
+        bool IsAvailable1 = PlayLogic.IsHallAvailable("ID0", DateTime.Parse("01/01/2025"), "19:21:13", "ID0");
+        bool IsAvailable2 = PlayLogic.IsHallAvailable("ID1", DateTime.Parse("01/01/2025"), "17:50:00", "ID2");
+
+        Assert.IsTrue(IsAvailable1);
+        Assert.IsTrue(IsAvailable2);
+    }
+
+    [TestMethod]
+    public void IsHallAvailableTest_HallIsBooked(){
+        string Location1 = "ID0";
+        string Location2 = "ID1";
+        List<Play> Viewings = new(){
+            new Play(Location1, "19:21:13", "01/01/2025", "ID0", "ID0"),
+            new Play(Location1, "20:30:00", "01/01/2025", "ID1", "ID0"),
+            new Play(Location2, "17:50:00", "01/01/2025", "ID2", "ID1"),
+            new Play(Location2, "09:15:00", "01/01/2025", "ID3", "ID2"),
+            new Play(Location2, "09:15:00", "01/01/2025", "null", "ID2")
+        };
+        App.Plays.Add($"{App.Plays.Count}", Viewings);
+
+        bool IsNotAvailable1 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "19:21:13", "ID0");
+        bool IsNotAvailable2 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "20:30:00", "ID1");
+        bool IsNotAvailable3 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15:00", "ID3");
+        bool IsNotAvailable4 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15:00", "null");
+
+        Assert.IsFalse(IsNotAvailable1);
+        Assert.IsFalse(IsNotAvailable2);
+        Assert.IsFalse(IsNotAvailable3);
+        Assert.IsTrue(IsNotAvailable4);
+    }
 }

@@ -40,7 +40,7 @@ public static class AccountLogic
                     App.HomePage.AddCurrentOption("View Tickets");
                     App.HomePage.AddCurrentOption("View Notifications");
                     App.HomePage.AddCurrentOption("Edit Account Settings");
-                    App.FrontPage.AddCurrentOption("Notifications");
+                    NotificationLogic.UpdateNotificationOption();
 
                     AccountPresentation.PrintSuccess($"Welcome back {account.Name}");
                     loginLoop = false;

@@ -2,9 +2,9 @@ public static class NotificationLogic {
     public static (string, string) UpdatePrintInfo(){
         string locationId = App.Accounts[App.LoggedInUsername].Location;
         string location = locationId == "null" ? "No location" : App.Locations[locationId].Name;
-        List<string> genres = App.Accounts[App.LoggedInUsername].Genres;
-        for (int i = 0; i < genres.Count; i++){
-            genres[i] = App.Genres[genres[i]].Name;
+        List<string> genres = new();
+        foreach (string id in App.Accounts[App.LoggedInUsername].Genres){
+            genres.Add(App.Genres[id].Name);
         }
         genres.Sort();
         string seperator = ", ";
@@ -22,8 +22,8 @@ public static class NotificationLogic {
     }
 
     public static string GetString(){
-        if (App.LoggedInUsername == "Unknown") return "Notifications (0)";
-        return $"Notifications ({App.Notifications[App.LoggedInUsername].Count})";
+        if (App.LoggedInUsername == "Unknown") return "View Notifications (0)";
+        return $"View Notifications ({App.Notifications[App.LoggedInUsername].Count})";
     }
 
     public static void UpdateNotificationOption(){

@@ -1,7 +1,7 @@
 public static class NotificationPresentation {
     public static void AccountSettings(){
-        (string location, string genres) = NotificationLogic.UpdatePrintInfo();
         while (true){
+            (string location, string genres) = NotificationLogic.UpdatePrintInfo();
             Console.Clear();
             Console.WriteLine($"What would you like to change?");
             Console.WriteLine($"1: Change location".PadRight(30) + location);
@@ -13,10 +13,10 @@ public static class NotificationPresentation {
                 continue;
             }
             else if (choice == 1){
-                NotificationLogic.ChangeGenres();
+                NotificationLogic.ChangeLocation();
             }
             else if (choice == 2){
-                NotificationLogic.ChangeLocation();
+                NotificationLogic.ChangeGenres();
             }
             else if (choice == 3){
                 Console.WriteLine("\nExiting...");

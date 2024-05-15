@@ -33,7 +33,7 @@ public static class PlayPresentation
         int chosenIndex = -1;
         while (chosenIndex == -1){
 
-            Console.Write("Select a performance by entering its index or '0' to cancel: ");
+            Console.Write("Select a performance by entering its index or '0' to cancel\n> ");
             
             string? choice = Console.ReadLine();
             if (int.TryParse(choice, out int index)){
@@ -77,7 +77,7 @@ public static class PlayPresentation
         while (true){
             Console.Clear();
             Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name}\n");
-            Console.WriteLine("What date? [DD/MM/YYYY]? (can't be today or in the past)");
+            Console.Write("What date? [DD/MM/YYYY]? (can't be today or in the past)\n> ");
             string givenDate = Console.ReadLine() ?? "";
             if (!PlayLogic.ValidDate(givenDate)) continue;
             date = givenDate;
@@ -106,8 +106,8 @@ public static class PlayPresentation
         }
         Console.Clear();
 
-        Console.WriteLine("Do you want to add play? (Y/N)");
         Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date} : {startTime}");
+        Console.Write("Do you want to add play? (Y/N)\n> ");
         string choice = Console.ReadLine() ?? "";
         if (!choice.ToLower().StartsWith('y')){
             Console.WriteLine("Cancelling adding of play");

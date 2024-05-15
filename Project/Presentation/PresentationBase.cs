@@ -65,7 +65,7 @@ public class PresentationBase<T> where T : IEditable{
             }
             
             if (typeof(T) == typeof(Performance)) Console.WriteLine($"{index++}: Add play for this performance");
-            Console.WriteLine($"{index}: Exit\n> ");
+            Console.Write($"{index}: Exit\n> ");
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             Console.WriteLine();
@@ -127,7 +127,7 @@ public class PresentationBase<T> where T : IEditable{
             }
 
             menu += $"\n{index}: {exit}\n> ";
-            Console.WriteLine(menu);
+            Console.Write(menu);
             
             try {
                 if (!Int32.TryParse(Console.ReadLine(), out choice)){

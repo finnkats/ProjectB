@@ -36,11 +36,12 @@ public class PresentationBase<T> where T : IEditable{
 
         // Get all properties of type T
         var properties = typeof(T).GetProperties().Where(property => Attribute.IsDefined(property, typeof(EditableAttribute)));
+        string objectName = obj.GetType().GetProperty("Name")?.GetValue(obj, null)?.ToString() ?? "Unnamed";
 
         while (true){
             int index = 1;
             Console.Clear();
-            Console.WriteLine("Front Page -> Home Page -> Edit Performances -> ")
+            Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> {objectName}\n");
             Console.WriteLine($"What to change for this {typeof(T).Name.ToLower()}");
             foreach (var property in properties) {
                 var val = typeof(T).GetProperty(property.Name)?.GetValue(obj, null);
@@ -108,6 +109,7 @@ public class PresentationBase<T> where T : IEditable{
             int index = 1;
             int choice = -1;
             Console.Clear();
+            Console.WriteLine("$Front Page -> Home Page -> Edit Performances -> {}");
             Console.WriteLine(question);
             
             foreach (var itemPair in itemsOrdered){

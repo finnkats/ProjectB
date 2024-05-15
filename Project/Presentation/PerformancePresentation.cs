@@ -71,7 +71,13 @@ public class PerformancePresentation : PresentationBase<Performance>{
                     currentGenres.Add(App.Genres[genreId].Name);
                 }
                 List<string> RemovedGenreIds = new();
+                bool printBreadCrumb = true;
                 foreach (var genreId in Logic.Dict[performanceId].Genres){
+                    if (printBreadCrumb)
+                    {
+                        Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
+                    }
+                    printBreadCrumb = false;
                     Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N) \n\n> ");
                     string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
                     if (removeGenre.StartsWith("Y")){

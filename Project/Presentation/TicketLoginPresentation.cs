@@ -6,10 +6,11 @@ public static class TicketLoginPresentation{
     public static bool ChooseLoginOption(){
         while (true){
             Console.Clear();
+            Console.WriteLine("Front Page -> Home Page -> View Performances\n");
             Console.WriteLine("You're not logged in, please choose to sign in or to sign up");
             Console.WriteLine("1. Sign in");
             Console.WriteLine("2. Sign up");
-            Console.Write("3. Exit/Stop\n\n>");
+            Console.Write("3. Exit/Stop\n\n> ");
             string? inputOption = Console.ReadLine();
             bool isInt = int.TryParse(inputOption, out int option);
             if (isInt){

@@ -133,6 +133,7 @@ public static class PlayLogic
         foreach (Play play in plays) {
             if (play.BookedSeats == App.Halls[play.Hall].Seats) {
                 filteredPlays.Remove(play);
+                if (plays.Count == 0) break;
             }
         }
         return filteredPlays;
@@ -142,6 +143,18 @@ public static class PlayLogic
         foreach (Play play in App.Plays[newTicket.PerformanceId]) {
             if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall) {
                 play.BookedSeats += 1;
+                DataAccess.UpdateList<Play>();
+                break;
+            }
+        }
+    }
+    public static void RemoveBooking(Ticket newTicket)
+    {
+        foreach (Play play in App.Plays[newTicket.PerformanceId])
+        {
+            if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall)
+            {
+                play.BookedSeats -= 1;
                 DataAccess.UpdateList<Play>();
                 break;
             }

@@ -7,9 +7,10 @@ public static class PlayPresentation
     public static void DisplayViewings(List<Play> playOptions, string performanceId)
     {
         Console.Clear();
-        Console.WriteLine($"Plays for {App.Performances[performanceId].Name}\n------------------------------------------------------------------");
-        Console.WriteLine($"|# |Location               |Date        |Time      |Hall         |");
-        Console.WriteLine("------------------------------------------------------------------");
+        Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name}\n");
+        Console.WriteLine($"Plays for {App.Performances[performanceId].Name}\n----------------------------------------------------------------------------");
+        Console.WriteLine($"|# |Location               |Date        |Time                |Hall         |");
+        Console.WriteLine("----------------------------------------------------------------------------");
 
         // Sort the playOptions by location
         playOptions.Sort((a, b) => string.Compare(App.Locations[a.Location].Name, App.Locations[b.Location].Name));
@@ -19,21 +20,21 @@ public static class PlayPresentation
             var viewing = playOptions[i];
             string locationName = App.Locations[viewing.Location].Name;
             string hallName = App.Halls[viewing.Hall].Name;
-
+            
             // Truncate strings if they are too long
             if (locationName.Length > 29)
                 locationName = $"{locationName.Substring(0, 26)}...";
             if (hallName.Length > 14)
                 hallName = $"{hallName.Substring(0, 10)}...";
 
-            Console.WriteLine($"|{i + 1,-2}|{locationName,-23}|{viewing.Date,-12}|{viewing.StartTime,-7}  |{hallName,-13}|");
+            Console.WriteLine($"|{i + 1,-2}|{locationName,-23}|{viewing.Date,-12}|{viewing.StartTime,-7} - {viewing.EndTime} |{hallName,-13}|");
         }
-        Console.WriteLine("------------------------------------------------------------------");
+        Console.WriteLine("----------------------------------------------------------------------------");
 
         int chosenIndex = -1;
         while (chosenIndex == -1){
 
-            Console.Write("Select a performance by entering its index or '0' to cancel\n> ");
+            Console.Write("Select a performance by entering its index or '0' to cancel\n\n> ");
             
             string? choice = Console.ReadLine();
             if (int.TryParse(choice, out int index)){
@@ -76,8 +77,9 @@ public static class PlayPresentation
         string date;
         while (true){
             Console.Clear();
+            Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date\n");
             Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name}\n");
-            Console.Write("What date? [DD/MM/YYYY]? (can't be today or in the past)\n> ");
+            Console.Write("What date? [DD/MM/YYYY]? (can't be today or in the past) \n\n> ");
             string givenDate = Console.ReadLine() ?? "";
             if (!PlayLogic.ValidDate(givenDate)) continue;
             date = givenDate;
@@ -87,8 +89,9 @@ public static class PlayPresentation
         string startTime;
         while (true){
             Console.Clear();
+            Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date -> Choosing a time\n");
             Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date}\n");
-            Console.Write("What time? [HH:MM]\n> ");
+            Console.Write("What time? [HH:MM] \n\n> ");
             startTime = Console.ReadLine() ?? "99:99";
             if (!PlayLogic.ValidTime(startTime)) continue;
             break;
@@ -100,7 +103,7 @@ public static class PlayPresentation
             return; // Exit the method if hall is not available
         }
         Console.Clear();
-
+        Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date -> Choosing a time -> Adding a play\n");
         Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date} : {startTime}");
         Console.Write("Do you want to add play? (Y/N)\n> ");
         string choice = Console.ReadLine() ?? "";

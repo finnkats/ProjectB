@@ -1,5 +1,7 @@
-public class PerformanceLogic : LogicBase<Performance>{
-    public bool AddPerformance(string name, int runtime, List<string> genres, bool active){
+public class PerformanceLogic : LogicBase<Performance>
+{
+    public bool AddPerformance(string name, int runtime, List<string> genres, bool active)
+    {
         string AssignedId = GetID();
         bool success = AddObject(new Performance(name, runtime, genres, active));
         if (!success) return false;
@@ -11,14 +13,16 @@ public class PerformanceLogic : LogicBase<Performance>{
     }
 
     // Change list of genres
-    public void ChangeGenres(List<string> genres, string id){
+    public void ChangeGenres(List<string> genres, string id)
+    {
         App.Performances[id].Genres = genres;
         DataAccess.UpdateItem<Performance>();
         return;
     }
 
     // Changes active value
-    public void ChangeActive(string id){
+    public void ChangeActive(string id)
+    {
         App.Performances[id].Active = !App.Performances[id].Active;
         DataAccess.UpdateItem<Performance>();
     }
@@ -45,7 +49,7 @@ public class PerformanceLogic : LogicBase<Performance>{
     // Returns a list of performanceId, string made for printing
     // containing the genres from the list
     public List<(string, string)> FilteredPerformanceOptions(List<string> genreIDList)
-    {   
+    {
         var PerformanceOptions = GetPerformanceOptions(true);
         List<(string, string)> FilteredPerformanceOptionsList = new();
 
@@ -56,14 +60,14 @@ public class PerformanceLogic : LogicBase<Performance>{
 
         int performanceIndex = 1;
         foreach (var performance in PerformanceOptions)
-        {   
+        {
             if (HasGenre(performance.Item1, genreIDList))
             {
                 // overwrites index of the option that will be printed for the menu
                 string performanceOptionString = $"{performanceIndex++}: {performance.Item2}";
                 FilteredPerformanceOptionsList.Add((performance.Item1, performanceOptionString));
             }
-            
+
         }
 
         return FilteredPerformanceOptionsList;
@@ -71,14 +75,16 @@ public class PerformanceLogic : LogicBase<Performance>{
 
     // Returns a list of performanceId, string made for printing,
     // if onlyActive is true, it only contains Active performances
-    public List<(string, string)> GetPerformanceOptions(bool onlyActive){
+    public List<(string, string)> GetPerformanceOptions(bool onlyActive)
+    {
         // list of id, performance string
         List<(string, string)> PerformanceOptions = new();
         // list of id, performance
         List<(string, Performance)> PerformancesOrdered = new();
 
         // Adds the performances to PerformancesOrdered
-        foreach (KeyValuePair<string, Performance> performance in App.Performances){
+        foreach (KeyValuePair<string, Performance> performance in App.Performances)
+        {
             if (onlyActive && !performance.Value.Active) continue;
             PerformancesOrdered.Add((performance.Key, performance.Value));
         }
@@ -86,12 +92,15 @@ public class PerformanceLogic : LogicBase<Performance>{
         PerformancesOrdered = PerformancesOrdered.OrderBy(performance => performance.Item2.Name).ToList();
 
         // Goes over the performances and then adds the (id, string (made for printing)) to PerformanceOptions
-        foreach (var performance in PerformancesOrdered){
+        foreach (var performance in PerformancesOrdered)
+        {
             if (onlyActive && !performance.Item2.Active) continue;
             string performanceString = performance.Item2.Name.PadRight(40);
-            if (onlyActive){
+            if (onlyActive)
+            {
                 List<string> currentGenres = new();
-                foreach (var genreId in App.Performances[performance.Item1].Genres){
+                foreach (var genreId in App.Performances[performance.Item1].Genres)
+                {
                     currentGenres.Add(App.Genres[genreId].Name);
                 }
                 currentGenres.Sort();
@@ -100,22 +109,26 @@ public class PerformanceLogic : LogicBase<Performance>{
             }
             PerformanceOptions.Add((performance.Item1, performanceString));
         }
-        
+
         // Returns the string, which is basically a menu
         return PerformanceOptions;
     }
 
 
-    public void PerformanceCatalogue(){
+    public void PerformanceCatalogue()
+    {
         Console.Clear();
-        string? performanceId = App.performancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket:", true);
+        string? performanceId = App.performancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket: \n\n> ", true, false);
         if (performanceId == null) return;
         PlayLogic.Choose(performanceId);
     }
 
-    public int? GetRuntime(string performanceID){
-        foreach(var performancePair in App.Performances){
-            if(performancePair.Key == performanceID){
+    public int? GetRuntime(string performanceID)
+    {
+        foreach (var performancePair in App.Performances)
+        {
+            if (performancePair.Key == performanceID)
+            {
                 return performancePair.Value.RuntimeInMin;
             }
         }

@@ -210,4 +210,21 @@ public class PlayScheduleTest
         Assert.AreEqual(120, App.Performances["ID0"].RuntimeInMin);
         Assert.AreEqual(120, App.Performances["ID1"].RuntimeInMin);
     }
+    [TestMethod]
+    public void TestFilterFullPlays()
+    {
+        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
+
+        Play Play1 = new Play("ID0", "18:00:00", nextMonth, "ID5", "ID0");
+        Ticket Ticket1 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
+
+        App.Plays["ID0"].Add(Play1);
+        App.Plays["ID0"][0].BookedSeats = 79;
+        List<Play> FilterCheck1 = PlayLogic.FilterFullPlays(App.Plays["ID0"]);
+        Assert.IsTrue(FilterCheck1.Contains(Play1));
+
+        PlayLogic.AddBooking(Ticket1);
+        List<Play> FilterCheck2 = PlayLogic.FilterFullPlays(App.Plays["ID0"]);
+        Assert.IsFalse(FilterCheck2.Contains(Play1));
+    }
 }

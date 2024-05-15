@@ -1,141 +1,180 @@
-public class PresentationBase<T> where T : IEditable{
+public class PresentationBase<T> where T : IEditable
+{
     // Reference to logic class from T
     protected LogicBase<T> Logic;
     public PresentationBase(LogicBase<T> logic) => Logic = logic;
-    
-    public virtual void AddObject(){
+
+    public virtual void AddObject()
+    {
         string? name = GetNameInput();
         if (name == null) return;
     }
 
     // Returns a string for name that was input
-    public string? GetNameInput(){
+    public string? GetNameInput()
+    {
         //Console.Clear();
         string inputName = "";
         bool validName = false;
-        while (!validName){
-            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)\n> ");
+        while (!validName)
+        {
+            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)" + "\n\n" + "> ");
             inputName = Console.ReadLine() ?? "";
-            if (inputName == ""){
+            if (inputName == "")
+            {
                 Console.WriteLine("Exiting..");
                 Thread.Sleep(1500);
                 return null;
             }
             validName = Logic.ValidName(inputName);
-            if (!validName){
+            if (!validName)
+            {
                 Console.WriteLine($"{typeof(T).Name} with name {inputName} already exists\n");
             }
         }
         return inputName;
     }
 
-    public int EditObject(string objectId){
+    public int EditObject(string objectId)
+    {
         // Get object
         if (objectId == "") return 0;
         T obj = Logic.Dict[objectId];
 
         // Get all properties of type T
         var properties = typeof(T).GetProperties().Where(property => Attribute.IsDefined(property, typeof(EditableAttribute)));
+        string objectName = obj.GetType().GetProperty("Name")?.GetValue(obj, null)?.ToString() ?? "Unnamed";
 
-        while (true){
+        while (true)
+        {
             int index = 1;
             Console.Clear();
+            Console.WriteLine($"Front Page -> Home Page -> Modify {typeof(T).Name}s -> {objectName}\n");
             Console.WriteLine($"What to change for this {typeof(T).Name.ToLower()}");
-            foreach (var property in properties) {
+            foreach (var property in properties)
+            {
                 var val = typeof(T).GetProperty(property.Name)?.GetValue(obj, null);
                 string value = "";
 
                 // Don't know a better way of doing this without "hardcoding" the type check
                 // Values get formatted here properly
-                if (val is IList<string> valList){
+                if (val is IList<string> valList)
+                {
                     List<string> names = new();
-                    foreach (string id in valList){
+                    foreach (string id in valList)
+                    {
 
-                        if (typeof(T) == typeof(Location)){
+                        if (typeof(T) == typeof(Location))
+                        {
                             names.Add(App.hallLogic.Dict[id].Name);
-                        } else if (typeof(T) == typeof(Performance)){
+                        }
+                        else if (typeof(T) == typeof(Performance))
+                        {
                             names.Add(App.genreLogic.Dict[id].Name);
-                        } else names.Add(Logic.Dict[id].Name);
+                        }
+                        else names.Add(Logic.Dict[id].Name);
                     }
-                    string seperator = ", ";
-                    value = $"[{String.Join(seperator, names)}]";
-                } else value = $"'{val}'";
+                    string separator = ", ";
+                    value = $"[{String.Join(separator, names)}]";
+                }
+                else value = $"'{val}'";
 
                 Console.WriteLine($"{index++}: Change {property.Name.PadRight(25)} {value}");
             }
-            
+
             if (typeof(T) == typeof(Performance)) Console.WriteLine($"{index++}: Add play for this performance");
-            Console.Write($"{index}: Exit\n> ");
+            Console.Write($"{index}: Exit\n\n> ");
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             Console.WriteLine();
-            if (choice == 0 || choice > index){
+            if (choice == 0 || choice > index)
+            {
                 Console.WriteLine("Not a valid choice");
                 Thread.Sleep(2500);
-            } else if (choice == index){
+            }
+            else if (choice == index)
+            {
                 Console.WriteLine("Exiting..");
                 DataAccess.UpdateItem<T>();
                 Thread.Sleep(1500);
                 return 0;
-            } else if (choice == 1) {       // Because Name is first property, it will always be 1;
+            }
+            else if (choice == 1)
+            {       // Because Name is first property, it will always be 1;
                 string? newName = GetNameInput();
                 if (newName == null) continue;
                 Console.WriteLine($"Changed {obj.Name} to {newName}");
                 obj.Name = newName;
+                objectName = newName;
                 Thread.Sleep(2500);
-            } else return choice;
+            }
+            else return choice;
         }
     }
 
-    public string GetItem(string question, string exit, string locationId = "", bool InEditMenu = false){
+    public string GetItem(string question, string exit, string locationId = "", bool InEditMenu = false)
+    {
         List<(string, string)> itemsOrdered = new();
         int EditOffset = InEditMenu ? 1 : 0;
-        
+
         // Don't know a better way of doing this
-        if (typeof(T) == typeof(Hall) && locationId != ""){
+        if (typeof(T) == typeof(Hall) && locationId != "")
+        {
             if (!App.Locations.ContainsKey(locationId)) return "null";
             App.Locations[locationId].Halls.ForEach(hallId => itemsOrdered.Add((hallId, Logic.Dict[hallId].Name)));
-        } else {
-            foreach (var itemPair in Logic.Dict){
+        }
+        else
+        {
+            foreach (var itemPair in Logic.Dict)
+            {
                 itemsOrdered.Add((itemPair.Key, itemPair.Value.Name));
             }
         }
         itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();
 
-        while (true){
+        while (true)
+        {
             string menu = "";
             int index = 1;
             int choice = -1;
             Console.Clear();
-            Console.WriteLine(question);
-            
-            foreach (var itemPair in itemsOrdered){
+            if (InEditMenu) Console.WriteLine($"Front page -> HomePage -> Modify {typeof(T).Name}s\n");
+            Console.WriteLine($"{question}");
+
+            foreach (var itemPair in itemsOrdered)
+            {
                 menu += $"{index++}: {itemPair.Item2}";
 
-                // Again can't think of a way to seperate this better
+                // Again can't think of a way to separate this better
                 // if this object is a hall, then add the location of the hall after it
-                if (typeof(T) == typeof(Hall)){
+                if (typeof(T) == typeof(Hall))
+                {
                     string locationIdOfHall = App.Halls[itemPair.Item1].LocationId;
                     menu += (locationIdOfHall == "null") ? "\tNo location" : $"\t({App.Locations[locationIdOfHall].Name})";
                 }
 
                 menu += "\n";
             }
-            
-            if (InEditMenu){
+
+            if (InEditMenu)
+            {
                 menu += $"\n{index++}: Add New {typeof(T).Name}";
             }
 
             menu += $"\n{index}: {exit}\n> ";
             Console.Write(menu);
-            
-            try {
-                if (!Int32.TryParse(Console.ReadLine(), out choice)){
+
+            try
+            {
+                if (!Int32.TryParse(Console.ReadLine(), out choice))
+                {
                     Console.WriteLine("\nInvalid input\n");
                     continue;
                 }
                 return itemsOrdered[choice - 1].Item1;
-            } catch (ArgumentOutOfRangeException){
+            }
+            catch (ArgumentOutOfRangeException)
+            {
                 if (InEditMenu && choice == itemsOrdered.Count + 1) return "add";
                 if (choice == itemsOrdered.Count + 1 + EditOffset) return "null";
                 Console.WriteLine("Invalid choice");
@@ -147,20 +186,25 @@ public class PresentationBase<T> where T : IEditable{
 
     // Only for Genres and Halls
     // I know it looks and uses similar code to GetItem, but I can't think of any way to incorporate that code here
-    public List<string> GetItemList(string objectId = ""){
+    public List<string> GetItemList(string objectId = "", bool filter = false){
         // Don't know a better way of doing this
 
         // itemIds is a list of the Ids which will eventually be returned
         List<string> itemIds = new();
-        if (typeof(T) == typeof(Genre)){
+        if (typeof(T) == typeof(Genre))
+        {
             if (App.Performances.ContainsKey(objectId)) itemIds = App.Performances[objectId].Genres;
-        } else if (typeof(T) == typeof(Hall)){
+        }
+        else if (typeof(T) == typeof(Hall))
+        {
             if (App.Locations.ContainsKey(objectId)) itemIds = App.Locations[objectId].Halls;
-        } else return new List<string>();
+        }
+        else return new List<string>();
 
         // itemsOrdered is the items with id and name, which is used for printing what options are available
         List<(string, string)> itemsOrdered = new();
-        foreach (var itemPair in Logic.Dict){
+        foreach (var itemPair in Logic.Dict)
+        {
             // Don't add the genres that are int itemIds already
             if (typeof(T) == typeof(Genre) && itemIds.Contains(itemPair.Key)) continue;
             // Don't add the halls which are already linked to a location
@@ -168,9 +212,10 @@ public class PresentationBase<T> where T : IEditable{
             itemsOrdered.Add((itemPair.Key, itemPair.Value.Name));
         }
         itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();
-        
-        string seperator = ", ";
-        while (true){
+
+        string separator = ", ";
+        while (true)
+        {
             Console.Clear();
             int index = 1;
             int choice = -1;
@@ -180,28 +225,39 @@ public class PresentationBase<T> where T : IEditable{
             itemIds.ForEach(itemId => currentItems.Add(Logic.Dict[itemId].Name));
             currentItems.Sort();
 
-            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(seperator, currentItems)}]\n");
+            if (filter) Console.WriteLine($"Front Page -> Home Page -> View Performances -> Filter\n");
+            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(separator, currentItems)}]\n");
             Console.WriteLine($"Choose {typeof(T).Name.ToLower()}s:");
 
             string menu = "";
-            foreach (var itemPair in itemsOrdered){
+            foreach (var itemPair in itemsOrdered)
+            {
                 menu += $"{index++} {itemPair.Item2}\n";
             }
-            menu += $"\n{index}: Confirm\n> ";
+            menu += $"\n{index}: Confirm \n\n> ";
             Console.Write(menu);
 
-            try {
-                if (!Int32.TryParse(Console.ReadLine(), out choice)){
+            try
+            {
+                if (!Int32.TryParse(Console.ReadLine(), out choice))
+                {
                     Console.WriteLine("\nInvalid input\n");
                     Thread.Sleep(2500);
-                } else {
+                }
+                else
+                {
                     itemIds.Add(itemsOrdered[choice - 1].Item1);
                     itemsOrdered.RemoveAt(choice - 1);
                 }
-            } catch (ArgumentOutOfRangeException){
-                if (choice - 1 == itemsOrdered.Count){
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                if (choice - 1 == itemsOrdered.Count)
+                {
                     return itemIds;
-                } else {
+                }
+                else
+                {
                     Console.WriteLine("Invalid choice");
                     Thread.Sleep(2500);
                 }

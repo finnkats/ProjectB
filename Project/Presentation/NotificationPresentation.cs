@@ -3,6 +3,7 @@ public static class NotificationPresentation {
         while (true){
             (string location, string genres) = NotificationLogic.UpdatePrintInfo();
             Console.Clear();
+            Console.WriteLine("Front Page -> Home Page -> Edit Account Settings\n");
             Console.WriteLine($"What would you like to change?");
             Console.WriteLine($"1: Change location".PadRight(30) + location);
             Console.WriteLine($"2: Change interested genres".PadRight(30) + genres);
@@ -41,6 +42,7 @@ public static class NotificationPresentation {
         int originalNotificationCount = App.Notifications[App.LoggedInUsername].Count;
         while (true){
             Console.Clear();
+            Console.WriteLine("Front Page -> Home Page -> View Notifications\n");
             Console.WriteLine("Your preferences:");
             Console.WriteLine($"{location} | {genres}\n");
             Console.WriteLine("Notifications:");

@@ -1,29 +1,36 @@
-public class GenrePresentation : PresentationBase<Genre>{
-    public GenrePresentation(LogicBase<Genre> logic) : base(logic){}
+public class GenrePresentation : PresentationBase<Genre>
+{
+    public GenrePresentation(LogicBase<Genre> logic) : base(logic) { }
 
-    public void AddGenre(){
+    public void AddGenre()
+    {
         Console.Clear();
         string? genreName = GetNameInput();
         if (genreName is null) return;
         Console.WriteLine();
 
         int genreAge;
-        while (true){
+        while (true)
+        {
             genreAge = -1;
             Console.WriteLine($"Enter age-rating for genre {genreName}");
             Console.WriteLine(Genre.AgeString() + "'-1' to exit");
             Int32.TryParse(Console.ReadLine(), out genreAge);
-            if (genreAge == -1){
+            if (genreAge == -1)
+            {
                 Console.WriteLine("Exitting");
                 return;
             }
-            if (!App.genreLogic.ValidAge(genreAge)){
+            if (!App.genreLogic.ValidAge(genreAge))
+            {
                 Console.WriteLine($"{genreAge} is not a valid age-rating");
-            } else break;
+            }
+            else break;
         }
         Console.WriteLine();
 
-        if (!App.genreLogic.AddGenre(genreName, genreAge)){
+        if (!App.genreLogic.AddGenre(genreName, genreAge))
+        {
             Console.WriteLine("An error occurred while adding genre.");
             Thread.Sleep(3000);
             return;
@@ -34,32 +41,40 @@ public class GenrePresentation : PresentationBase<Genre>{
         return;
     }
 
-    public void EditGenreStart(){
+    public void EditGenreStart()
+    {
         string genreId = GetItem("Which genre do you want to edit?", "Exit", InEditMenu: true);
         Console.WriteLine(genreId);
 
-        if (genreId == "add"){
+        if (genreId == "add")
+        {
             App.genrePresentation.AddGenre();
             return;
         }
 
         if (genreId == "null") genreId = "";
-        while (true){
+        while (true)
+        {
             int choice = EditObject(genreId);
             if (choice == 0) return;
-            if (choice == 2){
+            if (choice == 2)
+            {
                 Console.Clear();
                 Console.Write($"Enter new age-rating for '{Logic.Dict[genreId].Name}', currently: {Logic.Dict[genreId].Age}\n" +
-                                   Genre.AgeString());
+                                   Genre.AgeString() + "\n" + "> ");
                 int oldAge = Logic.Dict[genreId].Age;
-                if (!Int32.TryParse(Console.ReadLine(), out int newAge) || !Genre.Ages.Contains(newAge)){
+                if (!Int32.TryParse(Console.ReadLine(), out int newAge) || !Genre.Ages.Contains(newAge))
+                {
                     Console.WriteLine("Invalid input");
                     Thread.Sleep(2000);
                     continue;
                 }
-                if (!App.genreLogic.ChangeAge(genreId, newAge)){
-                    Console.WriteLine($"An error occured while changing age-rating. Try again");
-                } else {
+                if (!App.genreLogic.ChangeAge(genreId, newAge))
+                {
+                    Console.WriteLine($"An error occurred while changing age-rating. Try again");
+                }
+                else
+                {
                     Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");
                 }
                 Thread.Sleep(4000);

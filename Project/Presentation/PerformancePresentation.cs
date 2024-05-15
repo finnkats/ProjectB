@@ -28,9 +28,9 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
         bool active;
         while(true){
-            Console.Write("Will the performance be currently active?\'y\' (Yes) or \'n\' (No)\n> ");
+            Console.Write("Will the performance be currently active? \'y\' (Yes) or \'n\' (No)\n> ");
             string activeInput = Console.ReadLine()?.ToLower() ?? "";
-            if (activeInput != "y" || activeInput != "n"){
+            if (activeInput != "y" && activeInput != "n"){
                 Console.WriteLine("Invalid input");
                 continue;
             }
@@ -53,7 +53,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
 
     public void EditPerformanceStart(){
-        string performanceId = PerformanceChoice("Choose the performance you want to edit:") ?? "";
+        string performanceId = PerformanceChoice("Choose the performance you want to edit: \n\n> ", false, true) ?? "";
 
         // Add a performance option was chosen
         if (performanceId == "add") {
@@ -71,8 +71,14 @@ public class PerformancePresentation : PresentationBase<Performance>{
                     currentGenres.Add(App.Genres[genreId].Name);
                 }
                 List<string> RemovedGenreIds = new();
+                bool printBreadCrumb = true;
                 foreach (var genreId in Logic.Dict[performanceId].Genres){
-                    Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N)\n");
+                    if (printBreadCrumb)
+                    {
+                        Console.WriteLine($"Front Page -> Home Page -> Modify Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
+                    }
+                    printBreadCrumb = false;
+                    Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N) \n\n> ");
                     string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
                     if (removeGenre.StartsWith("Y")){
                         currentGenres.Remove(App.Genres[genreId].Name);
@@ -100,7 +106,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
     }
 
     // This is the catalogue, this should probably the base for future menu's
-    public string? PerformanceChoice(string question, bool onlyActive=false){
+    public string? PerformanceChoice(string question, bool onlyActive=false, bool admin=false){
         // Clear the console
         Console.Clear();
         
@@ -121,6 +127,14 @@ public class PerformancePresentation : PresentationBase<Performance>{
             int printIndex = 1;
             // Clear the console
             Console.Clear();
+            if (!admin)
+            {
+                Console.WriteLine("Front Page -> Home Page -> View Performances\n");
+            }
+            else
+            {
+                Console.WriteLine("Front Page -> Home Page -> Modify Performances\n");
+            }
             
             // Calculate the total number of pages based on the number of performance options
             pages = (PerformanceOptions.Count + 4) / 5;
@@ -153,7 +167,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             
             // Display exit option
             Console.WriteLine($"{PerformanceOptionsScope.Count + 2 + offset}: Exit");
-            Console.Write($"{question}\n> ");
+            Console.Write(question);
 
             // Read user input and parse it as integer
             Int32.TryParse(Console.ReadLine(), out int choice);
@@ -161,7 +175,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 // Handle user choices
                 if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
                     // Filter performance options based on user-selected genres
-                    List<string> genres = App.genrePresentation.GetItemList();
+                    List<string> genres = App.genrePresentation.GetItemList(filter: true);
                     var filteredPerformanceOptions = App.performanceLogic.FilteredPerformanceOptions(genres);
                     PerformanceOptions = filteredPerformanceOptions;
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){

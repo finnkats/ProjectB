@@ -7,6 +7,7 @@ public static class TicketPresentation{
         while (true){
             Console.Clear();
             var TicketsList = MainTicketSystem.SortActiveTicket(); // Method sorts tickets owned by user by if they are active or not
+            Console.WriteLine("Front Page -> Home Page -> View Tickets\n\n");
             if (TicketsList != null)
             {
                 // This part of the method prints the Inactive tickets
@@ -25,7 +26,7 @@ public static class TicketPresentation{
                     string hallName = App.Halls[ticket.Hall].Name;
                     if (hallName.Length > 19) hallName = $"{hallName.Substring(0, 16)}...";
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|",
-                        performanceName, ticket.Date, ticket.Time, hallName));
+                        performanceName, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", hallName));
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "", "", "", ""));
                     Console.WriteLine(new string('-', 82));
 
@@ -46,7 +47,7 @@ public static class TicketPresentation{
                     string hallName = App.Halls[ticket.Hall].Name;
                     if (hallName.Length > 19) hallName = $"{hallName.Substring(0, 16)}...";
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|",
-                        performanceName, ticket.Date, ticket.Time, hallName));
+                        performanceName, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", hallName));
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "", "", "", ""));
                     Console.WriteLine(new string('-', 82));
                 }
@@ -56,7 +57,7 @@ public static class TicketPresentation{
                 {
                     Console.WriteLine($"{IndexNumber++}. {App.Performances[ticket.PerformanceId].Name} ");
                 }
-                Console.WriteLine("Q. I don't want to cancel any tickets");
+                Console.Write("Q. I don't want to cancel any tickets \n\n> ");
                 string? userInput = Console.ReadLine();
                 if (userInput == null) return;
                 if (userInput.ToLower() == "q") return;
@@ -88,8 +89,9 @@ public static class TicketPresentation{
         }
     }
 
-    public static void PrintTicket(Ticket ticket){
+    public static void PrintTicket(Ticket ticket, string performanceId){
         Console.Clear();
+        Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
         Console.WriteLine(ticket.TicketInfo());
         Thread.Sleep(6000);

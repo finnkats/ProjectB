@@ -132,26 +132,14 @@ public class PresentationBase<T> where T : IEditable
         }
         itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();
 
-        string chooseHall = "";
-        // Check if any item in itemsOrdered is of type Hall to update chooseLocation
-        foreach (var itemPair in itemsOrdered)
-        {
-            if (typeof(T) == typeof(Hall))
-            {
-                chooseHall = "-> Choosing a hall";
-                break;
-            }
-        }
-
-
         while (true)
         {
             string menu = "";
             int index = 1;
             int choice = -1;
             Console.Clear();
-            Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> Choosing a location {chooseHall}\n");
-            Console.WriteLine(question);
+            Console.WriteLine($"Front Page -> Home Page -> Modify Performances");
+            Console.WriteLine($"{question}");
 
             foreach (var itemPair in itemsOrdered)
             {
@@ -173,7 +161,7 @@ public class PresentationBase<T> where T : IEditable
                 menu += $"\n{index++}: Add New {typeof(T).Name}";
             }
 
-            menu += $"\n{index}: {exit}";
+            menu += $"\n{index}: {exit}\n> ";
             Console.Write(menu);
 
             try

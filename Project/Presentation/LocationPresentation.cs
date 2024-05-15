@@ -22,7 +22,7 @@ public class LocationPresentation : PresentationBase<Location>{
     }
 
     public void EditLocationStart(){
-        string locationId = GetItem("Which location do you want to edit?", "Exit\n\n> ", InEditMenu: true);
+        string locationId = GetItem("Which location do you want to edit?", "Exit", InEditMenu: true);
 
         if (locationId == "add"){
             App.locationPresentation.AddLocation();

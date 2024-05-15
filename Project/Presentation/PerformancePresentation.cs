@@ -28,9 +28,9 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
         bool active;
         while(true){
-            Console.Write("Will the performance be currently active?\'y\' (Yes) or \'n\' (No)\n> ");
+            Console.Write("Will the performance be currently active? \'y\' (Yes) or \'n\' (No)\n> ");
             string activeInput = Console.ReadLine()?.ToLower() ?? "";
-            if (activeInput != "y" || activeInput != "n"){
+            if (activeInput != "y" && activeInput != "n"){
                 Console.WriteLine("Invalid input");
                 continue;
             }

@@ -6,7 +6,7 @@ public static class NotificationPresentation {
             Console.WriteLine($"What would you like to change?");
             Console.WriteLine($"1: Change location".PadRight(30) + location);
             Console.WriteLine($"2: Change interested genres".PadRight(30) + genres);
-            Console.WriteLine("3: Exit\n> ");
+            Console.Write("3: Exit\n> ");
             Int32.TryParse(Console.ReadLine(), out int choice);
             if (choice == 0){
                 Console.WriteLine("Not a valid choice");
@@ -50,7 +50,7 @@ public static class NotificationPresentation {
                 Console.WriteLine($"{index++}: {notification.ToString()}");
             }
             Console.WriteLine($"\n{index}: Exit\n");
-            Console.WriteLine("Choose a notification to remove (read)\n> ");
+            Console.Write("Choose a notification to remove (read)\n> ");
             Int32.TryParse(Console.ReadLine(), out int choice);
             if (choice <= 0 || choice > index){
                 Console.WriteLine("Invalid choice");

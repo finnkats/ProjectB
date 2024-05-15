@@ -87,15 +87,10 @@ public static class PlayPresentation
         string startTime;
         while (true){
             Console.Clear();
+            Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date}\n");
             Console.Write("What time? [HH:MM]\n> ");
             startTime = Console.ReadLine() ?? "99:99";
-            string[] times = startTime.Split(':');
-            if (times.Length != 2) continue;
-            if (!Int32.TryParse(times[0], out int hours)) continue;
-            if (!Int32.TryParse(times[1], out int minutes)) continue;
-            if (0 > hours || hours > 23) continue;
-            if (0 > minutes || minutes > 59) continue;
-            startTime = $"{startTime}:00";
+            if (!PlayLogic.ValidTime(startTime)) continue;
             break;
         }
 

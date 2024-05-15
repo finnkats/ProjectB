@@ -152,7 +152,7 @@ public static class PlayLogic
     {
         foreach (Play play in App.Plays[newTicket.PerformanceId])
         {
-            if (play.Date == newTicket.Date && play.Time == newTicket.Time && play.Hall == newTicket.Hall)
+            if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall)
             {
                 play.BookedSeats -= 1;
                 DataAccess.UpdateList<Play>();

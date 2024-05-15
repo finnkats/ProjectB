@@ -7,6 +7,7 @@ public static class TicketPresentation{
         while (true){
             Console.Clear();
             var TicketsList = MainTicketSystem.SortActiveTicket(); // Method sorts tickets owned by user by if they are active or not
+            Console.WriteLine("Front Page -> Home Page -> View Tickets\n\n");
             if (TicketsList != null)
             {
                 // This part of the method prints the Inactive tickets

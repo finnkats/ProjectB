@@ -12,14 +12,16 @@ public class HallPresentation : PresentationBase<Hall>{
         int hallSeats;
         while (true){
             hallSeats = -1;
-            Console.WriteLine($"Enter seats for hall {hallName}\n-1 to exit");
-            Int32.TryParse(Console.ReadLine(), out hallSeats);
-            if (hallSeats == -1){
+            Console.WriteLine($"Enter seats for hall {hallName}\nQ to exit");
+            string seatChoice = Console.ReadLine()?.ToLower() ?? "";
+            if (seatChoice == "q"){
                 Console.WriteLine("Exitting");
                 return;
             }
+            Int32.TryParse(seatChoice, out hallSeats);
             if (hallSeats <= 0){
-                Console.WriteLine($"{hallSeats} is not a valid amount of seats");
+                Console.WriteLine($"{seatChoice} is not a valid amount of seats\n");
+                
             } else break;
         }
         Console.WriteLine();
@@ -38,36 +40,17 @@ public class HallPresentation : PresentationBase<Hall>{
     }
 
     public void EditHallStart(){
-        string hallId = GetItem("Which hall do you want to edit?", "Exit");
+        string hallId = GetItem("Which hall do you want to edit?", "Exit", InEditMenu: true);
+
+        if (hallId == "add"){
+            App.hallPresentation.AddHall();
+            return;
+        }
+
         if (hallId == "null") hallId = "";
         while (true){
             int choice = EditObject(hallId);
             if (choice == 0) return;
-            if (choice == 2){
-                Console.Clear();
-                Console.WriteLine($"Enter new amount of seats for '{Logic.Dict[hallId].Name}', currently: {Logic.Dict[hallId].Seats}:");
-                int oldSeats = Logic.Dict[hallId].Seats;
-                if (!Int32.TryParse(Console.ReadLine(), out int newSeats)){
-                    Console.WriteLine("Invalid input");
-                    Thread.Sleep(2000);
-                    continue;
-                }
-                if (!App.hallLogic.ChangeSeats(hallId, newSeats)){
-                    Console.WriteLine($"Couldn't change seats, value too low");
-                } else {
-                    Console.WriteLine($"Successfully changed '{oldSeats}' to '{newSeats}'");
-                }
-                Thread.Sleep(4000);
-            } else if (choice == 3){
-                string oldLocation = (Logic.Dict[hallId].LocationId == "null") ? $"No location": $"{App.Locations[Logic.Dict[hallId].LocationId].Name}";
-                string newLocationId = App.locationPresentation.GetItem($"New location for {Logic.Dict[hallId].Name}, " +
-                                                            $"currently: {oldLocation}:\n", "Remove hall from location");
-                Logic.Dict[hallId].LocationId = newLocationId;
-                DataAccess.UpdateItem<Hall>();
-                Console.WriteLine($"Successfully changed '{Logic.Dict[hallId].Name}' location from '{oldLocation}' to " +
-                                  ((newLocationId == "null") ? $"'No location'": $"'{App.Locations[newLocationId].Name}'"));
-                Thread.Sleep(6000);
-            }
         }
     }
 }

@@ -8,6 +8,7 @@ public static class MainTicketSystem{
         if(!App.Tickets.ContainsKey(App.LoggedInUsername)){
             App.Tickets[App.LoggedInUsername] = new List<Ticket>();
         }
+        PlayLogic.AddBooking(createNewTicket);
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
         DataAccess.UpdateList<Ticket>();
         TicketPresentation.PrintTicket(createNewTicket);

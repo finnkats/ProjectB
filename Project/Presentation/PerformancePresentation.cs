@@ -14,13 +14,12 @@ public class PerformancePresentation : PresentationBase<Performance>{
             Console.Write("Enter the runtime in minutes:\n> ");
             string runtimeInput = Console.ReadLine() ?? "";
             bool runtimeBool = int.TryParse(runtimeInput, out runtime);
-            if(!runtimeBool){Console.WriteLine("Invalid input. Please enter a valid number representing minutes.");}
+            if(!runtimeBool || runtime <= 0){Console.WriteLine("Invalid input. Please enter a valid number representing minutes.");}
             else if(runtimeBool){
-                Console.Write($"Are you sure that the runtime will be in {runtime} minutes?\n> ");
+                Console.Write($"Are you sure that the runtime will be in {runtime} minutes?\nPlease confirm by entering \'y\' (Yes) or \'n\' (No)\n> ");
                 string confirmRuntime = Console.ReadLine() ?? "";
                 if(confirmRuntime.ToLower() == "y"){break;}
                 else if(confirmRuntime.ToLower() == "n"){continue;}
-                else{Console.WriteLine("Please confirm by entering \'y\' (Yes) or \'n\' (No)");}
             }
         }
   
@@ -56,6 +55,13 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
     public void EditPerformanceStart(){
         string performanceId = PerformanceChoice("Choose the performance you want to edit:") ?? "";
+
+        // Add a performance option was chosen
+        if (performanceId == "add") {
+            App.performancePresentation.AddPerformance();
+            return;
+        }
+
         while (true){
             int choice = EditObject(performanceId);
             if (choice == 0) return;
@@ -88,6 +94,9 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 Console.WriteLine("Successfully changed active status");
                 Thread.Sleep(2500);
             }
+            else if (choice == 4){
+                PlayPresentation.AddPlayDetails(performanceId);
+            }
         }
     }
 
@@ -103,8 +112,10 @@ public class PerformancePresentation : PresentationBase<Performance>{
         int page = 1;
         int pages;
         int offset = 0;
-        // Determine the index of the exit option based on whether only active is true or false are requested
-        int exitOptionIndex = onlyActive ? 2 : 1;
+        
+        // Changed for now, because now an extra option is always added
+        // // Determine the index of the exit option based on whether only active is true or false are requested
+        //int exitOptionIndex = onlyActive ? 2 : 1;
         
         // Infinite loop to keep the menu running until an option is chosen or the user exits
         while (true){
@@ -133,13 +144,16 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 Console.WriteLine($"{PerformanceOptionsScope.Count + 2}: Previous page");
                 offset = 2;
             }
-            // Display filter option if only active performances are requested
+
+            // If onlyActive is true, this menu is in the "view performances" option, if its false, its in the "edit performances" option
             if (onlyActive){
                 Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Filter");
+            } else {
+                Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Add New Performance");
             }
             
             // Display exit option
-            Console.WriteLine($"{PerformanceOptionsScope.Count + exitOptionIndex + offset}: Exit");
+            Console.WriteLine($"{PerformanceOptionsScope.Count + 2 + offset}: Exit");
             Console.Write($"{question}\n> ");
 
             // Read user input and parse it as integer
@@ -161,7 +175,10 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 }
             } catch (ArgumentOutOfRangeException) {
                 // Handle out of range exceptions
-                if (choice == PerformanceOptionsScope.Count() + 1 + offset) return null; // User chooses to exit
+                if (choice == PerformanceOptionsScope.Count() + 1 + offset){ // The option filter or add was chosen
+                    if (onlyActive) return null;
+                    else return "add";
+                } // User chooses to exit
                 else if (offset == 2){
                     // Handle pagination options
                     if (choice == PerformanceOptionsScope.Count() + 1){

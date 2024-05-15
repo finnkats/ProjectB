@@ -4,7 +4,7 @@ public class Play : IDataAccessList {
     public string Location { get; set; }
     [JsonPropertyName("Start time")]
     public string StartTime { get; set; }
-    [JsonPropertyName("End time")]
+    [JsonIgnore()]
     public string EndTime {
         get{
             DateTime startTime = DateTime.Parse(StartTime);

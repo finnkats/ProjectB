@@ -35,7 +35,8 @@ public static class AccountLogic
                     loginLoop = false;
                     Console.Clear();
                 }
-                else {
+                else
+                {
                     // Add Customer Logged-In options
                     App.HomePage.AddCurrentOption("View Tickets");
                     App.HomePage.AddCurrentOption("View Notifications");
@@ -44,7 +45,7 @@ public static class AccountLogic
                     AccountPresentation.PrintSuccess($"Welcome back {account.Name}");
                     loginLoop = false;
                 }
-                
+
                 App.LoggedInUsername = loginName;
                 // Remove sign in / up option from frontpage, and add logout
                 App.FrontPage.RemoveCurrentOption("Sign in / up");
@@ -54,21 +55,23 @@ public static class AccountLogic
                 break;
             }
 
-            if (!found){
+            if (!found)
+            {
                 if (inputName != "") return;
                 loginLoop = AccountPresentation.LoginFailure() ? true : false;
             }
         }
     }
 
-    public static bool CheckLogin(string? loginName, string? loginPassword, Account account){
+    public static bool CheckLogin(string? loginName, string? loginPassword, Account account)
+    {
         return (account.Name == loginName && account.Password == loginPassword);
     }
 
     public static void Logout()
     {
         AccountPresentation.PrintLogout();
-        
+
         App.LoggedInUsername = "Unknown";
 
         // Remove all options which has to do with someone being logged in
@@ -82,13 +85,20 @@ public static class AccountLogic
         App.FrontPage.SetToCurrentMenu();
     }
 
-    public static void CreateAccount(){
+    public static void CreateAccount()
+    {
         (string name, string password) = AccountPresentation.GetLoginDetails();
+
+
+
         if (!AccountPresentation.DoubleCheckPassword(password) || name == "null"){
             return;
         }
 
-        if (App.Accounts.ContainsKey(name) || name == "Unknown"){
+
+
+        if (App.Accounts.ContainsKey(name) || name == "Unknown")
+        {
             AccountPresentation.PrintMessage("Account with that name already exists");
             return;
         }

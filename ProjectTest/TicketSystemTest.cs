@@ -124,5 +124,8 @@ public class TicketSystemTest{
         Assert.AreEqual(2, App.Plays["ID0"][0].BookedSeats);
         PlayLogic.AddBooking(Ticket3);
         Assert.AreEqual(3, App.Plays["ID0"][0].BookedSeats);
+
+        PlayLogic.RemoveBooking(Ticket1);
+        Assert.AreEqual(2, App.Plays["ID0"][0].BookedSeats);
     }
 }

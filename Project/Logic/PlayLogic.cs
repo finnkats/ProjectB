@@ -148,4 +148,16 @@ public static class PlayLogic
             }
         }
     }
+    public static void RemoveBooking(Ticket newTicket)
+    {
+        foreach (Play play in App.Plays[newTicket.PerformanceId])
+        {
+            if (play.Date == newTicket.Date && play.Time == newTicket.Time && play.Hall == newTicket.Hall)
+            {
+                play.BookedSeats -= 1;
+                DataAccess.UpdateList<Play>();
+                break;
+            }
+        }
+    }
 }

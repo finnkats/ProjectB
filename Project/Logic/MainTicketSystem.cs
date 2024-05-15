@@ -49,6 +49,7 @@ public static class MainTicketSystem{
     public static void CancelTicketLogic(Ticket ticketToCancel){
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
+        PlayLogic.RemoveBooking(ticketToCancel);
         DataAccess.UpdateList<Ticket>();
     }
 

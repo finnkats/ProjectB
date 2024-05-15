@@ -1,6 +1,7 @@
 {
     "ID0": {
         "Name": "Soldaat van Oranje",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID5",
             "ID6"
@@ -9,6 +10,7 @@
     },
     "ID1": {
         "Name": "Lion King",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID2",
             "ID9"
@@ -17,6 +19,7 @@
     },
     "ID2": {
         "Name": "Hamlet",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID0",
             "ID4"
@@ -25,6 +28,7 @@
     },
     "ID3": {
         "Name": "Romeo and Juliet",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID0",
             "ID4",
@@ -34,6 +38,7 @@
     },
     "ID4": {
         "Name": "Long Day\u0027s Journey Into Night",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID0",
             "ID4"
@@ -42,6 +47,7 @@
     },
     "ID5": {
         "Name": "Wicked Little Letters",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID0",
             "ID1"
@@ -50,6 +56,7 @@
     },
     "ID6": {
         "Name": "The Zone of Interest",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID0",
             "ID5"
@@ -58,6 +65,7 @@
     },
     "ID7": {
         "Name": "Sonny Boy",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID7",
             "ID8"
@@ -66,6 +74,7 @@
     },
     "ID8": {
         "Name": "Pink Project the Band",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID2"
         ],
@@ -73,6 +82,7 @@
     },
     "ID9": {
         "Name": "Sribi Switi",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID2",
             "ID9"
@@ -81,6 +91,7 @@
     },
     "ID10": {
         "Name": "Women Connected",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID7",
             "ID9"
@@ -89,6 +100,7 @@
     },
     "ID11": {
         "Name": "Compagnie 21",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID7",
             "ID9"
@@ -97,6 +109,7 @@
     },
     "ID12": {
         "Name": "MIST",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID9"
         ],
@@ -104,6 +117,7 @@
     },
     "ID13": {
         "Name": "Nabil",
+        "RuntimeInMin": 120,
         "Genres": [
             "ID1",
             "ID2"

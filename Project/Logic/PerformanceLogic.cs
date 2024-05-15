@@ -1,7 +1,7 @@
 public class PerformanceLogic : LogicBase<Performance>{
-    public bool AddPerformance(string name, List<string> genres, bool active){
+    public bool AddPerformance(string name, int runtime, List<string> genres, bool active){
         string AssignedId = GetID();
-        bool success = AddObject(new Performance(name, genres, active));
+        bool success = AddObject(new Performance(name, runtime, genres, active));
         if (!success) return false;
         App.Plays.Add(AssignedId, new List<Play>());
         DataAccess.UpdateList<Play>();
@@ -111,5 +111,14 @@ public class PerformanceLogic : LogicBase<Performance>{
         string? performanceId = App.performancePresentation.PerformanceChoice("Pick a performance for which you want to buy a ticket:", true);
         if (performanceId == null) return;
         PlayLogic.Choose(performanceId);
+    }
+
+    public int? GetRuntime(string performanceID){
+        foreach(var performancePair in App.Performances){
+            if(performancePair.Key == performanceID){
+                return performancePair.Value.RuntimeInMin;
+            }
+        }
+        return null;
     }
 }

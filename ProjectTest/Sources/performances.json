@@ -1,6 +1,7 @@
 {
     "ID0": {
       "Name": "Performance 1",
+      "RuntimeInMin": 120,
       "Genres": [
         "ID0",
         "ID3"
@@ -9,6 +10,7 @@
     },
     "ID1": {
       "Name": "Performance 2",
+      "RuntimeInMin": 120,
       "Genres": [
         "ID1",
         "ID2"
@@ -17,6 +19,7 @@
     },
     "ID2": {
       "Name": "Performance 3",
+      "RuntimeInMin": 120,
       "Genres": [
         "ID0"
       ],

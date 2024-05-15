@@ -33,6 +33,7 @@ public static class AccountLogic
 
                     AccountPresentation.PrintSuccess($"Logged in as administrator {account.Name}");
                     loginLoop = false;
+                    Console.Clear();
                 }
                 else
                 {

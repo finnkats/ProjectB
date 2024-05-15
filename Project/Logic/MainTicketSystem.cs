@@ -12,7 +12,6 @@ public static class MainTicketSystem{
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
         DataAccess.UpdateList<Ticket>();
         TicketPresentation.PrintTicket(createNewTicket);
-        // createNewTicket.UpdateData(); before
     }
 
     // Prints a string of ticket info (currently called after creating a ticket as confirmation)
@@ -48,15 +47,6 @@ public static class MainTicketSystem{
     }
 
     public static void CancelTicketLogic(Ticket ticketToCancel){
-        // Note: the ticketInApp here is a reference type not a copy of the class
-        // OLD
-        // foreach(var ticketInApp in App.Tickets){
-        //     if(ticketInApp == ticketToCancel){
-        //         ticketInApp.Ticket.IsActive = false;
-        //         TicketDataAccess.UpdateTickets();
-        //         break;
-        //     }
-        // }
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
         DataAccess.UpdateList<Ticket>();

@@ -56,7 +56,7 @@ public static class TicketPresentation{
                 {
                     Console.WriteLine($"{IndexNumber++}. {App.Performances[ticket.PerformanceId].Name} ");
                 }
-                Console.WriteLine("Q. I don't want to cancel any tickets");
+                Console.Write("Q. I don't want to cancel any tickets \n\n> ");
                 string? userInput = Console.ReadLine();
                 if (userInput == null) return;
                 if (userInput.ToLower() == "q") return;
@@ -88,8 +88,9 @@ public static class TicketPresentation{
         }
     }
 
-    public static void PrintTicket(Ticket ticket){
+    public static void PrintTicket(Ticket ticket, string performanceId){
         Console.Clear();
+        Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
         Console.WriteLine(ticket.TicketInfo());
         Thread.Sleep(6000);

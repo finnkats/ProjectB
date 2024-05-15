@@ -53,9 +53,17 @@ public static class AccountPresentation
 
 
 
-    public static (string, string) GetLoginDetails()
+    public static (string, string) GetLoginDetails(bool accountCreation = false)
     {
         Console.Clear();
+        if (!accountCreation)
+        {
+            Console.WriteLine("Front Page -> Sign in / up -> Sign in");
+        }
+        else
+        {
+            Console.WriteLine("Front Page -> Sign in / up -> Sign up");
+        }
         Console.Write("Name: \n\n> ");
         string? loginName = Console.ReadLine();
 

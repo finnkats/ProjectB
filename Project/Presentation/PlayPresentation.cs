@@ -34,7 +34,7 @@ public static class PlayPresentation
         int chosenIndex = -1;
         while (chosenIndex == -1){
 
-            Console.Write("Select a performance by entering its index or '0' to cancel\n> ");
+            Console.Write("Select a performance by entering its index or '0' to cancel\n\n> ");
             
             string? choice = Console.ReadLine();
             if (int.TryParse(choice, out int index)){
@@ -78,7 +78,7 @@ public static class PlayPresentation
         while (true){
             Console.Clear();
             Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name}\n");
-            Console.Write("What date? [DD/MM/YYYY]? (can't be today or in the past)\n> ");
+            Console.Write("What date? [DD/MM/YYYY]? (can't be today or in the past) \n\n> ");
             string givenDate = Console.ReadLine() ?? "";
             if (!PlayLogic.ValidDate(givenDate)) continue;
             date = givenDate;
@@ -89,7 +89,7 @@ public static class PlayPresentation
         while (true){
             Console.Clear();
             Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date}\n");
-            Console.Write("What time? [HH:MM]\n> ");
+            Console.Write("What time? [HH:MM] \n\n> ");
             startTime = Console.ReadLine() ?? "99:99";
             if (!PlayLogic.ValidTime(startTime)) continue;
             break;

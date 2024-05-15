@@ -53,7 +53,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
 
     public void EditPerformanceStart(){
-        string performanceId = PerformanceChoice("Choose the performance you want to edit:") ?? "";
+        string performanceId = PerformanceChoice("Choose the performance you want to edit: \n\n> ", false, true) ?? "";
 
         // Add a performance option was chosen
         if (performanceId == "add") {
@@ -72,7 +72,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 }
                 List<string> RemovedGenreIds = new();
                 foreach (var genreId in Logic.Dict[performanceId].Genres){
-                    Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N)\n");
+                    Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N) \n\n> ");
                     string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
                     if (removeGenre.StartsWith("Y")){
                         currentGenres.Remove(App.Genres[genreId].Name);
@@ -100,7 +100,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
     }
 
     // This is the catalogue, this should probably the base for future menu's
-    public string? PerformanceChoice(string question, bool onlyActive=false){
+    public string? PerformanceChoice(string question, bool onlyActive=false, bool admin=false){
         // Clear the console
         Console.Clear();
         
@@ -121,6 +121,14 @@ public class PerformancePresentation : PresentationBase<Performance>{
             int printIndex = 1;
             // Clear the console
             Console.Clear();
+            if (!admin)
+            {
+                Console.WriteLine("Front Page -> Home Page -> View Performances\n");
+            }
+            else
+            {
+                Console.WriteLine("Front Page -> Home Page -> Edit Performances\n");
+            }
             
             // Calculate the total number of pages based on the number of performance options
             pages = (PerformanceOptions.Count + 4) / 5;

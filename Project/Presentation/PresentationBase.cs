@@ -40,6 +40,7 @@ public class PresentationBase<T> where T : IEditable{
         while (true){
             int index = 1;
             Console.Clear();
+            Console.WriteLine("Front Page -> Home Page -> Edit Performances -> ")
             Console.WriteLine($"What to change for this {typeof(T).Name.ToLower()}");
             foreach (var property in properties) {
                 var val = typeof(T).GetProperty(property.Name)?.GetValue(obj, null);
@@ -57,8 +58,8 @@ public class PresentationBase<T> where T : IEditable{
                             names.Add(App.genreLogic.Dict[id].Name);
                         } else names.Add(Logic.Dict[id].Name);
                     }
-                    string seperator = ", ";
-                    value = $"[{String.Join(seperator, names)}]";
+                    string separator = ", ";
+                    value = $"[{String.Join(separator, names)}]";
                 } else value = $"'{val}'";
 
                 Console.WriteLine($"{index++}: Change {property.Name.PadRight(25)} {value}");
@@ -126,7 +127,7 @@ public class PresentationBase<T> where T : IEditable{
                 menu += $"\n{index++}: Add New {typeof(T).Name}";
             }
 
-            menu += $"\n{index}: {exit}\n> ";
+            menu += $"\n{index}: {exit} \n\n> ";
             Console.Write(menu);
             
             try {
@@ -169,7 +170,7 @@ public class PresentationBase<T> where T : IEditable{
         }
         itemsOrdered = itemsOrdered.OrderBy(itemPair => itemPair.Item2).ToList();
         
-        string seperator = ", ";
+        string separator = ", ";
         while (true){
             Console.Clear();
             int index = 1;
@@ -180,14 +181,15 @@ public class PresentationBase<T> where T : IEditable{
             itemIds.ForEach(itemId => currentItems.Add(Logic.Dict[itemId].Name));
             currentItems.Sort();
 
-            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(seperator, currentItems)}]\n");
+            Console.WriteLine($"Front Page -> Home Page -> View Performances -> Filter\n");
+            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(separator, currentItems)}]\n");
             Console.WriteLine($"Choose {typeof(T).Name.ToLower()}s:");
 
             string menu = "";
             foreach (var itemPair in itemsOrdered){
                 menu += $"{index++} {itemPair.Item2}\n";
             }
-            menu += $"\n{index}: Confirm\n> ";
+            menu += $"\n{index}: Confirm \n\n> ";
             Console.Write(menu);
 
             try {

@@ -89,7 +89,7 @@ public static class AccountLogic
 
     public static void CreateAccount()
     {
-        (string name, string password) = AccountPresentation.GetLoginDetails();
+        (string name, string password) = AccountPresentation.GetLoginDetails(true);
 
 
 

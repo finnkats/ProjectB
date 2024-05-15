@@ -11,7 +11,7 @@ public static class MainTicketSystem{
         PlayLogic.AddBooking(createNewTicket);
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
         DataAccess.UpdateList<Ticket>();
-        TicketPresentation.PrintTicket(createNewTicket);
+        TicketPresentation.PrintTicket(createNewTicket, performanceId);
     }
 
     // Prints a string of ticket info (currently called after creating a ticket as confirmation)

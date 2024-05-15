@@ -43,7 +43,7 @@ public class GenrePresentation : PresentationBase<Genre>
 
     public void EditGenreStart()
     {
-        string genreId = GetItem("Which genre do you want to edit?", "Exit \n\n> ", InEditMenu: true);
+        string genreId = GetItem("Which genre do you want to edit?", "Exit", InEditMenu: true);
         Console.WriteLine(genreId);
 
         if (genreId == "add")

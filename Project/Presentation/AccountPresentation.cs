@@ -59,18 +59,18 @@ public static class AccountPresentation
         string breadcrumb = App.CurrentMenu == App.SignInUp ? "Front Page -> Sign in / up ->" : "Front Page -> Home Page -> View Perfomances ->"; 
         if (!accountCreation)
         {
-            Console.WriteLine($"{breadcrumb} Sign in");
+            Console.WriteLine($"{breadcrumb} Sign in\n");
         }
         else
         {
-            Console.WriteLine($"{breadcrumb} Sign up");
+            Console.WriteLine($"{breadcrumb} Sign up\n");
         }
-        Console.Write("Name: \n\n> ");
+        Console.Write("Name: \n> ");
         string? loginName = Console.ReadLine();
 
         Console.WriteLine();
 
-        Console.Write("Password: \n\n> ");
+        Console.Write("Password: \n> ");
         string loginPassword = MaskPasswordInput();
         Console.WriteLine();
         return (loginName ?? "null", loginPassword);
@@ -101,7 +101,7 @@ public static class AccountPresentation
 
     public static bool DoubleCheckPassword(string? password)
     {
-        Console.Write("Confirm Password: \n\n> ");
+        Console.Write("Confirm Password: \n> ");
         string confirmedPassword = MaskPasswordInput(); // Get the confirmed password
 
 

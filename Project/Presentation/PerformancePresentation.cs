@@ -175,7 +175,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 // Handle user choices
                 if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
                     // Filter performance options based on user-selected genres
-                    List<string> genres = App.genrePresentation.GetItemList();
+                    List<string> genres = App.genrePresentation.GetItemList(filter: true);
                     var filteredPerformanceOptions = App.performanceLogic.FilteredPerformanceOptions(genres);
                     PerformanceOptions = filteredPerformanceOptions;
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){

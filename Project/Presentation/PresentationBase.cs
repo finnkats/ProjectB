@@ -198,8 +198,7 @@ public class PresentationBase<T> where T : IEditable
 
     // Only for Genres and Halls
     // I know it looks and uses similar code to GetItem, but I can't think of any way to incorporate that code here
-    public List<string> GetItemList(string objectId = "")
-    {
+    public List<string> GetItemList(string objectId = "", bool filter = false){
         // Don't know a better way of doing this
 
         // itemIds is a list of the Ids which will eventually be returned
@@ -238,7 +237,7 @@ public class PresentationBase<T> where T : IEditable
             itemIds.ForEach(itemId => currentItems.Add(Logic.Dict[itemId].Name));
             currentItems.Sort();
 
-            Console.WriteLine($"Front Page -> Home Page -> View Performances -> Filter\n");
+            if (filter) Console.WriteLine($"Front Page -> Home Page -> View Performances -> Filter\n");
             Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(separator, currentItems)}]\n");
             Console.WriteLine($"Choose {typeof(T).Name.ToLower()}s:");
 

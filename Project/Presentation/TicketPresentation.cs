@@ -26,7 +26,7 @@ public static class TicketPresentation{
                     string hallName = App.Halls[ticket.Hall].Name;
                     if (hallName.Length > 19) hallName = $"{hallName.Substring(0, 16)}...";
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|",
-                        performanceName, ticket.Date, ticket.Time, hallName));
+                        performanceName, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", hallName));
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "", "", "", ""));
                     Console.WriteLine(new string('-', 82));
 
@@ -47,7 +47,7 @@ public static class TicketPresentation{
                     string hallName = App.Halls[ticket.Hall].Name;
                     if (hallName.Length > 19) hallName = $"{hallName.Substring(0, 16)}...";
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|",
-                        performanceName, ticket.Date, ticket.Time, hallName));
+                        performanceName, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", hallName));
                     Console.WriteLine(String.Format("|{0,-19}|{1,-19}|{2,-19}|{3,-19}|", "", "", "", ""));
                     Console.WriteLine(new string('-', 82));
                 }

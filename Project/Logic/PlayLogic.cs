@@ -34,16 +34,16 @@ public static class PlayLogic
 
     }
 
-    public static bool AddPlay(string location, string time, string date, string hall, string playId){
+    public static bool AddPlay(string location, string startTime, string date, string hall, string playId){
         if (!App.Plays.ContainsKey(playId)) return false;
         if (!ValidDate(date)) return false;
-        if (!ValidTime(time)) return false;
-        time += ":00";
-        Play newPlay = new(location, time, date, hall, playId);
+        if (!ValidTime(startTime)) return false;
+        startTime += ":00";
+        Play newPlay = new(location, startTime, date, hall, playId);
         App.Plays[playId].Add(newPlay);
         NotificationLogic.SendOutNotifications(newPlay);
         DataAccess.UpdateList<Play>();
-        App.ArchivedPlays[playId].Add(new ArchivedPlay(location, time, date, hall, playId));
+        App.ArchivedPlays[playId].Add(new ArchivedPlay(location, startTime, date, hall, playId));
         DataAccess.UpdateList<ArchivedPlay>();
         return true;
     }
@@ -69,13 +69,41 @@ public static class PlayLogic
         }
     }
 
+    public static bool IsHallAvailable(string location, DateTime date, string startTime, string hall){
+        if(hall == "null") return true;
+        TimeSpan parsedStartTime = TimeSpan.Parse(startTime);
+        DateTime proposedStartDateTime = date.Add(parsedStartTime);
+
+        // Check if there are existing plays in the same hall at the same time
+        foreach (var playList in App.Plays.Values){
+            foreach(var play in playList){
+                if (play.Location == location && play.Hall == hall){
+                    string existingPlayStartStr = $"{play.Date} {play.StartTime}";
+                    string existingPlayEndStr = $"{play.Date} {play.EndTime}";
+                    DateTime existingPlayStart = DateTime.Parse(existingPlayStartStr);
+                    DateTime existingPlayEnd = DateTime.Parse(existingPlayEndStr);
+                    int? currentRuntime = App.performanceLogic.GetRuntime(play.PerformanceId);
+                    // DateTime existingPlayEnd = existingPlayStart.AddMinutes((double)currentRuntime!);
+
+                    // Check for time overlap
+                    // Console.WriteLine($"Check:\n{existingPlayStart}\n{existingPlayEnd}");
+                    // Thread.Sleep(10000);
+                    if (proposedStartDateTime <= existingPlayEnd && proposedStartDateTime.AddMinutes((double)currentRuntime!) >= existingPlayStart){
+                        return false; // Hall is not available
+                    }
+                }
+            }
+        }
+        return true; // Hall is available
+    }
+
     public static void RemoveOutdatedPlays(){
         foreach (var playList in App.Plays.Values){
             // Get the time for 1 hour in the future
             DateTime dateLimit = DateTime.Now.Add(DateTime.Now.TimeOfDay).AddHours(1);
             // Loop backwards over list, so removing wont cause errors
             for (int i = playList.Count - 1; i >= 0; i--){
-                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].Time}", out DateTime playDate)) continue;
+                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].StartTime}", out DateTime playDate)) continue;
                 if (playDate > dateLimit) continue;
                 playList.RemoveAt(i);
             }
@@ -112,7 +140,7 @@ public static class PlayLogic
     public static void AddBooking(Ticket newTicket)
     {
         foreach (Play play in App.Plays[newTicket.PerformanceId]) {
-            if (play.Date == newTicket.Date && play.Time == newTicket.Time && play.Hall == newTicket.Hall) {
+            if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall) {
                 play.BookedSeats += 1;
                 DataAccess.UpdateList<Play>();
                 break;

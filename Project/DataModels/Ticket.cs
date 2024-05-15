@@ -20,10 +20,6 @@ public class Ticket : IEquatable<Ticket>, IDataAccessList {
         this.IsActive = isActive;
     }
 
-    // public void UpdateData(){
-    //     TicketDataAccess.UpdateTickets(this);
-    // }
-
     public string TicketInfo() {
         if(IsActive){
             return $"The play you booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +

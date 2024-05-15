@@ -8,24 +8,45 @@ public class PerformancePresentation : PresentationBase<Performance>{
         string? performanceName = GetNameInput();
         if (performanceName is null) return;
         Console.WriteLine();
+
+        int runtime;
+        while(true){
+            Console.Write("Enter the runtime in minutes:\n> ");
+            string runtimeInput = Console.ReadLine() ?? "";
+            bool runtimeBool = int.TryParse(runtimeInput, out runtime);
+            if(!runtimeBool || runtime <= 0){Console.WriteLine("Invalid input. Please enter a valid number representing minutes.");}
+            else if(runtimeBool){
+                Console.Write($"Are you sure that the runtime will be in {runtime} minutes?\nPlease confirm by entering \'y\' (Yes) or \'n\' (No)\n> ");
+                string confirmRuntime = Console.ReadLine() ?? "";
+                if(confirmRuntime.ToLower() == "y"){break;}
+                else if(confirmRuntime.ToLower() == "n"){continue;}
+            }
+        }
   
         var genres = App.genrePresentation.GetItemList();
         Console.WriteLine();
 
-        Console.WriteLine("Will the performance be currently active?\n1. Yes\n2. Exit\nAnything else. No");
-        string activeInput = Console.ReadLine() ?? "";
-        if (activeInput == "2") return;
-        bool active = activeInput == "1";
+        bool active;
+        while(true){
+            Console.Write("Will the performance be currently active?\'y\' (Yes) or \'n\' (No)\n> ");
+            string activeInput = Console.ReadLine()?.ToLower() ?? "";
+            if (activeInput != "y" || activeInput != "n"){
+                Console.WriteLine("Invalid input");
+                continue;
+            }
+            active = activeInput == "y";
+            break;
+        }
 
         Console.Clear();
-        if (!App.performanceLogic.AddPerformance(performanceName, genres, active)){
+        if (!App.performanceLogic.AddPerformance(performanceName, runtime, genres, active)){
             Console.WriteLine("An error occured while adding performance.");
         }
 
         string seperator = ", ";
         List<string> currentGenres = new();
         genres.ForEach(genreId => currentGenres.Add(App.Genres[genreId].Name));
-        Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + ") " +
+        Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + $"), {runtime} minutes " +
                           $"with genres [{String.Join(seperator, currentGenres)}] has been added");
         Thread.Sleep(5000);
     }
@@ -51,7 +72,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 }
                 List<string> RemovedGenreIds = new();
                 foreach (var genreId in Logic.Dict[performanceId].Genres){
-                    Console.WriteLine($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N)");
+                    Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N)\n");
                     string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
                     if (removeGenre.StartsWith("Y")){
                         currentGenres.Remove(App.Genres[genreId].Name);
@@ -131,8 +152,8 @@ public class PerformancePresentation : PresentationBase<Performance>{
             }
             
             // Display exit option
-            Console.WriteLine($"{PerformanceOptionsScope.Count + 2 + offset}: Exit\n");
-            Console.WriteLine(question);
+            Console.WriteLine($"{PerformanceOptionsScope.Count + 2 + offset}: Exit");
+            Console.Write($"{question}\n> ");
 
             // Read user input and parse it as integer
             Int32.TryParse(Console.ReadLine(), out int choice);

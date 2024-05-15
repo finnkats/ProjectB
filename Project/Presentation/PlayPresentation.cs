@@ -7,6 +7,7 @@ public static class PlayPresentation
     public static void DisplayViewings(List<Play> playOptions, string performanceId)
     {
         Console.Clear();
+        Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name}\n");
         Console.WriteLine($"Plays for {App.Performances[performanceId].Name}\n------------------------------------------------------------------");
         Console.WriteLine($"|# |Location               |Date        |Time      |Hall         |");
         Console.WriteLine("------------------------------------------------------------------");

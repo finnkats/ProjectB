@@ -16,10 +16,11 @@ public class PerformanceTest{
     [TestMethod]
     public void AddNewPerformanceTest(){
         string name = "Performance 4";
+        int runtime = 120;
         List<string> genres = new(){"Genre 1", "Genre 2"};
         bool active = false;
 
-        App.performanceLogic.AddPerformance(name, 120, genres, active);
+        App.performanceLogic.AddPerformance(name, runtime, genres, active);
 
         Performance? Performance = null;
         foreach (var performance in App.Performances.Values){
@@ -31,6 +32,7 @@ public class PerformanceTest{
 
         Assert.IsNotNull(Performance);
         Assert.AreEqual("Performance 4", Performance.Name);
+        Assert.AreEqual(120, Performance.RuntimeInMin);
         Assert.AreEqual(genres[0], Performance.Genres[0]);
         Assert.AreEqual(active, Performance.Active);
     }

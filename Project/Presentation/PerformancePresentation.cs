@@ -28,14 +28,13 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
         bool active;
         while(true){
-            Console.Write("Will the performance be currently active?\n1. Yes\n2. Exit\nAnything else. No\n> ");
-            string activeInput = Console.ReadLine() ?? "";
-            if (activeInput == "2") return;
-            else if(activeInput != "1"){
-                Console.WriteLine("Please enter a correct choice (1 or 2)");
+            Console.Write("Will the performance be currently active?\'y\' (Yes) or \'n\' (No)\n> ");
+            string activeInput = Console.ReadLine()?.ToLower() ?? "";
+            if (activeInput != "y" || activeInput != "n"){
+                Console.WriteLine("Invalid input");
                 continue;
             }
-            active = activeInput == "1";
+            active = activeInput == "y";
             break;
         }
 

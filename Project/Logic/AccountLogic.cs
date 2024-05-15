@@ -48,6 +48,7 @@ public static class AccountLogic
 
                 App.LoggedInUsername = loginName;
                 // Remove sign in / up option from frontpage, and add logout
+                if (!account.IsAdmin) NotificationLogic.UpdateNotificationOption(true);
                 App.FrontPage.RemoveCurrentOption("Sign in / up");
                 App.FrontPage.AddCurrentOption("Logout");
                 App.HomePage.SetToCurrentMenu();
@@ -80,6 +81,7 @@ public static class AccountLogic
         App.HomePage.RemoveCurrentOption("View Notifications");
         App.HomePage.RemoveCurrentOption("Edit Account Settings");
         App.HomePage.RemoveCurrentOption("Admin Features");
+        NotificationLogic.UpdateNotificationOption(false);
 
         App.FrontPage.AddCurrentOption("Sign in / up");
         App.FrontPage.SetToCurrentMenu();
@@ -103,6 +105,7 @@ public static class AccountLogic
             return;
         }
         App.Accounts.Add(name, new Account(name, password, false));
+        App.Notifications.Add(name, new List<Notification>());
         DataAccess.UpdateItem<Account>();
         AccountPresentation.PrintMessage("\nAccount has been created.");
         Thread.Sleep(1000);

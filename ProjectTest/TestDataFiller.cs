@@ -38,6 +38,9 @@ namespace ProjectTest
 
             File.WriteAllText("../../../Sources/tickets.json", File.ReadAllText("../../../Sources/ticketsStatic.json"));
             App.Tickets = DataAccess.ReadList<Ticket>();
+
+            File.WriteAllText("../../../Sources/notifications.json", "{\"Admin1\": [], \"User1\": []}");
+            App.Notifications = DataAccess.ReadList<Notification>();
         }
     }
 }

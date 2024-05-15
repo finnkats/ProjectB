@@ -41,6 +41,7 @@ public static class PlayLogic
         startTime += ":00";
         Play newPlay = new(location, startTime, date, hall, playId);
         App.Plays[playId].Add(newPlay);
+        NotificationLogic.SendOutNotifications(newPlay);
         DataAccess.UpdateList<Play>();
         App.ArchivedPlays[playId].Add(new ArchivedPlay(location, startTime, date, hall, playId));
         DataAccess.UpdateList<ArchivedPlay>();

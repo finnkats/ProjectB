@@ -27,6 +27,7 @@ public static class App
     public static Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
     public static Dictionary<string, List<ArchivedPlay>> ArchivedPlays = DataAccess.ReadList<ArchivedPlay>();
     public static Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
+    public static Dictionary<string, List<Notification>> Notifications = DataAccess.ReadList<Notification>();
 
     public static void Start()
     {
@@ -69,8 +70,7 @@ public static class App
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Performances", performanceLogic.PerformanceCatalogue);
         HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
-        HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
-        HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
+        HomePage.AddAllOption("Edit Account Settings", NotificationPresentation.AccountSettings); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         HomePage.AddCurrentOption("View Performances");
 

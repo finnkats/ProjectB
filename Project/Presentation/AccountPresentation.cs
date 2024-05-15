@@ -56,12 +56,12 @@ public static class AccountPresentation
     public static (string, string) GetLoginDetails()
     {
         Console.Clear();
-        Console.WriteLine("Name: ");
+        Console.Write("Name: \n\n> ");
         string? loginName = Console.ReadLine();
 
         Console.WriteLine();
 
-        Console.WriteLine("Password:");
+        Console.Write("Password: \n\n> ");
         string loginPassword = MaskPasswordInput();
         Console.WriteLine();
         return (loginName ?? "null", loginPassword);
@@ -78,7 +78,7 @@ public static class AccountPresentation
     public static bool LoginFailure()
     {
         Console.Clear();
-        Console.WriteLine("Invalid name or password.\nDo you want to try again? (y/n)");
+        Console.Write("Invalid name or password.\nDo you want to try again? (y/n)\n\n> ");
         string input = Console.ReadLine()?.ToLower() ?? "n";
         return input.StartsWith('y');
     }
@@ -92,7 +92,7 @@ public static class AccountPresentation
 
     public static bool DoubleCheckPassword(string? password)
     {
-        Console.WriteLine("Confirm Password:");
+        Console.Write("Confirm Password: \n\n> ");
         string confirmedPassword = MaskPasswordInput(); // Get the confirmed password
 
 

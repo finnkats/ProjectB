@@ -101,7 +101,7 @@ public static class AccountLogic
 
         if (App.Accounts.ContainsKey(name) || name == "Unknown")
         {
-            AccountPresentation.PrintMessage("Account with that name already exists");
+            AccountPresentation.PrintMessage("\n\nAccount with that name already exists.");
             return;
         }
         App.Accounts.Add(name, new Account(name, password, false));

@@ -40,7 +40,7 @@ public class HallPresentation : PresentationBase<Hall>{
     }
 
     public void EditHallStart(){
-        string hallId = GetItem("Which hall do you want to edit?", "Exit", InEditMenu: true);
+        string hallId = GetItem("Which hall do you want to edit?", "Exit\n\n> ", InEditMenu: true);
 
         if (hallId == "add"){
             App.hallPresentation.AddHall();

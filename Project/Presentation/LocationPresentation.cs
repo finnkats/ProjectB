@@ -22,7 +22,7 @@ public class LocationPresentation : PresentationBase<Location>{
     }
 
     public void EditLocationStart(){
-        string locationId = GetItem("Which location do you want to edit?", "Exit", InEditMenu: true);
+        string locationId = GetItem("Which location do you want to edit?", "Exit\n\n> ", InEditMenu: true);
 
         if (locationId == "add"){
             App.locationPresentation.AddLocation();
@@ -39,7 +39,7 @@ public class LocationPresentation : PresentationBase<Location>{
                 Logic.Dict[locationId].Halls.ForEach(hallId => currentHalls.Add(App.Halls[hallId].Name));
                 List<string> RemovedHallIds = new();
                 foreach (var hallId in Logic.Dict[locationId].Halls){
-                    Console.WriteLine($"Do you want to remove '{App.Halls[hallId].Name}' from '{Logic.Dict[locationId].Name}'? (Y/N)");
+                    Console.Write($"Do you want to remove '{App.Halls[hallId].Name}' from '{Logic.Dict[locationId].Name}'? (Y/N)\n\n> ");
                     string removeHall = Console.ReadLine()?.ToUpper() ?? "";
                     if (removeHall.StartsWith("Y")){
                         App.Halls[hallId].LocationId = "null";

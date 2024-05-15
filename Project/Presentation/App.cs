@@ -29,6 +29,7 @@ public static class App
     public static Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
     public static Dictionary<string, List<Notification>> Notifications = DataAccess.ReadList<Notification>();
 
+    private static BreadCrumb BCFrontPage = new BreadCrumb();
     public static void Start()
     {
         // Fill in all Menu's
@@ -38,7 +39,7 @@ public static class App
     }
 
     // Add new menu's here
-    public static Menu FrontPage = new("Front Page");
+    public static Menu FrontPage = new(BCFrontPage.AddBreadCrumb("Front Page\n"));
     public static Menu SignInUp = new("Sign in / up");
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");

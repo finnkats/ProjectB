@@ -75,7 +75,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 foreach (var genreId in Logic.Dict[performanceId].Genres){
                     if (printBreadCrumb)
                     {
-                        Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
+                        Console.WriteLine($"Front Page -> Home Page -> Modify Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
                     }
                     printBreadCrumb = false;
                     Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N) \n\n> ");
@@ -133,7 +133,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             }
             else
             {
-                Console.WriteLine("Front Page -> Home Page -> Edit Performances\n");
+                Console.WriteLine("Front Page -> Home Page -> Modify Performances\n");
             }
             
             // Calculate the total number of pages based on the number of performance options
@@ -167,7 +167,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             
             // Display exit option
             Console.WriteLine($"{PerformanceOptionsScope.Count + 2 + offset}: Exit");
-            Console.Write($"{question}\n> ");
+            Console.Write(question);
 
             // Read user input and parse it as integer
             Int32.TryParse(Console.ReadLine(), out int choice);

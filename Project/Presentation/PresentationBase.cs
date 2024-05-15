@@ -49,7 +49,7 @@ public class PresentationBase<T> where T : IEditable
         {
             int index = 1;
             Console.Clear();
-            Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> {objectName}\n");
+            Console.WriteLine($"Front Page -> Home Page -> Modify {typeof(T).Name}s -> {objectName}\n");
             Console.WriteLine($"What to change for this {typeof(T).Name.ToLower()}");
             foreach (var property in properties)
             {
@@ -105,6 +105,7 @@ public class PresentationBase<T> where T : IEditable
                 if (newName == null) continue;
                 Console.WriteLine($"Changed {obj.Name} to {newName}");
                 obj.Name = newName;
+                objectName = newName;
                 Thread.Sleep(2500);
             }
             else return choice;
@@ -172,7 +173,7 @@ public class PresentationBase<T> where T : IEditable
                 menu += $"\n{index++}: Add New {typeof(T).Name}";
             }
 
-            menu += $"\n{index}: {exit} \n\n> ";
+            menu += $"\n{index}: {exit}";
             Console.Write(menu);
 
             try

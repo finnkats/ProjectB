@@ -105,4 +105,24 @@ public class TicketSystemTest{
         Assert.IsFalse(result2);
         Assert.IsTrue(result3);
     }
+    [TestMethod]
+    public void TestAddBooking()
+    {
+        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
+
+        Play Play1 = new Play("ID0", "18:00:00", nextMonth, "ID5", "ID0");
+
+        Ticket Ticket1 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
+        Ticket Ticket2 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
+        Ticket Ticket3 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
+
+        App.Plays["ID0"].Add(Play1);
+
+        PlayLogic.AddBooking(Ticket1);
+        Assert.AreEqual(1, App.Plays["ID0"][0].BookedSeats);
+        PlayLogic.AddBooking(Ticket2);
+        Assert.AreEqual(2, App.Plays["ID0"][0].BookedSeats);
+        PlayLogic.AddBooking(Ticket3);
+        Assert.AreEqual(3, App.Plays["ID0"][0].BookedSeats);
+    }
 }

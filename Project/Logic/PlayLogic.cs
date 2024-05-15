@@ -133,6 +133,7 @@ public static class PlayLogic
         foreach (Play play in plays) {
             if (play.BookedSeats == App.Halls[play.Hall].Seats) {
                 filteredPlays.Remove(play);
+                if (plays.Count == 0) break;
             }
         }
         return filteredPlays;

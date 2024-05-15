@@ -9,10 +9,16 @@ public class Account : IDataAccessItem
     public string Password {get; set;}
     [JsonPropertyName("IsAdmin")]
     public bool IsAdmin {get; set;}
+    [JsonPropertyName("Location")]
+    public string Location {get; set;}
+    [JsonPropertyName("Genres")]
+    public List<string> Genres {get; set;}
     
     public Account(string name, string password, bool isAdmin){
         Name = name;
         Password = password;
         IsAdmin = isAdmin;
+        Location = "null";
+        Genres = new List<string>();
     }
 }

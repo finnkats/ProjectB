@@ -33,8 +33,10 @@ public static class AccountLogic
 
                     AccountPresentation.PrintSuccess($"Logged in as administrator {account.Name}");
                     loginLoop = false;
+                    Console.Clear();
                 }
-                else {
+                else
+                {
                     // Add Customer Logged-In options
                     App.HomePage.AddCurrentOption("View Tickets");
                     App.HomePage.AddCurrentOption("View Notifications");
@@ -43,9 +45,10 @@ public static class AccountLogic
                     AccountPresentation.PrintSuccess($"Welcome back {account.Name}");
                     loginLoop = false;
                 }
-                
+
                 App.LoggedInUsername = loginName;
                 // Remove sign in / up option from frontpage, and add logout
+                if (!account.IsAdmin) NotificationLogic.UpdateNotificationOption(true);
                 App.FrontPage.RemoveCurrentOption("Sign in / up");
                 App.FrontPage.AddCurrentOption("Logout");
                 App.HomePage.SetToCurrentMenu();
@@ -53,21 +56,23 @@ public static class AccountLogic
                 break;
             }
 
-            if (!found){
+            if (!found)
+            {
                 if (inputName != "") return;
                 loginLoop = AccountPresentation.LoginFailure() ? true : false;
             }
         }
     }
 
-    public static bool CheckLogin(string? loginName, string? loginPassword, Account account){
+    public static bool CheckLogin(string? loginName, string? loginPassword, Account account)
+    {
         return (account.Name == loginName && account.Password == loginPassword);
     }
 
     public static void Logout()
     {
         AccountPresentation.PrintLogout();
-        
+
         App.LoggedInUsername = "Unknown";
 
         // Remove all options which has to do with someone being logged in
@@ -76,22 +81,31 @@ public static class AccountLogic
         App.HomePage.RemoveCurrentOption("View Notifications");
         App.HomePage.RemoveCurrentOption("Edit Account Settings");
         App.HomePage.RemoveCurrentOption("Admin Features");
+        NotificationLogic.UpdateNotificationOption(false);
 
         App.FrontPage.AddCurrentOption("Sign in / up");
         App.FrontPage.SetToCurrentMenu();
     }
 
-    public static void CreateAccount(){
-        (string name, string password) = AccountPresentation.GetLoginDetails();
+    public static void CreateAccount()
+    {
+        (string name, string password) = AccountPresentation.GetLoginDetails(true);
+
+
+
         if (!AccountPresentation.DoubleCheckPassword(password) || name == "null"){
             return;
         }
 
-        if (App.Accounts.ContainsKey(name) || name == "Unknown"){
-            AccountPresentation.PrintMessage("Account with that name already exists");
+
+
+        if (App.Accounts.ContainsKey(name) || name == "Unknown")
+        {
+            AccountPresentation.PrintMessage("\n\nAccount with that name already exists.");
             return;
         }
         App.Accounts.Add(name, new Account(name, password, false));
+        App.Notifications.Add(name, new List<Notification>());
         DataAccess.UpdateItem<Account>();
         AccountPresentation.PrintMessage("\nAccount has been created.");
         Thread.Sleep(1000);

@@ -6,19 +6,35 @@ public static class App
 
     public static Menu? CurrentMenu;
 
-    public static readonly Dictionary<string, Performance> Performances = DataAccess.ReadItem<Performance>();
-    public static readonly Dictionary<string, Account> Accounts = DataAccess.ReadItem<Account>();
-    public static readonly Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
-    public static readonly Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
-    public static readonly Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
-    public static readonly Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
-    public static readonly Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
+    public static Dictionary<string, Performance> Performances = DataAccess.ReadItem<Performance>();
+    public static readonly PerformanceLogic performanceLogic = new PerformanceLogic();
+    public static readonly PerformancePresentation performancePresentation = new PerformancePresentation(performanceLogic);
+
+    public static Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
+    public static LocationLogic locationLogic = new LocationLogic();
+    public static LocationPresentation locationPresentation = new LocationPresentation(locationLogic);
+
+    public static Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
+    public static HallLogic hallLogic = new HallLogic();
+    public static HallPresentation hallPresentation = new HallPresentation(hallLogic);
+
+    public static Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
+    public static readonly GenreLogic genreLogic = new GenreLogic();
+    public static readonly GenrePresentation genrePresentation = new GenrePresentation(genreLogic);
+
+
+    public static Dictionary<string, Account> Accounts = DataAccess.ReadItem<Account>();
+    public static Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
+    public static Dictionary<string, List<ArchivedPlay>> ArchivedPlays = DataAccess.ReadList<ArchivedPlay>();
+    public static Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
+    public static Dictionary<string, List<Notification>> Notifications = DataAccess.ReadList<Notification>();
 
     public static void Start()
     {
         // Fill in all Menu's
         CreateMenus();
         MainTicketSystem.CheckOutdatedTickets();
+        PlayLogic.RemoveOutdatedPlays();
     }
 
     // Add new menu's here
@@ -26,9 +42,6 @@ public static class App
     public static Menu SignInUp = new("Sign in / up");
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");
-    public static Menu ModifyPerformances = new("Modify Performances");
-    public static Menu ModifyGenres = new("Modify Genres");
-    public static Menu ModifyLocations = new("Modify Locations");
     public static Menu ExampleMenu1 = new("Example Menu 1");
 
     public static void CreateMenus()
@@ -55,50 +68,24 @@ public static class App
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
-        HomePage.AddAllOption("View Performances", PerformanceLogic.PerformanceCatalogue);
+        HomePage.AddAllOption("View Performances", performanceLogic.PerformanceCatalogue);
         HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
-        HomePage.AddAllOption("View Notifications", Example.DoNothing); // TODO add view notification function
-        HomePage.AddAllOption("Edit Account Settings", Example.DoNothing); // TODO add account settings function
+        HomePage.AddAllOption("Edit Account Settings", NotificationPresentation.AccountSettings); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         HomePage.AddCurrentOption("View Performances");
 
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;
-        AdminFeatures.AddAllOption("Modify Performances", ModifyPerformances.SetToCurrentMenu);
-        AdminFeatures.AddAllOption("Modify Genres", ModifyGenres.SetToCurrentMenu);
-        AdminFeatures.AddAllOption("Modify Locations", ModifyLocations.SetToCurrentMenu);
+        AdminFeatures.AddAllOption("Modify Performances", performancePresentation.EditPerformanceStart);
+        AdminFeatures.AddAllOption("Modify Genres", genrePresentation.EditGenreStart);
+        AdminFeatures.AddAllOption("Modify Locations", locationPresentation.EditLocationStart);
+        AdminFeatures.AddAllOption("Modify Halls", hallPresentation.EditHallStart);
         AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
         AdminFeatures.AddCurrentOption("Modify Performances");
         AdminFeatures.AddCurrentOption("Modify Genres");
+        AdminFeatures.AddCurrentOption("Modify Halls");
         AdminFeatures.AddCurrentOption("Modify Locations");
         AdminFeatures.AddCurrentOption("Check Statistics");
-
-        //  Modify Performances
-        ModifyPerformances.PreviousMenu = AdminFeatures;
-        ModifyPerformances.AddAllOption("Add Performance", PerformancePresentation.AddPerformance);
-        ModifyPerformances.AddAllOption("Edit Performance", PerformancePresentation.EditPerformanceStart);
-        ModifyPerformances.AddAllOption("Add Play", PlayPresentation.AddPlayDetails);
-        ModifyPerformances.AddCurrentOption("Add Performance");
-        ModifyPerformances.AddCurrentOption("Edit Performance");
-        ModifyPerformances.AddCurrentOption("Add Play");
-
-        // Modify Genres
-        ModifyGenres.PreviousMenu = AdminFeatures;
-        ModifyGenres.AddAllOption("Add Genre", GenrePresentation.AddGenre); // TODO add add genre function
-        ModifyGenres.AddAllOption("Edit Genre", GenrePresentation.EditGenreStart); // TODO add edit genre function
-        ModifyGenres.AddCurrentOption("Add Genre");
-        ModifyGenres.AddCurrentOption("Edit Genre");
-
-        // Modify Locations
-        ModifyLocations.PreviousMenu = AdminFeatures;
-        ModifyLocations.AddAllOption("Add Location", LocationPresentation.AddLocation);
-        ModifyLocations.AddAllOption("Edit Location", LocationPresentation.EditLocationStart);
-        ModifyLocations.AddAllOption("Add Hall", HallPresentation.AddHall);
-        ModifyLocations.AddAllOption("Edit Hall", HallPresentation.EditHallStart);
-        ModifyLocations.AddCurrentOption("Add Location");
-        ModifyLocations.AddCurrentOption("Edit Location");
-        ModifyLocations.AddCurrentOption("Add Hall");
-        ModifyLocations.AddCurrentOption("Edit Hall");
 
         //  Example Menu 1
         ExampleMenu1.PreviousMenu = FrontPage;

@@ -1,5 +1,10 @@
-using System.Text.Json;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Data;
+using System.Linq;
+using System.Threading;
+
 public static class PlayLogic
 {
     //  This is the start of creating a ticket
@@ -22,96 +27,24 @@ public static class PlayLogic
         if (App.Plays.ContainsKey(performanceId)) AllViewings = App.Plays[performanceId];
         else AllViewings = new();
         AllViewings = OneMonthFilter(AllViewings);
+        AllViewings = FilterFullPlays(AllViewings);
         
-        // Gets the location
-        string ViewingLocation = LocationPresentation.GetLocation("Select a location:", "Exit");
-        if (ViewingLocation == "null") return;
+        // Display all viewings and allow user to choose
+        PlayPresentation.DisplayViewings(AllViewings, performanceId);
 
-        // Gets the date
-        string? ViewingDate = PlayPresentation.PrintDates(ViewingLocation, AllViewings);
-        if (ViewingDate == null) return;
-
-        // Gets the time
-        string? ViewingTime = PlayPresentation.PrintTimes(ViewingLocation, ViewingDate, AllViewings);
-        if (ViewingTime == null) return;
-
-        // Gets the hall
-        string ViewingHall = "";
-        foreach (var viewing in AllViewings){
-            if (viewing.Date == ViewingDate && viewing.Time == ViewingTime){
-                ViewingHall = viewing.Hall;
-                break;
-            }
-        }
-
-        // Creates the ticket
-        MainTicketSystem.CreateBookTicket(performanceId, ViewingDate, ViewingTime, ViewingHall, true);
     }
 
-    // returns a string (which is basically a menu)
-    // and a Dictionary of int and string (where int is the index of the option shown in the menu) and
-    // string is the string of the date
-    public static (string?, Dictionary<int, string>?) GetDates(string selectedLocation, List<Play> playOptions){
-        if (playOptions.Count() == 0) return (null, null);
-        string? datesString = "";
-        datesString += "Available dates:\n";
-
-        HashSet<string> availableDates = new HashSet<string>();
-        foreach (var viewing in playOptions)
-        {
-            if (viewing.Location == selectedLocation)
-            {
-                availableDates.Add(viewing.Date);
-            }
-        }
-        List<string> availableDatesOrdered = availableDates.Order().ToList();
-
-        int dateCounter = 1;
-        Dictionary<int, string> dateOptions = new Dictionary<int, string>();
-        foreach (var date in availableDatesOrdered)
-        {
-            datesString += $"{dateCounter}: {date}\n";
-            dateOptions.Add(dateCounter, date);
-            dateCounter++;
-        }
-        
-        if (datesString == "Available dates:\n") datesString = null;
-        return (datesString, dateOptions);
-    }
-
-    // Does the same as GetDates but then with times
-    public static (string?, Dictionary<int, string>?) GetTimes(string selectedLocation, string chosenDate, List<Play> playOptions){
-        if (playOptions.Count() == 0) return (null, null);
-        string? timesString = $"Available times on {chosenDate}:\n";
-        int timeCounter = 1;
-        Dictionary<int, string> timeOptions = new Dictionary<int, string>();
-
-        var playOptionsOrdered = playOptions.OrderBy(performance => performance.Time).ToList();
-        foreach (var viewing in playOptionsOrdered)
-        {
-            if (viewing.Location == selectedLocation && viewing.Date == chosenDate)
-            {
-                timesString += $"{timeCounter}: {viewing.Time} in {App.Halls[viewing.Hall].Name}\n";
-                timeOptions.Add(timeCounter, viewing.Time);
-                timeCounter++;
-            }
-        }
-
-        if (timesString == $"Available times on {chosenDate}:\n") timesString = null;
-        return (timesString, timeOptions);
-    }
-
-    public static void AddNewId(string id){
-        App.Plays.Add(id, new List<Play>());
-        DataAccess.UpdateList<Play>();
-    }
-
-    public static bool AddPlay(string location, string time, string date, string hall, string playId){
+    public static bool AddPlay(string location, string startTime, string date, string hall, string playId){
         if (!App.Plays.ContainsKey(playId)) return false;
-        Play newPlay = new(location, time, date, hall, playId);
+        if (!ValidDate(date)) return false;
+        if (!ValidTime(startTime)) return false;
+        startTime += ":00";
+        Play newPlay = new(location, startTime, date, hall, playId);
         App.Plays[playId].Add(newPlay);
+        NotificationLogic.SendOutNotifications(newPlay);
         DataAccess.UpdateList<Play>();
-
+        App.ArchivedPlays[playId].Add(new ArchivedPlay(location, startTime, date, hall, playId));
+        DataAccess.UpdateList<ArchivedPlay>();
         return true;
     }
 
@@ -126,5 +59,105 @@ public static class PlayLogic
             }
         }
         return FilteredPlays;
+    }
+
+    public static List<Play> GetPlaysFromPresentations(string playID){
+        if (App.Plays.ContainsKey(playID)){
+            return App.Plays[playID];
+        } else {
+            return new List<Play>();
+        }
+    }
+
+    public static bool IsHallAvailable(string location, DateTime date, string startTime, string hall){
+        if(hall == "null") return true;
+        TimeSpan parsedStartTime = TimeSpan.Parse(startTime);
+        DateTime proposedStartDateTime = date.Add(parsedStartTime);
+
+        // Check if there are existing plays in the same hall at the same time
+        foreach (var playList in App.Plays.Values){
+            foreach(var play in playList){
+                if (play.Location == location && play.Hall == hall){
+                    string existingPlayStartStr = $"{play.Date} {play.StartTime}";
+                    string existingPlayEndStr = $"{play.Date} {play.EndTime}";
+                    DateTime existingPlayStart = DateTime.Parse(existingPlayStartStr);
+                    DateTime existingPlayEnd = DateTime.Parse(existingPlayEndStr);
+                    int? currentRuntime = App.performanceLogic.GetRuntime(play.PerformanceId);
+                    // DateTime existingPlayEnd = existingPlayStart.AddMinutes((double)currentRuntime!);
+
+                    // Check for time overlap
+                    // Console.WriteLine($"Check:\n{existingPlayStart}\n{existingPlayEnd}");
+                    // Thread.Sleep(10000);
+                    if (proposedStartDateTime <= existingPlayEnd && proposedStartDateTime.AddMinutes((double)currentRuntime!) >= existingPlayStart){
+                        return false; // Hall is not available
+                    }
+                }
+            }
+        }
+        return true; // Hall is available
+    }
+
+    public static void RemoveOutdatedPlays(){
+        foreach (var playList in App.Plays.Values){
+            // Get the time for 1 hour in the future
+            DateTime dateLimit = DateTime.Now.Add(DateTime.Now.TimeOfDay).AddHours(1);
+            // Loop backwards over list, so removing wont cause errors
+            for (int i = playList.Count - 1; i >= 0; i--){
+                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].StartTime}", out DateTime playDate)) continue;
+                if (playDate > dateLimit) continue;
+                playList.RemoveAt(i);
+            }
+        }
+        DataAccess.UpdateList<Play>();
+    }
+
+    public static bool ValidTime(string givenTime){
+        string[] times = givenTime.Split(':');
+        if (times.Length != 2) return false;
+        if (!Int32.TryParse(times[0], out int hours)) return false;
+        if (!Int32.TryParse(times[1], out int minutes)) return false;
+        if (0 > hours || hours > 23) return false;
+        if (0 > minutes || minutes > 59) return false;
+        return true;
+    }
+
+    public static bool ValidDate(string givenDate){
+        if (!DateTime.TryParseExact(givenDate, "dd/MM/yyyy", null, DateTimeStyles.None, out DateTime date)) return false;
+        if (date < DateTime.Now.AddDays(1)) return false;
+        return true;
+    }
+
+    public static List<Play> FilterFullPlays(List<Play> plays)
+    {
+        List<Play> filteredPlays = plays;
+        foreach (Play play in plays) {
+            if (play.BookedSeats == App.Halls[play.Hall].Seats) {
+                filteredPlays.Remove(play);
+                if (plays.Count == 0) break;
+            }
+        }
+        return filteredPlays;
+    }
+    public static void AddBooking(Ticket newTicket)
+    {
+        foreach (Play play in App.Plays[newTicket.PerformanceId]) {
+            if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall) {
+                play.BookedSeats += 1;
+                DataAccess.UpdateList<Play>();
+                break;
+            }
+        }
+    }
+    public static void RemoveBooking(Ticket newTicket)
+    {
+        foreach (Play play in App.Plays[newTicket.PerformanceId])
+        {
+            if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall)
+            {
+                play.BookedSeats -= 1;
+                DataAccess.UpdateList<Play>();
+                break;
+            }
+        }
     }
 }

@@ -1,13 +1,22 @@
 using System.Text.Json;
 
 public static class DataAccess {
+    public static string FilePrefix = "DataSources/";
     public static Dictionary<string, T> ReadItem<T>() where T : IDataAccessItem{
-        string json = File.ReadAllText($"DataSources/{typeof(T).Name.ToLower()}s.json");
+        string filePath = $"{FilePrefix}{typeof(T).Name.ToLower()}s.json";
+        if(!File.Exists(filePath) || string.IsNullOrEmpty(File.ReadAllText(filePath))){
+            return new Dictionary<string, T>();
+        }
+        string json = File.ReadAllText(filePath);
         return JsonSerializer.Deserialize<Dictionary<string, T>>(json) ?? new Dictionary<string, T>();
     }
 
     public static Dictionary<string, List<T>> ReadList<T>() where T : IDataAccessList{
-        string json = File.ReadAllText($"DataSources/{typeof(T).Name.ToLower()}s.json");
+        string filePath = $"{FilePrefix}{typeof(T).Name.ToLower()}s.json";
+        if(!File.Exists(filePath) || string.IsNullOrEmpty(File.ReadAllText(filePath))){
+            return new Dictionary<string, List<T>>();
+        }
+        string json = File.ReadAllText(filePath);
         return JsonSerializer.Deserialize<Dictionary<string, List<T>>>(json) ?? new Dictionary<string, List<T>>();
     }
 
@@ -29,7 +38,7 @@ public static class DataAccess {
 
 
         string json = JsonSerializer.Serialize(objDict);
-        File.WriteAllText($"DataSources/{typeof(T).Name.ToLower()}s.json", json);
+        File.WriteAllText($"{FilePrefix}{typeof(T).Name.ToLower()}s.json", json);
     }
 
     public static void UpdateList<T>() where T : IDataAccessList {
@@ -50,6 +59,6 @@ public static class DataAccess {
 
 
         string json = JsonSerializer.Serialize(objDict);
-        File.WriteAllText($"DataSources/{typeof(T).Name.ToLower()}s.json", json);
+        File.WriteAllText($"{FilePrefix}{typeof(T).Name.ToLower()}s.json", json);
     }
 }

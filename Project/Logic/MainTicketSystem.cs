@@ -8,10 +8,10 @@ public static class MainTicketSystem{
         if(!App.Tickets.ContainsKey(App.LoggedInUsername)){
             App.Tickets[App.LoggedInUsername] = new List<Ticket>();
         }
+        PlayLogic.AddBooking(createNewTicket);
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
         DataAccess.UpdateList<Ticket>();
-        TicketPresentation.PrintTicket(createNewTicket);
-        // createNewTicket.UpdateData(); before
+        TicketPresentation.PrintTicket(createNewTicket, performanceId);
     }
 
     // Prints a string of ticket info (currently called after creating a ticket as confirmation)
@@ -47,17 +47,9 @@ public static class MainTicketSystem{
     }
 
     public static void CancelTicketLogic(Ticket ticketToCancel){
-        // Note: the ticketInApp here is a reference type not a copy of the class
-        // OLD
-        // foreach(var ticketInApp in App.Tickets){
-        //     if(ticketInApp == ticketToCancel){
-        //         ticketInApp.Ticket.IsActive = false;
-        //         TicketDataAccess.UpdateTickets();
-        //         break;
-        //     }
-        // }
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
+        PlayLogic.RemoveBooking(ticketToCancel);
         DataAccess.UpdateList<Ticket>();
     }
 

@@ -14,7 +14,7 @@ public class PresentationBase<T> where T : IEditable{
         string inputName = "";
         bool validName = false;
         while (!validName){
-            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)\n> ");
+            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)"  + "\n\n" + "> ");
             inputName = Console.ReadLine() ?? "";
             if (inputName == ""){
                 Console.WriteLine("Exiting..");

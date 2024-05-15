@@ -20,7 +20,7 @@ public static class PlayPresentation
             var viewing = playOptions[i];
             string locationName = App.Locations[viewing.Location].Name;
             string hallName = App.Halls[viewing.Hall].Name;
-            int duration = App.Performances[viewing.PerformanceId].RuntimeInMin;
+            
             // Truncate strings if they are too long
             if (locationName.Length > 29)
                 locationName = $"{locationName.Substring(0, 26)}...";

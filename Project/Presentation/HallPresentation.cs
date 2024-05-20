@@ -28,7 +28,9 @@ public class HallPresentation : PresentationBase<Hall>{
 
         string locationId = App.locationPresentation.GetItem("In which location is this hall?", "No location yet");
         
-        if (!App.hallLogic.AddHall(hallName, hallSeats, locationId)){
+        // TO DO add layout chooser and put the corerct layout in here
+        // and remove seatchoice
+        if (!App.hallLogic.AddHall(hallName, new Layout(Layout.array, 20), locationId)){
             Console.WriteLine("An error occurred while adding hall.");
             Thread.Sleep(3000);
             return;

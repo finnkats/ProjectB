@@ -1,25 +1,26 @@
-public abstract class Logger
+public abstract class ActionLogger
 {
-    protected string logFilePath {get; set;}
-    protected string header {get; set;}
-
-    public Logger(string logFilePath, string header)
+    protected DateTime LogTime { get; }
+    protected string User { get; }
+    protected string Action { get; }
+    protected ActionLogger(DateTime logTime, string user, string action)
     {
-        this.logFilePath = logFilePath;
-        this.header = header;
-        InitializeLogFile();
+        LogTime = logTime;
+        User = user;
+        Action = action;
     }
+    // Abstracte methode voor het vastleggen van specifieke actiegegevens naar een CSV-string
+    protected abstract string GetActionDetailsAsCsv();
 
-    private void InitializeLogFile()
+    // Methode om de volledige CSV-string voor de logboekinvoer te krijgen
+    public string GetLogEntryAsCsv()
     {
-        if (!File.Exists(logFilePath))
-        {
-            using (var writer = new StreamWriter(logFilePath, true))
-            {
-                writer.WriteLine(header);
-            }
-        }
+        return $"{LogTime:HH:mm dd-MM-yyyy},{User},{Action},{GetActionDetailsAsCsv()}";
     }
-
-    public abstract void Log(object logEntry);
+    
+    // Methode om de logboekinvoer naar een CSV-bestand te schrijven
+    public void Log(string logFilePath)
+    {
+        File.AppendAllText(logFilePath, GetLogEntryAsCsv() + "\n");
+    }
 }

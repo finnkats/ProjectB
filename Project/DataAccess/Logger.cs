@@ -5,8 +5,8 @@ public abstract class ActionLogger
     protected string Action { get; }
     protected ActionLogger(DateTime logTime, string user, string action)
     {
-        LogTime = logTime;
-        User = user;
+        LogTime = DateTime.Now;
+        User = App.LoggedInUsername;
         Action = action;
     }
     // Abstracte methode voor het vastleggen van specifieke actiegegevens naar een CSV-string

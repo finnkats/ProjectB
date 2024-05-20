@@ -2,14 +2,35 @@ using System.Text;
 
 public static class LayoutPresentation
 {
-    public static void ChooseTickets(Play play){
+    public static HashSet<int> ChooseSeats(Play play){
+        HashSet<int> selected = new();
+        while (true){
+            Console.Clear();
+            Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[play.PerformanceId].Name} -> Choose Seats\n");
+            PrintLayout(App.Halls[play.Hall].SeatLayout, play.Seats, selected);
+            Console.ForegroundColor = ConsoleColor.Green; Console.Write("Green = Available\n");
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.Write("Yellow = Selected\n");
+            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Red = Unavailable\n"); Console.ResetColor();
 
+            Console.WriteLine($"Select seats for {App.Performances[play.PerformanceId].Name} in {App.Halls[play.Hall].Name}");
+            Console.Write("To deselect a seat, select it again\nTo continue purchase enter nothing\nTo cancel enter 'Q'\n\n> ");
+
+            string input = Console.ReadLine()?.ToLower() ?? "";
+            if (input == "") break;
+            if (input == "q") return new HashSet<int>();
+            Int32.TryParse(input, out int seat);
+            if (selected.Contains(seat)) selected.Remove(seat);
+            else if (seat <= 0 || seat > App.Halls[play.Hall].Seats) continue;
+            else if (play.Seats.Contains(seat)) continue;
+            else selected.Add(seat);
+        }
+        return selected;
     }
 
     public static void PrintLayout(Layout layout, HashSet<int>? seats = null, HashSet<int>? selected = null){
         // Because seats will be '[00] ', every seat is 5 long, however, ignore the last whitespace
         // and make it so whitespace is before and after the screen (" -------- "), but make sure a screen atleast always exists
-        string screen = new string('-', Math.Max(layout.Seats[0].Length * 5 - 1 - 2, 2));
+        string screen = new string('¯', Math.Max(layout.Seats[0].Length * 5 - 1 - 2, 2));
         Console.ForegroundColor = ConsoleColor.Black;
         Console.WriteLine($" {screen} ");
         Console.ResetColor();
@@ -33,5 +54,6 @@ public static class LayoutPresentation
             }
             Console.WriteLine();
         }
+        Console.WriteLine();
     }
 }

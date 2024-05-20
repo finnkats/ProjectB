@@ -50,13 +50,16 @@ public class TicketSystemTest{
 
     [TestMethod]
     public void TestCheckOutdatedTickets(){
+        // Ticket seat
+        HashSet<int> seat = new(){1};
+
         // Create some tickets with dates in the past and add them to App.Tickets
         string monthAgo = DateTime.Now.AddMonths(-1).ToString(@"dd\/MM\/yyyy");
         string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd\/MM\/yyyy");
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
-        MainTicketSystem.CreateBookTicket("ID1", monthAgo, "12:00:00", "ID0", true);
-        MainTicketSystem.CreateBookTicket("ID1", yesterday, "15:00:00", "ID0", true);
-        MainTicketSystem.CreateBookTicket("ID1", nextMonth, "01:00:00", "ID0", true);
+        MainTicketSystem.CreateBookTicket("ID1", monthAgo, "12:00:00", "ID0", true, seat);
+        MainTicketSystem.CreateBookTicket("ID1", yesterday, "15:00:00", "ID0", true, seat);
+        MainTicketSystem.CreateBookTicket("ID1", nextMonth, "01:00:00", "ID0", true, seat);
 
         // Check outdated tickets
         MainTicketSystem.CheckOutdatedTickets();

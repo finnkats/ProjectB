@@ -89,11 +89,11 @@ public static class TicketPresentation{
         }
     }
 
-    public static void PrintTicket(Ticket ticket, string performanceId){
+    public static void PrintTicket(List<Ticket>tickets, string performanceId){
         Console.Clear();
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
-        Console.WriteLine(ticket.TicketInfo());
+        tickets.ForEach(ticket => Console.WriteLine(ticket.TicketInfo()));
         Thread.Sleep(6000);
     }
 }

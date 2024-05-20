@@ -47,7 +47,12 @@ public static class PlayPresentation
                     var chosenViewing = playOptions[index - 1];
 
                     // Here you'd create the ticket with the chosen details
-                    MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.StartTime, chosenViewing.Hall, true);
+                    HashSet<int> seats = LayoutPresentation.ChooseSeats(chosenViewing);
+                    if (seats.Count == 0){
+                        Console.WriteLine("Canceling ticket purchase");
+                        return;
+                    }
+                    MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.StartTime, chosenViewing.Hall, true, seats);
 
                     chosenIndex = index - 1;
                 }else{

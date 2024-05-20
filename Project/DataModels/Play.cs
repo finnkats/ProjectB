@@ -2,8 +2,10 @@ using System.Text.Json.Serialization;
 public class Play : IDataAccessList {
     [JsonPropertyName("Location")]
     public string Location { get; set; }
+
     [JsonPropertyName("Start time")]
     public string StartTime { get; set; }
+
     [JsonIgnore()]
     public string EndTime {
         get{
@@ -12,12 +14,19 @@ public class Play : IDataAccessList {
             return startTime.AddMinutes(runTimeMin).ToString("HH:mm:ss");
         }
     }
+
     [JsonPropertyName("Date")]
     public string Date { get; set; }
+
     [JsonPropertyName("Hall")]
     public string Hall { get; set; }
-    [JsonPropertyName("BookedSeats")]
-    public int BookedSeats { get; set; }
+
+    [JsonPropertyName("Seats")]
+    public HashSet<int> Seats { get; set;}
+
+    [JsonIgnore]
+    public int BookedSeats { get => Seats.Count; }
+
     [JsonPropertyName("PerformanceId")]
     // PlayId is performanceId
     public string PerformanceId { get; set; }
@@ -27,7 +36,7 @@ public class Play : IDataAccessList {
         this.StartTime = startTime;
         this.Date = date;
         this.Hall = hall;
-        this.BookedSeats = 0;
         this.PerformanceId = performanceId;
+        this.Seats = new();
     }
 }

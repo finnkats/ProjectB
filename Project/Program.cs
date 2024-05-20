@@ -1,6 +1,9 @@
 ﻿using Logic;
 
 App.Start();
+
+LayoutPresentation.PrintLayout(new Layout(), new HashSet<int>(){1, 3, 7, 10, 11, 12}, new HashSet<int>(){8, 9});
+return;
 //Console.Clear();
 // program arguments
 if (args.Length != 0) {

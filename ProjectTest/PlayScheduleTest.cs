@@ -219,7 +219,11 @@ public class PlayScheduleTest
         Ticket Ticket1 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
 
         App.Plays["ID0"].Add(Play1);
-        App.Plays["ID0"][0].BookedSeats = 79;
+        HashSet<int> seats = new();
+        for (int i = 1; i <= 79; i++){
+            seats.Add(i);
+        }
+        App.Plays["ID0"][0].Seats = seats;
         List<Play> FilterCheck1 = PlayLogic.FilterFullPlays(App.Plays["ID0"]);
         Assert.IsTrue(FilterCheck1.Contains(Play1));
 

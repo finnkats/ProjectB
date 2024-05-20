@@ -35,18 +35,3 @@ public static class LayoutPresentation
         }
     }
 }
-
-// for testing
-public class Layout {
-    public int SeatAmount { get; set;}
-    public int[,] Seats { get; set;}
-    public Layout(){
-        SeatAmount = 25;
-        Seats = new int[5,5]{{1, 2, 3, 4, 5},
-                             {6, 7, 8, 9 ,10}, 
-                             {11, 12, 0, 13, 14}, 
-                             {15, 16, 0, 17, 18}, 
-                             {19, 0, 0, 0, 20}
-                            };
-    }
-}

@@ -6,4 +6,10 @@ public class Layout
     public int[,] Seats { get; set; }
     public int SeatAmount { get; set; }
 
+    public Layout(int[,] seats, int seatAmount)
+    {
+        Seats = seats;
+        SeatAmount = Math.Min(seatAmount, 99); // Ensure SeatAmount doesn't exceed 99
+    }
+
 }

@@ -1,7 +1,7 @@
 public abstract class Logger
 {
-    protected string logFilePath;
-    protected string header;
+    protected string logFilePath {get; set;}
+    protected string header {get; set;}
 
     public Logger(string logFilePath, string header)
     {

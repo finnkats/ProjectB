@@ -3,7 +3,7 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "01/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID0"
@@ -11,23 +11,23 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "01/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID0"
         },
         {
             "Location": "ID0",
-            "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Start time": "18:00:00",
+            "Date": "01/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID0"
         },
         {
             "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Start time": "21:00:00",
+            "Date": "01/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID0"
@@ -37,7 +37,7 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "02/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID1"
@@ -45,23 +45,23 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "02/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID1"
         },
         {
             "Location": "ID0",
-            "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Start time": "18:00:00",
+            "Date": "02/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID1"
         },
         {
             "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Start time": "21:00:00",
+            "Date": "02/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID1"
@@ -86,16 +86,16 @@
         },
         {
             "Location": "ID0",
-            "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Start time": "18:00:00",
+            "Date": "03/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID2"
         },
         {
             "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Start time": "21:00:00",
+            "Date": "03/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID2"
@@ -105,7 +105,7 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "04/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID3"
@@ -113,23 +113,23 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "04/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID3"
         },
         {
             "Location": "ID0",
-            "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Start time": "18:00:00",
+            "Date": "04/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID3"
         },
         {
             "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Start time": "21:00:00",
+            "Date": "04/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID3"
@@ -139,22 +139,6 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
-            "Hall": "ID0",
-            "BookedSeats": 0,
-            "PerformanceId": "ID4"
-        },
-        {
-            "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "03/06/2024",
-            "Hall": "ID0",
-            "BookedSeats": 0,
-            "PerformanceId": "ID4"
-        },
-        {
-            "Location": "ID0",
-            "Start time": "12:00:00",
             "Date": "05/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
@@ -163,6 +147,22 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
+            "Date": "05/06/2024",
+            "Hall": "ID0",
+            "BookedSeats": 0,
+            "PerformanceId": "ID4"
+        },
+        {
+            "Location": "ID0",
+            "Start time": "18:00:00",
+            "Date": "05/06/2024",
+            "Hall": "ID0",
+            "BookedSeats": 0,
+            "PerformanceId": "ID4"
+        },
+        {
+            "Location": "ID0",
+            "Start time": "21:00:00",
             "Date": "05/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
@@ -173,7 +173,7 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "06/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID5"
@@ -181,23 +181,23 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "06/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID5"
         },
         {
             "Location": "ID0",
-            "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Start time": "18:00:00",
+            "Date": "06/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID5"
         },
         {
             "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Start time": "21:00:00",
+            "Date": "06/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID5"
@@ -207,7 +207,7 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "07/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID6"
@@ -215,23 +215,23 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "07/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID6"
         },
         {
             "Location": "ID0",
-            "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Start time": "18:00:00",
+            "Date": "07/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID6"
         },
         {
             "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Start time": "21:00:00",
+            "Date": "07/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID6"
@@ -241,7 +241,7 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "08/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID7"
@@ -249,23 +249,23 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "08/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID7"
         },
         {
             "Location": "ID0",
-            "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Start time": "18:00:00",
+            "Date": "08/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID7"
         },
         {
             "Location": "ID0",
-            "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Start time": "21:00:00",
+            "Date": "08/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID7"
@@ -275,7 +275,7 @@
         {
             "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "09/06/2024",
             "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID8"
@@ -283,7 +283,7 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "09/06/2024",
             "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID8"
@@ -291,16 +291,16 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "05/06/2024",
-            "Hall": "ID2",
+            "Date": "09/06/2024",
+            "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID8"
         },
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "05/06/2024",
-            "Hall": "ID2",
+            "Date": "09/06/2024",
+            "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID8"
         }
@@ -309,7 +309,7 @@
         {
             "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "10/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID9"
@@ -317,7 +317,7 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "10/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID9"
@@ -325,16 +325,16 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "05/06/2024",
-            "Hall": "ID1",
+            "Date": "10/06/2024",
+            "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID9"
         },
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "05/06/2024",
-            "Hall": "ID1",
+            "Date": "10/06/2024",
+            "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID9"
         }
@@ -343,7 +343,7 @@
         {
             "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "11/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID10"
@@ -351,7 +351,7 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "11/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID10"
@@ -359,7 +359,7 @@
         {
             "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Date": "11/06/2024",
             "Hall": "ID3",
             "BookedSeats": 0,
             "PerformanceId": "ID10"
@@ -367,7 +367,7 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Date": "11/06/2024",
             "Hall": "ID3",
             "BookedSeats": 0,
             "PerformanceId": "ID10"
@@ -375,9 +375,9 @@
     ],
     "ID11": [
         {
-            "Location": "ID1",
+            "Location": "ID0",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "12/06/2024",
             "Hall": "ID0",
             "BookedSeats": 10,
             "PerformanceId": "ID11"
@@ -385,23 +385,23 @@
         {
             "Location": "ID0",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "12/06/2024",
             "Hall": "ID0",
             "BookedSeats": 0,
             "PerformanceId": "ID11"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Date": "12/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID11"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Date": "12/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID11"
@@ -411,31 +411,31 @@
         {
             "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "13/06/2024",
             "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID12"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "13/06/2024",
             "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID12"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Date": "13/06/2024",
             "Hall": "ID3",
             "BookedSeats": 0,
             "PerformanceId": "ID12"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Date": "13/06/2024",
             "Hall": "ID3",
             "BookedSeats": 0,
             "PerformanceId": "ID12"
@@ -445,31 +445,31 @@
         {
             "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "03/06/2024",
+            "Date": "14/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID13"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "15:00:00",
-            "Date": "03/06/2024",
+            "Date": "14/06/2024",
             "Hall": "ID1",
             "BookedSeats": 0,
             "PerformanceId": "ID13"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "12:00:00",
-            "Date": "05/06/2024",
+            "Date": "14/06/2024",
             "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID13"
         },
         {
-            "Location": "ID0",
+            "Location": "ID1",
             "Start time": "15:00:00",
-            "Date": "05/06/2024",
+            "Date": "14/06/2024",
             "Hall": "ID2",
             "BookedSeats": 0,
             "PerformanceId": "ID13"

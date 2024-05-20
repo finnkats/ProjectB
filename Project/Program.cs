@@ -2,6 +2,11 @@
 
 App.Start();
 
+Layout.array[0] = new int[]{1, 2, 3, 4, 5};
+Layout.array[1] = new int[]{6, 7, 8, 9 ,10};
+Layout.array[2] = new int[]{11, 12, 0, 13, 14};
+Layout.array[3] = new int[]{15, 16, 0, 17, 18};
+Layout.array[4] = new int[]{19, 0, 0, 0, 20};
 LayoutPresentation.PrintLayout(new Layout(Layout.array, 20), new HashSet<int>(){1, 3, 7, 10, 11, 12}, new HashSet<int>(){8, 9});
 return;
 //Console.Clear();

@@ -9,7 +9,11 @@ public class Layout
     public Layout(int[,] seats, int seatAmount)
     {
         Seats = seats;
-        SeatAmount = Math.Min(seatAmount, 99); // Ensure SeatAmount doesn't exceed 99
+        if (seatAmount > 99)
+        {
+            throw new ArgumentException($"The seat amount cannot exceed 99, you have: {seatAmount}");
+        }
+        SeatAmount = seatAmount;
     }
 
 }

@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Threading;
 
 public class HallPresentation : PresentationBase<Hall>
 {
@@ -23,13 +24,13 @@ public class HallPresentation : PresentationBase<Hall>
             Console.WriteLine($"Layout #{layoutIndex + 1} ({hallSeats} seats):");
             LayoutPresentation.PrintLayout(currentLayout, new HashSet<int>(), new HashSet<int>());
 
-            Console.WriteLine("\nChoose an option:");
-            Console.WriteLine("N: Next layout");
-            Console.WriteLine("P: Previous layout");
-            Console.WriteLine("S: Select this layout");
-            Console.WriteLine("E: Exit without selection");
+            PresentationBase<Hall>.PrintColoredText("\nChoose an option:", ConsoleColor.White);
+            PresentationBase<Hall>.PrintColoredText("N: Next layout", ConsoleColor.White);
+            PresentationBase<Hall>.PrintColoredText("P: Previous layout", ConsoleColor.White);
+            PresentationBase<Hall>.PrintColoredText("S: Select this layout", ConsoleColor.Green);
+            PresentationBase<Hall>.PrintColoredText("Q: Exit without selection", ConsoleColor.Red);
 
-            Console.Write("> ");
+            Console.Write("\n> ");
             string input = Console.ReadLine()?.ToUpper() ?? "";
 
             if (input == "N")
@@ -45,14 +46,15 @@ public class HallPresentation : PresentationBase<Hall>
                 selectedLayout = currentLayout;
                 break;
             }
-            else if (input == "E")
+            else if (input == "Q")
             {
-                Console.WriteLine("Exiting");
+                PresentationBase<Hall>.PrintColoredText("\nExiting...", ConsoleColor.Red);
+                Thread.Sleep(2000);
                 return;
             }
             else
             {
-                Console.WriteLine("Invalid choice");
+                PresentationBase<Hall>.PrintColoredText("Invalid choice", ConsoleColor.DarkYellow);
                 Thread.Sleep(1000);
             }
         }

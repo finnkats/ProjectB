@@ -264,4 +264,19 @@ public class PresentationBase<T> where T : IEditable
             }
         }
     }
+
+    public static void PrintColoredText(string text, ConsoleColor color)
+    {
+        // Store the current console color
+        ConsoleColor previousColor = Console.ForegroundColor;
+
+        // Set the console color to the specified color
+        Console.ForegroundColor = color;
+
+        // Write the text to the console
+        Console.WriteLine(text);
+
+        // Reset the console color back to its previous color
+        Console.ForegroundColor = previousColor;
+    }
 }

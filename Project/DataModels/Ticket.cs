@@ -31,11 +31,11 @@ public class Ticket : IEquatable<Ticket>, IDataAccessList {
     public string TicketInfo() {
         if(IsActive){
             return $"The play you booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +
-                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name}.";
+                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name} | Seat {this.SeatNumber}.";
         }
         else{
             return $"The play you had booked was (is now cancelled): {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +
-                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name}.";
+                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name} | Seat {this.SeatNumber}.";
         }
     }
 

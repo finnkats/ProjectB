@@ -96,4 +96,6 @@ public static class TicketPresentation{
         tickets.ForEach(ticket => Console.WriteLine(ticket.TicketInfo()));
         Thread.Sleep(6000);
     }
+    public static void PrintTicket(Ticket ticket, string performanceId) => PrintTicket(new List<Ticket>(){ticket}, performanceId);
+    // If any code still calls this method with only a ticket, it will fix it
 }

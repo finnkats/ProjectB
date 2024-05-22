@@ -32,6 +32,10 @@ public static class LayoutPresentation
         // and make it so whitespace is before and after the screen (" -------- "), but make sure a screen atleast always exists
         string screen = new string('¯', Math.Max(layout.Seats[0].Length * 5 - 1 - 2, 2));
         Console.ForegroundColor = ConsoleColor.Black;
+        if (screen.Length >= 8){
+            string podiumBuffer = new string(' ', screen.Length / 2 - 2);
+            Console.WriteLine(podiumBuffer + "podium" + podiumBuffer);
+        }
         Console.WriteLine($" {screen} ");
         Console.ResetColor();
         for (int row = 0; row < layout.Seats.Length; row++){

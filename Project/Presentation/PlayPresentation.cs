@@ -52,7 +52,7 @@ public static class PlayPresentation
                         Console.WriteLine("Canceling ticket purchase");
                         return;
                     }
-                    MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.StartTime, chosenViewing.Hall, true, seats);
+                    MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.StartTime, chosenViewing.Hall, seats);
 
                     chosenIndex = index - 1;
                 }else{

@@ -18,5 +18,5 @@ public class Layout
 
 
     // for now
-    public static int[][] array =  new int[11][];
+    public static int[][] array =  new int[12][];
 }

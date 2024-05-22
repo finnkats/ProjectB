@@ -11,7 +11,7 @@ public class Play : IDataAccessList {
         get{
             DateTime startTime = DateTime.Parse(StartTime);
             int runTimeMin = App.Performances[PerformanceId].RuntimeInMin;
-            return startTime.AddMinutes(runTimeMin).ToString("HH:mm:ss");
+            return startTime.AddMinutes(runTimeMin).ToString("HH:mm");
         }
     }
 

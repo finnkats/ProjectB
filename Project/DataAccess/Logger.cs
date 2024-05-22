@@ -1,26 +1,6 @@
-public abstract class ActionLogger
-{
-    protected DateTime LogTime { get; }
-    protected string User { get; }
-    protected string Action { get; }
-    protected ActionLogger(DateTime logTime, string user, string action)
-    {
-        LogTime = DateTime.Now;
-        User = App.LoggedInUsername;
-        Action = action;
-    }
-    // Abstracte methode voor het vastleggen van specifieke actiegegevens naar een CSV-string
-    protected abstract string GetActionDetailsAsCsv();
+public abstract class Logger {
+    protected abstract string _filePath {get; set;} // "DataModels/Logs/idk.csv"
+    protected abstract string _headers {get; set;}  // "item1,item2,item3,item4"
+    public abstract void LogAction();
 
-    // Methode om de volledige CSV-string voor de logboekinvoer te krijgen
-    public string GetLogEntryAsCsv()
-    {
-        return $"{LogTime:HH:mm dd-MM-yyyy},{User},{Action},{GetActionDetailsAsCsv()}";
-    }
-    
-    // Methode om de logboekinvoer naar een CSV-bestand te schrijven
-    public void Log(string logFilePath)
-    {
-        File.AppendAllText(logFilePath, GetLogEntryAsCsv() + "\n");
-    }
 }

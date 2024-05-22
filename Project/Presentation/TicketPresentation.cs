@@ -94,7 +94,7 @@ public static class TicketPresentation{
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
         tickets.ForEach(ticket => Console.WriteLine(ticket.TicketInfo()));
-        Thread.Sleep(4000 * tickets.Count);
+        Thread.Sleep(4000 + 1000 * tickets.Count);
     }
     public static void PrintTicket(Ticket ticket, string performanceId) => PrintTicket(new List<Ticket>(){ticket}, performanceId);
     // If any code still calls this method with only a ticket, it will fix it

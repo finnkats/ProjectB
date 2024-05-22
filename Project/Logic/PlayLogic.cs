@@ -142,7 +142,7 @@ public static class PlayLogic
         foreach (Play play in App.Plays[newTicket.PerformanceId]) {
             if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall) {
                 // for now
-                play.Seats.Add(play.Seats.Count + 1);
+                play.Seats.Add(newTicket.SeatNumber);
                 DataAccess.UpdateList<Play>();
                 break;
             }

@@ -2,7 +2,7 @@ public class GenreLogic : LogicBase<Genre>{
     // Function gets called to add A genre
     // It checks if the name isn't empty or the genre with the same name already exists
     // Returns if it successfully added the genre
-    public static Logger logger = new GenreLogger("DataSources/LogFiles/Genres.csv", "Time, User, Action, Object");
+    public static Logger logger = new GenreLogger();
 
     public bool AddGenre(string name, int age){
         if (!ValidAge(age)) return false;

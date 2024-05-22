@@ -52,8 +52,14 @@ public abstract class LogicBase<T> where T : IEditable{
     public bool ChangeName(string id, string name){
         if (!Dict.ContainsKey(id)) return false;
         if (!ValidName(name, id)) return false;
+        string oldName = Dict[id].Name;
         Dict[id].Name = name;
         DataAccess.UpdateItem<T>();
+        Console.WriteLine($"{typeof(T)}{typeof(Genre)}");
+        Thread.Sleep(5000);
+        if (typeof(T) == typeof(Genre)){
+            GenreLogic.logger.LogAction("Genre name changed", new { GenreId = id, OldName = oldName, NewName = name });
+        }
         return true;
     }
 }

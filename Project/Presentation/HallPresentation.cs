@@ -24,11 +24,11 @@ public class HallPresentation : PresentationBase<Hall>
             Console.WriteLine($"Layout #{layoutIndex + 1} ({hallSeats} seats):");
             LayoutPresentation.PrintLayout(currentLayout, new HashSet<int>(), new HashSet<int>());
 
-            PresentationBase<Hall>.PrintColoredText("\nChoose an option:", ConsoleColor.White);
-            PresentationBase<Hall>.PrintColoredText("1: Next layout", ConsoleColor.White);
-            PresentationBase<Hall>.PrintColoredText("2: Previous layout", ConsoleColor.White);
-            PresentationBase<Hall>.PrintColoredText("3: Select this layout", ConsoleColor.White);
-            PresentationBase<Hall>.PrintColoredText("Q: Exit without selection", ConsoleColor.White);
+            Console.WriteLine("\nChoose an option");
+            Console.WriteLine("1: Next layout");
+            Console.WriteLine("2: Previous layout");
+            Console.WriteLine("3: Select this layout");
+            Console.WriteLine("Q: Exit without selection");
 
             Console.Write("\n> ");
             string input = Console.ReadLine()?.ToUpper() ?? "";
@@ -48,13 +48,13 @@ public class HallPresentation : PresentationBase<Hall>
             }
             else if (input == "Q")
             {
-                PresentationBase<Hall>.PrintColoredText("\nExiting...", ConsoleColor.White);
+                Console.WriteLine("\nExiting...");
                 Thread.Sleep(2000);
                 return;
             }
             else
             {
-                PresentationBase<Hall>.PrintColoredText("Invalid choice", ConsoleColor.DarkYellow);
+                Console.WriteLine("Invalid choice");
                 Thread.Sleep(1000);
             }
         }

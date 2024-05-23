@@ -25,30 +25,30 @@ public class HallPresentation : PresentationBase<Hall>
             LayoutPresentation.PrintLayout(currentLayout, new HashSet<int>(), new HashSet<int>());
 
             PresentationBase<Hall>.PrintColoredText("\nChoose an option:", ConsoleColor.White);
-            PresentationBase<Hall>.PrintColoredText("N: Next layout", ConsoleColor.White);
-            PresentationBase<Hall>.PrintColoredText("P: Previous layout", ConsoleColor.White);
-            PresentationBase<Hall>.PrintColoredText("S: Select this layout", ConsoleColor.Green);
-            PresentationBase<Hall>.PrintColoredText("Q: Exit without selection", ConsoleColor.Red);
+            PresentationBase<Hall>.PrintColoredText("1: Next layout", ConsoleColor.White);
+            PresentationBase<Hall>.PrintColoredText("2: Previous layout", ConsoleColor.White);
+            PresentationBase<Hall>.PrintColoredText("3: Select this layout", ConsoleColor.White);
+            PresentationBase<Hall>.PrintColoredText("Q: Exit without selection", ConsoleColor.White);
 
             Console.Write("\n> ");
             string input = Console.ReadLine()?.ToUpper() ?? "";
 
-            if (input == "N")
+            if (input == "1")
             {
                 layoutIndex = (layoutIndex + 1) % layouts.Length;
             }
-            else if (input == "P")
+            else if (input == "2")
             {
                 layoutIndex = (layoutIndex - 1 + layouts.Length) % layouts.Length;
             }
-            else if (input == "S")
+            else if (input == "3")
             {
                 selectedLayout = currentLayout;
                 break;
             }
             else if (input == "Q")
             {
-                PresentationBase<Hall>.PrintColoredText("\nExiting...", ConsoleColor.Red);
+                PresentationBase<Hall>.PrintColoredText("\nExiting...", ConsoleColor.White);
                 Thread.Sleep(2000);
                 return;
             }

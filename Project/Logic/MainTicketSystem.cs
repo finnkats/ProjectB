@@ -10,6 +10,7 @@ public static class MainTicketSystem{
         }
         PlayLogic.AddBooking(createNewTicket);
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
+        TicketLogger.LogAction("bought a ticket", createNewTicket);
         DataAccess.UpdateList<Ticket>();
         TicketPresentation.PrintTicket(createNewTicket, performanceId);
     }

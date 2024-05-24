@@ -52,7 +52,7 @@ namespace Logic.Tests.AccountTest
 
             string menuString = App.HomePage.MenuString();
             Assert.IsTrue(menuString.Contains("Admin Features"), menuString);
-            Assert.IsFalse(menuString.Contains("View Tickets"), menuString);
+            Assert.IsFalse(menuString.Contains("View Orders"), menuString);
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace Logic.Tests.AccountTest
             Assert.AreEqual("User1", App.LoggedInUsername);
 
             string menuString = App.HomePage.MenuString();
-            Assert.IsTrue(menuString.Contains("View Tickets"), menuString);
+            Assert.IsTrue(menuString.Contains("View Orders"), menuString);
             Assert.IsFalse(menuString.Contains("Admin Features"), menuString);
         }
     }

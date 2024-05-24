@@ -55,11 +55,14 @@ public abstract class LogicBase<T> where T : IEditable{
         string oldName = Dict[id].Name;
         Dict[id].Name = name;
         DataAccess.UpdateItem<T>();
+        //logs all name changes
         if (typeof(T) == typeof(Genre)){
             GenreLogic.logger.LogAction("Genre name changed", new { GenreId = id, OldName = oldName, NewName = name });
-         } //else if (typeof(T) == typeof(Hall)) {
-        //     HallLogic.logger.LogAction("Hall name changed", new { HallId = id, OldName = oldName, NewName = name });
-            
+        } else if (typeof(T) == typeof(Hall)) {
+            HallLogic.logger.LogAction("Hall name changed", new { HallId = id, OldName = oldName, NewName = name });
+        } else if (typeof(T) == typeof(Location)) {
+            LocationLogic.logger.LogAction("Location name changed", new { LocationId = id, OldName = oldName, NewName = name });
+        }
         return true;
     }
     // if object is given, it finds the id of it

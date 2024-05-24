@@ -7,12 +7,12 @@ public static class TicketPresentation{
         while (true){
             Console.Clear();
             var TicketsList = MainTicketSystem.SortActiveTicket(); // Method sorts tickets owned by user by if they are active or not
-            Console.WriteLine("Front Page -> Home Page -> View Tickets\n\n");
+            Console.WriteLine("Front Page -> Home Page -> View Orders\n\n");
             if (TicketsList != null)
             {
                 // This part of the method prints the Inactive tickets
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Inactive Tickets");
+                Console.WriteLine("Previous Orders");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(new string('-', 90));
                 Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|", "Performance", "Order #", "Date", "Time",
@@ -33,7 +33,7 @@ public static class TicketPresentation{
                 }
                 // this part of the code prints the Active Tickets
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n\n\nActive Tickets");
+                Console.WriteLine("\n\n\nCurrent Orders");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(new string('-', 90));
                 Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|", "Performance", "Order #", "Date", "Time",
@@ -52,13 +52,13 @@ public static class TicketPresentation{
                     Console.WriteLine(new string('-', 90));
                 }
                 int IndexNumber = 1;
-                Console.WriteLine("\n\nIs there a ticket you want to cancel?");
+                Console.WriteLine("\n\nIs there an order you want to cancel?");
                 foreach (Ticket ticket in TicketsList[0]) // this part writes all the the current active tickets underneath eachother as options for the user
                 {
                     string sep = ", ";
-                    Console.WriteLine($"{IndexNumber++}: {App.Performances[ticket.PerformanceId].Name} | Order: {ticket.OrderNumber} | Seat: {String.Join(sep, ticket.SeatNumbers)} | {ticket.Date} - {ticket.Time}");
+                    Console.WriteLine($"{IndexNumber++}: Order: {ticket.OrderNumber} | Seat(s): {String.Join(sep, ticket.SeatNumbers)} | ({App.Performances[ticket.PerformanceId].Name})");
                 }
-                Console.Write("Q. I don't want to cancel any tickets \n\n> ");
+                Console.Write("Q. I don't want to cancel an order\n\n> ");
                 string? userInput = Console.ReadLine();
                 if (userInput == null) return;
                 if (userInput.ToLower() == "q") return;
@@ -79,7 +79,7 @@ public static class TicketPresentation{
                         break;
                     }
                     if (orderNumber != -1) Console.WriteLine($"Refunded {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name} | Order: {orderNumber}");
-                    else Console.WriteLine("Can't refund ticket because the performance is tomorrow");
+                    else Console.WriteLine("Can't refund order because the performance is tomorrow");
                     Thread.Sleep(2500);
                 } catch (ArgumentOutOfRangeException){
                     Console.WriteLine("Invalid input");
@@ -95,6 +95,6 @@ public static class TicketPresentation{
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
         Console.WriteLine(ticket.TicketInfo());
-        Thread.Sleep(4000 + 250 * ticket.SeatNumbers.Length);
+        Thread.Sleep(6000 + 500 * ticket.SeatNumbers.Length);
     }
 }

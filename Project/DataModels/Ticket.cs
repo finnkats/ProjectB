@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
 
 public class Ticket : IEquatable<Ticket>, IDataAccessList {
-    public static int CurrentOrderNumber = App.Tickets.Select(user => user.Value.Count).Sum() + 1;
+    // Real value gets calculated in App.Start, after all json tickets have been read and put in App.Tickets
+    public static int CurrentOrderNumber = -1;
 
     [JsonPropertyName("PerformanceId")]
     public string PerformanceId {get; set;}

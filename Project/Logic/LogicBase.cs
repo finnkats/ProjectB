@@ -57,7 +57,9 @@ public abstract class LogicBase<T> where T : IEditable{
         DataAccess.UpdateItem<T>();
         if (typeof(T) == typeof(Genre)){
             GenreLogic.logger.LogAction("Genre name changed", new { GenreId = id, OldName = oldName, NewName = name });
-        }
+         } //else if (typeof(T) == typeof(Hall)) {
+        //     HallLogic.logger.LogAction("Hall name changed", new { HallId = id, OldName = oldName, NewName = name });
+            
         return true;
     }
     // if object is given, it finds the id of it

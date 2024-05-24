@@ -8,15 +8,12 @@ public static class MainTicketSystem{
             App.Tickets[App.LoggedInUsername] = new List<Ticket>();
         }
         
-        List<Ticket> bookedTickets = new();
-        foreach (int seat in seats){
-            Ticket createNewTicket = new Ticket(performanceId, date, time, room, seat, true);
-            PlayLogic.AddBooking(createNewTicket);
-            App.Tickets[App.LoggedInUsername].Add(createNewTicket);
-            bookedTickets.Add(createNewTicket);
-        }
+        Ticket createNewTicket = new Ticket(performanceId, date, time, room, seats.ToArray(), true);
+        PlayLogic.AddBooking(createNewTicket);
+        App.Tickets[App.LoggedInUsername].Add(createNewTicket);
+
         DataAccess.UpdateList<Ticket>();
-        TicketPresentation.PrintTicket(bookedTickets, performanceId);
+        TicketPresentation.PrintTicket(createNewTicket, performanceId);
     }
 
     // Prints a string of ticket info (currently called after creating a ticket as confirmation)

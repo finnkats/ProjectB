@@ -14,10 +14,10 @@ public static class TicketPresentation{
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Inactive Tickets");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(new string('-', 92));
-                Console.WriteLine(String.Format("|{0,-19}|{1,-5}|{2,-11}|{3,-16}|{4,-35}|", "Performance Name", "Seat", "Date", "Time",
+                Console.WriteLine(new string('-', 90));
+                Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|", "Performance", "Order #", "Date", "Time",
                     "Location"));
-                Console.WriteLine(new string('-', 92));
+                Console.WriteLine(new string('-', 90));
 
                 foreach (Ticket ticket in TicketsList[1])
                 {
@@ -25,20 +25,20 @@ public static class TicketPresentation{
                     if (performanceName.Length > 19) performanceName = $"{performanceName.Substring(0, 16)}...";
                     string location = $"{App.Locations[App.Halls[ticket.Hall].LocationId].Name} ({App.Halls[ticket.Hall].Name})";
                     if (location.Length > 35) location = $"{location.Substring(0, 30)}...) ";
-                    Console.WriteLine(String.Format("|{0,-19}|{1,-5}|{2,-11}|{3,-16}|{4,-35}|",
-                        performanceName, ticket.SeatNumber, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", location));
-                    Console.WriteLine(String.Format("|{0,-19}|{1,-5}|{2,-11}|{3,-16}|{4,-35}|", "", "", "", "", ""));
-                    Console.WriteLine(new string('-', 92));
+                    Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|",
+                        performanceName, ticket.OrderNumber, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", location));
+                    Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|", "", "", "", "", ""));
+                    Console.WriteLine(new string('-', 90));
 
                 }
                 // this part of the code prints the Active Tickets
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\n\n\nActive Tickets");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(new string('-', 92));
-                Console.WriteLine(String.Format("|{0,-19}|{1,-5}|{2,-11}|{3,-16}|{4,-35}|", "Performance Name", "Seat", "Date", "Time",
+                Console.WriteLine(new string('-', 90));
+                Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|", "Performance", "Order #", "Date", "Time",
                     "Location"));
-                Console.WriteLine(new string('-', 92));
+                Console.WriteLine(new string('-', 90));
 
                 foreach (Ticket ticket in TicketsList[0])
                 {
@@ -46,16 +46,17 @@ public static class TicketPresentation{
                     if (performanceName.Length > 19) performanceName = $"{performanceName.Substring(0, 16)}...";
                     string location = $"{App.Locations[App.Halls[ticket.Hall].LocationId].Name} ({App.Halls[ticket.Hall].Name})";
                     if (location.Length > 35) location = $"{location.Substring(0, 30)}...) ";
-                    Console.WriteLine(String.Format("|{0,-19}|{1,-5}|{2,-11}|{3,-16}|{4,-35}|",
-                        performanceName, ticket.SeatNumber, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", location));
-                    Console.WriteLine(String.Format("|{0,-19}|{1,-5}|{2,-11}|{3,-16}|{4,-35}|", "", "", "", "", ""));
-                    Console.WriteLine(new string('-', 92));
+                    Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|",
+                        performanceName, ticket.OrderNumber, ticket.Date, $"{ticket.Time} ({App.Performances[ticket.PerformanceId].RuntimeInMin} min)", location));
+                    Console.WriteLine(String.Format("|{0,-14}|{1,-8}|{2,-11}|{3,-16}|{4,-35}|", "", "", "", "", ""));
+                    Console.WriteLine(new string('-', 90));
                 }
                 int IndexNumber = 1;
                 Console.WriteLine("\n\nIs there a ticket you want to cancel?");
                 foreach (Ticket ticket in TicketsList[0]) // this part writes all the the current active tickets underneath eachother as options for the user
                 {
-                    Console.WriteLine($"{IndexNumber++}. {App.Performances[ticket.PerformanceId].Name} | Seat: {ticket.SeatNumber} | {ticket.Date} - {ticket.Time}");
+                    string sep = ", ";
+                    Console.WriteLine($"{IndexNumber++}: {App.Performances[ticket.PerformanceId].Name} | {ticket.OrderNumber} | Seat: {String.Join(sep, ticket.SeatNumbers)} | {ticket.Date} - {ticket.Time}");
                 }
                 Console.Write("Q. I don't want to cancel any tickets \n\n> ");
                 string? userInput = Console.ReadLine();
@@ -68,16 +69,16 @@ public static class TicketPresentation{
                         Thread.Sleep(1000);
                         continue;
                     };
-                    bool ticketFound = false;
+                    int orderNumber = -1;
                     int ReturnIndex = IndexInt - 1;
                     foreach (Ticket ticket in App.Tickets[App.LoggedInUsername]){
                         if (ticket != TicketsList[0][ReturnIndex]) continue;
                         if (!MainTicketSystem.CancellationIsNotOneDayBefore(ticket)) break;
-                        ticketFound = true;
+                        orderNumber = ticket.OrderNumber;
                         MainTicketSystem.CancelTicketLogic(ticket);
                         break;
                     }
-                    if (ticketFound) Console.WriteLine($"Refunded {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name}");
+                    if (orderNumber != -1) Console.WriteLine($"Refunded {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name} | {orderNumber}");
                     else Console.WriteLine("Can't refund ticket because the performance is tomorrow");
                     Thread.Sleep(2500);
                 } catch (ArgumentOutOfRangeException){
@@ -89,13 +90,11 @@ public static class TicketPresentation{
         }
     }
 
-    public static void PrintTicket(List<Ticket>tickets, string performanceId){
+    public static void PrintTicket(Ticket ticket, string performanceId){
         Console.Clear();
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
-        tickets.ForEach(ticket => Console.WriteLine(ticket.TicketInfo()));
-        Thread.Sleep(4000 + 1000 * tickets.Count);
+        ticket.TicketInfo();
+        Thread.Sleep(4000 + 250 * ticket.SeatNumbers.Length);
     }
-    public static void PrintTicket(Ticket ticket, string performanceId) => PrintTicket(new List<Ticket>(){ticket}, performanceId);
-    // If any code still calls this method with only a ticket, it will fix it
 }

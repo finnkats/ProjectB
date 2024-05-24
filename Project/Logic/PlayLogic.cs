@@ -141,8 +141,7 @@ public static class PlayLogic
     {
         foreach (Play play in App.Plays[newTicket.PerformanceId]) {
             if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall) {
-                // for now
-                play.Seats.Add(newTicket.SeatNumber);
+                Array.ForEach(newTicket.SeatNumbers, number => play.Seats.Add(number));
                 DataAccess.UpdateList<Play>();
                 break;
             }
@@ -154,8 +153,7 @@ public static class PlayLogic
         {
             if (play.Date == ticket.Date && play.StartTime == ticket.Time && play.Hall == ticket.Hall)
             {
-                // for now
-                play.Seats.Remove(ticket.SeatNumber);
+                Array.ForEach(ticket.SeatNumbers, number => play.Seats.Remove(number));
                 DataAccess.UpdateList<Play>();
                 break;
             }

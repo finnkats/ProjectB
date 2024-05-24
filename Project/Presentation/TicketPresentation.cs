@@ -56,7 +56,7 @@ public static class TicketPresentation{
                 foreach (Ticket ticket in TicketsList[0]) // this part writes all the the current active tickets underneath eachother as options for the user
                 {
                     string sep = ", ";
-                    Console.WriteLine($"{IndexNumber++}: {App.Performances[ticket.PerformanceId].Name} | {ticket.OrderNumber} | Seat: {String.Join(sep, ticket.SeatNumbers)} | {ticket.Date} - {ticket.Time}");
+                    Console.WriteLine($"{IndexNumber++}: {App.Performances[ticket.PerformanceId].Name} | Order: {ticket.OrderNumber} | Seat: {String.Join(sep, ticket.SeatNumbers)} | {ticket.Date} - {ticket.Time}");
                 }
                 Console.Write("Q. I don't want to cancel any tickets \n\n> ");
                 string? userInput = Console.ReadLine();
@@ -78,7 +78,7 @@ public static class TicketPresentation{
                         MainTicketSystem.CancelTicketLogic(ticket);
                         break;
                     }
-                    if (orderNumber != -1) Console.WriteLine($"Refunded {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name} | {orderNumber}");
+                    if (orderNumber != -1) Console.WriteLine($"Refunded {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name} | Order: {orderNumber}");
                     else Console.WriteLine("Can't refund ticket because the performance is tomorrow");
                     Thread.Sleep(2500);
                 } catch (ArgumentOutOfRangeException){
@@ -94,7 +94,7 @@ public static class TicketPresentation{
         Console.Clear();
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
-        ticket.TicketInfo();
+        Console.WriteLine(ticket.TicketInfo());
         Thread.Sleep(4000 + 250 * ticket.SeatNumbers.Length);
     }
 }

@@ -1,6 +1,11 @@
 using Logic;
+using System.ComponentModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics;
 
 public static class MainTicketSystem{
+
+    private static TicketLogger logger = new TicketLogger();
     public static (bool,string,string)? IsTesting {get; set;}
     // Creates a new Ticket (UserTicket)
     public static void CreateBookTicket(string performanceId, string date, string time, string room, bool activity){
@@ -10,7 +15,7 @@ public static class MainTicketSystem{
         }
         PlayLogic.AddBooking(createNewTicket);
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
-        TicketLogger.LogAction("bought a ticket", createNewTicket);
+        logger.LogAction("bought a ticket", new { ID = performanceId, Datum = date, Kamer = room, activiteit = activity});
         DataAccess.UpdateList<Ticket>();
         TicketPresentation.PrintTicket(createNewTicket, performanceId);
     }
@@ -50,6 +55,7 @@ public static class MainTicketSystem{
     public static void CancelTicketLogic(Ticket ticketToCancel){
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
+        logger.LogAction("Cancelled a ticket", new { ID = ticketToCancel.PerformanceId, date = ticketToCancel.Date, hall = ticketToCancel.Hall, Activity = ticketToCancel.IsActive });
         PlayLogic.RemoveBooking(ticketToCancel);
         DataAccess.UpdateList<Ticket>();
     }

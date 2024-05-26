@@ -7,6 +7,8 @@ using System.Threading;
 
 public static class PlayLogic
 {
+    public static PlayLogger logger = new PlayLogger();
+
     //  This is the start of creating a ticket
     public static void Choose(string performanceId){
         // Checks if logged in user is no one, (means user should login)
@@ -42,6 +44,7 @@ public static class PlayLogic
         Play newPlay = new(location, startTime, date, hall, playId);
         App.Plays[playId].Add(newPlay);
         NotificationLogic.SendOutNotifications(newPlay);
+        logger.LogAction("Added Play", new {locatie = location, starttijd = startTime, datum = date, zaal = hall });
         DataAccess.UpdateList<Play>();
         App.ArchivedPlays[playId].Add(new ArchivedPlay(location, startTime, date, hall, playId));
         DataAccess.UpdateList<ArchivedPlay>();

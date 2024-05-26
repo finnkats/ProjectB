@@ -58,6 +58,10 @@ public abstract class LogicBase<T> where T : IEditable{
         if (typeof(T) == typeof(Genre)){
             GenreLogic.logger.LogAction("Genre name changed", new { GenreId = id, OldName = oldName, NewName = name });
         }
+        if (typeof(T) == typeof(Play))
+        {
+            PlayLogic.logger.LogAction("Genre name changed", new { PlayId = id, OldName = oldName, NewName = name });
+        }
         return true;
     }
     // if object is given, it finds the id of it

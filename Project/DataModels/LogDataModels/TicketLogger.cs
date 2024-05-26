@@ -5,7 +5,7 @@ class TicketLogger : Logger
 
     public TicketLogger() { }
 
-    public override void LogAction(string action, object Ticket)
+    public override void LogAction(string action, object? Ticket)
     {
         string logEntry = $"{DateTime.Now}, {App.LoggedInUsername}, {action}, {Ticket}";
         WriteToCsv(logEntry);

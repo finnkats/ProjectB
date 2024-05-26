@@ -17,6 +17,7 @@ public static class MainTicketSystem{
         foreach (int seat in seats){
             Ticket createNewTicket = new Ticket(performanceId, date, time, room, seat, true);
             PlayLogic.AddBooking(createNewTicket);
+            logger.LogAction("bought a ticket", new { ID = performanceId, Date = date, Room = room, Active = true });
             App.Tickets[App.LoggedInUsername].Add(createNewTicket);
             bookedTickets.Add(createNewTicket);
         }

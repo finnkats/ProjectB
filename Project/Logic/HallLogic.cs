@@ -13,7 +13,7 @@ public class HallLogic : LogicBase<Hall> {
         }
         DataAccess.UpdateItem<Location>();
 
-        logger.LogAction("Hall added", new { Name = Name, Seats = Seats, LocationId = locationId });
+        logger.LogAction("Hall added", new { Name = Name, Seats = layout.SeatAmount, LocationId = locationId });
         return true;
     }
 }

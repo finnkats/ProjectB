@@ -62,10 +62,10 @@ public abstract class LogicBase<T> where T : IEditable{
             HallLogic.logger.LogAction("Hall name changed", new { HallId = id, OldName = oldName, NewName = name });
         } else if (typeof(T) == typeof(Location)) {
             LocationLogic.logger.LogAction("Location name changed", new { LocationId = id, OldName = oldName, NewName = name });
-        }
-        if (typeof(T) == typeof(Play))
-        {
-            PlayLogic.logger.LogAction("Genre name changed", new { PlayId = id, OldName = oldName, NewName = name });
+        } else if (typeof(T) == typeof(Play)){
+            PlayLogic.logger.LogAction("Play name changed", new { PlayId = id, OldName = oldName, NewName = name });
+        } else if (typeof(T) == typeof(Performance)){
+            PerformanceLogic.logger.LogAction("Peformance name changed", new { PeformanceId = id, OldName = oldName, NewName = name });
         }
         return true;
     }

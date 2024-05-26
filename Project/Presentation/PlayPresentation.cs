@@ -8,9 +8,9 @@ public static class PlayPresentation
     {
         Console.Clear();
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name}\n");
-        Console.WriteLine($"Plays for {App.Performances[performanceId].Name}\n----------------------------------------------------------------------------");
-        Console.WriteLine($"|# |Location               |Date        |Time                |Hall         |");
-        Console.WriteLine("----------------------------------------------------------------------------");
+        Console.WriteLine($"Plays for {App.Performances[performanceId].Name}\n----------------------------------------------------------------------");
+        Console.WriteLine($"|# |Location               |Date        |Time          |Hall         |");
+        Console.WriteLine("----------------------------------------------------------------------");
 
         // Sort the playOptions by location
         playOptions.Sort((a, b) => string.Compare(App.Locations[a.Location].Name, App.Locations[b.Location].Name));
@@ -27,9 +27,9 @@ public static class PlayPresentation
             if (hallName.Length > 14)
                 hallName = $"{hallName.Substring(0, 10)}...";
 
-            Console.WriteLine($"|{i + 1,-2}|{locationName,-23}|{viewing.Date,-12}|{viewing.StartTime,-7} - {viewing.EndTime} |{hallName,-13}|");
+            Console.WriteLine($"|{i + 1,-2}|{locationName,-23}|{viewing.Date,-12}|{viewing.StartTime} - {viewing.EndTime} |{hallName,-13}|");
         }
-        Console.WriteLine("----------------------------------------------------------------------------");
+        Console.WriteLine("----------------------------------------------------------------------");
 
         int chosenIndex = -1;
         while (chosenIndex == -1){
@@ -47,7 +47,12 @@ public static class PlayPresentation
                     var chosenViewing = playOptions[index - 1];
 
                     // Here you'd create the ticket with the chosen details
-                    MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.StartTime, chosenViewing.Hall, true);
+                    HashSet<int> seats = LayoutPresentation.ChooseSeats(chosenViewing);
+                    if (seats.Count == 0){
+                        Console.WriteLine("Canceling ticket purchase");
+                        return;
+                    }
+                    MainTicketSystem.CreateBookTicket(performanceId, chosenViewing.Date, chosenViewing.StartTime, chosenViewing.Hall, seats);
 
                     chosenIndex = index - 1;
                 }else{

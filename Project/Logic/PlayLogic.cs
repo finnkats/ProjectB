@@ -40,7 +40,6 @@ public static class PlayLogic
         if (!App.Plays.ContainsKey(playId)) return false;
         if (!ValidDate(date)) return false;
         if (!ValidTime(startTime)) return false;
-        startTime += ":00";
         Play newPlay = new(location, startTime, date, hall, playId);
         App.Plays[playId].Add(newPlay);
         NotificationLogic.SendOutNotifications(newPlay);
@@ -145,19 +144,21 @@ public static class PlayLogic
     {
         foreach (Play play in App.Plays[newTicket.PerformanceId]) {
             if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall) {
-                play.BookedSeats += 1;
+                // for now
+                play.Seats.Add(newTicket.SeatNumber);
                 DataAccess.UpdateList<Play>();
                 break;
             }
         }
     }
-    public static void RemoveBooking(Ticket newTicket)
+    public static void RemoveBooking(Ticket ticket)
     {
-        foreach (Play play in App.Plays[newTicket.PerformanceId])
+        foreach (Play play in App.Plays[ticket.PerformanceId])
         {
-            if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall)
+            if (play.Date == ticket.Date && play.StartTime == ticket.Time && play.Hall == ticket.Hall)
             {
-                play.BookedSeats -= 1;
+                // for now
+                play.Seats.Remove(ticket.SeatNumber);
                 DataAccess.UpdateList<Play>();
                 break;
             }

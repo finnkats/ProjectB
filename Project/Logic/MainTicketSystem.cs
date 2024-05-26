@@ -8,16 +8,20 @@ public static class MainTicketSystem{
     private static TicketLogger logger = new TicketLogger();
     public static (bool,string,string)? IsTesting {get; set;}
     // Creates a new Ticket (UserTicket)
-    public static void CreateBookTicket(string performanceId, string date, string time, string room, bool activity){
-        Ticket createNewTicket = new Ticket(performanceId, date, time, room, activity);
+    public static void CreateBookTicket(string performanceId, string date, string time, string room, HashSet<int> seats){
         if(!App.Tickets.ContainsKey(App.LoggedInUsername)){
             App.Tickets[App.LoggedInUsername] = new List<Ticket>();
         }
-        PlayLogic.AddBooking(createNewTicket);
-        App.Tickets[App.LoggedInUsername].Add(createNewTicket);
-        logger.LogAction("bought a ticket", new { ID = performanceId, Datum = date, Kamer = room, activiteit = activity});
+        
+        List<Ticket> bookedTickets = new();
+        foreach (int seat in seats){
+            Ticket createNewTicket = new Ticket(performanceId, date, time, room, seat, true);
+            PlayLogic.AddBooking(createNewTicket);
+            App.Tickets[App.LoggedInUsername].Add(createNewTicket);
+            bookedTickets.Add(createNewTicket);
+        }
         DataAccess.UpdateList<Ticket>();
-        TicketPresentation.PrintTicket(createNewTicket, performanceId);
+        TicketPresentation.PrintTicket(bookedTickets, performanceId);
     }
 
     // Prints a string of ticket info (currently called after creating a ticket as confirmation)

@@ -52,6 +52,7 @@ public class TicketSystemTest{
     public void TestCheckOutdatedTickets(){
         // Ticket seat
         HashSet<int> seat = new(){1};
+        App.LoggedInUsername = "User1";
 
         // Create some tickets with dates in the past and add them to App.Tickets
         string monthAgo = DateTime.Now.AddMonths(-1).ToString(@"dd\/MM\/yyyy");
@@ -86,6 +87,7 @@ public class TicketSystemTest{
 
     [TestMethod]
     public void TestCancellationIsNotOneDayBefore(){
+        App.LoggedInUsername = "User1";
         string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd\/MM\/yyyy");
         string today = DateTime.Now.ToString(@"dd\/MM\/yyyy");
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
@@ -112,6 +114,7 @@ public class TicketSystemTest{
     [TestMethod]
     public void TestAddBooking()
     {
+        App.LoggedInUsername = "User1";
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
 
         Play Play1 = new Play("ID0", "18:00", nextMonth, "ID5", "ID0");

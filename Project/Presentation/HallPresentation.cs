@@ -16,12 +16,14 @@ public class HallPresentation : PresentationBase<Hall>
         int hallSeats = -1;
         int layoutIndex = 0;
         Layout[] layouts = { Layout.LayoutSmall, Layout.LayoutMedium, Layout.LayoutBig };
+        string[] layoutnames = { "Small", "Medium", "Large" };
         while (true)
         {
             Console.Clear();
             Layout currentLayout = layouts[layoutIndex];
             hallSeats = currentLayout.SeatAmount;
-            Console.WriteLine($"Layout #{layoutIndex + 1} ({hallSeats} seats):");
+            Console.WriteLine($"Front Page -> Home Page -> Admin Features -> Adding Hall '{hallName}'\n");
+            Console.WriteLine($"Layout {layoutnames[layoutIndex]} ({hallSeats} seats):");
             LayoutPresentation.PrintLayout(currentLayout, new HashSet<int>(), new HashSet<int>());
 
             Console.WriteLine("\nChoose an option");

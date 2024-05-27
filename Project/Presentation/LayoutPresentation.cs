@@ -13,7 +13,8 @@ public static class LayoutPresentation
             Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Red = Unavailable\n"); Console.ResetColor();
 
             Console.WriteLine($"Select seats for {App.Performances[play.PerformanceId].Name} in {App.Halls[play.Hall].Name}");
-            Console.Write("To deselect a seat, select it again\nTo continue purchase enter nothing\nTo cancel enter 'Q'\n\n> ");
+            Console.WriteLine("To select a seat, enter the number of the seat");
+            Console.Write("To deselect a seat, select it again\nTo continue purchase press enter\n'Q' To cancel reservation\n\n> ");
 
             string input = Console.ReadLine()?.ToLower() ?? "";
             if (input == "") break;

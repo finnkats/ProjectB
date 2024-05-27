@@ -17,7 +17,7 @@ public static class MainTicketSystem{
         foreach (int seat in seats){
             Ticket createNewTicket = new Ticket(performanceId, date, time, room, seat, true);
             PlayLogic.AddBooking(createNewTicket);
-            logger.LogAction("bought a ticket", new { ID = performanceId, Date = date, Room = room, Active = true });
+            logger.LogAction("bought a ticket", new { PeformanceID = performanceId, Date = date, Room = room, Active = true });
             App.Tickets[App.LoggedInUsername].Add(createNewTicket);
             bookedTickets.Add(createNewTicket);
         }
@@ -60,7 +60,7 @@ public static class MainTicketSystem{
     public static void CancelTicketLogic(Ticket ticketToCancel){
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
-        logger.LogAction("Cancelled a ticket", new { ID = ticketToCancel.PerformanceId, date = ticketToCancel.Date, hall = ticketToCancel.Hall, Activity = ticketToCancel.IsActive });
+        logger.LogAction("Cancelled a ticket", new { PeformanceID = ticketToCancel.PerformanceId, date = ticketToCancel.Date, hall = ticketToCancel.Hall, Activity = ticketToCancel.IsActive });
         PlayLogic.RemoveBooking(ticketToCancel);
         DataAccess.UpdateList<Ticket>();
     }

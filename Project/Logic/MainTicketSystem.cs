@@ -1,18 +1,28 @@
 using Logic;
+using System.ComponentModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics;
 
 public static class MainTicketSystem{
+
+    private static TicketLogger logger = new TicketLogger();
     public static (bool,string,string)? IsTesting {get; set;}
     // Creates a new Ticket (UserTicket)
-    public static void CreateBookTicket(string performanceId, string date, string time, string room, bool activity){
-        Ticket createNewTicket = new Ticket(performanceId, date, time, room, activity);
+    public static void CreateBookTicket(string performanceId, string date, string time, string room, HashSet<int> seats){
         if(!App.Tickets.ContainsKey(App.LoggedInUsername)){
             App.Tickets[App.LoggedInUsername] = new List<Ticket>();
         }
-        PlayLogic.AddBooking(createNewTicket);
-        App.Tickets[App.LoggedInUsername].Add(createNewTicket);
-        //TicketLogger.LogAction("bought a ticket", createNewTicket);
+        
+        List<Ticket> bookedTickets = new();
+        foreach (int seat in seats){
+            Ticket createNewTicket = new Ticket(performanceId, date, time, room, seat, true);
+            PlayLogic.AddBooking(createNewTicket);
+            logger.LogAction("bought a ticket", new { PeformanceID = performanceId, Date = date, Room = room, Active = true });
+            App.Tickets[App.LoggedInUsername].Add(createNewTicket);
+            bookedTickets.Add(createNewTicket);
+        }
         DataAccess.UpdateList<Ticket>();
-        TicketPresentation.PrintTicket(createNewTicket, performanceId);
+        TicketPresentation.PrintTicket(bookedTickets, performanceId);
     }
 
     // Prints a string of ticket info (currently called after creating a ticket as confirmation)
@@ -50,6 +60,7 @@ public static class MainTicketSystem{
     public static void CancelTicketLogic(Ticket ticketToCancel){
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
+        logger.LogAction("Cancelled a ticket", new { PeformanceID = ticketToCancel.PerformanceId, date = ticketToCancel.Date, hall = ticketToCancel.Hall, Activity = ticketToCancel.IsActive });
         PlayLogic.RemoveBooking(ticketToCancel);
         DataAccess.UpdateList<Ticket>();
     }

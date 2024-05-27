@@ -5,16 +5,15 @@ public class HallLogic : LogicBase<Hall> {
     public static Logger logger = new HallsLogger();
     // A hall can be made without instantly linking it to a location, the location will be the string "null"
     // in that case
-    public bool AddHall(string Name, int Seats, string locationId = "null"){
+    public bool AddHall(string Name, Layout layout, string locationId = "null"){
         string tempId = GetID();
-        if (Seats <= 0) return false;
-        if (!AddObject(new Hall(Name, Seats, locationId))) return false;
+        if (!AddObject(new Hall(Name, layout, locationId))) return false;
         if (locationId != "null"){
             App.Locations[locationId].Halls.Add(tempId);
         }
         DataAccess.UpdateItem<Location>();
 
-        logger.LogAction("Hall added", new { Name = Name, Seats = Seats, LocationId = locationId });
+        logger.LogAction("Hall added", new { Name = Name, Seats = layout.SeatAmount, LocationId = locationId });
         return true;
     }
 }

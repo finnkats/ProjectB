@@ -41,6 +41,8 @@ namespace ProjectTest
 
             File.WriteAllText("../../../Sources/notifications.json", "{\"Admin1\": [], \"User1\": []}");
             App.Notifications = DataAccess.ReadList<Notification>();
+
+            Ticket.CurrentOrderNumber = 1;
         }
     }
 }

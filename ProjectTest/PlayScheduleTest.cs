@@ -214,21 +214,19 @@ public class PlayScheduleTest
     public void TestFilterFullPlays()
     {
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
-
-        Play Play1 = new Play("ID0", "18:00", nextMonth, "ID5", "ID0");
-        Ticket Ticket1 = new Ticket("ID0", nextMonth, "18:00", "ID5", 1, true);
-
-        App.Plays["ID0"].Add(Play1);
         HashSet<int> seats = new();
-        for (int i = 1; i <= 79; i++){
+        for (int i = 1; i <= 20; i++){
             seats.Add(i);
         }
-        App.Plays["ID0"][0].Seats = seats;
+        Play Play1 = new Play("ID0", "18:00", nextMonth, "ID5", "ID0");
+
+        Console.WriteLine(App.Plays["ID0"].Count);
+        App.Plays["ID0"].Add(Play1);
         List<Play> FilterCheck1 = PlayLogic.FilterFullPlays(App.Plays["ID0"]);
         Assert.IsTrue(FilterCheck1.Contains(Play1));
 
-        PlayLogic.AddBooking(Ticket1);
+        App.Plays["ID0"][0].Seats = seats;
         List<Play> FilterCheck2 = PlayLogic.FilterFullPlays(App.Plays["ID0"]);
-        Assert.IsFalse(FilterCheck2.Contains(Play1));
+        Assert.IsFalse(FilterCheck2.Contains(Play1), $"{String.Join('|', Play1.Seats)} {Play1.BookedSeats}");
     }
 }

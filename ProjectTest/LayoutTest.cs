@@ -1,7 +1,7 @@
 namespace ProjectTest.LayoutTest;
 
 [TestClass]
-public class GenreTest
+public class LayoutTest
 {
     [TestInitialize]
     public void Reset(){
@@ -23,6 +23,7 @@ public class GenreTest
         Assert.IsFalse(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));
         MainTicketSystem.CreateBookTicket("ID0", "01/06/2024", "12:00", "ID0", new HashSet<int>(){5, 6, 7});
         Assert.IsTrue(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));
+        App.LoggedInUsername = "Unknown";
     }
 
     [TestMethod]
@@ -43,6 +44,7 @@ public class GenreTest
         Assert.IsTrue(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));
         PlayLogic.RemoveBooking(new Ticket(performance, date, time, hall, new int[]{5, 6, 7}, true, 2));
         Assert.IsFalse(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));
+        App.LoggedInUsername = "Unknown";
     }
 
 }

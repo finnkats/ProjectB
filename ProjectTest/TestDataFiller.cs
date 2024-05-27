@@ -43,6 +43,7 @@ namespace ProjectTest
             App.Notifications = DataAccess.ReadList<Notification>();
 
             Ticket.CurrentOrderNumber = 1;
+            App.LoggedInUsername = "Unknown";
         }
     }
 }

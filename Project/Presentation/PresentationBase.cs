@@ -104,7 +104,10 @@ public class PresentationBase<T> where T : IEditable
                 string oldName = obj.Name;
                 string? newName = GetNameInput();
                 if (newName == null) continue;
-                if (Logic.ChangeName(obj, newName)) Console.WriteLine($"Changed {oldName} to {newName}");
+                if (Logic.ChangeName(obj, newName)) {
+                    Console.WriteLine($"Changed {oldName} to {newName}");
+                    objectName = newName;
+                }
                 else Console.WriteLine("Couldn't change name");
                 Thread.Sleep(2500);
             }

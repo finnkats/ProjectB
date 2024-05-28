@@ -58,6 +58,12 @@ public static class TicketPresentation{
                     Thread.Sleep(1000);
                     continue;
                 };
+                if (TicketsList[0].Count == 0) {
+                    Console.WriteLine("No tickets available to cancel.");
+                    Console.WriteLine("Leaving menu...");
+                    Thread.Sleep(3000);
+                    return;
+                }
                 int orderNumber = -1;
                 int ReturnIndex = IndexInt - 1;
                 foreach (Ticket ticket in App.Tickets[App.LoggedInUsername]){

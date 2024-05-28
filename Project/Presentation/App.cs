@@ -35,6 +35,8 @@ public static class App
         CreateMenus();
         MainTicketSystem.CheckOutdatedTickets();
         PlayLogic.RemoveOutdatedPlays();
+        IEnumerable<int> ticketCount = App.Tickets.Select(user => user.Value.Count);
+        Ticket.CurrentOrderNumber = ticketCount.Count() == 0 ? 1 : ticketCount.Sum() + 1;
     }
 
     // Add new menu's here
@@ -69,7 +71,7 @@ public static class App
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Performances", performanceLogic.PerformanceCatalogue);
-        HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
+        HomePage.AddAllOption("View Orders", TicketPresentation.TicketMenu);
         HomePage.AddAllOption("Edit Account Settings", NotificationPresentation.AccountSettings); // TODO add account settings function
         HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         HomePage.AddCurrentOption("View Performances");
@@ -103,7 +105,7 @@ public static class App
         FrontPage.AddCurrentOption("Example Menu");
 
         HomePage.AddCurrentOption("View Plays");
-        HomePage.AddCurrentOption("View Tickets");
+        HomePage.AddCurrentOption("View Orders");
         HomePage.AddCurrentOption("View Notifications");
         HomePage.AddCurrentOption("Edit Account Settings");
         HomePage.AddCurrentOption("Admin Features");

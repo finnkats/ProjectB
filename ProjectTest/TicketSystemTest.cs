@@ -50,21 +50,25 @@ public class TicketSystemTest{
 
     [TestMethod]
     public void TestCheckOutdatedTickets(){
+        // Ticket seat
+        HashSet<int> seat = new(){1};
+        App.LoggedInUsername = "User1";
+
         // Create some tickets with dates in the past and add them to App.Tickets
         string monthAgo = DateTime.Now.AddMonths(-1).ToString(@"dd\/MM\/yyyy");
         string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd\/MM\/yyyy");
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
-        MainTicketSystem.CreateBookTicket("ID1", monthAgo, "12:00:00", "ID0", true);
-        MainTicketSystem.CreateBookTicket("ID1", yesterday, "15:00:00", "ID0", true);
-        MainTicketSystem.CreateBookTicket("ID1", nextMonth, "01:00:00", "ID0", true);
+        MainTicketSystem.CreateBookTicket("ID1", monthAgo, "12:00", "ID0", seat);
+        MainTicketSystem.CreateBookTicket("ID1", yesterday, "15:00", "ID0", seat);
+        MainTicketSystem.CreateBookTicket("ID1", nextMonth, "01:00", "ID0", seat);
 
         // Check outdated tickets
         MainTicketSystem.CheckOutdatedTickets();
 
         // Expected tickets
-        Ticket expectedTestTicket1 = new Ticket("ID1", monthAgo, "12:00:00", "ID0", false);
-        Ticket expectedTestTicket2 = new Ticket("ID1", yesterday, "15:00:00", "ID0", false);
-        Ticket expectedTestTicket3 = new Ticket("ID1", nextMonth, "01:00:00", "ID0", true);
+        Ticket expectedTestTicket1 = new Ticket("ID1", monthAgo, "12:00", "ID0", new int[]{1}, false);
+        Ticket expectedTestTicket2 = new Ticket("ID1", yesterday, "15:00", "ID0", new int[]{1}, false);
+        Ticket expectedTestTicket3 = new Ticket("ID1", nextMonth, "01:00", "ID0", new int[]{1}, true);
 
         // Asserts that the IsActive property of the outdated tickets is false
         //Ticket? TicketFound1 = App.Tickets["User1"].Find(userticket => userticket.Date == expectedTestTicket1.Date)!;
@@ -83,13 +87,14 @@ public class TicketSystemTest{
 
     [TestMethod]
     public void TestCancellationIsNotOneDayBefore(){
+        App.LoggedInUsername = "User1";
         string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd\/MM\/yyyy");
         string today = DateTime.Now.ToString(@"dd\/MM\/yyyy");
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
     
-        Ticket Ticket1 = new Ticket("ID0", yesterday, "12:00", "ID0", true);
-        Ticket Ticket2 = new Ticket("ID0", today, "12:00", "ID0", true);
-        Ticket Ticket3 = new Ticket("ID0", nextMonth, "12:00", "ID0", true);
+        Ticket Ticket1 = new Ticket("ID0", yesterday, "12:00", "ID0", new int[]{1}, true);
+        Ticket Ticket2 = new Ticket("ID0", today, "12:00", "ID0", new int[]{1}, true);
+        Ticket Ticket3 = new Ticket("ID0", nextMonth, "12:00", "ID0", new int[]{1}, true);
 
         App.Tickets["User1"].Add(Ticket1);
         App.Tickets["User1"].Add(Ticket2);
@@ -105,16 +110,18 @@ public class TicketSystemTest{
         Assert.IsFalse(result2);
         Assert.IsTrue(result3);
     }
+    
     [TestMethod]
     public void TestAddBooking()
     {
+        App.LoggedInUsername = "User1";
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
 
-        Play Play1 = new Play("ID0", "18:00:00", nextMonth, "ID5", "ID0");
+        Play Play1 = new Play("ID0", "18:00", nextMonth, "ID5", "ID0");
 
-        Ticket Ticket1 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
-        Ticket Ticket2 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
-        Ticket Ticket3 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
+        Ticket Ticket1 = new Ticket("ID0", nextMonth, "18:00", "ID5", new int[]{1}, true);
+        Ticket Ticket2 = new Ticket("ID0", nextMonth, "18:00", "ID5", new int[]{2}, true);
+        Ticket Ticket3 = new Ticket("ID0", nextMonth, "18:00", "ID5", new int[]{3}, true);
 
         App.Plays["ID0"].Add(Play1);
 

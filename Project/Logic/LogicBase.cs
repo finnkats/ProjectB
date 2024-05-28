@@ -52,8 +52,23 @@ public abstract class LogicBase<T> where T : IEditable{
     public bool ChangeName(string id, string name){
         if (!Dict.ContainsKey(id)) return false;
         if (!ValidName(name, id)) return false;
+        string oldName = Dict[id].Name;
         Dict[id].Name = name;
         DataAccess.UpdateItem<T>();
+        //logs all name changes
+        if (typeof(T) == typeof(Genre)){
+            GenreLogic.logger.LogAction("Genre name changed", new { GenreId = id, OldName = oldName, NewName = name });
+        } else if (typeof(T) == typeof(Hall)) {
+            HallLogic.logger.LogAction("Hall name changed", new { HallId = id, OldName = oldName, NewName = name });
+        } else if (typeof(T) == typeof(Location)) {
+            LocationLogic.logger.LogAction("Location name changed", new { LocationId = id, OldName = oldName, NewName = name });
+        } else if (typeof(T) == typeof(Play)){
+            PlayLogic.logger.LogAction("Play name changed", new { PlayId = id, OldName = oldName, NewName = name });
+        } else if (typeof(T) == typeof(Performance)){
+            PerformanceLogic.logger.LogAction("Peformance name changed", new { PeformanceId = id, OldName = oldName, NewName = name });
+        }
         return true;
     }
+    // if object is given, it finds the id of it
+    public bool ChangeName(T obj, string name) => ChangeName(Dict.First(keyval => keyval.Value.Name == obj.Name).Key, name);
 }

@@ -1,4 +1,6 @@
 using Logic;
+using System.Runtime.InteropServices;
+using System.IO;
 
 public static class App
 {
@@ -82,12 +84,12 @@ public static class App
         AdminFeatures.AddAllOption("Modify Genres", genrePresentation.EditGenreStart);
         AdminFeatures.AddAllOption("Modify Locations", locationPresentation.EditLocationStart);
         AdminFeatures.AddAllOption("Modify Halls", hallPresentation.EditHallStart);
-        AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
+        AdminFeatures.AddAllOption("Open Logs Folder", OpenLogFolder); // TODO add statistic function
         AdminFeatures.AddCurrentOption("Modify Performances");
         AdminFeatures.AddCurrentOption("Modify Genres");
         AdminFeatures.AddCurrentOption("Modify Halls");
         AdminFeatures.AddCurrentOption("Modify Locations");
-        AdminFeatures.AddCurrentOption("Check Statistics");
+        AdminFeatures.AddCurrentOption("Open Logs Folder");
 
         //  Example Menu 1
         ExampleMenu1.PreviousMenu = FrontPage;
@@ -109,5 +111,24 @@ public static class App
         HomePage.AddCurrentOption("View Notifications");
         HomePage.AddCurrentOption("Edit Account Settings");
         HomePage.AddCurrentOption("Admin Features");
+    }
+
+        public static void OpenLogFolder(){
+        string path = Directory.GetCurrentDirectory();
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)){
+            Console.WriteLine("OS is not supported");
+            Thread.Sleep(2500);
+            return;
+        }
+        path += RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"\DataSources\LogFiles" : @"/DataSources/LogFiles";
+
+        if (!Directory.Exists(path)){
+            Console.WriteLine($"Folder {path} doesn't exist");
+            Thread.Sleep(2000);
+            return;
+        }
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) System.Diagnostics.Process.Start("explorer.exe", path);
+        else System.Diagnostics.Process.Start("open", path);
     }
 }

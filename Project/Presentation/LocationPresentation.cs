@@ -52,7 +52,7 @@ public class LocationPresentation : PresentationBase<Location>{
 
                 string seperator = ", ";
                 Console.WriteLine($"Current Halls: [{String.Join(seperator, currentHalls)}]\n" +
-                                  $"Do you want to add halls to '{Logic.Dict[locationId].Name}'? (Y/N)"); 
+                                  $"Do you want to add halls to '{Logic.Dict[locationId]}'? (Y/N)"); 
                                   
                 string addHall = Console.ReadLine()?.ToUpper() ?? "";
                 if (addHall.StartsWith("Y")){
@@ -60,6 +60,11 @@ public class LocationPresentation : PresentationBase<Location>{
                 }
                 
                 DataAccess.UpdateItem<Location>();
+                string hallsString = Logic.Dict[locationId].Halls.Count > 0 
+                                 ? string.Join(", ", Logic.Dict[locationId].Halls.Select(hallId => App.Halls[hallId].Name)) 
+                                 : "null";
+                LocationLogic.logger.LogAction("Location halls updated", $"{Logic.Dict[locationId].Name}, Halls: {hallsString}");
+
                 Console.WriteLine("Successfully changed halls");
                 Thread.Sleep(1500);
             }

@@ -1,6 +1,6 @@
 class TicketLogger : Logger
 {
-    protected override string FilePath { get; set; } = "DataSources/LogFiles/Tickets.csv"; 
+    protected override string FilePath { get; set; } = "D:\\Hoge_school_projecten\\C#_project\\Project-B\\ProjectB\\Project\\DataSources\\LogFiles\\Tickets.csv"; 
     protected override string Headers { get; set; } = "Time, User, Action, Ticket";
 
     public TicketLogger() { }

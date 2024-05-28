@@ -14,7 +14,8 @@ public static class MainTicketSystem{
         }
         
         Ticket createNewTicket = new Ticket(performanceId, date, time, room, seats.ToArray(), true);
-        logger.LogAction("Bought a new ticket", new { PerformanceID = performanceId, Date = date, Time = time, Hall = room, OrderedSeats = seats.ToArray(), Active = true });
+        var orderedSeats = string.Join(", ", seats.OrderBy(seat => seat));
+        logger.LogAction("Bought a new ticket", new { PerformanceID = performanceId, Date = date, Time = time, Hall = room, OrderedSeats = orderedSeats, Active = true });
         PlayLogic.AddBooking(createNewTicket);
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
 

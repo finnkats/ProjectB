@@ -163,8 +163,8 @@ public class PlayScheduleTest
     [TestMethod]
     public void IsHallAvailableTest_HallIsFree(){
         // With no plays added, assumes that json file is empty List with no plays.
-        bool IsAvailable1 = PlayLogic.IsHallAvailable("ID0", DateTime.Parse("01/01/2025"), "19:21", "ID0");
-        bool IsAvailable2 = PlayLogic.IsHallAvailable("ID1", DateTime.Parse("01/01/2025"), "17:50", "ID2");
+        bool IsAvailable1 = PlayLogic.IsHallAvailable("ID0", DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "19:21", "ID0");
+        bool IsAvailable2 = PlayLogic.IsHallAvailable("ID1", DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "17:50", "ID2");
 
         Assert.IsTrue(IsAvailable1);
         Assert.IsTrue(IsAvailable2);
@@ -183,10 +183,10 @@ public class PlayScheduleTest
         };
         App.Plays.Add($"{App.Plays.Count}", Viewings);
 
-        bool IsNotAvailable1 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "19:21", "ID0");
-        bool IsNotAvailable2 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "20:30", "ID1");
-        bool IsNotAvailable3 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15", "ID3");
-        bool IsNotAvailable4 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15", "null");
+        bool IsNotAvailable1 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "19:21", "ID0");
+        bool IsNotAvailable2 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "20:30", "ID1");
+        bool IsNotAvailable3 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "09:15", "ID3");
+        bool IsNotAvailable4 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "09:15", "null");
 
         Assert.IsFalse(IsNotAvailable1);
         Assert.IsFalse(IsNotAvailable2);

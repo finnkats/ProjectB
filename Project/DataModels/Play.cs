@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json.Serialization;
 public class Play : IDataAccessList {
     [JsonPropertyName("Location")]
@@ -9,7 +10,7 @@ public class Play : IDataAccessList {
     [JsonIgnore()]
     public string EndTime {
         get{
-            DateTime startTime = DateTime.Parse(StartTime);
+            DateTime startTime = DateTime.Parse(StartTime, new CultureInfo("nl-NL"));
             int runTimeMin = App.Performances[PerformanceId].RuntimeInMin;
             return startTime.AddMinutes(runTimeMin).ToString("HH:mm");
         }

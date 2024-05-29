@@ -82,8 +82,8 @@ public static class PlayLogic
                 if (play.Location == location && play.Hall == hall){
                     string existingPlayStartStr = $"{play.Date} {play.StartTime}";
                     string existingPlayEndStr = $"{play.Date} {play.EndTime}";
-                    DateTime existingPlayStart = DateTime.Parse(existingPlayStartStr);
-                    DateTime existingPlayEnd = DateTime.Parse(existingPlayEndStr);
+                    DateTime existingPlayStart = DateTime.Parse(existingPlayStartStr, new CultureInfo("nl-NL"));
+                    DateTime existingPlayEnd = DateTime.Parse(existingPlayEndStr, new CultureInfo("nl-NL"));
                     int? currentRuntime = App.performanceLogic.GetRuntime(play.PerformanceId);
                     // DateTime existingPlayEnd = existingPlayStart.AddMinutes((double)currentRuntime!);
 

@@ -27,9 +27,9 @@ public class PlayScheduleTest
 
     [TestMethod]
     public void ValidDateTest(){
-        string invalidDate1 = DateTime.Now.ToString(@"dd\/MM\/yyyy");
+        string invalidDate1 = DateTime.Now.ToString(@"dd/MM/yyyy");
         string invalidDate2 = "not a date";
-        string validDate = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
+        string validDate = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
 
         Assert.IsFalse(PlayLogic.ValidDate(invalidDate1));
         Assert.IsFalse(PlayLogic.ValidDate(invalidDate2));
@@ -42,7 +42,7 @@ public class PlayScheduleTest
         string validTime = "12:00";
         string invalidTime = "50:00";
 
-        string validDate = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
+        string validDate = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
         string invalidDate = "01/01/2020";
 
         string validPerformance = "ID0";
@@ -132,22 +132,22 @@ public class PlayScheduleTest
 
     [TestMethod]
     public void PlayGetsAddedToArchiveTest(){
-        string validDate = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
+        string validDate = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
         PlayLogic.AddPlay("ID0", "12:00", validDate, "ID0", "ID0");
 
         Play archivedPlay = App.ArchivedPlays["ID0"][0];
-        Assert.IsTrue(archivedPlay.Location == "ID0" && archivedPlay.StartTime == "12:00:00" && 
+        Assert.IsTrue(archivedPlay.Location == "ID0" && archivedPlay.StartTime == "12:00" && 
                       archivedPlay.Date == validDate && archivedPlay.Hall == "ID0");
     }
 
     [TestMethod]
     public void RemoveOutdatedPlaysTest(){
-        string tenDays = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
-        string today = DateTime.Now.ToString(@"dd\/MM\/yyyy");
-        string invalidTime = DateTime.Now.AddMinutes(30).ToString("HH:mm:ss");
+        string tenDays = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
+        string today = DateTime.Now.ToString(@"dd/MM/yyyy");
+        string invalidTime = DateTime.Now.AddMinutes(30).ToString("HH:mm");
 
-        Play ValidPlay = new("ID0", "12:00:00", tenDays, "ID0", "ID0");
-        Play outdatedPlay1 = new("ID0", "12:00:00", "01/01/2020", "ID0", "ID0");
+        Play ValidPlay = new("ID0", "12:00", tenDays, "ID0", "ID0");
+        Play outdatedPlay1 = new("ID0", "12:00", "01/01/2020", "ID0", "ID0");
         Play outdatedPlay2 = new("ID0", invalidTime, today, "ID0", "ID0");
         App.Plays["ID0"].Add(ValidPlay);
         App.Plays["ID0"].Add(outdatedPlay1);
@@ -163,8 +163,8 @@ public class PlayScheduleTest
     [TestMethod]
     public void IsHallAvailableTest_HallIsFree(){
         // With no plays added, assumes that json file is empty List with no plays.
-        bool IsAvailable1 = PlayLogic.IsHallAvailable("ID0", DateTime.Parse("01/01/2025"), "19:21:13", "ID0");
-        bool IsAvailable2 = PlayLogic.IsHallAvailable("ID1", DateTime.Parse("01/01/2025"), "17:50:00", "ID2");
+        bool IsAvailable1 = PlayLogic.IsHallAvailable("ID0", DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "19:21", "ID0");
+        bool IsAvailable2 = PlayLogic.IsHallAvailable("ID1", DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "17:50", "ID2");
 
         Assert.IsTrue(IsAvailable1);
         Assert.IsTrue(IsAvailable2);
@@ -175,18 +175,18 @@ public class PlayScheduleTest
         string Location1 = "ID0";
         string Location2 = "ID1";
         List<Play> Viewings = new(){
-            new Play(Location1, "19:21:13", "01/01/2025", "ID0", "ID0"),
-            new Play(Location1, "20:30:00", "01/01/2025", "ID1", "ID0"),
-            new Play(Location2, "17:50:00", "01/01/2025", "ID2", "ID1"),
-            new Play(Location2, "09:15:00", "01/01/2025", "ID3", "ID2"),
-            new Play(Location2, "09:15:00", "01/01/2025", "null", "ID2")
+            new Play(Location1, "19:21", "01/01/2025", "ID0", "ID0"),
+            new Play(Location1, "20:30", "01/01/2025", "ID1", "ID0"),
+            new Play(Location2, "17:50", "01/01/2025", "ID2", "ID1"),
+            new Play(Location2, "09:15", "01/01/2025", "ID3", "ID2"),
+            new Play(Location2, "09:15", "01/01/2025", "null", "ID2")
         };
         App.Plays.Add($"{App.Plays.Count}", Viewings);
 
-        bool IsNotAvailable1 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "19:21:13", "ID0");
-        bool IsNotAvailable2 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "20:30:00", "ID1");
-        bool IsNotAvailable3 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15:00", "ID3");
-        bool IsNotAvailable4 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15:00", "null");
+        bool IsNotAvailable1 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "19:21", "ID0");
+        bool IsNotAvailable2 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "20:30", "ID1");
+        bool IsNotAvailable3 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "09:15", "ID3");
+        bool IsNotAvailable4 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "09:15", "null");
 
         Assert.IsFalse(IsNotAvailable1);
         Assert.IsFalse(IsNotAvailable2);
@@ -199,11 +199,11 @@ public class PlayScheduleTest
         string Location1 = "ID0";
         string Location2 = "ID1";
         List<Play> Viewings = new(){
-            new Play(Location1, "19:21:13", "01/01/2025", "ID0", "ID0"),
-            new Play(Location1, "20:30:00", "01/01/2025", "ID1", "ID0"),
-            new Play(Location2, "17:50:00", "01/01/2025", "ID2", "ID1"),
-            new Play(Location2, "09:15:00", "01/01/2025", "ID3", "ID2"),
-            new Play(Location2, "09:15:00", "01/01/2025", "null", "ID2")
+            new Play(Location1, "19:21", "01/01/2025", "ID0", "ID0"),
+            new Play(Location1, "20:30", "01/01/2025", "ID1", "ID0"),
+            new Play(Location2, "17:50", "01/01/2025", "ID2", "ID1"),
+            new Play(Location2, "09:15", "01/01/2025", "ID3", "ID2"),
+            new Play(Location2, "09:15", "01/01/2025", "null", "ID2")
         };
         App.Plays.Add($"{App.Plays.Count}", Viewings);
 
@@ -213,18 +213,20 @@ public class PlayScheduleTest
     [TestMethod]
     public void TestFilterFullPlays()
     {
-        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
+        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd/MM/yyyy");
+        HashSet<int> seats = new();
+        for (int i = 1; i <= 20; i++){
+            seats.Add(i);
+        }
+        Play Play1 = new Play("ID0", "18:00", nextMonth, "ID5", "ID0");
 
-        Play Play1 = new Play("ID0", "18:00:00", nextMonth, "ID5", "ID0");
-        Ticket Ticket1 = new Ticket("ID0", nextMonth, "18:00:00", "ID5", true);
-
+        Console.WriteLine(App.Plays["ID0"].Count);
         App.Plays["ID0"].Add(Play1);
-        App.Plays["ID0"][0].BookedSeats = 79;
         List<Play> FilterCheck1 = PlayLogic.FilterFullPlays(App.Plays["ID0"]);
         Assert.IsTrue(FilterCheck1.Contains(Play1));
 
-        PlayLogic.AddBooking(Ticket1);
+        App.Plays["ID0"][0].Seats = seats;
         List<Play> FilterCheck2 = PlayLogic.FilterFullPlays(App.Plays["ID0"]);
-        Assert.IsFalse(FilterCheck2.Contains(Play1));
+        Assert.IsFalse(FilterCheck2.Contains(Play1), $"{String.Join('|', Play1.Seats)} {Play1.BookedSeats}");
     }
 }

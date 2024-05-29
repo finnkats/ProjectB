@@ -27,9 +27,9 @@ public class PlayScheduleTest
 
     [TestMethod]
     public void ValidDateTest(){
-        string invalidDate1 = DateTime.Now.ToString(@"dd\/MM\/yyyy");
+        string invalidDate1 = DateTime.Now.ToString(@"dd/MM/yyyy");
         string invalidDate2 = "not a date";
-        string validDate = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
+        string validDate = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
 
         Assert.IsFalse(PlayLogic.ValidDate(invalidDate1));
         Assert.IsFalse(PlayLogic.ValidDate(invalidDate2));
@@ -42,7 +42,7 @@ public class PlayScheduleTest
         string validTime = "12:00";
         string invalidTime = "50:00";
 
-        string validDate = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
+        string validDate = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
         string invalidDate = "01/01/2020";
 
         string validPerformance = "ID0";
@@ -132,7 +132,7 @@ public class PlayScheduleTest
 
     [TestMethod]
     public void PlayGetsAddedToArchiveTest(){
-        string validDate = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
+        string validDate = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
         PlayLogic.AddPlay("ID0", "12:00", validDate, "ID0", "ID0");
 
         Play archivedPlay = App.ArchivedPlays["ID0"][0];
@@ -142,9 +142,9 @@ public class PlayScheduleTest
 
     [TestMethod]
     public void RemoveOutdatedPlaysTest(){
-        string tenDays = DateTime.Now.AddDays(10).ToString(@"dd\/MM\/yyyy");
-        string today = DateTime.Now.ToString(@"dd\/MM\/yyyy");
-        string invalidTime = DateTime.Now.AddMinutes(30).ToString("HH:mm:ss");
+        string tenDays = DateTime.Now.AddDays(10).ToString(@"dd/MM/yyyy");
+        string today = DateTime.Now.ToString(@"dd/MM/yyyy");
+        string invalidTime = DateTime.Now.AddMinutes(30).ToString("HH:mm");
 
         Play ValidPlay = new("ID0", "12:00", tenDays, "ID0", "ID0");
         Play outdatedPlay1 = new("ID0", "12:00", "01/01/2020", "ID0", "ID0");
@@ -163,8 +163,8 @@ public class PlayScheduleTest
     [TestMethod]
     public void IsHallAvailableTest_HallIsFree(){
         // With no plays added, assumes that json file is empty List with no plays.
-        bool IsAvailable1 = PlayLogic.IsHallAvailable("ID0", DateTime.Parse("01/01/2025"), "19:21", "ID0");
-        bool IsAvailable2 = PlayLogic.IsHallAvailable("ID1", DateTime.Parse("01/01/2025"), "17:50", "ID2");
+        bool IsAvailable1 = PlayLogic.IsHallAvailable("ID0", DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "19:21", "ID0");
+        bool IsAvailable2 = PlayLogic.IsHallAvailable("ID1", DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "17:50", "ID2");
 
         Assert.IsTrue(IsAvailable1);
         Assert.IsTrue(IsAvailable2);
@@ -183,10 +183,10 @@ public class PlayScheduleTest
         };
         App.Plays.Add($"{App.Plays.Count}", Viewings);
 
-        bool IsNotAvailable1 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "19:21", "ID0");
-        bool IsNotAvailable2 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025"), "20:30", "ID1");
-        bool IsNotAvailable3 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15", "ID3");
-        bool IsNotAvailable4 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025"), "09:15", "null");
+        bool IsNotAvailable1 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "19:21", "ID0");
+        bool IsNotAvailable2 = PlayLogic.IsHallAvailable(Location1, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "20:30", "ID1");
+        bool IsNotAvailable3 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "09:15", "ID3");
+        bool IsNotAvailable4 = PlayLogic.IsHallAvailable(Location2, DateTime.Parse("01/01/2025", new CultureInfo("nl-NL")), "09:15", "null");
 
         Assert.IsFalse(IsNotAvailable1);
         Assert.IsFalse(IsNotAvailable2);
@@ -213,7 +213,7 @@ public class PlayScheduleTest
     [TestMethod]
     public void TestFilterFullPlays()
     {
-        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
+        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd/MM/yyyy");
         HashSet<int> seats = new();
         for (int i = 1; i <= 20; i++){
             seats.Add(i);

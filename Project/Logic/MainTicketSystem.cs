@@ -69,7 +69,7 @@ public static class MainTicketSystem{
             DateTime currentTime = DateTime.Now;
             foreach(Ticket ticket in userTicket.Value){
                 string currentTicketDateTime = $"{ticket.Date} {ticket.Time}";
-                if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
+                if(DateTime.TryParse(currentTicketDateTime, System.Globalization.CultureInfo.GetCultureInfo("nl-NL"), out DateTime ticketDate)){
                     if(ticketDate < currentTime){
                         ticket.IsActive = false;
                         DataAccess.UpdateList<Ticket>();
@@ -82,7 +82,7 @@ public static class MainTicketSystem{
     public static bool CancellationIsNotOneDayBefore(Ticket userTicket){
         DateTime currentTime = DateTime.Now;
         string currentTicketDateTime = $"{userTicket.Date} {userTicket.Time}";
-        if(DateTime.TryParse(currentTicketDateTime, out DateTime ticketDate)){
+        if(DateTime.TryParse(currentTicketDateTime, System.Globalization.CultureInfo.GetCultureInfo("nl-NL"), out DateTime ticketDate)){
             DateTime oneDayBefore = ticketDate.AddDays(-1);
             return currentTime < oneDayBefore;
         }

@@ -80,12 +80,12 @@ public static class App
 
         // Admin Features
         AdminFeatures.PreviousMenu = HomePage;
-        AdminFeatures.AddAllOption("Modify Performances", performancePresentation.EditPerformanceStart);
+        AdminFeatures.AddAllOption("Modify Performances/Add Play", performancePresentation.EditPerformanceStart);
         AdminFeatures.AddAllOption("Modify Genres", genrePresentation.EditGenreStart);
         AdminFeatures.AddAllOption("Modify Locations", locationPresentation.EditLocationStart);
         AdminFeatures.AddAllOption("Modify Halls", hallPresentation.EditHallStart);
         AdminFeatures.AddAllOption("Open Logs Folder", OpenLogFolder); // TODO add statistic function
-        AdminFeatures.AddCurrentOption("Modify Performances");
+        AdminFeatures.AddCurrentOption("Modify Performances/Add Play");
         AdminFeatures.AddCurrentOption("Modify Genres");
         AdminFeatures.AddCurrentOption("Modify Halls");
         AdminFeatures.AddCurrentOption("Modify Locations");

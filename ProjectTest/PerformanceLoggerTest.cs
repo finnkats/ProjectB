@@ -14,6 +14,7 @@ public class PerformanceLoggerTest{
     public void Reset(){
         this.logger = new PerformanceLogger();
         this.logger.FilePath = this.FilePath;
+        // Empty the file for new test methods
         if (File.Exists(FilePath)){
             File.WriteAllText(FilePath, String.Empty);
         }
@@ -21,6 +22,7 @@ public class PerformanceLoggerTest{
 
     [TestMethod]
     public void TestLogCorrectHeaderFormat(){
+        // Expected result that are written inside the csv file.
         string expectedHeaders = "Time, User, Action, Performance Info";
         object performanceInfo = new{PerforamnceID = "TestID", RuntimeInMin = 120, Genres = new List<string>{"TestGenre1", "TestGenre2"}, Active = false};
         string expectedPerformanceInfo = "{ PerforamnceID = TestID, RuntimeInMin = 120, Genres = System.Collections.Generic.List`1[System.String], Active = False }";
@@ -35,6 +37,8 @@ public class PerformanceLoggerTest{
 
     [TestMethod]
     public void TestLogWriteToFile(){
+        // Test if the logger writes the action correct into the csv file.
+        // Expected result that are written inside the csv file.
         object performanceInfo = new{PerforamnceID = "TestID", RuntimeInMin = 120, Genres = new List<string>{"TestGenre1", "TestGenre2"}, Active = false};
 
         this.logger!.LogAction("TestAction", performanceInfo);
@@ -45,6 +49,8 @@ public class PerformanceLoggerTest{
 
     [TestMethod]
     public void TestLogCorrectFormat(){
+        // Test if the logger writes the actions contents correctly.
+        // Expected result that are written inside the csv file.
         object performanceInfo = new{PerforamnceID = "TestID", RuntimeInMin = 120, Genres = new List<string>{"TestGenre1", "TestGenre2"}, Active = false};
         string expectedPerformanceInfo = "{ PerforamnceID = TestID, RuntimeInMin = 120, Genres = System.Collections.Generic.List`1[System.String], Active = False }";
 
@@ -64,6 +70,7 @@ public class PerformanceLoggerTest{
 
     [TestMethod]
     public void TestLogNullPerformanceInfo(){
+        // Test logger for when Performance info is null.
         this.logger!.LogAction("TestAction", null);
 
         string[] lines = File.ReadAllLines(FilePath);

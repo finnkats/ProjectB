@@ -55,9 +55,9 @@ public class TicketSystemTest{
         App.LoggedInUsername = "User1";
 
         // Create some tickets with dates in the past and add them to App.Tickets
-        string monthAgo = DateTime.Now.AddMonths(-1).ToString(@"dd\/MM\/yyyy");
-        string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd\/MM\/yyyy");
-        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
+        string monthAgo = DateTime.Now.AddMonths(-1).ToString(@"dd/MM/yyyy");
+        string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd/MM/yyyy");
+        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd/MM/yyyy");
         MainTicketSystem.CreateBookTicket("ID1", monthAgo, "12:00", "ID0", seat);
         MainTicketSystem.CreateBookTicket("ID1", yesterday, "15:00", "ID0", seat);
         MainTicketSystem.CreateBookTicket("ID1", nextMonth, "01:00", "ID0", seat);
@@ -88,9 +88,9 @@ public class TicketSystemTest{
     [TestMethod]
     public void TestCancellationIsNotOneDayBefore(){
         App.LoggedInUsername = "User1";
-        string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd\/MM\/yyyy");
+        string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd/MM/yyyy");
         string today = DateTime.Now.ToString(@"dd\/MM\/yyyy");
-        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
+        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd/MM/yyyy");
     
         Ticket Ticket1 = new Ticket("ID0", yesterday, "12:00", "ID0", new int[]{1}, true);
         Ticket Ticket2 = new Ticket("ID0", today, "12:00", "ID0", new int[]{1}, true);
@@ -115,7 +115,7 @@ public class TicketSystemTest{
     public void TestAddBooking()
     {
         App.LoggedInUsername = "User1";
-        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd\/MM\/yyyy");
+        string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd/MM/yyyy");
 
         Play Play1 = new Play("ID0", "18:00", nextMonth, "ID5", "ID0");
 

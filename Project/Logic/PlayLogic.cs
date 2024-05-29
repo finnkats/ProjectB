@@ -105,7 +105,7 @@ public static class PlayLogic
             DateTime dateLimit = DateTime.Now.Add(DateTime.Now.TimeOfDay).AddHours(1);
             // Loop backwards over list, so removing wont cause errors
             for (int i = playList.Count - 1; i >= 0; i--){
-                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].StartTime}", out DateTime playDate)) continue;
+                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].StartTime}", System.Globalization.CultureInfo.GetCultureInfo("nl-NL"), out DateTime playDate)) continue;
                 if (playDate > dateLimit) continue;
                 playList.RemoveAt(i);
             }

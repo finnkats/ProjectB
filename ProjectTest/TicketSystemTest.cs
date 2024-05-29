@@ -74,7 +74,7 @@ public class TicketSystemTest{
         //Ticket? TicketFound1 = App.Tickets["User1"].Find(userticket => userticket.Date == expectedTestTicket1.Date)!;
         Ticket? TicketFound1 = App.Tickets["User1"].Find(userticket => userticket.Date == expectedTestTicket1.Date)!;
         Assert.IsNotNull(TicketFound1);
-        Assert.IsTrue(expectedTestTicket1.Equals(TicketFound1)); //Both Assert methods works
+        Assert.IsTrue(expectedTestTicket1.Equals(TicketFound1), $"{expectedTestTicket1.ToString()} {TicketFound1.ToString()}"); //Both Assert methods works
 
         Ticket? TicketFound2 = App.Tickets["User1"].Find(userticket => userticket.Date == expectedTestTicket2.Date)!;
         Assert.IsNotNull(TicketFound2);

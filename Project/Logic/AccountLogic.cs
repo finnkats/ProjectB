@@ -61,7 +61,7 @@ public static class AccountLogic
             if (!found)
             {
                 if (inputName != "") return;
-                loginLoop = AccountPresentation.LoginFailure() ? true : false;
+                loginLoop = AccountPresentation.LoginFailure(loginName) ? true : false;
             }
         }
     }

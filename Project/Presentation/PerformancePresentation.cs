@@ -160,7 +160,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
             // If onlyActive is true, this menu is in the "view performances" option, if its false, its in the "edit performances" option
             if (onlyActive){
-                Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Filter");
+                Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Filter Catalogue by Genres");
             } else {
                 Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Add New Performance");
             }

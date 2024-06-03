@@ -87,10 +87,12 @@ public static class AccountPresentation
         Thread.Sleep(2000);
     }
 
-    public static bool LoginFailure()
+    public static bool LoginFailure(string loginName)
     {
         Console.Clear();
-        Console.Write("Invalid name or password.\nDo you want to try again? (y/n)\n\n> ");
+        if (!App.Accounts.ContainsKey(loginName)) Console.WriteLine($"Account with username {loginName} does not exist");
+        else Console.WriteLine("Invalid password");
+        Console.Write("Do you want to try again? (y/n)\n\n> ");
         string input = Console.ReadLine()?.ToLower() ?? "n";
         return input.StartsWith('y');
     }

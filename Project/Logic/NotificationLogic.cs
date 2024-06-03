@@ -16,7 +16,7 @@ public static class NotificationLogic {
         var account = App.Accounts[App.LoggedInUsername];
         string oldLocationId = account.Location;
         string oldLocation = oldLocationId == "null" ? "No location" : App.Locations[oldLocationId].Name;
-        string newLocationId = App.locationPresentation.GetItem("What location are you interested in", "No location");
+        string newLocationId = App.locationPresentation.GetItem("What location are you interested in", "No location (turn off notifications)\n");
         string newLocation = newLocationId == "null" ? "No location" : App.Locations[newLocationId].Name;
 
         account.Location = newLocationId;
@@ -28,7 +28,7 @@ public static class NotificationLogic {
     public static void ChangeGenres(){
         var account = App.Accounts[App.LoggedInUsername];
         var oldGenres = account.Genres.Select(id => App.Genres[id].Name).ToList();
-        var newGenreIds = App.genrePresentation.GetItemList();
+        var newGenreIds = App.genrePresentation.GetItemList(extraInfo: "\nChoose no genre, if you want to turn off notifications\n");
         var newGenres = newGenreIds.Select(id => App.Genres[id].Name).ToList();
 
         account.Genres = newGenreIds;

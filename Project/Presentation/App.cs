@@ -76,15 +76,15 @@ public static class App
 
         // Admin Features
         AdminFeatures.PreviousMenu = FrontPage;
-        AdminFeatures.AddAllOption("Modify Performances", performancePresentation.EditPerformanceStart);
-        AdminFeatures.AddAllOption("Modify Genres", genrePresentation.EditGenreStart);
-        AdminFeatures.AddAllOption("Modify Locations", locationPresentation.EditLocationStart);
-        AdminFeatures.AddAllOption("Modify Halls", hallPresentation.EditHallStart);
+        AdminFeatures.AddAllOption("Edit/Add Performances", performancePresentation.EditPerformanceStart);
+        AdminFeatures.AddAllOption("Edit/Add Genres", genrePresentation.EditGenreStart);
+        AdminFeatures.AddAllOption("Edit/Add Locations", locationPresentation.EditLocationStart);
+        AdminFeatures.AddAllOption("Edit/Add Halls", hallPresentation.EditHallStart);
         AdminFeatures.AddAllOption("Check Statistics", Example.DoNothing); // TODO add statistic function
-        AdminFeatures.AddCurrentOption("Modify Performances");
-        AdminFeatures.AddCurrentOption("Modify Genres");
-        AdminFeatures.AddCurrentOption("Modify Halls");
-        AdminFeatures.AddCurrentOption("Modify Locations");
+        AdminFeatures.AddCurrentOption("Edit/Add Performances");
+        AdminFeatures.AddCurrentOption("Edit/Add Genres");
+        AdminFeatures.AddCurrentOption("Edit/Add Halls");
+        AdminFeatures.AddCurrentOption("Edit/Add Locations");
         AdminFeatures.AddCurrentOption("Check Statistics");
 
         //  Example Menu 1

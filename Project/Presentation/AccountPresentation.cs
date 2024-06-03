@@ -56,16 +56,18 @@ public static class AccountPresentation
     public static (string, string) GetLoginDetails(bool accountCreation = false)
     {
         Console.Clear();
-        string breadcrumb = App.CurrentMenu == App.SignInUp ? "Front Page -> Sign in / up ->" : "Front Page -> Home Page -> View Perfomances ->"; 
+        string breadcrumb = App.CurrentMenu == App.SignInUp ? "Front Page ->" : "Front Page -> Home Page -> View Perfomances ->"; 
         if (!accountCreation)
         {
-            Console.WriteLine($"{breadcrumb} Sign in\n");
+            Console.WriteLine($"{breadcrumb} Log In\n");
         }
         else
         {
-            Console.WriteLine($"{breadcrumb} Sign up\n");
+            Console.WriteLine($"{breadcrumb} Create Account\n");
+            Console.WriteLine("Enter the account details for your new account\n");
         }
-        Console.Write("Name: \n> ");
+
+        Console.Write("Username: \n> ");
         string? loginName = Console.ReadLine();
 
         Console.WriteLine();

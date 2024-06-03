@@ -51,8 +51,8 @@ public static class AccountLogic
                 logger.LogAction("Logged in");
                 // Remove sign in / up option from frontpage, and add logout
                 if (!account.IsAdmin) NotificationLogic.UpdateNotificationOption(true);
-                App.FrontPage.RemoveCurrentOption("Sign in / up");
-                App.FrontPage.AddCurrentOption("Logout");
+                App.FrontPage.RemoveCurrentOption("Log In / Create Account");
+                App.FrontPage.AddCurrentOption("Log Out");
                 App.HomePage.SetToCurrentMenu();
                 found = true;
                 break;
@@ -79,14 +79,14 @@ public static class AccountLogic
         App.LoggedInUsername = "Unknown";
 
         // Remove all options which has to do with someone being logged in
-        App.FrontPage.RemoveCurrentOption("Logout");
+        App.FrontPage.RemoveCurrentOption("Log Out");
         App.HomePage.RemoveCurrentOption("View Orders");
         App.HomePage.RemoveCurrentOption("View Notifications");
         App.HomePage.RemoveCurrentOption("Edit Account Settings");
         App.HomePage.RemoveCurrentOption("Admin Features");
         NotificationLogic.UpdateNotificationOption(false);
 
-        App.FrontPage.AddCurrentOption("Sign in / up");
+        App.FrontPage.AddCurrentOption("Log In / Create Account");
         App.FrontPage.SetToCurrentMenu();
     }
 

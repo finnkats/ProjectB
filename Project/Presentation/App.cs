@@ -43,7 +43,7 @@ public static class App
 
     // Add new menu's here
     public static Menu FrontPage = new("Front Page");
-    public static Menu SignInUp = new("Sign in / up");
+    public static Menu SignInUp = new("Log In / Create Account");
     public static Menu HomePage = new("Home Page");
     public static Menu AdminFeatures = new("Admin Features");
     public static Menu ExampleMenu1 = new("Example Menu 1");
@@ -57,18 +57,18 @@ public static class App
 
         //  Front Page
         FrontPage.AddAllOption("Home Page", HomePage.SetToCurrentMenu);
-        FrontPage.AddAllOption("Sign in / up", SignInUp.SetToCurrentMenu);
-        FrontPage.AddAllOption("Logout", AccountLogic.Logout);
+        FrontPage.AddAllOption("Log In / Create Account", SignInUp.SetToCurrentMenu);
+        FrontPage.AddAllOption("Log Out", AccountLogic.Logout);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
         FrontPage.AddCurrentOption("Home Page");
-        FrontPage.AddCurrentOption("Sign in / up");
+        FrontPage.AddCurrentOption("Log In / Create Account");
 
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
-        SignInUp.AddAllOption("Sign in", () => AccountLogic.Login());
-        SignInUp.AddAllOption("Sign up", AccountLogic.CreateAccount);
-        SignInUp.AddCurrentOption("Sign in");
-        SignInUp.AddCurrentOption("Sign up");
+        SignInUp.AddAllOption("Log In", () => AccountLogic.Login());
+        SignInUp.AddAllOption("Create Account", AccountLogic.CreateAccount);
+        SignInUp.AddCurrentOption("Log In");
+        SignInUp.AddCurrentOption("Create Account");
 
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
@@ -103,7 +103,7 @@ public static class App
     // Adds all "hidden" menu's, for demo
     public static void AddAllMenus()
     {
-        FrontPage.AddCurrentOption("Logout");
+        FrontPage.AddCurrentOption("Log Out");
         FrontPage.AddCurrentOption("Example Menu");
 
         HomePage.AddCurrentOption("View Plays");

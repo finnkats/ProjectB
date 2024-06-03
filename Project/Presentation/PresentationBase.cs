@@ -11,14 +11,14 @@ public class PresentationBase<T> where T : IEditable
     }
 
     // Returns a string for name that was input
-    public string? GetNameInput()
+    public string? GetNameInput(bool newName = false)
     {
         //Console.Clear();
         string inputName = "";
         bool validName = false;
         while (!validName)
         {
-            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)" + "\n\n" + "> ");
+            Console.Write($"Enter {(newName ? "new " : "")}name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)" + "\n\n" + "> ");
             inputName = Console.ReadLine() ?? "";
             if (inputName == "")
             {
@@ -102,7 +102,7 @@ public class PresentationBase<T> where T : IEditable
             else if (choice == 1)
             {       // Because Name is first property, it will always be 1;
                 string oldName = obj.Name;
-                string? newName = GetNameInput();
+                string? newName = GetNameInput(newName: true);
                 if (newName == null) continue;
                 if (Logic.ChangeName(obj, newName)) {
                     Console.WriteLine($"Changed {oldName} to {newName}");

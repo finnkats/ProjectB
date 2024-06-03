@@ -138,7 +138,7 @@ public class PresentationBase<T> where T : IEditable
             int index = 1;
             int choice = -1;
             Console.Clear();
-            if (InEditMenu) Console.WriteLine($"Front page -> Admin Features -> Edit/Add {typeof(T).Name}s\n");
+            if (InEditMenu) Console.WriteLine($"Front Page -> Admin Features -> Edit/Add {typeof(T).Name}s\n");
             Console.WriteLine($"{question}");
 
             foreach (var itemPair in itemsOrdered)

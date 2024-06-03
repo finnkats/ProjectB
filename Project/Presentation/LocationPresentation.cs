@@ -7,8 +7,8 @@ public class LocationPresentation : PresentationBase<Location>{
         if (locationName is null) return;
         Console.WriteLine();
 
-        var Halls = App.hallPresentation.GetItemList(extraInfo: "\nNote:\nIf the halls that are going to be in this location has not been added to the program yet;\n" +
-                                                     "Enter confirm, and the hall can be linked when adding a new hall or later in the edit menu\n");
+        var Halls = App.hallPresentation.GetItemList(extraInfo: "\nNote:\nIf the halls for this location have not been added to the program yet;\n" +
+                                                     "Simply choose 'confirm', and the hall can be linked when either adding a new hall or in the edit menu\n");
         if (!App.locationLogic.AddLocation(locationName, Halls)){
             Console.WriteLine("An error occured while adding location.");
             Thread.Sleep(2500);

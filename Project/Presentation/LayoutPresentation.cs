@@ -14,7 +14,7 @@ public static class LayoutPresentation
 
             Console.WriteLine($"Select seats for {App.Performances[play.PerformanceId].Name} in {App.Halls[play.Hall].Name}");
             Console.WriteLine("To select a seat, enter the number of the seat");
-            Console.Write("To deselect a seat, select it again\nTo continue purchase press enter\n'Q' To cancel reservation\n\n> ");
+            Console.Write("To deselect a seat, select it again\nTo continue purchase press enter\nSelect 'Q' To cancel the reservation\n\n> ");
 
             string input = Console.ReadLine()?.ToLower() ?? "";
             if (input == "") break;

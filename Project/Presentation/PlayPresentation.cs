@@ -34,12 +34,15 @@ public static class PlayPresentation
         int chosenIndex = -1;
         while (chosenIndex == -1){
 
-            Console.Write("Select a performance by entering its index or '0' to cancel\n\n> ");
+            Console.Write("Select a performance by entering its index or 'Q' to quit the process.\n\n> ");
             
             string? choice = Console.ReadLine();
+
+            if (choice.ToLower() == "q") choice = "0";
+
             if (int.TryParse(choice, out int index)){
                 if (index == 0){
-                    Console.WriteLine("Cancelled.");
+                    Console.WriteLine("Process was quit.");
                     Thread.Sleep(1500);
                     return;
                 }else if (index > 0 && index <= playOptions.Count){

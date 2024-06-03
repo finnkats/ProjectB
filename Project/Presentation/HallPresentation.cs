@@ -48,7 +48,7 @@ public class HallPresentation : PresentationBase<Hall>
                 selectedLayout = currentLayout;
                 break;
             }
-            else if (input == "Q")
+            else if (input.ToLower() == "e")
             {
                 Console.WriteLine("\nExiting...");
                 Thread.Sleep(2000);

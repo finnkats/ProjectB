@@ -30,7 +30,7 @@ public class HallPresentation : PresentationBase<Hall>
             Console.WriteLine("1: Next layout");
             Console.WriteLine("2: Previous layout");
             Console.WriteLine("3: Select this layout");
-            Console.WriteLine("Q: Exit without selection");
+            Console.WriteLine("E: Exit without selection");
 
             Console.Write("\n> ");
             string input = Console.ReadLine()?.ToUpper() ?? "";

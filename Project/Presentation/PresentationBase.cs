@@ -83,7 +83,7 @@ public class PresentationBase<T> where T : IEditable
             }
 
             if (typeof(T) == typeof(Performance)) Console.WriteLine($"{index++}: Add play for this performance");
-            Console.Write($"{index}: Exit\n\n> ");
+            Console.Write($"E: Exit\n\n> ");
 
             Int32.TryParse(Console.ReadLine(), out int choice);
             Console.WriteLine();
@@ -164,7 +164,7 @@ public class PresentationBase<T> where T : IEditable
                 menu += $"\n{index++}: Add New {typeof(T).Name}";
             }
 
-            menu += $"\n{index}: {exit}\n> ";
+            menu += $"\nE: {exit}\n> ";
             Console.Write(menu);
 
             try

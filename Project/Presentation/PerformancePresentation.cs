@@ -166,7 +166,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             }
             
             // Display exit option
-            Console.WriteLine($"{PerformanceOptionsScope.Count + 2 + offset}: Exit");
+            Console.WriteLine($"E: Exit");
             Console.Write(question);
 
             // Read user input and parse it as integer

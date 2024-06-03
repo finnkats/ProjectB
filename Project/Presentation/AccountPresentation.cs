@@ -64,8 +64,9 @@ public static class AccountPresentation
         else
         {
             Console.WriteLine($"{breadcrumb} Create Account\n");
-            Console.WriteLine("Enter the account details for your new account\n");
+            Console.WriteLine("Enter the account details for your new account");
         }
+        Console.WriteLine("Details are case-sensitive\n");
 
         Console.Write("Username: \n> ");
         string? loginName = Console.ReadLine();

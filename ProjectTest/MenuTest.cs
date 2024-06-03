@@ -69,12 +69,12 @@ public class MenuTest{
         menu.AddCurrentOption("Three");
 
         string menuString = menu.MenuString();
-        Assert.IsTrue(menuString.Contains("4: Exit"));
+        Assert.IsTrue(menuString.Contains("E: Exit"));
 
         menu.RemoveCurrentOption("Three");
 
         menuString = menu.MenuString();
-        Assert.IsTrue(menuString.Contains("3: Exit"));
+        Assert.IsTrue(menuString.Contains("E: Exit"));
     }
 
     [TestMethod]

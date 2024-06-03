@@ -26,9 +26,8 @@ public static class AccountLogic
                 if (!CheckLogin(loginName, loginPassword, account)) continue;
                 if (account.IsAdmin)
                 {
-                    // Add Admin features
-                    App.HomePage.AddCurrentOption("Admin Features");
-
+                    App.FrontPage.AddCurrentOption("Admin Features");
+                    App.FrontPage.RemoveCurrentOption("Home Page");
                     App.LoggedInUsername = loginName; // Set the LoggedInUsername property
 
                     AccountPresentation.PrintSuccess($"Logged in as administrator {account.Name}");
@@ -51,7 +50,8 @@ public static class AccountLogic
                 if (!account.IsAdmin) NotificationLogic.UpdateNotificationOption(true);
                 App.FrontPage.RemoveCurrentOption("Sign in / up");
                 App.FrontPage.AddCurrentOption("Logout");
-                App.HomePage.SetToCurrentMenu();
+                if(account.IsAdmin) App.AdminFeatures.SetToCurrentMenu();
+                else App.HomePage.SetToCurrentMenu();
                 found = true;
                 break;
             }

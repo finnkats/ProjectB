@@ -1,7 +1,7 @@
 public class PresentationBase<T> where T : IEditable
 {
     // Reference to logic class from T
-    protected LogicBase<T> Logic;
+    public LogicBase<T> Logic;
     public PresentationBase(LogicBase<T> logic) => Logic = logic;
 
     public virtual void AddObject()
@@ -101,11 +101,14 @@ public class PresentationBase<T> where T : IEditable
             }
             else if (choice == 1)
             {       // Because Name is first property, it will always be 1;
+                string oldName = obj.Name;
                 string? newName = GetNameInput();
                 if (newName == null) continue;
-                Console.WriteLine($"Changed {obj.Name} to {newName}");
-                obj.Name = newName;
-                objectName = newName;
+                if (Logic.ChangeName(obj, newName)) {
+                    Console.WriteLine($"Changed {oldName} to {newName}");
+                    objectName = newName;
+                }
+                else Console.WriteLine("Couldn't change name");
                 Thread.Sleep(2500);
             }
             else return choice;

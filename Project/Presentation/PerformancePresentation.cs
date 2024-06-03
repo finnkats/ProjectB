@@ -178,6 +178,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                     List<string> genres = App.genrePresentation.GetItemList(filter: true);
                     var filteredPerformanceOptions = App.performanceLogic.FilteredPerformanceOptions(genres);
                     PerformanceOptions = filteredPerformanceOptions;
+                    page = 1;
                 }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
                     // Return null if user chooses to exit
                     return null;

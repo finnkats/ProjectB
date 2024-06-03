@@ -5,6 +5,7 @@ using System.Threading;
 namespace Logic;
 public static class AccountLogic
 {
+    public static Logger logger = new AccountLogger();
     // This function can be called with or without login info
     public static void Login(string inputName = "", string inputPassword = "")
     {
@@ -37,7 +38,7 @@ public static class AccountLogic
                 else
                 {
                     // Add Customer Logged-In options
-                    App.HomePage.AddCurrentOption("View Tickets");
+                    App.HomePage.AddCurrentOption("View Orders");
                     App.HomePage.AddCurrentOption("View Notifications");
                     App.HomePage.AddCurrentOption("Edit Account Settings");
 
@@ -46,6 +47,7 @@ public static class AccountLogic
                 }
 
                 App.LoggedInUsername = loginName;
+                logger.LogAction("Logged in");
                 // Remove sign in / up option from frontpage, and add logout
                 if (!account.IsAdmin) NotificationLogic.UpdateNotificationOption(true);
                 App.FrontPage.RemoveCurrentOption("Sign in / up");
@@ -71,6 +73,7 @@ public static class AccountLogic
 
     public static void Logout()
     {
+        logger.LogAction("Logged out");
         AccountPresentation.PrintLogout();
 
         App.LoggedInUsername = "Unknown";
@@ -109,6 +112,9 @@ public static class AccountLogic
         App.Accounts.Add(name, new Account(name, password, false));
         App.Notifications.Add(name, new List<Notification>());
         DataAccess.UpdateItem<Account>();
+
+        logger.LogAction("Account created", new { Name = name });
+        
         AccountPresentation.PrintMessage("\nAccount has been created.");
         Thread.Sleep(1000);
         AccountLogic.Login(name, password);

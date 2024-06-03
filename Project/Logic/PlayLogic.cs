@@ -7,6 +7,8 @@ using System.Threading;
 
 public static class PlayLogic
 {
+    public static PlayLogger logger = new PlayLogger();
+
     //  This is the start of creating a ticket
     public static void Choose(string performanceId){
         // Checks if logged in user is no one, (means user should login)
@@ -38,10 +40,10 @@ public static class PlayLogic
         if (!App.Plays.ContainsKey(playId)) return false;
         if (!ValidDate(date)) return false;
         if (!ValidTime(startTime)) return false;
-        startTime += ":00";
         Play newPlay = new(location, startTime, date, hall, playId);
         App.Plays[playId].Add(newPlay);
         NotificationLogic.SendOutNotifications(newPlay);
+        logger.LogAction("Added Play", new {locatie = location, starttijd = startTime, datum = date, zaal = hall });
         DataAccess.UpdateList<Play>();
         App.ArchivedPlays[playId].Add(new ArchivedPlay(location, startTime, date, hall, playId));
         DataAccess.UpdateList<ArchivedPlay>();
@@ -80,8 +82,8 @@ public static class PlayLogic
                 if (play.Location == location && play.Hall == hall){
                     string existingPlayStartStr = $"{play.Date} {play.StartTime}";
                     string existingPlayEndStr = $"{play.Date} {play.EndTime}";
-                    DateTime existingPlayStart = DateTime.Parse(existingPlayStartStr);
-                    DateTime existingPlayEnd = DateTime.Parse(existingPlayEndStr);
+                    DateTime existingPlayStart = DateTime.Parse(existingPlayStartStr, new CultureInfo("nl-NL"));
+                    DateTime existingPlayEnd = DateTime.Parse(existingPlayEndStr, new CultureInfo("nl-NL"));
                     int? currentRuntime = App.performanceLogic.GetRuntime(play.PerformanceId);
                     // DateTime existingPlayEnd = existingPlayStart.AddMinutes((double)currentRuntime!);
 
@@ -103,7 +105,7 @@ public static class PlayLogic
             DateTime dateLimit = DateTime.Now.Add(DateTime.Now.TimeOfDay).AddHours(1);
             // Loop backwards over list, so removing wont cause errors
             for (int i = playList.Count - 1; i >= 0; i--){
-                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].StartTime}", out DateTime playDate)) continue;
+                if (!DateTime.TryParse($"{playList[i].Date} {playList[i].StartTime}", System.Globalization.CultureInfo.GetCultureInfo("nl-NL"), out DateTime playDate)) continue;
                 if (playDate > dateLimit) continue;
                 playList.RemoveAt(i);
             }
@@ -142,19 +144,19 @@ public static class PlayLogic
     {
         foreach (Play play in App.Plays[newTicket.PerformanceId]) {
             if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall) {
-                play.BookedSeats += 1;
+                Array.ForEach(newTicket.SeatNumbers, number => play.Seats.Add(number));
                 DataAccess.UpdateList<Play>();
                 break;
             }
         }
     }
-    public static void RemoveBooking(Ticket newTicket)
+    public static void RemoveBooking(Ticket ticket)
     {
-        foreach (Play play in App.Plays[newTicket.PerformanceId])
+        foreach (Play play in App.Plays[ticket.PerformanceId])
         {
-            if (play.Date == newTicket.Date && play.StartTime == newTicket.Time && play.Hall == newTicket.Hall)
+            if (play.Date == ticket.Date && play.StartTime == ticket.Time && play.Hall == ticket.Hall)
             {
-                play.BookedSeats -= 1;
+                Array.ForEach(ticket.SeatNumbers, number => play.Seats.Remove(number));
                 DataAccess.UpdateList<Play>();
                 break;
             }

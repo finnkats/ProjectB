@@ -1,4 +1,6 @@
 using Logic;
+using System.Runtime.InteropServices;
+using System.IO;
 
 public static class App
 {
@@ -35,6 +37,8 @@ public static class App
         CreateMenus();
         MainTicketSystem.CheckOutdatedTickets();
         PlayLogic.RemoveOutdatedPlays();
+        IEnumerable<int> ticketCount = App.Tickets.Select(user => user.Value.Count);
+        Ticket.CurrentOrderNumber = ticketCount.Count() == 0 ? 1 : ticketCount.Sum() + 1;
     }
 
     // Add new menu's here
@@ -70,7 +74,7 @@ public static class App
         //  Home Page
         HomePage.PreviousMenu = FrontPage;
         HomePage.AddAllOption("View Performances", performanceLogic.PerformanceCatalogue);
-        HomePage.AddAllOption("View Tickets", TicketPresentation.TicketMenu);
+        HomePage.AddAllOption("View Orders", TicketPresentation.TicketMenu);
         HomePage.AddAllOption("Edit Account Settings", NotificationPresentation.AccountSettings); // TODO add account settings function
         HomePage.AddCurrentOption("View Performances");
 
@@ -103,9 +107,28 @@ public static class App
         FrontPage.AddCurrentOption("Example Menu");
 
         HomePage.AddCurrentOption("View Plays");
-        HomePage.AddCurrentOption("View Tickets");
+        HomePage.AddCurrentOption("View Orders");
         HomePage.AddCurrentOption("View Notifications");
         HomePage.AddCurrentOption("Edit Account Settings");
         HomePage.AddCurrentOption("Admin Features");
+    }
+
+        public static void OpenLogFolder(){
+        string path = Directory.GetCurrentDirectory();
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && !RuntimeInformation.IsOSPlatform(OSPlatform.OSX)){
+            Console.WriteLine("OS is not supported");
+            Thread.Sleep(2500);
+            return;
+        }
+        path += RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"\DataSources\LogFiles" : @"/DataSources/LogFiles";
+
+        if (!Directory.Exists(path)){
+            Console.WriteLine($"Folder {path} doesn't exist");
+            Thread.Sleep(2000);
+            return;
+        }
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) System.Diagnostics.Process.Start("explorer.exe", path);
+        else System.Diagnostics.Process.Start("open", path);
     }
 }

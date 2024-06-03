@@ -189,7 +189,7 @@ public class PresentationBase<T> where T : IEditable
 
     // Only for Genres and Halls
     // I know it looks and uses similar code to GetItem, but I can't think of any way to incorporate that code here
-    public List<string> GetItemList(string objectId = "", bool filter = false){
+    public List<string> GetItemList(string objectId = "", bool filter = false, string extraInfo = ""){
         // Don't know a better way of doing this
 
         // itemIds is a list of the Ids which will eventually be returned
@@ -229,7 +229,8 @@ public class PresentationBase<T> where T : IEditable
             currentItems.Sort();
 
             if (filter) Console.WriteLine($"Front Page -> Home Page -> View Performances -> Filter\n");
-            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(separator, currentItems)}]\n");
+            string currentlyChosen = currentItems.Count == 0 ? $"No {typeof(T).Name.ToLower()}s chosen yet": $"[{String.Join(separator, currentItems)}]";
+            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: {currentlyChosen}\n");
             Console.WriteLine($"Choose {typeof(T).Name.ToLower()}s:");
 
             string menu = "";
@@ -237,7 +238,8 @@ public class PresentationBase<T> where T : IEditable
             {
                 menu += $"{index++} {itemPair.Item2}\n";
             }
-            menu += $"\n{index}: Confirm \n\n> ";
+            if (itemsOrdered.Count == 0) menu += $"No {typeof(T).Name.ToLower()}s to choose from\n";
+            menu += $"\n{index}: Confirm \n{extraInfo}\n> ";
             Console.Write(menu);
 
             try

@@ -81,7 +81,7 @@ public static class AccountLogic
         // Remove all options which has to do with someone being logged in
         App.FrontPage.RemoveCurrentOption("Logout");
         App.FrontPage.RemoveCurrentOption("Admin Features");
-        App.HomePage.RemoveCurrentOption("View Tickets");
+        App.HomePage.RemoveCurrentOption("View Orders");
         App.HomePage.RemoveCurrentOption("View Notifications");
         App.HomePage.RemoveCurrentOption("Edit Account Settings");
         App.HomePage.RemoveCurrentOption("Admin Features");

@@ -168,7 +168,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             Console.WriteLine($"E: Exit");
             Console.Write(question);
 
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine() ?? "";
             // Read user input and parse it as integer
             if (choice.ToLower() == "e") return null;
             Int32.TryParse(choice, out int choiceInt);

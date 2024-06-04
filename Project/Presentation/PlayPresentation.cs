@@ -36,7 +36,7 @@ public static class PlayPresentation
 
             Console.Write("Select a performance by entering its index or 'Q' to quit the process.\n\n> ");
             
-            string? choice = Console.ReadLine();
+            string? choice = Console.ReadLine() ?? "";
 
             if (choice.ToLower() == "q") choice = "0";
 

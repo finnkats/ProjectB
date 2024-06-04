@@ -8,7 +8,7 @@ public static class NotificationPresentation {
             Console.WriteLine($"1: Change location".PadRight(30) + location);
             Console.WriteLine($"2: Change interested genres".PadRight(30) + genres);
             Console.Write("E: Exit\n> ");
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine() ?? "";
             if (choice.ToLower() == "e"){
                 Console.WriteLine("\nExiting...");
                 return;
@@ -54,7 +54,7 @@ public static class NotificationPresentation {
             }
             Console.WriteLine($"\nE: Exit\n");
             Console.Write("Choose a notification to remove (read)\n> ");
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine() ?? "";
             if (choice.ToLower() == "e"){
                 NotificationLogic.UpdateNotificationOption(true, originalNotificationCount);
                 Console.WriteLine("\nExiting...");

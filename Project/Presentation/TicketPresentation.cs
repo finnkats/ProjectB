@@ -45,7 +45,7 @@ public static class TicketPresentation{
             foreach (Ticket ticket in TicketsList[0]) // this part writes all the the current active tickets underneath eachother as options for the user
             {
                 string sep = ", ";
-                Console.WriteLine($"{IndexNumber++}: Order: {ticket.OrderNumber} | Seat(s): {String.Join(sep, ticket.SeatNumbers)} | ({App.Performances[ticket.PerformanceId].Name})");
+                Console.WriteLine($"{IndexNumber++}: Order: {ticket.OrderNumber} | Seat(s): {String.Join(sep, ticket.SeatNumbers)} | {App.Performances[ticket.PerformanceId].Name}");
             }
             Console.Write("E. Exit\n\n> ");
             string? userInput = Console.ReadLine();

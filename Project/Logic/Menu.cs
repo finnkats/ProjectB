@@ -75,7 +75,7 @@ public class Menu
         // If input is the last item + 1 (Exit), which isn't in CurrentOptions
         int ParsedInput = 0;
         if (input.ToLower() == "e") ParsedInput = -1;
-        else ParsedInput = int.Parse(input);
+        else if (!Int32.TryParse(input, out ParsedInput)) return null;
 
         if (ParsedInput == -1) return this.SetToPreviousMenu;
         // Menu input starts at 1, so if input is 1, then index should be 0

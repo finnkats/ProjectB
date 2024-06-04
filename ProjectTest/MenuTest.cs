@@ -44,18 +44,18 @@ public class MenuTest{
         menu.AddCurrentOption("Something");
 
         // Function should be Nothing
-        Action? func_nothing = menu.GetFunction(1);
+        Action? func_nothing = menu.GetFunction("1");
     	Assert.AreSame((Action)Nothing, func_nothing);
         // Function should be Something
-        Action? func_something = menu.GetFunction(2);
+        Action? func_something = menu.GetFunction("2");
     	Assert.AreSame((Action)Something, func_something);
 
         // Should be null
-        Action? func_zero = menu.GetFunction(0);
+        Action? func_zero = menu.GetFunction("0");
     	Assert.AreSame(null, func_zero);
-        Action? func_high = menu.GetFunction(99999);
+        Action? func_high = menu.GetFunction("99999");
     	Assert.AreSame(null, func_high);
-        Action? func_low = menu.GetFunction(-39);
+        Action? func_low = menu.GetFunction("-39");
     	Assert.AreSame(null, func_low);
     }
 

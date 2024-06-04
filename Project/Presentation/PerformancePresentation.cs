@@ -53,7 +53,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
 
     public void EditPerformanceStart(){
-        string performanceId = PerformanceChoice("Choose the performance you want to edit: \n\n> ", false, true) ?? "";
+        string performanceId = PerformanceChoice("Choose the performance you want to edit (or performance you want to use for a new play): \n\n> ", false, true) ?? "";
 
         // Add a performance option was chosen
         if (performanceId == "add") {

@@ -132,7 +132,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             }
             else
             {
-                Console.WriteLine("Front Page -> Admin Features -> Edit/Add Performances\n");
+                Console.WriteLine("Front Page -> Admin Features -> Edit/Add Performances/Play\n");
             }
             
             // Calculate the total number of pages based on the number of performance options

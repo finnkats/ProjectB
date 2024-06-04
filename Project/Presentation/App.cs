@@ -80,16 +80,17 @@ public static class App
 
         // Admin Features
         AdminFeatures.PreviousMenu = FrontPage;
-        AdminFeatures.AddAllOption("Modify Performances/Add Play", performancePresentation.EditPerformanceStart);
-        AdminFeatures.AddAllOption("Modify Genres", genrePresentation.EditGenreStart);
-        AdminFeatures.AddAllOption("Modify Locations", locationPresentation.EditLocationStart);
-        AdminFeatures.AddAllOption("Modify Halls", hallPresentation.EditHallStart);
-        AdminFeatures.AddAllOption("Open Logs Folder", OpenLogFolder); // TODO add statistic function
-        AdminFeatures.AddCurrentOption("Modify Performances/Add Play");
-        AdminFeatures.AddCurrentOption("Modify Genres");
-        AdminFeatures.AddCurrentOption("Modify Halls");
-        AdminFeatures.AddCurrentOption("Modify Locations");
+        AdminFeatures.AddAllOption("Edit/Add Performances/Play", performancePresentation.EditPerformanceStart);
+        AdminFeatures.AddAllOption("Edit/Add Genres", genrePresentation.EditGenreStart);
+        AdminFeatures.AddAllOption("Edit/Add Locations", locationPresentation.EditLocationStart);
+        AdminFeatures.AddAllOption("Edit/Add Halls", hallPresentation.EditHallStart);
+        AdminFeatures.AddAllOption("Open Log Folders", OpenLogFolder); // TODO add statistic function
+        AdminFeatures.AddCurrentOption("Edit/Add Performances/Play");
+        AdminFeatures.AddCurrentOption("Edit/Add Genres");
+        AdminFeatures.AddCurrentOption("Edit/Add Halls");
+        AdminFeatures.AddCurrentOption("Edit/Add Locations");
         AdminFeatures.AddCurrentOption("Open Logs Folder");
+
 
         //  Example Menu 1
         ExampleMenu1.PreviousMenu = FrontPage;

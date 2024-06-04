@@ -77,6 +77,7 @@ public class PresentationBase<T> where T : IEditable
                     string separator = ", ";
                     value = $"[{String.Join(separator, names)}]";
                 }
+                else if (typeof(T) == typeof(Performance) && property.Name == "Active") value = val?.ToString() == "True" ? "Active" : "Inactive"; 
                 else value = $"'{val}'";
 
                 Console.WriteLine($"{index++}: Change {property.Name.PadRight(25)} {value}");

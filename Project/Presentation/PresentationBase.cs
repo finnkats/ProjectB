@@ -238,6 +238,8 @@ public class PresentationBase<T> where T : IEditable
 
             if (filter) Console.WriteLine($"Front Page -> Home Page -> View Performances -> Filter\n");
             string currentlyChosen = currentItems.Count == 0 ? $"No {typeof(T).Name.ToLower()}s chosen yet": $"[{String.Join(separator, currentItems)}]";
+            if (filter && currentItems.Count == 0) currentlyChosen += "\nNote: any previously applied filters will be reset when you reenter the filter option." +
+                                                                      "\nSo, if you want to remove your filter later, simply reenter the option, and it will be removed automatically.\n";
             Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: {currentlyChosen}\n");
             Console.WriteLine($"Choose {typeof(T).Name.ToLower()}s:");
 

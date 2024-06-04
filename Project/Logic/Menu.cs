@@ -34,6 +34,19 @@ public class Menu
     public string MenuString()
     {
         string menuString = "";
+
+        if (Name == "Front Page"){
+            menuString +=
+            @"   _____ _                  _                   _  ___     _     " + "\n" +
+            @"  / ____(_)                (_)                 | |/ (_)   | |    " + "\n" +
+            @" | |     _ _ __   _____   ___  _____      __   | ' / _  __| |___ " + "\n" +
+            @" | |    | | '_ \ / _ \ \ / / |/ _ \ \ /\ / /   |  < | |/ _` / __|" + "\n" +
+            @" | |____| | | | |  __/\ V /| |  __/\ V  V /    | . \| | (_| \__ \" + "\n" +
+            @"  \_____|_|_| |_|\___| \_/ |_|\___| \_/\_/     |_|\_\_|\__,_|___/" + "\n" +
+            @"                                                                 " + "\n"
+            ;
+        }
+
         // Include logged-in username if available
         if (App.LoggedInUsername != "Unknown")
         {

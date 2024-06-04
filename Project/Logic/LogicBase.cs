@@ -65,7 +65,7 @@ public abstract class LogicBase<T> where T : IEditable{
         } else if (typeof(T) == typeof(Play)){
             PlayLogic.logger.LogAction("Play name changed", new { PlayId = id, OldName = oldName, NewName = name });
         } else if (typeof(T) == typeof(Performance)){
-            PerformanceLogic.logger.LogAction("Peformance name changed", new { PeformanceId = id, OldName = oldName, NewName = name });
+            PerformanceLogic.logger.LogAction("Performance name changed", new { PerformanceId = id, OldName = oldName, NewName = name });
         }
         return true;
     }

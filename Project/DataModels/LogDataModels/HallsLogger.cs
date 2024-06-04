@@ -1,6 +1,6 @@
 public class HallsLogger : Logger
 {
-    protected override string FilePath {get; set;} = "DataSources/LogFiles/Halls.csv";
+    public override string FilePath {get; set;} = "DataSources/LogFiles/Halls.csv";
     protected override string Headers {get; set;} = "Time, User, Action, Hall info";
     public HallsLogger(){ }
 

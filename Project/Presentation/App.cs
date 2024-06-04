@@ -60,6 +60,7 @@ public static class App
         FrontPage.AddAllOption("Log In / Create Account", SignInUp.SetToCurrentMenu);
         FrontPage.AddAllOption("Log Out", AccountLogic.Logout);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
+        FrontPage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         FrontPage.AddCurrentOption("Home Page");
         FrontPage.AddCurrentOption("Log In / Create Account");
 
@@ -75,7 +76,6 @@ public static class App
         HomePage.AddAllOption("View Performances", performanceLogic.PerformanceCatalogue);
         HomePage.AddAllOption("View Orders", TicketPresentation.TicketMenu);
         HomePage.AddAllOption("Edit Account Settings", NotificationPresentation.AccountSettings); // TODO add account settings function
-        HomePage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
         HomePage.AddCurrentOption("View Performances");
 
         // Admin Features

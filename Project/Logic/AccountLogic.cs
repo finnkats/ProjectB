@@ -27,9 +27,8 @@ public static class AccountLogic
                 if (!CheckLogin(loginName, loginPassword, account)) continue;
                 if (account.IsAdmin)
                 {
-                    // Add Admin features
-                    App.HomePage.AddCurrentOption("Admin Features");
-
+                    App.FrontPage.AddCurrentOption("Admin Features");
+                    App.FrontPage.RemoveCurrentOption("Home Page");
                     App.LoggedInUsername = loginName; // Set the LoggedInUsername property
 
                     AccountPresentation.PrintSuccess($"Logged in as administrator {account.Name}");
@@ -53,7 +52,8 @@ public static class AccountLogic
                 if (!account.IsAdmin) NotificationLogic.UpdateNotificationOption(true);
                 App.FrontPage.RemoveCurrentOption("Log In / Create Account");
                 App.FrontPage.AddCurrentOption("Log Out");
-                App.HomePage.SetToCurrentMenu();
+                if(account.IsAdmin) App.AdminFeatures.SetToCurrentMenu();
+                else App.HomePage.SetToCurrentMenu();
                 found = true;
                 break;
             }
@@ -80,12 +80,14 @@ public static class AccountLogic
 
         // Remove all options which has to do with someone being logged in
         App.FrontPage.RemoveCurrentOption("Log Out");
+        App.FrontPage.RemoveCurrentOption("Admin Features");
         App.HomePage.RemoveCurrentOption("View Orders");
         App.HomePage.RemoveCurrentOption("View Notifications");
         App.HomePage.RemoveCurrentOption("Edit Account Settings");
         App.HomePage.RemoveCurrentOption("Admin Features");
         NotificationLogic.UpdateNotificationOption(false);
 
+        App.FrontPage.AddCurrentOption("Home Page");
         App.FrontPage.AddCurrentOption("Log In / Create Account");
         App.FrontPage.SetToCurrentMenu();
     }

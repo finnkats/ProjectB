@@ -73,7 +73,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 foreach (var genreId in Logic.Dict[performanceId].Genres){
                     if (printBreadCrumb)
                     {
-                        Console.WriteLine($"Front Page -> Home Page -> Modify Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
+                        Console.WriteLine($"Front Page -> Admin Features -> Edit Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
                     }
                     printBreadCrumb = false;
                     Console.WriteLine($"Current Genres: {String.Join(sep, GenresCopy.Select(genre => App.Genres[genre].Name))}");
@@ -132,7 +132,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             }
             else
             {
-                Console.WriteLine("Front Page -> Home Page -> Modify Performances\n");
+                Console.WriteLine("Front Page -> Admin Features -> Edit/Add Performances\n");
             }
             
             // Calculate the total number of pages based on the number of performance options

@@ -49,7 +49,7 @@ public class PresentationBase<T> where T : IEditable
         {
             int index = 1;
             Console.Clear();
-            Console.WriteLine($"Front Page -> Home Page -> Modify {typeof(T).Name}s -> {objectName}\n");
+            Console.WriteLine($"Front Page -> Admin Features -> Edit {typeof(T).Name}s -> {objectName}\n");
             Console.WriteLine($"What to change for this {typeof(T).Name.ToLower()}");
             foreach (var property in properties)
             {
@@ -141,7 +141,7 @@ public class PresentationBase<T> where T : IEditable
             int index = 1;
             int choice = -1;
             Console.Clear();
-            if (InEditMenu) Console.WriteLine($"Front page -> HomePage -> Modify {typeof(T).Name}s\n");
+            if (InEditMenu) Console.WriteLine($"Front Page -> Admin Features -> Edit/Add {typeof(T).Name}s\n");
             Console.WriteLine($"{question}");
 
             foreach (var itemPair in itemsOrdered)

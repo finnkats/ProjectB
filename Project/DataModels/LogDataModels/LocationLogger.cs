@@ -1,6 +1,6 @@
 public class LocationLogger : Logger
 {
-    protected override string FilePath {get; set;} = "DataSources/LogFiles/Locations.csv";
+    public override string FilePath {get; set;} = "DataSources/LogFiles/Locations.csv";
     protected override string Headers {get; set;} = "Time, User, Action, Location info, Halls";
     public LocationLogger(){ }
 

@@ -62,7 +62,7 @@ public class HallPresentation : PresentationBase<Hall>
         }
         Console.WriteLine();
 
-        string locationId = App.locationPresentation.GetItem("In which location is this hall?", "No location yet");
+        string locationId = App.locationPresentation.GetItem("In which location is this hall?", "No location yet (location hasn't been added to program yet)");
 
         // TO DO add layout chooser and put the correct layout in here
         // and remove seatchoice
@@ -74,7 +74,7 @@ public class HallPresentation : PresentationBase<Hall>
         }
 
         string locationAdded = (locationId == "null") ? " no location" : $" to location {App.Locations[locationId].Name}";
-        Console.WriteLine($"Hall '{hallName}' with {hallSeats} seats has been added" + locationAdded + $" with {selectedLayout.SeatAmount} seats");
+        Console.WriteLine($"Hall '{hallName}' with {hallSeats} seats has been added" + locationAdded);
         Thread.Sleep(5000);
     }
 

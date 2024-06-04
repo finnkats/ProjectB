@@ -1,6 +1,6 @@
 public class AccountLogger : Logger
 {
-    protected override string FilePath {get; set;} = "DataSources/LogFiles/Accounts.csv";
+    public override string FilePath {get; set;} = "DataSources/LogFiles/Accounts.csv";
     protected override string Headers {get; set;} = "Time, User, Action, Account info";
     public AccountLogger(){ }
 

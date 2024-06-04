@@ -53,7 +53,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
 
     public void EditPerformanceStart(){
-        string performanceId = PerformanceChoice("Choose the performance you want to edit: \n\n> ", false, true) ?? "";
+        string performanceId = PerformanceChoice("Choose the performance you want to edit (or performance you want to use for a new play): \n\n> ", false, true) ?? "";
 
         // Add a performance option was chosen
         if (performanceId == "add") {
@@ -66,27 +66,26 @@ public class PerformancePresentation : PresentationBase<Performance>{
             if (choice == 0) return;
             if (choice == 2){
                 Console.Clear();
-                List<string> currentGenres = new();
-                foreach (var genreId in Logic.Dict[performanceId].Genres){
-                    currentGenres.Add(App.Genres[genreId].Name);
-                }
                 List<string> RemovedGenreIds = new();
+                string sep = ", ";
                 bool printBreadCrumb = true;
+                var GenresCopy = Logic.Dict[performanceId].Genres.ToList();
                 foreach (var genreId in Logic.Dict[performanceId].Genres){
                     if (printBreadCrumb)
                     {
-                        Console.WriteLine($"Front Page -> Home Page -> Modify Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
+                        Console.WriteLine($"Front Page -> Admin Features -> Edit Performances -> {Logic.Dict[performanceId].Name} -> Change Genre\n");
                     }
                     printBreadCrumb = false;
-                    Console.Write($"Do you want to remove '{App.Genres[genreId].Name}' from '{Logic.Dict[performanceId].Name}'? (Y/N) \n\n> ");
-                    string removeGenre = Console.ReadLine()?.ToUpper() ?? "";
-                    if (removeGenre.StartsWith("Y")){
-                        currentGenres.Remove(App.Genres[genreId].Name);
-                        RemovedGenreIds.Add(genreId);
+                    Console.WriteLine($"Current Genres: {String.Join(sep, GenresCopy.Select(genre => App.Genres[genre].Name))}");
+                    Console.Write($"Do you want '{Logic.Dict[performanceId].Name}' to keep the Genre '{App.Genres[genreId].Name}'? (Y/N) \n> ");
+                    string keepGenre = Console.ReadLine()?.ToUpper() ?? "";
+                    if (!keepGenre.StartsWith("Y")){
+                        GenresCopy.Remove(genreId);
+                        Console.WriteLine($"Removed {App.Genres[genreId].Name}");
                     }
                     Console.WriteLine();
                 }
-                RemovedGenreIds.ForEach(genreId => Logic.Dict[performanceId].Genres.Remove(genreId));
+                Logic.Dict[performanceId].Genres = GenresCopy;
 
                 Console.Clear();
                 List<string> genres = App.genrePresentation.GetItemList(performanceId);
@@ -133,7 +132,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
             }
             else
             {
-                Console.WriteLine("Front Page -> Home Page -> Modify Performances\n");
+                Console.WriteLine("Front Page -> Admin Features -> Edit/Add Performances/Play\n");
             }
             
             // Calculate the total number of pages based on the number of performance options
@@ -160,7 +159,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
             // If onlyActive is true, this menu is in the "view performances" option, if its false, its in the "edit performances" option
             if (onlyActive){
-                Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Filter");
+                Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Filter Catalogue by Genres");
             } else {
                 Console.WriteLine($"{PerformanceOptionsScope.Count + 1 + offset}: Add New Performance");
             }

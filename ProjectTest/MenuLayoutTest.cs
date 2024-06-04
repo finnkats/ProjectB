@@ -13,6 +13,6 @@ public class MenuLayoutTest{
         Assert.IsTrue(App.HomePage.PreviousMenu == App.FrontPage, "2");
         Assert.IsTrue(App.SignInUp.PreviousMenu == App.FrontPage, "3");
         Assert.IsTrue(App.ExampleMenu1.PreviousMenu == App.FrontPage, "4");
-        Assert.IsTrue(App.AdminFeatures.PreviousMenu == App.HomePage, "5");
+        Assert.IsTrue(App.AdminFeatures.PreviousMenu == App.FrontPage, "5");
     }
 }

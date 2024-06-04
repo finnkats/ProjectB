@@ -11,14 +11,14 @@ public class PresentationBase<T> where T : IEditable
     }
 
     // Returns a string for name that was input
-    public string? GetNameInput()
+    public string? GetNameInput(bool newName = false)
     {
         //Console.Clear();
         string inputName = "";
         bool validName = false;
         while (!validName)
         {
-            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)" + "\n\n" + "> ");
+            Console.Write($"Enter {(newName ? "new " : "")}name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)" + "\n\n" + "> ");
             inputName = Console.ReadLine() ?? "";
             if (inputName == "")
             {
@@ -49,7 +49,7 @@ public class PresentationBase<T> where T : IEditable
         {
             int index = 1;
             Console.Clear();
-            Console.WriteLine($"Front Page -> Home Page -> Modify {typeof(T).Name}s -> {objectName}\n");
+            Console.WriteLine($"Front Page -> Admin Features -> Edit {typeof(T).Name}s -> {objectName}\n");
             Console.WriteLine($"What to change for this {typeof(T).Name.ToLower()}");
             foreach (var property in properties)
             {
@@ -102,7 +102,7 @@ public class PresentationBase<T> where T : IEditable
             else if (choice == 1)
             {       // Because Name is first property, it will always be 1;
                 string oldName = obj.Name;
-                string? newName = GetNameInput();
+                string? newName = GetNameInput(newName: true);
                 if (newName == null) continue;
                 if (Logic.ChangeName(obj, newName)) {
                     Console.WriteLine($"Changed {oldName} to {newName}");
@@ -141,7 +141,7 @@ public class PresentationBase<T> where T : IEditable
             int index = 1;
             int choice = -1;
             Console.Clear();
-            if (InEditMenu) Console.WriteLine($"Front page -> HomePage -> Modify {typeof(T).Name}s\n");
+            if (InEditMenu) Console.WriteLine($"Front Page -> Admin Features -> Edit/Add {typeof(T).Name}s\n");
             Console.WriteLine($"{question}");
 
             foreach (var itemPair in itemsOrdered)
@@ -189,7 +189,7 @@ public class PresentationBase<T> where T : IEditable
 
     // Only for Genres and Halls
     // I know it looks and uses similar code to GetItem, but I can't think of any way to incorporate that code here
-    public List<string> GetItemList(string objectId = "", bool filter = false){
+    public List<string> GetItemList(string objectId = "", bool filter = false, string extraInfo = ""){
         // Don't know a better way of doing this
 
         // itemIds is a list of the Ids which will eventually be returned
@@ -229,7 +229,8 @@ public class PresentationBase<T> where T : IEditable
             currentItems.Sort();
 
             if (filter) Console.WriteLine($"Front Page -> Home Page -> View Performances -> Filter\n");
-            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: [{String.Join(separator, currentItems)}]\n");
+            string currentlyChosen = currentItems.Count == 0 ? $"No {typeof(T).Name.ToLower()}s chosen yet": $"[{String.Join(separator, currentItems)}]";
+            Console.WriteLine($"Current {typeof(T).Name.ToLower()}s: {currentlyChosen}\n");
             Console.WriteLine($"Choose {typeof(T).Name.ToLower()}s:");
 
             string menu = "";
@@ -237,7 +238,8 @@ public class PresentationBase<T> where T : IEditable
             {
                 menu += $"{index++} {itemPair.Item2}\n";
             }
-            menu += $"\n{index}: Confirm \n\n> ";
+            if (itemsOrdered.Count == 0) menu += $"No {typeof(T).Name.ToLower()}s to choose from\n";
+            menu += $"\n{index}: Confirm \n{extraInfo}\n> ";
             Console.Write(menu);
 
             try

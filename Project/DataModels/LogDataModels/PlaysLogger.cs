@@ -1,6 +1,6 @@
 public class PlayLogger : Logger
 {
-    protected override string FilePath { get; set; } = "DataSources/LogFiles/Plays.csv";
+    public override string FilePath { get; set; } = "DataSources/LogFiles/Plays.csv";
     protected override string Headers { get; set; } = "Time, User, Action, Play info";
     public PlayLogger(){ }
 

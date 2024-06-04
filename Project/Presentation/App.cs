@@ -79,7 +79,7 @@ public static class App
         HomePage.AddCurrentOption("View Performances");
 
         // Admin Features
-        AdminFeatures.PreviousMenu = HomePage;
+        AdminFeatures.PreviousMenu = FrontPage;
         AdminFeatures.AddAllOption("Modify Performances/Add Play", performancePresentation.EditPerformanceStart);
         AdminFeatures.AddAllOption("Modify Genres", genrePresentation.EditGenreStart);
         AdminFeatures.AddAllOption("Modify Locations", locationPresentation.EditLocationStart);

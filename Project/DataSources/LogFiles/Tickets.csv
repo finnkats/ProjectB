@@ -1,2 +1,10 @@
 Time, User, Action, Ticket
 
+01/06/2024 18:01:34, Finn, Bought a new ticket, { PerformanceID = ID13, Date = 14/06/2024, Time = 12:00, Hall = ID2, OrderedSeats = 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 14, 15, 17, 18, 19, 20, 22, 23, 24, 26, 28, 29, Active = True }
+01/06/2024 18:02:55, Max, Bought a new ticket, { PerformanceID = ID13, Date = 14/06/2024, Time = 12:00, Hall = ID1, OrderedSeats = 18, 19, 20, Active = True }
+01/06/2024 18:03:11, Max, Bought a new ticket, { PerformanceID = ID13, Date = 14/06/2024, Time = 12:00, Hall = ID1, OrderedSeats = 1, 2, Active = True }
+01/06/2024 18:03:34, Max, Bought a new ticket, { PerformanceID = ID12, Date = 13/06/2024, Time = 12:00, Hall = ID3, OrderedSeats = 21, Active = True }
+01/06/2024 18:05:42, Max, Cancelled a ticket, { PeformanceID = ID13, date = 14/06/2024, hall = ID1, Activity = False }
+01/06/2024 18:06:00, Max, Cancelled a ticket, { PeformanceID = ID12, date = 13/06/2024, hall = ID3, Activity = False }
+01/06/2024 18:13:12, Max, Bought a new ticket, { PerformanceID = ID13, Date = 14/06/2024, Time = 15:00, Hall = ID2, OrderedSeats = 2, 3, 5, 6, 7, 11, 12, 13, 15, 17, 18, 19, 20, 22, 23, 25, 26, 28, 29, Active = True }
+01/06/2024 18:17:22, Max, Bought a new ticket, { PerformanceID = ID13, Date = 14/06/2024, Time = 15:00, Hall = ID2, OrderedSeats = 9, 10, Active = True }

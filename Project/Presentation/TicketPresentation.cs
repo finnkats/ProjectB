@@ -75,7 +75,8 @@ public static class TicketPresentation{
                 }
                 if (orderNumber != -1) Console.WriteLine($"Refunded Order: {orderNumber} | {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name}");
                 else Console.WriteLine("Can't refund order because the performance is tomorrow");
-                Thread.Sleep(2500);
+                Console.WriteLine("\nPress any key to continue");
+                Console.ReadKey();
             } catch (ArgumentOutOfRangeException){
                 Console.WriteLine("Invalid input");
                 Thread.Sleep(1000);
@@ -89,6 +90,7 @@ public static class TicketPresentation{
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
         Console.WriteLine(ticket.TicketInfo());
-        Thread.Sleep(6000 + 500 * ticket.SeatNumbers.Length);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 }

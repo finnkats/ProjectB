@@ -107,7 +107,8 @@ public static class PlayPresentation
 
         if (!PlayLogic.IsHallAvailable(location, DateTime.Parse(date, new CultureInfo("nl-NL")), startTime, hall)){
             Console.WriteLine($"{App.Halls[hall].Name} is not available at the selected {date} : {startTime}. Please choose different details.");
-            Thread.Sleep(5000);
+            Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
             return; // Exit the method if hall is not available
         }
         Console.Clear();

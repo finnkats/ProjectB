@@ -75,7 +75,8 @@ public class HallPresentation : PresentationBase<Hall>
 
         string locationAdded = (locationId == "null") ? " no location" : $" to location {App.Locations[locationId].Name}";
         Console.WriteLine($"Hall '{hallName}' with {hallSeats} seats has been added" + locationAdded);
-        Thread.Sleep(5000);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 
     public void EditHallStart()

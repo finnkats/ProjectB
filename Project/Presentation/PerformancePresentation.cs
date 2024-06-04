@@ -48,7 +48,8 @@ public class PerformancePresentation : PresentationBase<Performance>{
         genres.ForEach(genreId => currentGenres.Add(App.Genres[genreId].Name));
         Console.WriteLine($"Performance {performanceName} (" + (active ? "active" : "inactive") + $"), {runtime} minutes " +
                           $"with genres [{String.Join(seperator, currentGenres)}] has been added");
-        Thread.Sleep(5000);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 
 

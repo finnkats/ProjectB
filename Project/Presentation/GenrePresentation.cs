@@ -32,12 +32,15 @@ public class GenrePresentation : PresentationBase<Genre>
         if (!App.genreLogic.AddGenre(genreName, genreAge))
         {
             Console.WriteLine("An error occurred while adding genre.");
-            Thread.Sleep(3000);
+            Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
+
             return;
         }
 
         Console.WriteLine($"Genre {genreName} with age-rating {genreAge} has been added.");
-        Thread.Sleep(5000);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
         return;
     }
 
@@ -77,7 +80,8 @@ public class GenrePresentation : PresentationBase<Genre>
                 {
                     Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");
                 }
-                Thread.Sleep(4000);
+                Console.WriteLine("\nPress any key to continue");
+                Console.ReadKey();
             }
         }
     }

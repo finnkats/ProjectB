@@ -19,7 +19,8 @@ public class LocationPresentation : PresentationBase<Location>{
         List<string> currentHalls = new();
         Halls.ForEach(hallId => currentHalls.Add(App.Halls[hallId].Name));
         Console.WriteLine($"Location '{locationName}' with halls [{String.Join(seperator, currentHalls)}] has been added");
-        Thread.Sleep(5000);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 
     public void EditLocationStart(){

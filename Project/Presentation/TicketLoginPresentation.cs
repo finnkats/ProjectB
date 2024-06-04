@@ -12,7 +12,7 @@ public static class TicketLoginPresentation{
             Console.WriteLine("2. Create Account");
             Console.Write("E. Exit\n\n> ");
             string? inputOption = Console.ReadLine() ?? "";
-            if (inputOption == "E".ToLower()){
+            if (inputOption.ToLower() == "e"){
                 Console.Clear();
                 Console.WriteLine("Stop buying process...");
                 Thread.Sleep(2000);

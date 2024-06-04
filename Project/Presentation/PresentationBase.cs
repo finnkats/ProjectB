@@ -18,9 +18,9 @@ public class PresentationBase<T> where T : IEditable
         bool validName = false;
         while (!validName)
         {
-            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)" + "\n\n" + "> ");
+            Console.Write($"Enter name for {typeof(T).Name.ToLower()}\n(Enter 'Q' to quit the process)" + "\n\n" + "> ");
             inputName = Console.ReadLine() ?? "";
-            if (inputName == "")
+            if (inputName.ToLower() == "q")
             {
                 Console.WriteLine("Exiting..");
                 Thread.Sleep(1500);
@@ -118,7 +118,7 @@ public class PresentationBase<T> where T : IEditable
         }
     }
 
-    public string GetItem(string question, string exit, string locationId = "", bool InEditMenu = false)
+    public string GetItem(string question, string exit, string locationId = "", bool InEditMenu = false, string letter = "E")
     {
         List<(string, string)> itemsOrdered = new();
         int EditOffset = InEditMenu ? 1 : 0;
@@ -167,11 +167,11 @@ public class PresentationBase<T> where T : IEditable
                 menu += $"\n{index++}: Add New {typeof(T).Name}";
             }
 
-            menu += $"\nE: {exit}\n> ";
+            menu += $"\n{letter}: {exit}\n> ";
             Console.Write(menu);
             int choiceInt = 0;
             string choiceStr = Console.ReadLine();
-            if (choiceStr.ToLower() == "e")
+            if (choiceStr.ToLower() == letter.ToLower())
             {
                 choiceStr = $"{index}";
             }

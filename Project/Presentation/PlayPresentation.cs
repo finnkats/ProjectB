@@ -71,10 +71,10 @@ public static class PlayPresentation
     public static void AddPlayDetails(string performanceId){
         if (performanceId == null) return;
 
-        string location = App.locationPresentation.GetItem("Choose a location:", "Cancel");
+        string location = App.locationPresentation.GetItem("Choose a location:", "Quit", letter: "Q");
         if (location == "null") return;
 
-        string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
+        string hall = App.hallPresentation.GetItem("Choose a hall:", "Quit", location, letter: "Q");
         if (hall == "null") {
             Console.WriteLine("Cancelling adding of play");
             return;

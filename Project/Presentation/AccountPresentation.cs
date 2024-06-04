@@ -113,7 +113,8 @@ public static class AccountPresentation
         if (confirmedPassword != password)
         {
             Console.WriteLine("\nPassword is not correct.");
-            Thread.Sleep(2000);
+            Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
             return false;
         }
 

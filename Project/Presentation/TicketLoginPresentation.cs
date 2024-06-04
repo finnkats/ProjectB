@@ -10,8 +10,14 @@ public static class TicketLoginPresentation{
             Console.WriteLine("You're not logged in, please choose to log in or to create an account");
             Console.WriteLine("1. Log In");
             Console.WriteLine("2. Create Account");
-            Console.Write("3. Exit\n\n> ");
-            string? inputOption = Console.ReadLine();
+            Console.Write("E. Exit\n\n> ");
+            string? inputOption = Console.ReadLine() ?? "";
+            if (inputOption.ToLower() == "e"){
+                Console.Clear();
+                Console.WriteLine("Stop buying process...");
+                Thread.Sleep(2000);
+                return false;
+            }
             bool isInt = int.TryParse(inputOption, out int option);
             if (isInt){
                 if (option == 1){
@@ -31,12 +37,6 @@ public static class TicketLoginPresentation{
                 else if(option == 2){
                     AccountLogic.CreateAccount();
                     if (App.LoggedInUsername != "Unknown") return true;
-                }
-                else if (option == 3){
-                    Console.Clear();
-                    Console.WriteLine("Stop buying process...");
-                    Thread.Sleep(2000);
-                    return false;
                 }
                 else{
                     Console.Clear();

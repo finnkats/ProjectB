@@ -47,10 +47,10 @@ public static class TicketPresentation{
                 string sep = ", ";
                 Console.WriteLine($"{IndexNumber++}: Order: {ticket.OrderNumber} | Seat(s): {String.Join(sep, ticket.SeatNumbers)} | ({App.Performances[ticket.PerformanceId].Name})");
             }
-            Console.Write("Q. Exit\n\n> ");
+            Console.Write("E. Exit\n\n> ");
             string? userInput = Console.ReadLine();
             if (userInput == null) return;
-            if (userInput.ToLower() == "q") return;
+            if (userInput.ToLower() == "e") return;
             // this upcoming part checks the input from the user. if they choose one of the active tickets it gets canceled (IsActive = false), except if the play is tomorrow 
             try {
                 if (!Int32.TryParse(userInput, out int IndexInt)) {

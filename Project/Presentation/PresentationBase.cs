@@ -18,9 +18,9 @@ public class PresentationBase<T> where T : IEditable
         bool validName = false;
         while (!validName)
         {
-            Console.Write($"Enter {(newName ? "new " : "")}name for {typeof(T).Name.ToLower()}\n(Enter nothing to exit)" + "\n\n" + "> ");
+            Console.Write($"Enter {(newName ? "new " : "")}name for {typeof(T).Name.ToLower()}\n(Enter 'Q' to quit the process)" + "\n\n" + "> ");
             inputName = Console.ReadLine() ?? "";
-            if (inputName == "")
+            if (inputName.ToLower() == "q")
             {
                 Console.WriteLine("Exiting..");
                 Thread.Sleep(1500);
@@ -83,13 +83,16 @@ public class PresentationBase<T> where T : IEditable
             }
 
             if (typeof(T) == typeof(Performance)) Console.WriteLine($"{index++}: Add play for this performance");
-            Console.Write($"{index}: Exit\n\n> ");
+            Console.Write($"E: Exit\n\n> ");
+            string choiceStr = Console.ReadLine() ?? "";
+            if (choiceStr.ToLower() == "e") choiceStr = $"{index}";
 
-            Int32.TryParse(Console.ReadLine(), out int choice);
+            Int32.TryParse(choiceStr, out int choice);
             Console.WriteLine();
             if (choice == 0 || choice > index)
             {
                 Console.WriteLine("Not a valid choice");
+                Console.WriteLine(choice);
                 Thread.Sleep(2500);
             }
             else if (choice == index)
@@ -115,7 +118,7 @@ public class PresentationBase<T> where T : IEditable
         }
     }
 
-    public string GetItem(string question, string exit, string locationId = "", bool InEditMenu = false)
+    public string GetItem(string question, string exit, string locationId = "", bool InEditMenu = false, string letter = "E")
     {
         List<(string, string)> itemsOrdered = new();
         int EditOffset = InEditMenu ? 1 : 0;
@@ -139,7 +142,6 @@ public class PresentationBase<T> where T : IEditable
         {
             string menu = "";
             int index = 1;
-            int choice = -1;
             Console.Clear();
             if (InEditMenu) Console.WriteLine($"Front Page -> Admin Features -> Edit/Add {typeof(T).Name}s\n");
             Console.WriteLine($"{question}");
@@ -164,22 +166,29 @@ public class PresentationBase<T> where T : IEditable
                 menu += $"\n{index++}: Add New {typeof(T).Name}";
             }
 
-            menu += $"\n{index}: {exit}\n> ";
+            menu += $"\n{letter}: {exit}\n> ";
             Console.Write(menu);
+            int choiceInt = 0;
+            string choiceStr = Console.ReadLine() ?? "";
+            if (choiceStr.ToLower() == letter.ToLower())
+            {
+                choiceStr = $"{index}";
+            }
 
             try
             {
-                if (!Int32.TryParse(Console.ReadLine(), out choice))
+                if (!Int32.TryParse(choiceStr, out choiceInt))
                 {
                     Console.WriteLine("\nInvalid input\n");
                     continue;
                 }
-                return itemsOrdered[choice - 1].Item1;
+                Console.WriteLine(choiceStr);
+                return itemsOrdered[choiceInt - 1].Item1;
             }
             catch (ArgumentOutOfRangeException)
             {
-                if (InEditMenu && choice == itemsOrdered.Count + 1) return "add";
-                if (choice == itemsOrdered.Count + 1 + EditOffset) return "null";
+                if (InEditMenu && choiceInt == itemsOrdered.Count + 1) return "add";
+                if (choiceInt == itemsOrdered.Count + 1 + EditOffset) return "null";
                 Console.WriteLine("Invalid choice");
                 Thread.Sleep(2000);
             }
@@ -221,7 +230,6 @@ public class PresentationBase<T> where T : IEditable
         {
             Console.Clear();
             int index = 1;
-            int choice = -1;
 
             // currentItems is a list of names of currently selected items, used for printing
             List<string> currentItems = new();
@@ -239,25 +247,30 @@ public class PresentationBase<T> where T : IEditable
                 menu += $"{index++} {itemPair.Item2}\n";
             }
             if (itemsOrdered.Count == 0) menu += $"No {typeof(T).Name.ToLower()}s to choose from\n";
-            menu += $"\n{index}: Confirm \n{extraInfo}\n> ";
+            menu += $"\nC: Confirm \n{extraInfo}\n> ";
             Console.Write(menu);
+
+            string choiceStr = Console.ReadLine() ?? "";
+            int choiceInt = 0;
+
+            if (choiceStr.ToLower() == "c") choiceStr = $"{index}";
 
             try
             {
-                if (!Int32.TryParse(Console.ReadLine(), out choice))
+                if (!Int32.TryParse(choiceStr, out choiceInt))
                 {
                     Console.WriteLine("\nInvalid input\n");
                     Thread.Sleep(2500);
                 }
                 else
                 {
-                    itemIds.Add(itemsOrdered[choice - 1].Item1);
-                    itemsOrdered.RemoveAt(choice - 1);
+                    itemIds.Add(itemsOrdered[choiceInt - 1].Item1);
+                    itemsOrdered.RemoveAt(choiceInt - 1);
                 }
             }
             catch (ArgumentOutOfRangeException)
             {
-                if (choice - 1 == itemsOrdered.Count)
+                if (choiceInt - 1 == itemsOrdered.Count)
                 {
                     return itemIds;
                 }

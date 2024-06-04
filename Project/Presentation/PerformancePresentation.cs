@@ -165,38 +165,40 @@ public class PerformancePresentation : PresentationBase<Performance>{
             }
             
             // Display exit option
-            Console.WriteLine($"{PerformanceOptionsScope.Count + 2 + offset}: Exit");
+            Console.WriteLine($"E: Exit");
             Console.Write(question);
 
+            string choice = Console.ReadLine() ?? "";
             // Read user input and parse it as integer
-            Int32.TryParse(Console.ReadLine(), out int choice);
+            if (choice.ToLower() == "e") return null;
+            Int32.TryParse(choice, out int choiceInt);
             try {
                 // Handle user choices
-                if (onlyActive && choice == PerformanceOptionsScope.Count + 1 + offset){
+                if (onlyActive && choiceInt == PerformanceOptionsScope.Count + 1 + offset){
                     // Filter performance options based on user-selected genres
                     List<string> genres = App.genrePresentation.GetItemList(filter: true);
                     var filteredPerformanceOptions = App.performanceLogic.FilteredPerformanceOptions(genres);
                     PerformanceOptions = filteredPerformanceOptions;
                     page = 1;
-                }else if (choice == PerformanceOptionsScope.Count + 2 + offset){
+                }else if (choiceInt == PerformanceOptionsScope.Count + 2 + offset){
                     // Return null if user chooses to exit
                     return null;
                 } else{
                     // Return the performance ID if a specific performance is chosen
-                    string performanceId = PerformanceOptionsScope[choice - 1].Item1;
+                    string performanceId = PerformanceOptionsScope[choiceInt - 1].Item1;
                     return performanceId;
                 }
             } catch (ArgumentOutOfRangeException) {
                 // Handle out of range exceptions
-                if (choice == PerformanceOptionsScope.Count() + 1 + offset){ // The option filter or add was chosen
+                if (choiceInt == PerformanceOptionsScope.Count() + 1 + offset){ // The option filter or add was chosen
                     if (onlyActive) return null;
                     else return "add";
                 } // User chooses to exit
                 else if (offset == 2){
                     // Handle pagination options
-                    if (choice == PerformanceOptionsScope.Count() + 1){
+                    if (choiceInt == PerformanceOptionsScope.Count() + 1){
                         page = (page + 1 > pages) ? 1 : page + 1; // Move to the next page
-                    } else if (choice == PerformanceOptionsScope.Count() + 2){
+                    } else if (choiceInt == PerformanceOptionsScope.Count() + 2){
                         page = (page - 1 < 1) ? pages : page - 1; // Move to the previous page
                     }
                 }

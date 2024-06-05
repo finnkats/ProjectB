@@ -105,7 +105,7 @@ public static class App
         AdminFeatures.AddAllOption("Edit/Add Genres", genrePresentation.EditGenreStart);
         AdminFeatures.AddAllOption("Edit/Add Locations", locationPresentation.EditLocationStart);
         AdminFeatures.AddAllOption("Edit/Add Halls", hallPresentation.EditHallStart);
-        AdminFeatures.AddAllOption("Open Log Folders", OpenLogFolder); // TODO add statistic function
+        AdminFeatures.AddAllOption("Open Logs Folder", OpenLogFolder); // TODO add statistic function
         AdminFeatures.AddCurrentOption("Edit/Add Performances/Play");
         AdminFeatures.AddCurrentOption("Edit/Add Genres");
         AdminFeatures.AddCurrentOption("Edit/Add Halls");

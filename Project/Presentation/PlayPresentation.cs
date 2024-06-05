@@ -34,7 +34,7 @@ public static class PlayPresentation
         int chosenIndex = -1;
         while (chosenIndex == -1){
 
-            Console.Write("Select a performance by entering its index or 'Q' to quit the process.\n\n> ");
+            Console.Write("Select a performance by entering its number (under the hashtag) from the list above,\nor enter 'Q' to quit the process.\n\n> ");
             
             string? choice = Console.ReadLine() ?? "";
 

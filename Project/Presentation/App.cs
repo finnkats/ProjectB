@@ -8,28 +8,47 @@ public static class App
 
     public static Menu? CurrentMenu;
 
-    public static Dictionary<string, Performance> Performances = DataAccess.ReadItem<Performance>();
-    public static readonly PerformanceLogic performanceLogic = new PerformanceLogic();
-    public static readonly PerformancePresentation performancePresentation = new PerformancePresentation(performanceLogic);
+    public static Dictionary<string, Performance> Performances;
+    public static readonly PerformanceLogic performanceLogic;
+    public static readonly PerformancePresentation performancePresentation;
 
-    public static Dictionary<string, Location> Locations = DataAccess.ReadItem<Location>();
-    public static LocationLogic locationLogic = new LocationLogic();
-    public static LocationPresentation locationPresentation = new LocationPresentation(locationLogic);
+    public static Dictionary<string, Location> Locations;
+    public static LocationLogic locationLogic;
+    public static LocationPresentation locationPresentation;
 
-    public static Dictionary<string, Hall> Halls = DataAccess.ReadItem<Hall>();
-    public static HallLogic hallLogic = new HallLogic();
-    public static HallPresentation hallPresentation = new HallPresentation(hallLogic);
+    public static Dictionary<string, Hall> Halls;
+    public static HallLogic hallLogic;
+    public static HallPresentation hallPresentation;
 
-    public static Dictionary<string, Genre> Genres = DataAccess.ReadItem<Genre>();
-    public static readonly GenreLogic genreLogic = new GenreLogic();
-    public static readonly GenrePresentation genrePresentation = new GenrePresentation(genreLogic);
+    public static Dictionary<string, Genre> Genres;
+    public static readonly GenreLogic genreLogic;
+    public static readonly GenrePresentation genrePresentation;
 
+    public static Dictionary<string, Account> Accounts;
+    public static Dictionary<string, List<Play>> Plays;
+    public static Dictionary<string, List<ArchivedPlay>> ArchivedPlays;
+    public static Dictionary<string,List<Ticket>> Tickets;
+    public static Dictionary<string, List<Notification>> Notifications;
 
-    public static Dictionary<string, Account> Accounts = DataAccess.ReadItem<Account>();
-    public static Dictionary<string, List<Play>> Plays = DataAccess.ReadList<Play>();
-    public static Dictionary<string, List<ArchivedPlay>> ArchivedPlays = DataAccess.ReadList<ArchivedPlay>();
-    public static Dictionary<string,List<Ticket>> Tickets = DataAccess.ReadList<Ticket>();
-    public static Dictionary<string, List<Notification>> Notifications = DataAccess.ReadList<Notification>();
+    static App(){
+        Performances = DataAccess.ReadItem<Performance>();
+        performanceLogic = new PerformanceLogic();
+        performancePresentation = new PerformancePresentation(performanceLogic);
+        Locations = DataAccess.ReadItem<Location>();
+        locationLogic = new LocationLogic();
+        locationPresentation = new LocationPresentation(locationLogic);
+        Halls = DataAccess.ReadItem<Hall>();
+        hallLogic = new HallLogic();
+        hallPresentation = new HallPresentation(hallLogic);
+        Genres = DataAccess.ReadItem<Genre>();
+        genreLogic = new GenreLogic();
+        genrePresentation = new GenrePresentation(genreLogic);
+        Accounts = DataAccess.ReadItem<Account>();
+        Plays = DataAccess.ReadList<Play>();
+        ArchivedPlays = DataAccess.ReadList<ArchivedPlay>();
+        Tickets = DataAccess.ReadList<Ticket>();
+        Notifications = DataAccess.ReadList<Notification>();
+    }    
 
     public static void Start()
     {

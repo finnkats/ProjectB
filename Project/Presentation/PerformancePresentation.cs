@@ -28,7 +28,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
 
         bool active;
         while(true){
-            Console.Write("Will the performance be currently active? \'y\' (Yes) or \'n\' (No)\n> ");
+            Console.Write("Will the performance currently be active?\nActive plays can be see by customers, inactive cannot\n \'y\' (Yes) or \'n\' (No)\n> ");
             string activeInput = Console.ReadLine()?.ToLower() ?? "";
             if (activeInput != "y" && activeInput != "n"){
                 Console.WriteLine("Invalid input");
@@ -89,7 +89,7 @@ public class PerformancePresentation : PresentationBase<Performance>{
                 Logic.Dict[performanceId].Genres = GenresCopy;
 
                 Console.Clear();
-                List<string> genres = App.genrePresentation.GetItemList(performanceId);
+                List<string> genres = App.genrePresentation.GetItemList(performanceId, extraInfo: $"\nWhat genres do you want to add to {Logic.Dict[performanceId].Name} (or keep these by confirming)\n");
                 App.performanceLogic.ChangeGenres(genres, performanceId);
                 Console.WriteLine("Successfully changed genres");
                 Thread.Sleep(2500);

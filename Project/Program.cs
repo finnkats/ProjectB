@@ -17,7 +17,7 @@ while (App.CurrentMenu != null){
     menuString += (invalidInput ? "\nInvalid input\n" : "\n") + "> ";
     Console.Write(menuString);
     // input will be 0 if the the input is not an integer
-    string input = Console.ReadLine();
+    string input = Console.ReadLine() ?? "";
     Action? function = App.CurrentMenu.GetFunction(input);
     if (function != null) {
         function();

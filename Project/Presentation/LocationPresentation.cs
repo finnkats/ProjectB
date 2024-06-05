@@ -3,7 +3,7 @@ public class LocationPresentation : PresentationBase<Location>{
 
     public void AddLocation(){
         Console.Clear();
-        string? locationName = GetNameInput();
+        string? locationName = GetNameInput(true);
         if (locationName is null) return;
         Console.WriteLine();
 
@@ -18,7 +18,15 @@ public class LocationPresentation : PresentationBase<Location>{
         string seperator = ", ";
         List<string> currentHalls = new();
         Halls.ForEach(hallId => currentHalls.Add(App.Halls[hallId].Name));
-        Console.WriteLine($"Location '{locationName}' with halls [{String.Join(seperator, currentHalls)}] has been added");
+        var hallsList = String.Join(seperator, currentHalls);
+        if (hallsList == "")
+        {
+            Console.WriteLine($"Location '{locationName}' with no halls yet has been added");
+        }
+        else
+        {
+            Console.WriteLine($"Location '{locationName}' with halls [{hallsList}] has been added");
+        }
         Console.WriteLine("\nPress any key to continue");
         Console.ReadKey();
     }

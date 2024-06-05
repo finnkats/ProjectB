@@ -46,7 +46,7 @@ public class Ticket : IEquatable<Ticket>, IDataAccessList {
         string sep = ", ";
         if(IsActive){
             return $"The play you booked: {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +
-                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name} | Seat(s) {String.Join(sep, this.SeatNumbers)}.\nYou can view this order in 'View my Orders' in the homepage.";
+                $"{App.Locations[App.Halls[this.Hall].LocationId].Name} - {App.Halls[this.Hall].Name} | Seat(s) {String.Join(sep, this.SeatNumbers)}.\nYou can view this order in 'View Orders' in the homepage.";
         }
         else{
             return $"The play you had booked was (is now cancelled): {App.Performances[PerformanceId].Name}. On {this.Date} at {this.Time} | " +

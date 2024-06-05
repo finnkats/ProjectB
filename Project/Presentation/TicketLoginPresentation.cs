@@ -27,7 +27,8 @@ public static class TicketLoginPresentation{
                     if(isAdmin){
                         Console.Clear();
                         Console.WriteLine("Cannot use Admin account to buy tickets");
-                        Thread.Sleep(5000);
+                        Console.WriteLine("\nPress any key to continue");
+                        Console.ReadKey();
                     }
                     else{
                         AccountLogic.Login(loginName, loginPassword);

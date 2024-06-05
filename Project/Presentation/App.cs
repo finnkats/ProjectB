@@ -61,8 +61,10 @@ public static class App
         FrontPage.AddAllOption("Log Out", AccountLogic.Logout);
         FrontPage.AddAllOption("Example Menu", ExampleMenu1.SetToCurrentMenu);
         FrontPage.AddAllOption("Admin Features", AdminFeatures.SetToCurrentMenu);
+        FrontPage.AddAllOption("About us & Info", aboutUsPrint);
         FrontPage.AddCurrentOption("Home Page");
         FrontPage.AddCurrentOption("Log In / Create Account");
+        FrontPage.AddCurrentOption("About us & Info");
 
         //  Sign in / up
         SignInUp.PreviousMenu = FrontPage;
@@ -132,4 +134,64 @@ public static class App
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) System.Diagnostics.Process.Start("explorer.exe", path);
         else System.Diagnostics.Process.Start("open", path);
     }
+
+    public static void aboutUsPrint(){
+    Console.Clear();
+
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.WriteLine("Welcome to Cineview Kids!\n");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("Your ultimate destination for reserving seats to the most exciting and engaging performances for anyone to enjoy!\n" +
+                      "We are a third-party reservation application designed to make it easy for anyone to plan outings to the theater.\n");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.WriteLine("What We Do:\n");
+    Console.ResetColor();
+    
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("At Cineview Kids, we partner with theaters such as Het Kruispunt and Theater Zuidplein to bring you a wide selection of performances.\n" +
+                      "Our platform allows you to select and reserve seats for these performances all in one place.\n");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.WriteLine("How It Works:\n");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.WriteLine("Performances and Plays:\n");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.Write("Performance: ");
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("Think of a performance like you would a movie title.\nIt's the actual show, like 'Hamlet' or 'The Lion King.'\n");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.Write("Play: ");
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.Write("A play is comparable to a movie screening. It refers to a specific date and time when a performance is happening.\n" +
+                      "For example,");
+    Console.ForegroundColor = ConsoleColor.Magenta;
+    Console.Write("'Hamlet on 12-06-2024 at 14:00' ");
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("is a play.\n");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("With Cineview Kids, you can choose different plays at various locations and in different halls to suit your preferences.\n" +
+                      "Whether you live nearby a particular theater or have specific scheduling needs,\n" +
+                      "our platform allows you to find the perfect play at the most convenient location and time.");
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.DarkGray;
+    Console.WriteLine("\nPress any key to go back to the home page");
+    Console.ResetColor();
+    Console.ReadKey();
+    }
+
+
 }

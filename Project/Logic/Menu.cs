@@ -34,6 +34,19 @@ public class Menu
     public string MenuString()
     {
         string menuString = "";
+
+        if (Name == "Front Page"){
+            menuString +=
+            @"   _____ _                  _                   _  ___     _     " + "\n" +
+            @"  / ____(_)                (_)                 | |/ (_)   | |    " + "\n" +
+            @" | |     _ _ __   _____   ___  _____      __   | ' / _  __| |___ " + "\n" +
+            @" | |    | | '_ \ / _ \ \ / / |/ _ \ \ /\ / /   |  < | |/ _` / __|" + "\n" +
+            @" | |____| | | | |  __/\ V /| |  __/\ V  V /    | . \| | (_| \__ \" + "\n" +
+            @"  \_____|_|_| |_|\___| \_/ |_|\___| \_/\_/     |_|\_\_|\__,_|___/" + "\n" +
+            @"                                                                 " + "\n"
+            ;
+        }
+
         // Include logged-in username if available
         if (App.LoggedInUsername != "Unknown")
         {
@@ -62,7 +75,7 @@ public class Menu
         // If input is the last item + 1 (Exit), which isn't in CurrentOptions
         int ParsedInput = 0;
         if (input.ToLower() == "e") ParsedInput = -1;
-        else ParsedInput = int.Parse(input);
+        else if (!Int32.TryParse(input, out ParsedInput)) return null;
 
         if (ParsedInput == -1) return this.SetToPreviousMenu;
         // Menu input starts at 1, so if input is 1, then index should be 0

@@ -7,7 +7,7 @@ using System.Text;
 namespace Logic.Tests.AccountTest
 {
     [TestClass]
-    public class AccountLogicTests
+    public class AccountLoginTests
     {   
 
         [ClassInitialize]

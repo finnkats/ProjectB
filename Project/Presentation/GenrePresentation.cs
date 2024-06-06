@@ -15,6 +15,7 @@ public class GenrePresentation : PresentationBase<Genre>
             genreAge = -1;
             Console.WriteLine($"Enter age-rating for genre {genreName}");
             Console.WriteLine(Genre.AgeString() + "'E' to exit");
+            Console.Write("\n> ");
             string? ExitCheck = Console.ReadLine();
             if (ExitCheck == null) break;
             if (ExitCheck.ToLower() == "e")

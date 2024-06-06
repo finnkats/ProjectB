@@ -131,11 +131,10 @@ public static class PlayLogic
 
     public static List<Play> FilterFullPlays(List<Play> plays)
     {
-        List<Play> filteredPlays = plays;
+        List<Play> filteredPlays = new List<Play>();
         foreach (Play play in plays) {
-            if (play.BookedSeats == App.Halls[play.Hall].Seats) {
-                filteredPlays.Remove(play);
-                if (plays.Count == 0) break;
+            if (play.BookedSeats != App.Halls[play.Hall].Seats) {
+                filteredPlays.Add(play);
             }
         }
         return filteredPlays;

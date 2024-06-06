@@ -98,8 +98,9 @@ public static class AccountLogic
 
 
 
-        if (!AccountPresentation.DoubleCheckPassword(password) || name == "null" || name == ""){
-            Console.WriteLine("\n Invalid account information");
+        if (!AccountPresentation.DoubleCheckPassword(password)) return;
+        if (name == "null" || name == ""){
+            Console.WriteLine("\nInvalid account information\n\nPress any key to continue");
             Console.ReadKey();
             return;
         }

@@ -2,13 +2,19 @@ using System.Text.Json;
 
 public static class DataAccess {
     public static string FilePrefix = "DataSources/";
+
     public static Dictionary<string, T> ReadItem<T>() where T : IDataAccessItem{
         string filePath = $"{FilePrefix}{typeof(T).Name.ToLower()}s.json";
         if(!File.Exists(filePath) || string.IsNullOrEmpty(File.ReadAllText(filePath))){
             return new Dictionary<string, T>();
         }
         string json = File.ReadAllText(filePath);
-        return JsonSerializer.Deserialize<Dictionary<string, T>>(json) ?? new Dictionary<string, T>();
+        try{
+            return JsonSerializer.Deserialize<Dictionary<string, T>>(json) ?? new Dictionary<string, T>();
+        }
+        catch (JsonException){
+            return new Dictionary<string, T>();
+        }
     }
 
     public static Dictionary<string, List<T>> ReadList<T>() where T : IDataAccessList{
@@ -17,7 +23,12 @@ public static class DataAccess {
             return new Dictionary<string, List<T>>();
         }
         string json = File.ReadAllText(filePath);
-        return JsonSerializer.Deserialize<Dictionary<string, List<T>>>(json) ?? new Dictionary<string, List<T>>();
+        try{
+            return JsonSerializer.Deserialize<Dictionary<string, List<T>>>(json) ?? new Dictionary<string, List<T>>();
+        }
+        catch(JsonException){
+            return new Dictionary<string, List<T>>();
+        }
     }
 
     public static void UpdateItem<T>() where T : IDataAccessItem {

@@ -62,13 +62,12 @@ public class PerformanceLogic : LogicBase<Performance>
             return PerformanceOptions;
         }
 
-        int performanceIndex = 1;
         foreach (var performance in PerformanceOptions)
         {
             if (HasGenre(performance.Item1, genreIDList))
             {
                 // overwrites index of the option that will be printed for the menu
-                string performanceOptionString = $"{performanceIndex++}: {performance.Item2}";
+                string performanceOptionString = $"{performance.Item2}";
                 FilteredPerformanceOptionsList.Add((performance.Item1, performanceOptionString));
             }
 

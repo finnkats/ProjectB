@@ -73,7 +73,7 @@ public class HallPresentation : PresentationBase<Hall>
             return;
         }
 
-        string locationAdded = (locationId == "null") ? " no location" : $" to location {App.Locations[locationId].Name}";
+        string locationAdded = (locationId == "null") ? " without a location" : $" to location {App.Locations[locationId].Name}";
         Console.WriteLine($"Hall '{hallName}' with {hallSeats} seats has been added" + locationAdded);
         Console.WriteLine("\nPress any key to continue");
         Console.ReadKey();

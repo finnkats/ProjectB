@@ -34,12 +34,15 @@ public static class PlayPresentation
         int chosenIndex = -1;
         while (chosenIndex == -1){
 
-            Console.Write("Select a performance by entering its index or '0' to cancel\n\n> ");
+            Console.Write("Select a performance by entering its number (under the hashtag) from the list above,\nor enter 'Q' to quit the process.\n\n> ");
             
-            string? choice = Console.ReadLine();
+            string? choice = Console.ReadLine() ?? "";
+
+            if (choice.ToLower() == "q") choice = "0";
+
             if (int.TryParse(choice, out int index)){
                 if (index == 0){
-                    Console.WriteLine("Cancelled.");
+                    Console.WriteLine("Process was quit.");
                     Thread.Sleep(1500);
                     return;
                 }else if (index > 0 && index <= playOptions.Count){
@@ -68,10 +71,10 @@ public static class PlayPresentation
     public static void AddPlayDetails(string performanceId){
         if (performanceId == null) return;
 
-        string location = App.locationPresentation.GetItem("Choose a location:", "Cancel");
+        string location = App.locationPresentation.GetItem("Choose a location:", "Quit", letter: "Q");
         if (location == "null") return;
 
-        string hall = App.hallPresentation.GetItem("Choose a hall:", "Cancel", location);
+        string hall = App.hallPresentation.GetItem("Choose a hall:", "Quit", location, letter: "Q");
         if (hall == "null") {
             Console.WriteLine("Cancelling adding of play");
             return;
@@ -82,7 +85,7 @@ public static class PlayPresentation
         string date;
         while (true){
             Console.Clear();
-            Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date\n");
+            Console.WriteLine($"Front Page -> Admin Features -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date\n");
             Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name}\n");
             Console.Write("What date? [DD/MM/YYYY]? (can't be today or in the past) \n\n> ");
             string givenDate = Console.ReadLine() ?? "";
@@ -94,7 +97,7 @@ public static class PlayPresentation
         string startTime;
         while (true){
             Console.Clear();
-            Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date -> Choosing a time\n");
+            Console.WriteLine($"Front Page -> Admin Features -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date -> Choosing a time\n");
             Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date}\n");
             Console.Write("What time? [HH:MM] \n\n> ");
             startTime = Console.ReadLine() ?? "99:99";
@@ -104,11 +107,12 @@ public static class PlayPresentation
 
         if (!PlayLogic.IsHallAvailable(location, DateTime.Parse(date, new CultureInfo("nl-NL")), startTime, hall)){
             Console.WriteLine($"{App.Halls[hall].Name} is not available at the selected {date} : {startTime}. Please choose different details.");
-            Thread.Sleep(5000);
+            Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
             return; // Exit the method if hall is not available
         }
         Console.Clear();
-        Console.WriteLine($"Front Page -> Home Page -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date -> Choosing a time -> Adding a play\n");
+        Console.WriteLine($"Front Page -> Admin Features -> Edit Performances -> Choosing a location -> Choosing a hall -> Choosing a date -> Choosing a time -> Adding a play\n");
         Console.WriteLine($"{App.Performances[performanceId].Name} | {App.Locations[location].Name} : {App.Halls[hall].Name} | {date} : {startTime}");
         Console.Write("Do you want to add play? (Y/N)\n> ");
         string choice = Console.ReadLine() ?? "";

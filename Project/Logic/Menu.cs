@@ -1,5 +1,6 @@
-public class Menu{
-    public string Name {get;}
+public class Menu
+{
+    public string Name { get; }
     public Menu(string name) => Name = name;
 
     // Dictionary with all options the menu will ever have (so also currently hidden options) as key,
@@ -10,15 +11,19 @@ public class Menu{
     // The menu this menu was accessed by
     public Menu? PreviousMenu = null;
 
-    public void AddAllOption(string optionName, Action optionFunction){
-        try {
+    public void AddAllOption(string optionName, Action optionFunction)
+    {
+        try
+        {
             AllOptions.Add(optionName, optionFunction);
-        } catch (ArgumentException) {}
+        }
+        catch (ArgumentException) { }
     }
 
     public void RemoveAllOption(string optionName) => AllOptions.Remove(optionName);
 
-    public void AddCurrentOption(string optionName){
+    public void AddCurrentOption(string optionName)
+    {
         // Dont allow duplicate options or options which arent in AllOptions
         if (CurrentOptions.Contains(optionName)) return;
         if (AllOptions.ContainsKey(optionName)) CurrentOptions.Add(optionName);
@@ -26,8 +31,22 @@ public class Menu{
 
     public void RemoveCurrentOption(string optionName) => CurrentOptions.Remove(optionName);
 
-    public string MenuString(){
+    public string MenuString()
+    {
         string menuString = "";
+
+        if (Name == "Front Page"){
+            menuString +=
+            @"   _____ _                  _                   _  ___     _     " + "\n" +
+            @"  / ____(_)                (_)                 | |/ (_)   | |    " + "\n" +
+            @" | |     _ _ __   _____   ___  _____      __   | ' / _  __| |___ " + "\n" +
+            @" | |    | | '_ \ / _ \ \ / / |/ _ \ \ /\ / /   |  < | |/ _` / __|" + "\n" +
+            @" | |____| | | | |  __/\ V /| |  __/\ V  V /    | . \| | (_| \__ \" + "\n" +
+            @"  \_____|_|_| |_|\___| \_/ |_|\___| \_/\_/     |_|\_\_|\__,_|___/" + "\n" +
+            @"                                                                 " + "\n"
+            ;
+        }
+
         // Include logged-in username if available
         if (App.LoggedInUsername != "Unknown")
         {
@@ -46,19 +65,26 @@ public class Menu{
         int index = 1;
         CurrentOptions.ForEach(option => menuString += $"{index++}: {option}\n");
         // Add Exit option at the end
-        menuString += $"{index}: Exit\n";
+        menuString += $"E: Exit\n";
         return menuString;
     }
 
 
-    public Action? GetFunction(int input){
-        // If input is the last item + 1 (Exit), which isnt in CurrentOptions
-        if (input == CurrentOptions.Count() + 1) return this.SetToPreviousMenu;
+    public Action? GetFunction(string input)
+    {
+        // If input is the last item + 1 (Exit), which isn't in CurrentOptions
+        int ParsedInput = 0;
+        if (input.ToLower() == "e") ParsedInput = -1;
+        else if (!Int32.TryParse(input, out ParsedInput)) return null;
+
+        if (ParsedInput == -1) return this.SetToPreviousMenu;
         // Menu input starts at 1, so if input is 1, then index should be 0
-        try {
-            Action function = AllOptions[CurrentOptions[input - 1]];
+        try
+        {
+            Action function = AllOptions[CurrentOptions[ParsedInput - 1]];
             return function;
-        } catch (ArgumentOutOfRangeException) { return null; }
+        }
+        catch (ArgumentOutOfRangeException) { return null; }
     }
 
     public void SetToPreviousMenu() => App.CurrentMenu = PreviousMenu;

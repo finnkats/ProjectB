@@ -23,21 +23,6 @@ public static class MainTicketSystem{
         TicketPresentation.PrintTicket(createNewTicket, performanceId);
     }
 
-    // Prints a string of ticket info (currently called after creating a ticket as confirmation)
-    public static void ShowTicketInfo(){
-        if(App.Tickets.Count != 0){
-            foreach(KeyValuePair<string, List<Ticket>> userTicket in App.Tickets){
-                if (userTicket.Key != App.LoggedInUsername) continue;
-                foreach(var ticket in userTicket.Value){
-                    Console.WriteLine(ticket.TicketInfo());
-                }
-            }
-        }
-        else{
-            Console.WriteLine("No tickets booked");
-        }
-    }
-
     // Gets login info and checks if logged in person is an admin
     // this method probably already exists in AccountLogic
     public static (bool, string, string) LoginCheckAdmin(){
@@ -58,7 +43,7 @@ public static class MainTicketSystem{
     public static void CancelTicketLogic(Ticket ticketToCancel){
         // This ticketToCancel is a reference to the App.Tickets ticket (classes are reference types)
         ticketToCancel.IsActive = false;
-        logger.LogAction("Cancelled a ticket", new { PeformanceID = ticketToCancel.PerformanceId, date = ticketToCancel.Date, hall = ticketToCancel.Hall, Activity = ticketToCancel.IsActive });
+        logger.LogAction("Cancelled a ticket", new { PerformanceID = ticketToCancel.PerformanceId, date = ticketToCancel.Date, hall = ticketToCancel.Hall, Activity = ticketToCancel.IsActive });
         PlayLogic.RemoveBooking(ticketToCancel);
         DataAccess.UpdateList<Ticket>();
     }

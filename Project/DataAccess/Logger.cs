@@ -1,6 +1,6 @@
 public abstract class Logger
 {
-    protected abstract string FilePath { get; set; }  // Path to the log file
+    public abstract string FilePath { get; set; }  // Path to the log file
     protected abstract string Headers { get; set; }   // Headers for the CSV file
 
     // Abstract method to log an action, to be implemented by derived classes

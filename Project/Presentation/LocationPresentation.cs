@@ -3,11 +3,12 @@ public class LocationPresentation : PresentationBase<Location>{
 
     public void AddLocation(){
         Console.Clear();
-        string? locationName = GetNameInput();
+        string? locationName = GetNameInput(true);
         if (locationName is null) return;
         Console.WriteLine();
 
-        var Halls = App.hallPresentation.GetItemList();
+        var Halls = App.hallPresentation.GetItemList(extraInfo: "\nNote:\nIf the halls for this location have not been added to the program yet;\n" +
+                                                     "Simply choose 'confirm', and the hall can be linked when either adding a new hall or in the edit menu\n");
         if (!App.locationLogic.AddLocation(locationName, Halls)){
             Console.WriteLine("An error occured while adding location.");
             Thread.Sleep(2500);
@@ -17,8 +18,17 @@ public class LocationPresentation : PresentationBase<Location>{
         string seperator = ", ";
         List<string> currentHalls = new();
         Halls.ForEach(hallId => currentHalls.Add(App.Halls[hallId].Name));
-        Console.WriteLine($"Location '{locationName}' with halls [{String.Join(seperator, currentHalls)}] has been added");
-        Thread.Sleep(5000);
+        var hallsList = String.Join(seperator, currentHalls);
+        if (hallsList == "")
+        {
+            Console.WriteLine($"Location '{locationName}' with no halls yet has been added");
+        }
+        else
+        {
+            Console.WriteLine($"Location '{locationName}' with halls [{hallsList}] has been added");
+        }
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 
     public void EditLocationStart(){

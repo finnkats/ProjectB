@@ -30,7 +30,7 @@ public class HallPresentation : PresentationBase<Hall>
             Console.WriteLine("1: Next layout");
             Console.WriteLine("2: Previous layout");
             Console.WriteLine("3: Select this layout");
-            Console.WriteLine("Q: Exit without selection");
+            Console.WriteLine("E: Exit without selection");
 
             Console.Write("\n> ");
             string input = Console.ReadLine()?.ToUpper() ?? "";
@@ -48,7 +48,7 @@ public class HallPresentation : PresentationBase<Hall>
                 selectedLayout = currentLayout;
                 break;
             }
-            else if (input == "Q")
+            else if (input.ToLower() == "e")
             {
                 Console.WriteLine("\nExiting...");
                 Thread.Sleep(2000);
@@ -62,7 +62,7 @@ public class HallPresentation : PresentationBase<Hall>
         }
         Console.WriteLine();
 
-        string locationId = App.locationPresentation.GetItem("In which location is this hall?", "No location yet");
+        string locationId = App.locationPresentation.GetItem("In which location is this hall?", "No location yet (location hasn't been added to program yet)");
 
         // TO DO add layout chooser and put the correct layout in here
         // and remove seatchoice
@@ -73,9 +73,10 @@ public class HallPresentation : PresentationBase<Hall>
             return;
         }
 
-        string locationAdded = (locationId == "null") ? " no location" : $" to location {App.Locations[locationId].Name}";
-        Console.WriteLine($"Hall '{hallName}' with {hallSeats} seats has been added" + locationAdded + $" with {selectedLayout.SeatAmount} seats");
-        Thread.Sleep(5000);
+        string locationAdded = (locationId == "null") ? " without a location" : $" to location {App.Locations[locationId].Name}";
+        Console.WriteLine($"Hall '{hallName}' with {hallSeats} seats has been added" + locationAdded);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 
     public void EditHallStart()

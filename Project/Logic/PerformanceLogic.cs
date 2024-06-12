@@ -8,7 +8,7 @@ public class PerformanceLogic : LogicBase<Performance>
         if (!success) return false;
         App.Plays.Add(AssignedId, new List<Play>());
         DataAccess.UpdateList<Play>();
-        logger.LogAction("Added Peformance", new { Name = name, Runtime = runtime, Genres = genres, Active = active });
+        logger.LogAction("Added Performance", new { Name = name, Runtime = runtime, Genres = genres, Active = active });
         App.ArchivedPlays.Add(AssignedId, new List<ArchivedPlay>());
         DataAccess.UpdateList<ArchivedPlay>();
         return true;
@@ -17,7 +17,7 @@ public class PerformanceLogic : LogicBase<Performance>
     // Change list of genres
     public void ChangeGenres(List<string> genres, string id)
     {
-        logger.LogAction("Changed genres", new{PeformanceID = id, OldGenres = App.Performances[id].Genres, NewGenres = genres });
+        logger.LogAction("Changed genres", new{PerformanceID = id, OldGenres = App.Performances[id].Genres, NewGenres = genres });
         App.Performances[id].Genres = genres;
         DataAccess.UpdateItem<Performance>();
         return;
@@ -26,7 +26,7 @@ public class PerformanceLogic : LogicBase<Performance>
     // Changes active value
     public void ChangeActive(string id)
     {
-        logger.LogAction("Changed Active status", new { PeformanceID = id, OldActiveStatus = App.Performances[id].Active, NewActiveStatus = !App.Performances[id].Active });
+        logger.LogAction("Changed Active status", new { PerformanceID = id, OldActiveStatus = App.Performances[id].Active, NewActiveStatus = !App.Performances[id].Active });
         App.Performances[id].Active = !App.Performances[id].Active;
         DataAccess.UpdateItem<Performance>();
     }
@@ -62,13 +62,12 @@ public class PerformanceLogic : LogicBase<Performance>
             return PerformanceOptions;
         }
 
-        int performanceIndex = 1;
         foreach (var performance in PerformanceOptions)
         {
             if (HasGenre(performance.Item1, genreIDList))
             {
                 // overwrites index of the option that will be printed for the menu
-                string performanceOptionString = $"{performanceIndex++}: {performance.Item2}";
+                string performanceOptionString = $"{performance.Item2}";
                 FilteredPerformanceOptionsList.Add((performance.Item1, performanceOptionString));
             }
 

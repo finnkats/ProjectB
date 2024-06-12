@@ -14,16 +14,22 @@ public class GenrePresentation : PresentationBase<Genre>
         {
             genreAge = -1;
             Console.WriteLine($"Enter age-rating for genre {genreName}");
-            Console.WriteLine(Genre.AgeString() + "'-1' to exit");
-            Int32.TryParse(Console.ReadLine(), out genreAge);
-            if (genreAge == -1)
+            Console.WriteLine(Genre.AgeString() + "'E' to exit");
+            Console.Write("\n> ");
+            string? ExitCheck = Console.ReadLine();
+            if (ExitCheck == null) break;
+            if (ExitCheck.ToLower() == "e")
             {
-                Console.WriteLine("Exitting");
+                Console.WriteLine("Exiting");
+                Thread.Sleep(1000);
                 return;
             }
-            if (!App.genreLogic.ValidAge(genreAge))
+            //Int32.TryParse(ExitCheck, out genreAge);
+            if (!Int32.TryParse(ExitCheck, out genreAge) || !App.genreLogic.ValidAge(genreAge))
             {
-                Console.WriteLine($"{genreAge} is not a valid age-rating");
+                Console.WriteLine($"\n{ExitCheck} is not a valid age-rating");
+                Thread.Sleep(1000);
+                Console.Clear();
             }
             else break;
         }
@@ -32,12 +38,15 @@ public class GenrePresentation : PresentationBase<Genre>
         if (!App.genreLogic.AddGenre(genreName, genreAge))
         {
             Console.WriteLine("An error occurred while adding genre.");
-            Thread.Sleep(3000);
+            Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
+
             return;
         }
 
         Console.WriteLine($"Genre {genreName} with age-rating {genreAge} has been added.");
-        Thread.Sleep(5000);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
         return;
     }
 
@@ -77,7 +86,8 @@ public class GenrePresentation : PresentationBase<Genre>
                 {
                     Console.WriteLine($"Successfully changed '{oldAge}' to '{newAge}'");
                 }
-                Thread.Sleep(4000);
+                Console.WriteLine("\nPress any key to continue");
+                Console.ReadKey();
             }
         }
     }

@@ -45,12 +45,12 @@ public static class TicketPresentation{
             foreach (Ticket ticket in TicketsList[0]) // this part writes all the the current active tickets underneath eachother as options for the user
             {
                 string sep = ", ";
-                Console.WriteLine($"{IndexNumber++}: Order: {ticket.OrderNumber} | Seat(s): {String.Join(sep, ticket.SeatNumbers)} | ({App.Performances[ticket.PerformanceId].Name})");
+                Console.WriteLine($"{IndexNumber++}: Order: {ticket.OrderNumber} | Seat(s): {String.Join(sep, ticket.SeatNumbers)} | {App.Performances[ticket.PerformanceId].Name}");
             }
-            Console.Write("Q. Exit\n\n> ");
+            Console.Write("E. Exit\n\n> ");
             string? userInput = Console.ReadLine();
             if (userInput == null) return;
-            if (userInput.ToLower() == "q") return;
+            if (userInput.ToLower() == "e") return;
             // this upcoming part checks the input from the user. if they choose one of the active tickets it gets canceled (IsActive = false), except if the play is tomorrow 
             try {
                 if (!Int32.TryParse(userInput, out int IndexInt)) {
@@ -75,7 +75,8 @@ public static class TicketPresentation{
                 }
                 if (orderNumber != -1) Console.WriteLine($"Refunded Order: {orderNumber} | {App.Performances[TicketsList[0][ReturnIndex].PerformanceId].Name}");
                 else Console.WriteLine("Can't refund order because the performance is tomorrow");
-                Thread.Sleep(2500);
+                Console.WriteLine("\nPress any key to continue");
+                Console.ReadKey();
             } catch (ArgumentOutOfRangeException){
                 Console.WriteLine("Invalid input");
                 Thread.Sleep(1000);
@@ -89,6 +90,7 @@ public static class TicketPresentation{
         Console.WriteLine($"Front Page -> Home Page -> View Performances -> {App.Performances[performanceId].Name} -> Booking Message\n");
         Console.WriteLine("Just booked:");
         Console.WriteLine(ticket.TicketInfo());
-        Thread.Sleep(6000 + 500 * ticket.SeatNumbers.Length);
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 }

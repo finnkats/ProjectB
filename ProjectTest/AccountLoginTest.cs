@@ -7,7 +7,7 @@ using System.Text;
 namespace Logic.Tests.AccountTest
 {
     [TestClass]
-    public class AccountLogicTests
+    public class AccountLoginTests
     {   
 
         [ClassInitialize]
@@ -50,9 +50,8 @@ namespace Logic.Tests.AccountTest
             Assert.AreNotEqual("Unknown", App.LoggedInUsername);
             Assert.AreEqual("Admin1", App.LoggedInUsername);
 
-            string menuString = App.HomePage.MenuString();
+            string menuString = App.FrontPage.MenuString();
             Assert.IsTrue(menuString.Contains("Admin Features"), menuString);
-            Assert.IsFalse(menuString.Contains("View Orders"), menuString);
         }
 
         [TestMethod]
@@ -64,8 +63,7 @@ namespace Logic.Tests.AccountTest
             Assert.AreNotEqual("Unknown", App.LoggedInUsername);
             Assert.AreEqual("User1", App.LoggedInUsername);
 
-            string menuString = App.HomePage.MenuString();
-            Assert.IsTrue(menuString.Contains("View Orders"), menuString);
+            string menuString = App.FrontPage.MenuString();
             Assert.IsFalse(menuString.Contains("Admin Features"), menuString);
         }
     }

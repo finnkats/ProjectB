@@ -56,16 +56,19 @@ public static class AccountPresentation
     public static (string, string) GetLoginDetails(bool accountCreation = false)
     {
         Console.Clear();
-        string breadcrumb = App.CurrentMenu == App.SignInUp ? "Front Page -> Sign in / up ->" : "Front Page -> Home Page -> View Perfomances ->"; 
+        string breadcrumb = App.CurrentMenu == App.SignInUp ? "Front Page ->" : "Front Page -> Home Page -> View Perfomances ->"; 
         if (!accountCreation)
         {
-            Console.WriteLine($"{breadcrumb} Sign in\n");
+            Console.WriteLine($"{breadcrumb} Log In\n");
         }
         else
         {
-            Console.WriteLine($"{breadcrumb} Sign up\n");
+            Console.WriteLine($"{breadcrumb} Create Account\n");
+            Console.WriteLine("Enter the account details for your new account");
         }
-        Console.Write("Name: \n> ");
+        Console.WriteLine("Details are case-sensitive\n");
+
+        Console.Write("Username: \n> ");
         string? loginName = Console.ReadLine();
 
         Console.WriteLine();
@@ -84,10 +87,12 @@ public static class AccountPresentation
         Thread.Sleep(2000);
     }
 
-    public static bool LoginFailure()
+    public static bool LoginFailure(string loginName)
     {
         Console.Clear();
-        Console.Write("Invalid name or password.\nDo you want to try again? (y/n)\n\n> ");
+        if (!App.Accounts.ContainsKey(loginName)) Console.WriteLine($"Account with username {loginName} does not exist");
+        else Console.WriteLine("Invalid password");
+        Console.Write("Do you want to try again? (y/n)\n\n> ");
         string input = Console.ReadLine()?.ToLower() ?? "n";
         return input.StartsWith('y');
     }
@@ -108,7 +113,8 @@ public static class AccountPresentation
         if (confirmedPassword != password)
         {
             Console.WriteLine("\nPassword is not correct.");
-            Thread.Sleep(2000);
+            Console.WriteLine("\nPress any key to continue");
+            Console.ReadKey();
             return false;
         }
 

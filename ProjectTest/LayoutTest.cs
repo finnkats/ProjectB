@@ -16,12 +16,12 @@ public class LayoutTest
 
         // One seat
         Assert.IsFalse(App.Plays["ID0"][0].Seats.Contains(1));
-        MainTicketSystem.CreateBookTicket("ID0", "01/06/2024", "12:00", "ID0", new HashSet<int>(){1});
+        MainTicketSystem.CreateBookTicket("ID0", "01/06/2024", "12:00", "ID0", new HashSet<int>(){1}, test:true);
         Assert.IsTrue(App.Plays["ID0"][0].Seats.Contains(1));
 
         // Multiple seats
         Assert.IsFalse(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));
-        MainTicketSystem.CreateBookTicket("ID0", "01/06/2024", "12:00", "ID0", new HashSet<int>(){5, 6, 7});
+        MainTicketSystem.CreateBookTicket("ID0", "01/06/2024", "12:00", "ID0", new HashSet<int>(){5, 6, 7}, test:true);
         Assert.IsTrue(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));
         App.LoggedInUsername = "Unknown";
     }
@@ -34,13 +34,13 @@ public class LayoutTest
         App.Plays["ID0"].Add(new Play("ID0", time, date, hall, performance));
 
         // One seat
-        MainTicketSystem.CreateBookTicket(performance, date, time, hall, new HashSet<int>(){1});
+        MainTicketSystem.CreateBookTicket(performance, date, time, hall, new HashSet<int>(){1}, test:true);
         Assert.IsTrue(App.Plays["ID0"][0].Seats.Contains(1));
         PlayLogic.RemoveBooking(new Ticket(performance, date, time, hall, new int[]{1}, true, 1));
         Assert.IsFalse(App.Plays["ID0"][0].Seats.Contains(1));
 
         // Multiple seats
-        MainTicketSystem.CreateBookTicket("ID0", "01/06/2024", "12:00", "ID0", new HashSet<int>(){5, 6, 7});
+        MainTicketSystem.CreateBookTicket("ID0", "01/06/2024", "12:00", "ID0", new HashSet<int>(){5, 6, 7}, test:true);
         Assert.IsTrue(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));
         PlayLogic.RemoveBooking(new Ticket(performance, date, time, hall, new int[]{5, 6, 7}, true, 2));
         Assert.IsFalse(App.Plays["ID0"][0].Seats.Contains(5) && App.Plays["ID0"][0].Seats.Contains(6) && App.Plays["ID0"][0].Seats.Contains(7));

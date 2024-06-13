@@ -16,38 +16,6 @@ public class TicketSystemTest{
         TestDataFiller.FillApp();
     }
 
-    // [TestMethod]
-    // // Test if the Tickets are able to be printed in the terminal
-    // public void TestPrintTicketInfo(){
-    //     Ticket testTicket = new Ticket("ID0", "01-02-2000", "12:00", "ID0", true);
-    //     testTicket.UpdateData();
-    //     Ticket testTicket2 = new Ticket("ID0", "01-02-2001", "18:00", "ID0", true);
-    //     testTicket2.UpdateData();
-
-    //     string name = App.Performances["ID0"].Name;
-    //     string hall = App.Halls["ID0"].Name;
-    //     string location = App.Locations[App.Halls["ID0"].LocationId].Name;
-
-    //     Assert.AreEqual(App.Tickets[0].Ticket.TicketInfo(), $"The play you booked: {name}. On 01-02-2000 at 12:00 | {location} - {hall}.");
-    //     Assert.AreEqual(App.Tickets[1].Ticket.TicketInfo(), $"The play you booked: {name}. On 01-02-2001 at 18:00 | {location} - {hall}.");
-    // }
-
-    // [TestMethod]
-    // public void LoginCheckCorrectAdminTest(){
-    //     MainTicketSystem.IsTesting = (true, "Admin123", "Password123");
-    //     (bool,string,string) tupleLogin = MainTicketSystem.LoginCheckAdmin();
-    //     Assert.AreEqual(tupleLogin, (true,"Admin123","Password123"));
-    //     MainTicketSystem.IsTesting = (false, "", "");
-    // }
-
-    // [TestMethod]
-    // public void LoginCheckIncorrectAdminTest(){
-    //     MainTicketSystem.IsTesting = (true, "admin", "password");
-    //     (bool,string,string) tupleLogin = MainTicketSystem.LoginCheckAdmin();
-    //     Assert.AreEqual(tupleLogin, (false,"admin","password"));
-    //     MainTicketSystem.IsTesting = (false, "", "");
-    // }
-
     [TestMethod]
     public void TestCheckOutdatedTickets(){
         // Ticket seat
@@ -58,9 +26,9 @@ public class TicketSystemTest{
         string monthAgo = DateTime.Now.AddMonths(-1).ToString(@"dd/MM/yyyy");
         string yesterday = DateTime.Now.AddDays(-1).ToString(@"dd/MM/yyyy");
         string nextMonth = DateTime.Now.AddMonths(1).ToString(@"dd/MM/yyyy");
-        MainTicketSystem.CreateBookTicket("ID1", monthAgo, "12:00", "ID0", seat);
-        MainTicketSystem.CreateBookTicket("ID1", yesterday, "15:00", "ID0", seat);
-        MainTicketSystem.CreateBookTicket("ID1", nextMonth, "01:00", "ID0", seat);
+        MainTicketSystem.CreateBookTicket("ID1", monthAgo, "12:00", "ID0", seat, test:true);
+        MainTicketSystem.CreateBookTicket("ID1", yesterday, "15:00", "ID0", seat, test:true);
+        MainTicketSystem.CreateBookTicket("ID1", nextMonth, "01:00", "ID0", seat, test:true);
 
         // Check outdated tickets
         MainTicketSystem.CheckOutdatedTickets();

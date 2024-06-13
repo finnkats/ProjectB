@@ -8,7 +8,7 @@ public static class MainTicketSystem{
     private static TicketLogger logger = new TicketLogger();
     public static (bool,string,string)? IsTesting {get; set;}
     // Creates a new Ticket (UserTicket)
-    public static void CreateBookTicket(string performanceId, string date, string time, string room, HashSet<int> seats){
+    public static void CreateBookTicket(string performanceId, string date, string time, string room, HashSet<int> seats, bool test=false){
         if(!App.Tickets.ContainsKey(App.LoggedInUsername)){
             App.Tickets[App.LoggedInUsername] = new List<Ticket>();
         }
@@ -20,7 +20,7 @@ public static class MainTicketSystem{
         App.Tickets[App.LoggedInUsername].Add(createNewTicket);
 
         DataAccess.UpdateList<Ticket>();
-        TicketPresentation.PrintTicket(createNewTicket, performanceId);
+        if (!test) TicketPresentation.PrintTicket(createNewTicket, performanceId);
     }
 
     // Gets login info and checks if logged in person is an admin
